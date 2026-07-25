@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+.venv/
+
+# Node / Frontend
+node_modules/
+dist/
+build/
+
+# Environment & Secrets
+.env
+.env.local
+
+# ML Models, Weights & Data
+*.bin
+*.safetensors
+*.pt
+*.pth
+*.onnx
+*.gguf
+*.ggml
+*.q4_0
+*.q4_K_M
+backend/data/faiss_index/*
+backend/data/documents/*
+backend/data/cache/*
+!backend/data/faiss_index/.gitkeep
+!backend/data/documents/.gitkeep
+!backend/data/cache/.gitkeep
+
+# HuggingFace model cache (never commit downloaded weights)
+**/.cache/huggingface/
+**/huggingface/hub/
+
+# System
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Test artifacts
+backend/tests/__pycache__/
