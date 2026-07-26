@@ -1,1 +1,11 @@
-# Owner: Pranav Sukale — not yet implemented, see Task_Assignment.md
+from pydantic import BaseModel
+
+
+class DocumentMetadata(BaseModel):
+    source: str
+    page: int
+
+
+class Document(BaseModel):
+    text: str
+    metadata: DocumentMetadata
