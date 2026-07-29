@@ -1,0 +1,21 @@
+# Virtual Environment
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+
+# Environment
+.env
+
+# Logs
+logs/
+*.log
+
+# Data
+data/cache/
+data/embeddings/
+data/faiss_index/
+
+# VS Code
+.vscode/
