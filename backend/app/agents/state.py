@@ -36,6 +36,7 @@ class QueryUnderstandingOutput(BaseModel):
 
     confidence: float = 0.0
 
+
 class GapAnalysisOutput(BaseModel):
     sufficient: bool
 
@@ -49,20 +50,7 @@ class GapAnalysisOutput(BaseModel):
 
     confidence: float = 0.0
 
-class CriticVerdict(BaseModel):
-    passed: bool
 
-    factual_consistency: float = 0.0
-    citation_support: float = 0.0
-    hallucination_risk: float = 0.0
-
-    issues: List[str] = Field(
-        default_factory=list
-    )
-
-    revision_instructions: Optional[str] = None
-
-    confidence: float = 0.0
 class AgentTraceStep(BaseModel):
     agent_type: str
     status: str
@@ -82,6 +70,23 @@ class AgentTraceOutput(BaseModel):
 
     total_duration_ms: int = 0
 
+
+class CriticVerdict(BaseModel):
+    passed: bool
+
+    factual_consistency: float = 0.0
+    citation_support: float = 0.0
+    hallucination_risk: float = 0.0
+
+    issues: List[str] = Field(
+        default_factory=list
+    )
+
+    revision_instructions: Optional[str] = None
+
+    confidence: float = 0.0
+
+
 class ConfidenceCalibrationOutput(BaseModel):
     calibrated_confidence: float
 
@@ -96,6 +101,7 @@ class ConfidenceCalibrationOutput(BaseModel):
 
     reasoning: str = ""
 
+
 class AbstentionDecisionOutput(BaseModel):
     decision: str
 
@@ -105,4 +111,4 @@ class AbstentionDecisionOutput(BaseModel):
         default_factory=list
     )
 
-    reasoning: str = ""    
+    reasoning: str = ""
