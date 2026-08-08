@@ -19,3 +19,12 @@ data/faiss_index/
 
 # VS Code
 .vscode/
+
+# Large datasets
+data/datasets/
+
+# Generated retrieval artifacts
+data/faiss_index/
+data/embeddings/
+data/cache/
+data/results/

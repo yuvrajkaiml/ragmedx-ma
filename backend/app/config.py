@@ -1,16 +1,22 @@
-# Owner: Pranav Sukale — not yet implemented, see Task_Assignment.md
-
 from pathlib import Path
 
 # Project Root
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Data Directories
+
 DATA_DIR = BASE_DIR / "data"
+
+DATASETS_DIR = DATA_DIR / "datasets"
 DOCUMENTS_DIR = DATA_DIR / "documents"
-FAISS_INDEX_DIR = DATA_DIR / "faiss_index"
+
 EMBEDDINGS_DIR = DATA_DIR / "embeddings"
+FAISS_INDEX_DIR = DATA_DIR / "faiss_index"
+
 CACHE_DIR = DATA_DIR / "cache"
+
+RESULTS_DIR = DATA_DIR / "results"
+EXPERIMENTS_DIR = DATA_DIR / "experiments"
 
 # Retrieval Parameters
 CHUNK_SIZE = 2000
