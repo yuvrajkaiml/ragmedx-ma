@@ -95,3 +95,14 @@ class ConfidenceCalibrationOutput(BaseModel):
     requires_abstention: bool = False
 
     reasoning: str = ""
+
+class AbstentionDecisionOutput(BaseModel):
+    decision: str
+
+    should_abstain: bool
+
+    reasons: List[str] = Field(
+        default_factory=list
+    )
+
+    reasoning: str = ""    
