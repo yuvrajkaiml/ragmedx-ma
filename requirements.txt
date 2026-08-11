@@ -1,0 +1,40 @@
+# ==========================================
+# Shared Backend Dependencies
+# ==========================================
+
+# FastAPI
+fastapi
+uvicorn[standard]
+pydantic
+python-dotenv
+httpx
+orjson
+
+# AI / LLM (Yuvraj)
+torch>=2.13.0
+torchvision>=0.28.0
+transformers
+accelerate
+sentence-transformers
+huggingface_hub
+datasets
+
+# RAG
+langchain
+langgraph
+faiss-cpu
+rank-bm25
+
+# Document Processing
+pymupdf
+pypdf
+jinja2
+
+# Data
+numpy
+pandas
+scikit-learn
+
+# Utilities
+rich
+tqdm
