@@ -39,3 +39,4 @@ scikit-learn
 # Utilities
 rich
 tqdm
+loguru
