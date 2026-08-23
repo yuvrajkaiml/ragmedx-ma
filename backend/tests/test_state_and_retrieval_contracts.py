@@ -73,9 +73,6 @@ def test_evidence_snippet_requires_explicit_ids():
         relevance_score=evidence.relevance_score,
     )
     assert res_evidence.chunk_id == chunk_id
-
-
-@pytest.mark.asyncio
 async def test_temporary_retrieval_stub_contract():
     """Verify retrieve_evidence returns valid fixture evidence with deterministic IDs."""
     query = "hypertension first line treatment"
@@ -96,9 +93,6 @@ async def test_temporary_retrieval_stub_contract():
         assert doc_uuid is not None
         assert ev["relevance_score"] >= 0.0
         assert ev["citation_marker"].startswith("[E")
-
-
-@pytest.mark.asyncio
 async def test_temporary_retrieval_stub_empty_query():
     """Verify empty query returns empty evidence list."""
     evidence_list, iterations = await retrieve_evidence(query="")

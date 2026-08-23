@@ -47,5 +47,5 @@ scikit-learn
 rich
 tqdm
 loguru
-pytest
-pytest-asyncio
+pytest==9.1.1
+pytest-asyncio==1.4.0

@@ -177,8 +177,6 @@ class TestBenchmarkRunner:
         runner = BenchmarkRunner(dataset_path=Path("/nonexistent/missing.jsonl"))
         samples = runner.load_dataset()
         assert len(samples) == 0
-
-    @pytest.mark.asyncio
     async def test_run_evaluation_over_synthetic_fixture(self):
         """Run evaluation scaffold over synthetic MedQA fixture."""
 
@@ -211,8 +209,6 @@ class TestBenchmarkRunner:
         assert result["samples_evaluated"] == 1
         assert "metrics" in result
         assert result["metrics"]["total_samples"] == 1
-
-    @pytest.mark.asyncio
     async def test_blocked_on_missing_dataset(self):
         runner = BenchmarkRunner(dataset_path=Path("/nonexistent/missing.jsonl"))
         result = await runner.run_evaluation()

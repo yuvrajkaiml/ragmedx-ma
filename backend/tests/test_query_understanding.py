@@ -23,9 +23,6 @@ class FakeLLM:
             "confidence": 0.95
         }
         """
-
-
-@pytest.mark.asyncio
 async def test_query_understanding():
     agent = QueryUnderstandingAgent(
         llm_wrapper=FakeLLM()
@@ -70,9 +67,6 @@ async def test_query_understanding():
         result["agent_trace"][0]["status"]
         == "completed"
     )
-
-
-@pytest.mark.asyncio
 async def test_query_understanding_rejects_invalid_json():
 
     class InvalidLLM:
@@ -95,9 +89,6 @@ async def test_query_understanding_rejects_invalid_json():
 
     with pytest.raises(RuntimeError):
         await agent.run(state)
-
-
-@pytest.mark.asyncio
 async def test_query_understanding_requires_question():
 
     agent = QueryUnderstandingAgent(

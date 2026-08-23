@@ -37,8 +37,6 @@ class SequenceFakeLLM:
 # ==============================================================================
 # Response Builder & Public Interface Contract Tests
 # ==============================================================================
-
-@pytest.mark.asyncio
 async def test_public_run_agent_pipeline_contract():
     """Verify run_agent_pipeline contract returns a valid MedicalResponse and trace."""
     query_resp = '{"medical_specialty": "Cardiology", "confidence": 0.95}'
@@ -62,9 +60,6 @@ async def test_public_run_agent_pipeline_contract():
     assert response.citations[0].citation_marker == "[E1]"
     assert trace is not None
     assert len(trace.steps) >= 5
-
-
-@pytest.mark.asyncio
 async def test_response_builder_verified_arm():
     """Verify build_medical_response constructs a VerifiedAnswerResponse when answer passes."""
     q_id = create_deterministic_uuid("query_test")
@@ -109,9 +104,6 @@ async def test_response_builder_verified_arm():
     assert response.citations[0].document_id == doc_id
     assert response.processing_time_ms == 120
     assert response.total_tokens_used == 50
-
-
-@pytest.mark.asyncio
 async def test_response_builder_abstention_arm_with_exact_copy():
     """Verify build_medical_response constructs AbstentionResponse with exact standard copy."""
     # 1. Retrieval failure copy
@@ -146,9 +138,6 @@ async def test_response_builder_abstention_arm_with_exact_copy():
     resp3 = build_medical_response(state_ood)
     assert isinstance(resp3, AbstentionResponse)
     assert resp3.message == MSG_OUT_OF_DOMAIN
-
-
-@pytest.mark.asyncio
 async def test_response_builder_error_arm_empty_query():
     """Verify empty query produces ErrorResponse with exact required copy."""
     state_empty = AgentState(
@@ -160,9 +149,6 @@ async def test_response_builder_error_arm_empty_query():
     assert resp.response_type == "error"
     assert resp.message == MSG_INVALID_QUERY
     assert resp.error_code == "INVALID_QUERY"
-
-
-@pytest.mark.asyncio
 async def test_include_trace_flag_behavior():
     """Verify include_trace=False omits trace while include_trace=True includes trace."""
     query_resp = '{"medical_specialty": "Cardiology", "confidence": 0.90}'
@@ -189,9 +175,6 @@ async def test_include_trace_flag_behavior():
     assert trace_with_trace is not None
     assert resp_with_trace.agent_trace is not None
     assert len(trace_with_trace.steps) > 0
-
-
-@pytest.mark.asyncio
 async def test_agent_service_execution():
     """Verify AgentService boundary executes successfully."""
     query_resp = '{"medical_specialty": "Cardiology", "confidence": 0.90}'

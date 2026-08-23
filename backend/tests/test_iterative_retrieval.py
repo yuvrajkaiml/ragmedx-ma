@@ -16,9 +16,6 @@ class FakeLLM:
         temperature=0.0,
     ):
         return self.response
-
-
-@pytest.mark.asyncio
 async def test_gap_analysis_evidence_is_sufficient():
 
     llm = FakeLLM(
@@ -63,9 +60,6 @@ async def test_gap_analysis_evidence_is_sufficient():
         result["agent_trace"][0]["status"]
         == "completed"
     )
-
-
-@pytest.mark.asyncio
 async def test_gap_analysis_generates_subquery():
 
     llm = FakeLLM(
@@ -114,9 +108,6 @@ async def test_gap_analysis_generates_subquery():
         gap["sub_query"]
         == "treatment outcomes for type 2 diabetes mellitus"
     )
-
-
-@pytest.mark.asyncio
 async def test_gap_analysis_requires_question():
 
     llm = FakeLLM(

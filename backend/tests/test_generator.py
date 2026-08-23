@@ -14,9 +14,6 @@ class FakeLLM:
         temperature=0.0,
     ):
         return self.response
-
-
-@pytest.mark.asyncio
 async def test_generator_creates_grounded_answer():
 
     llm = FakeLLM(
@@ -70,9 +67,6 @@ async def test_generator_creates_grounded_answer():
         result["agent_trace"][0]["status"]
         == "completed"
     )
-
-
-@pytest.mark.asyncio
 async def test_generator_rejects_unknown_citation():
 
     llm = FakeLLM(
@@ -102,9 +96,6 @@ async def test_generator_rejects_unknown_citation():
     with pytest.raises(RuntimeError):
 
         await agent.run(state)
-
-
-@pytest.mark.asyncio
 async def test_generator_requires_evidence():
 
     llm = FakeLLM(
@@ -124,9 +115,6 @@ async def test_generator_requires_evidence():
     with pytest.raises(RuntimeError):
 
         await agent.run(state)
-
-
-@pytest.mark.asyncio
 async def test_generator_requires_question():
 
     llm = FakeLLM(

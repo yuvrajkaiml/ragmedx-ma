@@ -3,9 +3,6 @@ import pytest
 from app.agents.confidence_calibration import (
     ConfidenceCalibrationAgent,
 )
-
-
-@pytest.mark.asyncio
 async def test_high_confidence_answer():
 
     agent = ConfidenceCalibrationAgent()
@@ -43,9 +40,6 @@ async def test_high_confidence_answer():
         output["requires_abstention"]
         is False
     )
-
-
-@pytest.mark.asyncio
 async def test_low_confidence_requires_abstention():
 
     agent = ConfidenceCalibrationAgent()
@@ -81,9 +75,6 @@ async def test_low_confidence_requires_abstention():
         output["requires_abstention"]
         is True
     )
-
-
-@pytest.mark.asyncio
 async def test_high_hallucination_risk_requires_abstention():
 
     agent = ConfidenceCalibrationAgent()
@@ -114,9 +105,6 @@ async def test_high_hallucination_risk_requires_abstention():
         output["requires_abstention"]
         is True
     )
-
-
-@pytest.mark.asyncio
 async def test_missing_critic_verdict():
 
     agent = ConfidenceCalibrationAgent()
@@ -134,9 +122,6 @@ async def test_missing_critic_verdict():
     with pytest.raises(RuntimeError):
 
         await agent.run(state)
-
-
-@pytest.mark.asyncio
 async def test_missing_evidence_produces_low_confidence():
 
     agent = ConfidenceCalibrationAgent()

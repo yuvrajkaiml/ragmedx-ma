@@ -126,8 +126,6 @@ def test_prompt_version_loading_and_rendering():
 # ==============================================================================
 # 4. Confidence Calibration Formula & Component Tests
 # ==============================================================================
-
-@pytest.mark.asyncio
 async def test_confidence_calibration_exact_four_components():
     """
     Verify exact 4-component calculation:
@@ -166,9 +164,6 @@ async def test_confidence_calibration_exact_four_components():
     assert abs(output["calibrated_confidence"] - expected_composite) < 0.01
     assert output["confidence_band"] == "high"
     assert output["requires_abstention"] is False
-
-
-@pytest.mark.asyncio
 async def test_confidence_calibration_abstains_below_threshold():
     """Verify confidence below 0.65 sets requires_abstention=True."""
     agent = ConfidenceCalibrationAgent()
@@ -201,8 +196,6 @@ async def test_confidence_calibration_abstains_below_threshold():
 # ==============================================================================
 # 5. Abstention Safety Gates & Standard Copy Tests
 # ==============================================================================
-
-@pytest.mark.asyncio
 async def test_abstention_on_contradictory_evidence():
     """Verify contradictory evidence triggers structured abstention with standard copy."""
     agent = AbstentionDecisionAgent()
@@ -221,9 +214,6 @@ async def test_abstention_on_contradictory_evidence():
     output = result["abstention_decision"]
     assert output["decision"] == "ABSTAIN"
     assert COPY_CONTRADICTORY_EVIDENCE in output["reasons"]
-
-
-@pytest.mark.asyncio
 async def test_abstention_on_out_of_domain():
     """Verify out-of-domain query triggers abstention with standard copy."""
     agent = AbstentionDecisionAgent()
@@ -242,9 +232,6 @@ async def test_abstention_on_out_of_domain():
     output = result["abstention_decision"]
     assert output["decision"] == "ABSTAIN"
     assert COPY_OUT_OF_DOMAIN in output["reasons"]
-
-
-@pytest.mark.asyncio
 async def test_generator_rejects_hallucinated_citation():
     """Verify generator rejects citation markers not present in supplied evidence."""
     fake_llm = StaticLLM("Metformin is first-line pharmacotherapy for type 2 diabetes [E99].")

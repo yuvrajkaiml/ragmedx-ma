@@ -20,9 +20,6 @@ def make_calibration(**overrides):
     calibration.update(overrides)
 
     return calibration
-
-
-@pytest.mark.asyncio
 async def test_high_confidence_proceeds():
 
     agent = AbstentionDecisionAgent()
@@ -41,9 +38,6 @@ async def test_high_confidence_proceeds():
     assert output["decision"] == "PROCEED"
     assert output["should_abstain"] is False
     assert output["reasons"] == []
-
-
-@pytest.mark.asyncio
 async def test_a7_abstention_is_respected():
 
     agent = AbstentionDecisionAgent()
@@ -69,9 +63,6 @@ async def test_a7_abstention_is_respected():
         "A7 requires abstention."
         in output["reasons"]
     )
-
-
-@pytest.mark.asyncio
 async def test_low_confidence_abstains():
 
     agent = AbstentionDecisionAgent()
@@ -90,9 +81,6 @@ async def test_low_confidence_abstains():
     ]
 
     assert output["decision"] == "ABSTAIN"
-
-
-@pytest.mark.asyncio
 async def test_low_evidence_abstains():
 
     agent = AbstentionDecisionAgent()
@@ -111,9 +99,6 @@ async def test_low_evidence_abstains():
     ]
 
     assert output["decision"] == "ABSTAIN"
-
-
-@pytest.mark.asyncio
 async def test_low_factual_consistency_abstains():
 
     agent = AbstentionDecisionAgent()
@@ -132,9 +117,6 @@ async def test_low_factual_consistency_abstains():
     ]
 
     assert output["decision"] == "ABSTAIN"
-
-
-@pytest.mark.asyncio
 async def test_low_citation_support_abstains():
 
     agent = AbstentionDecisionAgent()
@@ -153,9 +135,6 @@ async def test_low_citation_support_abstains():
     ]
 
     assert output["decision"] == "ABSTAIN"
-
-
-@pytest.mark.asyncio
 async def test_low_hallucination_safety_abstains():
 
     agent = AbstentionDecisionAgent()
@@ -174,9 +153,6 @@ async def test_low_hallucination_safety_abstains():
     ]
 
     assert output["decision"] == "ABSTAIN"
-
-
-@pytest.mark.asyncio
 async def test_multiple_reasons_are_reported():
 
     agent = AbstentionDecisionAgent()
@@ -201,9 +177,6 @@ async def test_multiple_reasons_are_reported():
     assert output["decision"] == "ABSTAIN"
 
     assert len(output["reasons"]) == 5
-
-
-@pytest.mark.asyncio
 async def test_missing_calibration_fails():
 
     agent = AbstentionDecisionAgent()

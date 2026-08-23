@@ -33,8 +33,6 @@ class MockSequenceLLM:
 # ==============================================================================
 # API Integration Tests for Mounted /api/v1/query/ask Endpoint
 # ==============================================================================
-
-@pytest.mark.asyncio
 async def test_query_ask_unauthenticated_returns_401():
     """Verify that unauthenticated request to /api/v1/query/ask returns 401."""
     # Ensure no dependency overrides
@@ -48,9 +46,6 @@ async def test_query_ask_unauthenticated_returns_401():
         )
 
     assert response.status_code == 401
-
-
-@pytest.mark.asyncio
 async def test_query_ask_authenticated_verified_response():
     """Verify authenticated request returns 200 with VerifiedAnswerResponse structure."""
     query_resp = '{"medical_specialty": "Cardiology", "confidence": 0.95}'
@@ -79,9 +74,6 @@ async def test_query_ask_authenticated_verified_response():
     assert data["response_type"] in ("verified_answer", "abstention")
     assert "answer" in data or "message" in data
     assert "processing_time_ms" in data
-
-
-@pytest.mark.asyncio
 async def test_query_ask_short_query_returns_422():
     """Verify that query shorter than 5 characters fails Pydantic schema validation with 422."""
     app.dependency_overrides[get_current_user] = lambda: MockUser()
@@ -96,9 +88,6 @@ async def test_query_ask_short_query_returns_422():
     app.dependency_overrides.clear()
 
     assert response.status_code == 422
-
-
-@pytest.mark.asyncio
 async def test_query_ask_trace_serialization():
     """Verify trace serialization when include_agent_trace is requested."""
     app.dependency_overrides[get_current_user] = lambda: MockUser()

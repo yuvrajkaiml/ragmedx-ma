@@ -26,8 +26,6 @@ class SequenceFakeLLM:
 # ==============================================================================
 # Orchestrator Tests
 # ==============================================================================
-
-@pytest.mark.asyncio
 async def test_orchestrator_verified_answer_path():
     """Verify end-to-end verified path when evidence is strong and critic approves."""
     query_resp = (
@@ -58,9 +56,6 @@ async def test_orchestrator_verified_answer_path():
     assert result_state.confidence_calibration["calibrated_confidence"] >= 0.65
     assert result_state.abstention_decision["should_abstain"] is False
     assert len(result_state.agent_trace) >= 5
-
-
-@pytest.mark.asyncio
 async def test_orchestrator_revision_loop_stops_after_success():
     """Verify revision loop executes a second round when critic requests revision, then succeeds."""
     query_resp = '{"medical_specialty": "Cardiology", "intent": "treatment", "expanded_query": "hypertension", "confidence": 0.90}'
@@ -94,9 +89,6 @@ async def test_orchestrator_revision_loop_stops_after_success():
     assert len(result_state.critic_reviews) == 2
     assert result_state.critic_reviews[0]["passed"] is False
     assert result_state.critic_reviews[1]["passed"] is True
-
-
-@pytest.mark.asyncio
 async def test_orchestrator_revision_loop_caps_at_two_rounds():
     """Verify revision loop terminates strictly at MAX_CRITIC_ROUNDS (2) when critic never passes."""
     query_resp = '{"medical_specialty": "Endocrinology", "confidence": 0.90}'
@@ -122,9 +114,6 @@ async def test_orchestrator_revision_loop_caps_at_two_rounds():
     # Because confidence is low and hallucination risk is high, it should abstain
     assert result_state.status == "abstained"
     assert result_state.abstention_decision["should_abstain"] is True
-
-
-@pytest.mark.asyncio
 async def test_orchestrator_abstains_on_empty_retrieval():
     """Verify orchestrator triggers abstention when no evidence is retrieved."""
     query_resp = '{"medical_specialty": "General", "confidence": 0.90}'
@@ -146,9 +135,6 @@ async def test_orchestrator_abstains_on_empty_retrieval():
     assert result_state.retrieval_failure is True
     assert result_state.status == "abstained"
     assert result_state.abstention_decision["should_abstain"] is True
-
-
-@pytest.mark.asyncio
 async def test_orchestrator_trace_steps_ordered_and_timed():
     """Verify trace steps have ordered sequence, valid timestamps, and durations."""
     query_resp = '{"medical_specialty": "General", "confidence": 0.90}'

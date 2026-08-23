@@ -14,9 +14,6 @@ class FakeLLM:
         temperature=0.0,
     ):
         return self.response
-
-
-@pytest.mark.asyncio
 async def test_critic_passes_supported_answer():
 
     llm = FakeLLM(
@@ -66,9 +63,6 @@ async def test_critic_passes_supported_answer():
         result["agent_trace"][0]["status"]
         == "completed"
     )
-
-
-@pytest.mark.asyncio
 async def test_critic_requests_revision():
 
     llm = FakeLLM(
@@ -125,9 +119,6 @@ async def test_critic_requests_revision():
         verdict["revision_instructions"]
         is not None
     )
-
-
-@pytest.mark.asyncio
 async def test_critic_rejects_invalid_score():
 
     llm = FakeLLM(
@@ -167,9 +158,6 @@ async def test_critic_rejects_invalid_score():
     with pytest.raises(RuntimeError):
 
         await agent.run(state)
-
-
-@pytest.mark.asyncio
 async def test_critic_requires_answer():
 
     llm = FakeLLM(
@@ -206,9 +194,6 @@ async def test_critic_requires_answer():
     with pytest.raises(RuntimeError):
 
         await agent.run(state)
-
-
-@pytest.mark.asyncio
 async def test_critic_requires_revision_instructions():
 
     llm = FakeLLM(
