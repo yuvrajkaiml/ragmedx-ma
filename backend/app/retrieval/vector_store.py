@@ -1,14 +1,16 @@
-"""Vector-store stub — pending implementation.
+"""Vector-store re-export for the retrieval boundary.
 
-Canonical implementation target: ``app.rag.vectorstore.faiss_store``
+The canonical implementation lives in ``app.rag.vectorstore.faiss_store``.
+This module re-exports it so retrieval-layer code can import from one stable
+location without depending directly on the rag internals package.
 
-Once ``FAISSStore`` is implemented there, this file should:
-1. Import and re-export it, OR
-2. Be deleted and all callers updated to use ``app.rag.vectorstore`` directly.
+Usage::
 
-The abstract interface that any implementation must satisfy is defined in
-``app.rag.interfaces.VectorStore``.
+    from app.retrieval.vector_store import FAISSVectorStore
+    store = FAISSVectorStore()          # uses FAISS_INDEX_DIR from config
+    store = FAISSVectorStore(dim=384, index_dir=Path("/tmp/test_idx"))
 """
 
-# TODO: implement FAISSStore in app/rag/vectorstore/faiss_store.py, then
-# expose it here.
+from app.rag.vectorstore.faiss_store import FAISSVectorStore  # noqa: F401
+
+__all__ = ["FAISSVectorStore"]
