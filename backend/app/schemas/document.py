@@ -5,6 +5,14 @@ from uuid import UUID
 
 from pydantic import BaseModel, Field
 
+class DocumentMetadata(BaseModel):
+    source: str
+    page: int
+
+
+class Document(BaseModel):
+    text: str
+    metadata: DocumentMetadata
 
 class DocumentStatus(str, Enum):
     UPLOADED = "uploaded"

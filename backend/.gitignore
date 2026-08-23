@@ -63,6 +63,9 @@ backend/data/cache/*
 **/.cache/huggingface/
 **/huggingface/hub/
 
+# Runtime logs
+logs/
+
 # System
 .DS_Store
 Thumbs.db

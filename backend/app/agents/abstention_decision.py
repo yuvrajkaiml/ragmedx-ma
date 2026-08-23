@@ -1,23 +1,29 @@
 from datetime import datetime, timezone
-from typing import Any, Dict
+from typing import Any, Dict, List, Tuple
 
 from .base import BaseAgent
 from .state import AbstentionDecisionOutput
 
+# Standard Exact Copy Definitions
+COPY_INVALID_QUERY = "Please enter a valid medical question."
+COPY_RETRIEVAL_FAILURE = "No relevant medical literature found."
+COPY_MODEL_FAILURE = "Unable to generate a response. Please try again."
+COPY_CONTRADICTORY_EVIDENCE = "Sources contain conflicting information."
+COPY_OUT_OF_DOMAIN = "Outside the scope of medical literature."
+
+
 class AbstentionDecisionAgent(BaseAgent):
     """
-    Agent 8: Abstention Decision.
+    Agent 8: Abstention Decision Agent.
 
-    Consumes the output of Agent 7 (Confidence Calibration)
-    and makes the final safety decision:
+    Consumes the output of Agent 7 (Confidence Calibration) and pipeline safety flags
+    to make the definitive safety decision:
 
         PROCEED
             or
         ABSTAIN
 
-    This agent does not recalculate confidence.
-    It applies explicit safety rules to the calibrated
-    confidence output.
+    Enforces standard exact copy for medical safety conditions.
     """
 
     def __init__(self):
@@ -31,23 +37,15 @@ class AbstentionDecisionAgent(BaseAgent):
         self,
         state: Dict[str, Any],
     ) -> Dict[str, Any]:
-
         started_at = datetime.now(timezone.utc)
 
         try:
-            calibration = state.get(
-                "confidence_calibration"
-            )
+            calibration = state.get("confidence_calibration")
 
             if calibration is None:
-                raise ValueError(
-                    "Abstention decision requires "
-                    "'confidence_calibration'."
-                )
+                raise ValueError("Abstention decision requires 'confidence_calibration'.")
 
-            decision, reasons = self._make_decision(
-                calibration
-            )
+            decision, reasons = self._make_decision(calibration, state)
 
             reasoning = self._build_reasoning(
                 calibration=calibration,
@@ -62,9 +60,7 @@ class AbstentionDecisionAgent(BaseAgent):
                 reasoning=reasoning,
             )
 
-            completed_at = datetime.now(
-                timezone.utc
-            )
+            completed_at = datetime.now(timezone.utc)
 
             trace_step = self.create_trace_step(
                 status="completed",
@@ -72,149 +68,94 @@ class AbstentionDecisionAgent(BaseAgent):
                 completed_at=completed_at,
                 details={
                     "decision": decision,
-                    "should_abstain":
-                        decision == "ABSTAIN",
+                    "should_abstain": decision == "ABSTAIN",
                     "reasons": reasons,
                 },
             )
 
             return {
-                    "abstention_decision": output.model_dump(),
-                    "agent_trace": [
-                    trace_step
-                ],
+                "abstention_decision": output.model_dump(),
+                "agent_trace": [trace_step],
             }
 
         except Exception as exc:
-
-            completed_at = datetime.now(
-                timezone.utc
-            )
+            completed_at = datetime.now(timezone.utc)
 
             trace_step = self.create_trace_step(
                 status="failed",
                 started_at=started_at,
                 completed_at=completed_at,
                 details={
-                    "error": str(exc)
+                    "error": str(exc),
                 },
             )
 
-            raise RuntimeError(
-                "Abstention Decision Agent failed."
-            ) from exc
+            raise RuntimeError(f"Abstention Decision Agent failed: {exc}") from exc
 
     @staticmethod
-    def _score(
-        value: Any,
-    ) -> float:
-        """
-        Normalize a score into the [0, 1] range.
-        """
+    def _score(value: Any) -> float:
         try:
             value = float(value)
         except (TypeError, ValueError):
             return 0.0
-
-        return max(
-            0.0,
-            min(1.0, value)
-        )
+        return max(0.0, min(1.0, value))
 
     @classmethod
     def _make_decision(
         cls,
         calibration: Dict[str, Any],
-    ) -> tuple[str, list[str]]:
-
+        state: Dict[str, Any],
+    ) -> Tuple[str, List[str]]:
         reasons = []
 
-        # Rule 1:
-        # Always respect A7's explicit abstention flag.
-        if calibration.get(
-            "requires_abstention",
-            False,
-        ):
-            reasons.append(
-                "A7 requires abstention."
-            )
+        # Check explicit pipeline safety flags first
+        if state.get("contradictory_evidence", False):
+            reasons.append(COPY_CONTRADICTORY_EVIDENCE)
 
-        calibrated_confidence = cls._score(
-            calibration.get(
-                "calibrated_confidence",
-                0.0,
-            )
-        )
+        if state.get("out_of_domain", False):
+            reasons.append(COPY_OUT_OF_DOMAIN)
 
-        evidence_score = cls._score(
-            calibration.get(
-                "evidence_score",
-                0.0,
-            )
-        )
+        if state.get("retrieval_failure", False):
+            reasons.append(COPY_RETRIEVAL_FAILURE)
 
-        factual_consistency = cls._score(
-            calibration.get(
-                "factual_consistency_score",
-                0.0,
-            )
-        )
+        if state.get("model_failure", False):
+            reasons.append(COPY_MODEL_FAILURE)
 
-        citation_support = cls._score(
-            calibration.get(
-                "citation_support_score",
-                0.0,
-            )
-        )
+        # Rule 1: Always respect A7's explicit abstention flag
+        if calibration.get("requires_abstention", False):
+            reasons.append("A7 requires abstention.")
 
-        hallucination_safety = cls._score(
-            calibration.get(
-                "hallucination_safety_score",
-                0.0,
-            )
-        )
+        calibrated_confidence = cls._score(calibration.get("calibrated_confidence", 0.0))
+        evidence_score = cls._score(calibration.get("evidence_score", calibration.get("evidence_quality_score", 0.0)))
+        factual_consistency = cls._score(calibration.get("factual_consistency_score", 0.0))
+        citation_support = cls._score(calibration.get("citation_support_score", 0.0))
+        hallucination_safety = cls._score(calibration.get("hallucination_safety_score", 0.0))
 
-        # Rule 2:
-        # Very low calibrated confidence.
-        if calibrated_confidence < 0.40:
-            reasons.append(
-                "Calibrated confidence is below "
-                "the minimum safety threshold."
-            )
+        # Rule 2: Calibrated confidence below minimum safety threshold (0.65)
+        if calibrated_confidence < 0.65:
+            reasons.append("Calibrated confidence is below the minimum safety threshold (0.65).")
 
-        # Rule 3:
-        # Insufficient evidence.
+        # Rule 3: Insufficient evidence support
         if evidence_score < 0.40:
-            reasons.append(
-                "Evidence support is insufficient."
-            )
+            reasons.append("Evidence support is insufficient.")
 
-        # Rule 4:
-        # Poor factual consistency.
+        # Rule 4: Poor factual consistency
         if factual_consistency < 0.50:
-            reasons.append(
-                "Factual consistency is below "
-                "the minimum safety threshold."
-            )
+            reasons.append("Factual consistency is below the minimum safety threshold.")
 
-        # Rule 5:
-        # Poor citation support.
+        # Rule 5: Poor citation support
         if citation_support < 0.50:
-            reasons.append(
-                "Citation support is below "
-                "the minimum safety threshold."
-            )
+            reasons.append("Citation support is below the minimum safety threshold.")
 
-        # Rule 6:
-        # Poor hallucination safety.
+        # Rule 6: Poor hallucination safety
         if hallucination_safety < 0.50:
-            reasons.append(
-                "Hallucination safety is below "
-                "the minimum safety threshold."
-            )
+            reasons.append("Hallucination safety is below the minimum safety threshold.")
 
-        if reasons:
-            return "ABSTAIN", reasons
+        # Deduplicate reasons while preserving order
+        unique_reasons = list(dict.fromkeys(reasons))
+
+        if unique_reasons:
+            return "ABSTAIN", unique_reasons
 
         return "PROCEED", []
 
@@ -222,35 +163,20 @@ class AbstentionDecisionAgent(BaseAgent):
     def _build_reasoning(
         calibration: Dict[str, Any],
         decision: str,
-        reasons: list[str],
+        reasons: List[str],
     ) -> str:
-
-        confidence = calibration.get(
-            "calibrated_confidence",
-            0.0,
-        )
-
-        band = calibration.get(
-            "confidence_band",
-            "unknown",
-        )
+        confidence = calibration.get("calibrated_confidence", 0.0)
+        band = calibration.get("confidence_band", "unknown")
 
         if decision == "PROCEED":
             return (
-                "A7 confidence calibration passed "
-                "all A8 safety gates. "
-                f"Calibrated confidence="
-                f"{float(confidence):.2f}, "
-                f"confidence band={band}. "
+                f"Confidence calibration passed all safety gates. "
+                f"Calibrated confidence={float(confidence):.2f}, confidence band={band}. "
                 "Answer may proceed."
             )
 
         return (
-            "A8 determined that the answer should "
-            "not proceed because one or more safety "
-            "conditions were not satisfied. "
-            f"Calibrated confidence="
-            f"{float(confidence):.2f}, "
-            f"confidence band={band}. "
+            f"Abstention determined because one or more safety conditions were not satisfied. "
+            f"Calibrated confidence={float(confidence):.2f}, confidence band={band}. "
             f"Reasons: {' '.join(reasons)}"
         )
