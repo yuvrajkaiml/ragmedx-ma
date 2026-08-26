@@ -1,14 +1,16 @@
-"""Embeddings stub — pending implementation.
+"""Embedding adapter re-export for the retrieval boundary.
 
-Canonical implementation target: ``app.rag.embeddings.bge_embedding``
+The canonical implementation lives in ``app.rag.embeddings.bge_embedding``.
+This module re-exports it so retrieval-layer code can import from one stable
+location without depending directly on the rag internals package.
 
-Once ``BGEEmbedder`` is implemented there, this file should:
-1. Import and re-export it, OR
-2. Be deleted and all callers updated to use ``app.rag.embeddings`` directly.
+Usage::
 
-The abstract interface that any implementation must satisfy is defined in
-``app.rag.interfaces.Embedder``.
+    from app.retrieval.embeddings import BGEEmbedder
+    embedder = BGEEmbedder()               # uses Settings.embedding_model_name
+    embedder = BGEEmbedder("BAAI/bge-small-en-v1.5", device="cuda")
 """
 
-# TODO: implement BGEEmbedder in app/rag/embeddings/bge_embedding.py, then
-# expose it here.
+from app.rag.embeddings.bge_embedding import BGEEmbedder  # noqa: F401
+
+__all__ = ["BGEEmbedder"]

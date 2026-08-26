@@ -122,3 +122,68 @@ def evaluate_batch(
         report["accuracy"] = compute_accuracy(pred_answers, true_answers)
 
     return report
+
+
+def compute_answer_with_citation_rate(responses: List[Dict[str, Any]]) -> float:
+    """Proportion of non-abstention responses that contain at least one evidence citation.
+
+    A response is considered cited when:
+    - Its ``answer`` string contains a token matching ``[E<n>]``, OR
+    - Its ``citations`` / ``answer_citations`` list is non-empty.
+
+    Abstention responses are excluded from the denominator.
+    """
+    import re
+    if not responses:
+        return 0.0
+
+    _MARKER_RE = re.compile(r"\[E\d+\]")
+    answered = [
+        r for r in responses
+        if r.get("response_type") not in ("abstention",)
+        and r.get("status") not in ("abstained",)
+    ]
+    if not answered:
+        return 0.0
+
+    cited = 0
+    for r in answered:
+        answer_text = str(r.get("answer", "") or "")
+        citations = r.get("citations", []) or r.get("answer_citations", [])
+        if _MARKER_RE.search(answer_text) or len(citations) > 0:
+            cited += 1
+
+    return round(cited / len(answered), 4)
+
+
+def compute_retrieval_coverage(
+    evidence_lists: List[List[str]],
+    relevant_keyword_sets: List[Set[str]],
+) -> float:
+    """Proportion of samples where at least one retrieved passage contains
+    a keyword from the expected relevant set (case-insensitive).
+
+    Parameters
+    ----------
+    evidence_lists:
+        One list of passage text strings per sample.
+    relevant_keyword_sets:
+        One set of expected keywords per sample.
+
+    Returns
+    -------
+    float
+        Coverage rate in ``[0, 1]``.
+    """
+    if not evidence_lists or not relevant_keyword_sets:
+        return 0.0
+    if len(evidence_lists) != len(relevant_keyword_sets):
+        return 0.0
+
+    covered = 0
+    for passages, keywords in zip(evidence_lists, relevant_keyword_sets):
+        combined = " ".join(passages).lower()
+        if any(kw.lower() in combined for kw in keywords):
+            covered += 1
+
+    return round(covered / len(evidence_lists), 4)
