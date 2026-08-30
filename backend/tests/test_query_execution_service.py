@@ -7,7 +7,7 @@ from app.api.v1 import websockets as websocket_module
 from app.db.models import QueryExecutionRecord
 from app.schemas.query import MedicalQueryRequest, QueryExecutionStatus
 from app.schemas.response import ErrorResponse
-from app.schemas.websocket import WebSocketEventType
+from app.schemas.websocket import WebSocketEvent, WebSocketEventType
 from app.services.query_execution_service import QueryExecutionService
 
 
@@ -163,3 +163,31 @@ async def test_websocket_replays_existing_execution_without_running_it_again(mon
     assert websocket.closed is None
     assert len(agent_service.calls) == 1
     assert websocket.messages[-1]["event_type"] == WebSocketEventType.FINAL_RESPONSE.value
+
+
+async def test_websocket_replays_durable_terminal_result_when_live_registry_is_gone(monkeypatch):
+    service = QueryExecutionService(agent_service=FakeAgentService())
+    user_id = uuid4()
+    query_id = uuid4()
+
+    async def fake_websocket_user(_):
+        return SimpleNamespace(id=user_id)
+
+    async def durable_terminal_event(_, __):
+        return WebSocketEvent(
+            query_id=query_id,
+            event_type=WebSocketEventType.FINAL_RESPONSE,
+            timestamp=datetime.now(timezone.utc),
+            data={"response": {"response_type": "error", "message": "stored result"}},
+        )
+
+    monkeypatch.setattr(service, "subscribe", lambda *_: None)
+    monkeypatch.setattr(service, "get_terminal_event", durable_terminal_event)
+    monkeypatch.setattr(websocket_module, "query_execution_service", service)
+    monkeypatch.setattr(websocket_module, "_get_websocket_user", fake_websocket_user)
+
+    websocket = FakeWebSocket()
+    await websocket_module.query_stream(websocket, query_id)
+
+    assert websocket.accepted
+    assert websocket.messages[-1]["data"]["response"]["message"] == "stored result"

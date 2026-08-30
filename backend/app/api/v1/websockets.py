@@ -35,6 +35,10 @@ async def query_stream(websocket: WebSocket, query_id: UUID) -> None:
     await websocket.accept()
     subscription = query_execution_service.subscribe(query_id, user.id)
     if subscription is None:
+        terminal_event = await query_execution_service.get_terminal_event(query_id, user.id)
+        if terminal_event is not None:
+            await websocket.send_json(terminal_event.model_dump(mode="json"))
+            return
         await websocket.close(code=1008, reason="Query not found or access denied")
         return
 

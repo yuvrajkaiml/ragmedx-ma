@@ -109,6 +109,37 @@ class QueryExecutionService:
             error_code=record.error_code,
         )
 
+    async def get_terminal_event(
+        self,
+        query_id: UUID,
+        user_id: UUID,
+    ) -> WebSocketEvent | None:
+        """Recover a terminal event after a process restart or reconnect."""
+        async with AsyncSessionLocal() as session:
+            execution = await self.get_persisted(query_id, user_id, session)
+
+        if execution is None or execution.status == QueryExecutionStatus.QUEUED:
+            return None
+        if execution.status == QueryExecutionStatus.RUNNING:
+            return None
+
+        event_type = (
+            WebSocketEventType.FINAL_RESPONSE
+            if execution.status == QueryExecutionStatus.COMPLETED
+            else WebSocketEventType.ERROR
+        )
+        data = (
+            {"response": execution.response.model_dump(mode="json")}
+            if execution.response is not None
+            else {"message": "Query execution failed", "error_code": execution.error_code}
+        )
+        return WebSocketEvent(
+            query_id=query_id,
+            event_type=event_type,
+            timestamp=execution.completed_at or execution.created_at,
+            data=data,
+        )
+
     def get(self, query_id: UUID, user_id: UUID) -> QueryExecution | None:
         """Return an execution only to the user who started it."""
         execution = self._executions.get(query_id)
