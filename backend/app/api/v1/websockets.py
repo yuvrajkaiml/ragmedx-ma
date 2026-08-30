@@ -1,4 +1,3 @@
-from datetime import datetime, timezone
 from uuid import UUID
 
 from fastapi import WebSocket, WebSocketDisconnect
@@ -6,7 +5,8 @@ from fastapi import WebSocket, WebSocketDisconnect
 from app.core.security import decode_token
 from app.db import AsyncSessionLocal
 from app.db.models import User
-from app.schemas.websocket import WebSocketEvent, WebSocketEventType
+from app.schemas.websocket import WebSocketEventType
+from app.services.query_execution_service import query_execution_service
 
 
 async def _get_websocket_user(token: str | None) -> User | None:
@@ -33,29 +33,31 @@ async def query_stream(websocket: WebSocket, query_id: UUID) -> None:
         return
 
     await websocket.accept()
+    subscription = query_execution_service.subscribe(query_id, user.id)
+    if subscription is None:
+        await websocket.close(code=1008, reason="Query not found or access denied")
+        return
 
-    connected_event = WebSocketEvent(
-        query_id=query_id,
-        event_type=WebSocketEventType.AGENT_STATUS,
-        timestamp=datetime.now(timezone.utc),
-        data={
-            "agent": "orchestrator",
-            "status": "connected",
-        },
-    )
-    await websocket.send_json(connected_event.model_dump(mode="json"))
+    backlog, event_queue = subscription
 
     try:
-        while True:
-            message = await websocket.receive_json()
+        for event in backlog:
+            await websocket.send_json(event.model_dump(mode="json"))
+            if event.event_type in {
+                WebSocketEventType.FINAL_RESPONSE,
+                WebSocketEventType.ERROR,
+            }:
+                return
 
-            if message.get("event_type") == WebSocketEventType.PING.value:
-                pong_event = WebSocketEvent(
-                    query_id=query_id,
-                    event_type=WebSocketEventType.PING,
-                    timestamp=datetime.now(timezone.utc),
-                    data={"status": "pong"},
-                )
-                await websocket.send_json(pong_event.model_dump(mode="json"))
+        while True:
+            event = await event_queue.get()
+            await websocket.send_json(event.model_dump(mode="json"))
+            if event.event_type in {
+                WebSocketEventType.FINAL_RESPONSE,
+                WebSocketEventType.ERROR,
+            }:
+                return
     except WebSocketDisconnect:
         return
+    finally:
+        query_execution_service.unsubscribe(query_id, event_queue)

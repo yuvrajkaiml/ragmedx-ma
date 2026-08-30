@@ -2,21 +2,25 @@
 # Query service: API-facing service layer for the medical QA pipeline.
 # Integrates with the AI pipeline through AgentService.
 
-from app.schemas.query import MedicalQueryRequest
-from app.schemas.response import MedicalResponse
-from app.services.agent_service import AgentService
+from uuid import UUID
+
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.schemas.query import MedicalQueryRequest, QueryAcceptedResponse
+from app.services.query_execution_service import QueryExecutionService, query_execution_service
 
 
 class QueryService:
-    """Query service delegating medical QA execution to AgentService."""
+    """API service that starts one observable medical query execution."""
 
-    def __init__(self, agent_service: AgentService | None = None):
-        self.agent_service = agent_service or AgentService()
+    def __init__(self, execution_service: QueryExecutionService | None = None):
+        self.execution_service = execution_service or query_execution_service
 
-    async def ask(self, request: MedicalQueryRequest) -> MedicalResponse:
-        response, _ = await self.agent_service.execute_query(
-            question=request.question,
-            conversation_id=request.conversation_id,
-            include_trace=request.include_agent_trace,
-        )
-        return response
+    async def start(
+        self,
+        request: MedicalQueryRequest,
+        user_id: UUID,
+        session: AsyncSession,
+    ) -> QueryAcceptedResponse:
+        """Schedule the pipeline once and return its subscription identifier."""
+        return await self.execution_service.start(request, user_id, session)

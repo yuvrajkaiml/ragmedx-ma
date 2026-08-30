@@ -3,9 +3,10 @@ from httpx import ASGITransport, AsyncClient
 from uuid import uuid4
 
 from app.api.deps import get_current_user
+from app.db import get_session
 from app.db.models import User
 from app.main import app
-from app.services.agent_service import AgentService
+from app.services.query_execution_service import QueryExecutionService
 
 
 class MockUser:
@@ -14,6 +15,27 @@ class MockUser:
     email = "physician@hospital.org"
     role = "physician"
     is_active = True
+
+
+class FakeSession:
+    def add(self, record):
+        self.record = record
+
+    async def commit(self):
+        return None
+
+    async def refresh(self, record):
+        from datetime import datetime, timezone
+
+        record.created_at = datetime.now(timezone.utc)
+
+
+async def _fake_session_dependency():
+    yield FakeSession()
+
+
+async def _skip_persistence(*_, **__):
+    """Avoid writing background state to the developer's local SQLite file."""
 
 
 class MockSequenceLLM:
@@ -46,16 +68,13 @@ async def test_query_ask_unauthenticated_returns_401():
         )
 
     assert response.status_code == 401
-async def test_query_ask_authenticated_verified_response():
-    """Verify authenticated request returns 200 with VerifiedAnswerResponse structure."""
-    query_resp = '{"medical_specialty": "Cardiology", "confidence": 0.95}'
-    gen_resp = "ACE inhibitors are recommended first-line therapy [E1]."
-    critic_resp = '{"passed": true, "factual_consistency": 0.95, "citation_support": 0.90, "hallucination_risk": 0.05, "confidence": 0.95}'
-
-    mock_llm = MockSequenceLLM([query_resp, gen_resp, critic_resp])
+async def test_query_ask_authenticated_creates_single_execution(monkeypatch):
+    """HTTP starts a query once and returns its WebSocket subscription ID."""
 
     # Override current user dependency
     app.dependency_overrides[get_current_user] = lambda: MockUser()
+    app.dependency_overrides[get_session] = _fake_session_dependency
+    monkeypatch.setattr(QueryExecutionService, "_persist_status", _skip_persistence)
 
     transport = ASGITransport(app=app)
     async with AsyncClient(transport=transport, base_url="http://test") as client:
@@ -69,14 +88,15 @@ async def test_query_ask_authenticated_verified_response():
 
     app.dependency_overrides.clear()
 
-    assert response.status_code == 200
+    assert response.status_code == 202
     data = response.json()
-    assert data["response_type"] in ("verified_answer", "abstention")
-    assert "answer" in data or "message" in data
-    assert "processing_time_ms" in data
-async def test_query_ask_short_query_returns_422():
+    assert data["status"] in ("queued", "running")
+    assert data["query_id"]
+async def test_query_ask_short_query_returns_422(monkeypatch):
     """Verify that query shorter than 5 characters fails Pydantic schema validation with 422."""
     app.dependency_overrides[get_current_user] = lambda: MockUser()
+    app.dependency_overrides[get_session] = _fake_session_dependency
+    monkeypatch.setattr(QueryExecutionService, "_persist_status", _skip_persistence)
 
     transport = ASGITransport(app=app)
     async with AsyncClient(transport=transport, base_url="http://test") as client:
@@ -88,9 +108,11 @@ async def test_query_ask_short_query_returns_422():
     app.dependency_overrides.clear()
 
     assert response.status_code == 422
-async def test_query_ask_trace_serialization():
-    """Verify trace serialization when include_agent_trace is requested."""
+async def test_query_ask_accepts_trace_request_for_the_background_execution(monkeypatch):
+    """Trace preference belongs to the query execution, not the 202 response."""
     app.dependency_overrides[get_current_user] = lambda: MockUser()
+    app.dependency_overrides[get_session] = _fake_session_dependency
+    monkeypatch.setattr(QueryExecutionService, "_persist_status", _skip_persistence)
 
     transport = ASGITransport(app=app)
     async with AsyncClient(transport=transport, base_url="http://test") as client:
@@ -104,9 +126,7 @@ async def test_query_ask_trace_serialization():
 
     app.dependency_overrides.clear()
 
-    assert response.status_code == 200
+    assert response.status_code == 202
     data = response.json()
-    assert "agent_trace" in data
-    if data["agent_trace"] is not None:
-        assert "steps" in data["agent_trace"]
-        assert "total_duration_ms" in data["agent_trace"]
+    assert data["query_id"]
+    assert data["status"] in ("queued", "running")
