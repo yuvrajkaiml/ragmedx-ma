@@ -1,1 +1,16 @@
-# Owner: Sana Thorat — not yet implemented, see Task_Assignment.md
+"""Embedding adapter re-export for the retrieval boundary.
+
+The canonical implementation lives in ``app.rag.embeddings.bge_embedding``.
+This module re-exports it so retrieval-layer code can import from one stable
+location without depending directly on the rag internals package.
+
+Usage::
+
+    from app.retrieval.embeddings import BGEEmbedder
+    embedder = BGEEmbedder()               # uses Settings.embedding_model_name
+    embedder = BGEEmbedder("BAAI/bge-small-en-v1.5", device="cuda")
+"""
+
+from app.rag.embeddings.bge_embedding import BGEEmbedder  # noqa: F401
+
+__all__ = ["BGEEmbedder"]

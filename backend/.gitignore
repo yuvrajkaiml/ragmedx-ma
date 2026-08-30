@@ -4,19 +4,49 @@ __pycache__/
 *.pyo
 *.pyd
 .Python
+
+# Virtual environments
+.venv/
 env/
 venv/
 ENV/
-.venv/
+
+# Environment & Secrets
+.env
+.env.local
+
+# Logs
+logs/
+*.log
 
 # Node / Frontend
 node_modules/
 dist/
 build/
 
-# Environment & Secrets
-.env
-.env.local
+# VS Code / IDE
+.vscode/
+.idea/
+
+# Data
+# Local SQLite database
+*.db
+data/cache/
+data/embeddings/
+data/results/
+data/experiments/
+data/datasets/
+
+# Generated retrieval artifacts
+data/faiss_index/
+backend/data/faiss_index/*
+backend/data/documents/*
+backend/data/cache/*
+
+# Keep directory placeholders
+!backend/data/faiss_index/.gitkeep
+!backend/data/documents/.gitkeep
+!backend/data/cache/.gitkeep
 
 # ML Models, Weights & Data
 *.bin
@@ -28,22 +58,17 @@ build/
 *.ggml
 *.q4_0
 *.q4_K_M
-backend/data/faiss_index/*
-backend/data/documents/*
-backend/data/cache/*
-!backend/data/faiss_index/.gitkeep
-!backend/data/documents/.gitkeep
-!backend/data/cache/.gitkeep
 
-# HuggingFace model cache (never commit downloaded weights)
+# HuggingFace model cache
 **/.cache/huggingface/
 **/huggingface/hub/
+
+# Runtime logs
+logs/
 
 # System
 .DS_Store
 Thumbs.db
-.vscode/
-.idea/
 
 # Test artifacts
 backend/tests/__pycache__/

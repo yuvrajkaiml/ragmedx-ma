@@ -1,38 +1,11 @@
-"""Interfaces for the retrieval implementation.
+"""Backwards-compatibility re-export of the RAG retrieval interfaces.
 
-Concrete vector stores and embedders must keep these contracts so the API and
-clinical safety layer remain independent of a specific vendor.
+The canonical definitions have moved to ``app.rag.interfaces``.
+Import from there for new code.  This shim exists so that any code that still
+references ``app.retrieval.interface`` continues to work without changes.
 """
 
-from abc import ABC, abstractmethod
-from collections.abc import Sequence
+# Re-export unchanged — do not add logic here.
+from app.rag.interfaces import Embedder, VectorStore  # noqa: F401
 
-from app.schemas.retrieval import DocumentChunk, RetrievalResult
-
-
-class Embedder(ABC):
-    @abstractmethod
-    def embed_documents(self, texts: Sequence[str]) -> list[list[float]]:
-        """Return one normalized vector for each input text."""
-
-    @abstractmethod
-    def embed_query(self, text: str) -> list[float]:
-        """Return a normalized vector for a search query."""
-
-
-class VectorStore(ABC):
-    @abstractmethod
-    def upsert(
-        self,
-        chunks: Sequence[DocumentChunk],
-        embeddings: Sequence[Sequence[float]],
-    ) -> None:
-        """Persist chunks with their corresponding embeddings."""
-
-    @abstractmethod
-    def search(
-        self,
-        query_embedding: Sequence[float],
-        top_k: int,
-    ) -> list[RetrievalResult]:
-        """Return the most relevant indexed chunks for a query vector."""
+__all__ = ["Embedder", "VectorStore"]

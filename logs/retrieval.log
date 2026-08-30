@@ -1,0 +1,49 @@
+2026-08-16 20:29:16.031 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-08-16 20:29:16.032 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 0 dataset file(s).
+2026-08-16 20:29:16.033 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 0 file(s).
+2026-08-16 20:29:16.033 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 0 MedQA documents.
+2026-08-16 20:32:25.238 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-08-16 20:32:25.239 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-08-16 20:32:25.239 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-08-16 20:32:25.239 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-08-16 20:32:25.239 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 2 MedQA documents.
+2026-08-16 20:42:06.539 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-08-16 20:42:06.540 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-08-16 20:42:06.540 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-08-16 20:42:06.540 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-08-16 20:42:06.540 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 2 MedQA documents.
+2026-08-16 20:43:16.256 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-08-16 20:43:16.257 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-08-16 20:43:16.257 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-08-16 20:43:16.257 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-08-16 20:43:16.258 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 2 MedQA documents.
+2026-08-16 20:46:58.456 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-08-16 20:46:58.456 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-08-16 20:46:58.456 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-08-16 20:46:58.456 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-08-16 20:46:58.457 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 2 MedQA documents.
+2026-08-16 20:48:55.595 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-08-16 20:48:55.595 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-08-16 20:48:55.595 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-08-16 20:48:55.595 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-08-16 20:48:55.596 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 2 MedQA documents.
+2026-08-16 20:51:01.655 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-08-16 20:51:01.656 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-08-16 20:51:01.656 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-08-16 20:51:01.656 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-08-16 20:51:01.656 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 2 MedQA documents.
+2026-08-16 20:55:20.127 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-08-16 20:55:20.127 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-08-16 20:55:20.127 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-08-16 20:55:20.127 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-08-16 20:55:20.128 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 2 MedQA documents.
+2026-08-16 21:01:05.590 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-08-16 21:01:05.590 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-08-16 21:01:05.591 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-08-16 21:01:05.591 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-08-16 21:01:05.591 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 2 MedQA documents.
+2026-08-16 21:02:28.125 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-08-16 21:02:28.126 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-08-16 21:02:28.126 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-08-16 21:02:28.126 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-08-16 21:02:28.126 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 2 MedQA documents.

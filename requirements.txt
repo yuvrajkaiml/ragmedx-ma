@@ -2,13 +2,21 @@
 # Shared Backend Dependencies
 # ==========================================
 
-# FastAPI
+# FastAPI & DB
 fastapi
 uvicorn[standard]
 pydantic
+pydantic-settings
+email-validator
+python-multipart
 python-dotenv
 httpx
 orjson
+sqlalchemy
+aiosqlite
+python-jose[cryptography]
+passlib[bcrypt]
+bcrypt
 
 # AI / LLM (Yuvraj)
 torch>=2.13.0
@@ -35,6 +43,9 @@ numpy
 pandas
 scikit-learn
 
-# Utilities
+# Utilities & Testing
 rich
 tqdm
+loguru
+pytest
+pytest-asyncio
