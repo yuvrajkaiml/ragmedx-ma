@@ -1,9 +1,26 @@
-from fastapi import APIRouter
+from uuid import UUID
 
-from app.api.routes.chat import router as chat_router
-from app.api.routes.health import router as health_router
+from fastapi import APIRouter, WebSocket
 
-router = APIRouter()
+from app.api.v1.endpoints import (
+    admin_router,
+    auth_router,
+    chat_router,
+    documents_router,
+    query_router,
+    users_router,
+)
+from app.api.v1.websockets import query_stream
 
-router.include_router(chat_router, tags=["Chat"])
-router.include_router(health_router, tags=["Health"])
+api_router = APIRouter()
+api_router.include_router(admin_router)
+api_router.include_router(auth_router)
+api_router.include_router(users_router)
+api_router.include_router(chat_router)
+api_router.include_router(documents_router)
+api_router.include_router(query_router)
+
+
+@api_router.websocket("/ws/query-stream")
+async def stream_query(websocket: WebSocket, query_id: UUID):
+    await query_stream(websocket, query_id)
