@@ -6,13 +6,26 @@ Combines:
     - Sparse lexical retrieval (BM25)
     - Query expansion
     - Reciprocal Rank Fusion (RRF)
+    - Optional cross-encoder reranking
 
-Query expansion generates multiple retrieval-oriented formulations
-of the original query. Dense and sparse retrieval are performed for
-each formulation, and the resulting ranked lists are fused using RRF.
+Pipeline:
 
-This component is intentionally independent of the multi-agent
-and LLM orchestration layer.
+    Original Query
+          ↓
+    Query Expansion
+          ↓
+    Dense + Sparse Retrieval
+          ↓
+    RRF Fusion
+          ↓
+    Candidate Pool
+          ↓
+    Cross-Encoder Reranking (optional)
+          ↓
+    Final Ranked Results
+
+This component is intentionally independent of the
+multi-agent and LLM orchestration layer.
 """
 
 from __future__ import annotations
@@ -23,38 +36,30 @@ from app.rag.chunking.models import MedicalChunk
 from app.rag.retrievers.dense_retriever import DenseRetriever
 from app.rag.retrievers.sparse_retriever import SparseRetriever
 from app.rag.retrievers.query_expander import QueryExpander
+from app.rag.rerankers.cross_encoder_reranker import CrossEncoderReranker
 
 
 class HybridRetriever:
     """
-    Hybrid retriever combining dense retrieval, sparse retrieval,
-    optional query expansion, and Reciprocal Rank Fusion (RRF).
+    Hybrid retriever combining:
 
-    Pipeline:
-
-        Original Query
-              |
         Query Expansion
-              |
-        Multiple Query Variants
-              |
-        +----------------------+
-        | Dense + Sparse       |
-        | Retrieval per query  |
-        +----------+-----------+
-                   |
-              RRF Fusion
-                   |
-             Ranked Results
+            ↓
+        Dense Retrieval
+            +
+        Sparse Retrieval
+            ↓
+        RRF
+            ↓
+        Optional Cross-Encoder Reranking
 
-    RRF formula:
+    RRF:
 
-        RRF(d) = sum 1 / (k + rank(d))
+        RRF(d) = Σ 1 / (k + rank(d))
 
     where:
         k is the RRF constant.
-        rank(d) is the 1-based rank of document d
-        in a retrieval list.
+        rank(d) is the rank of document d in a retrieval list.
     """
 
     def __init__(
@@ -62,6 +67,7 @@ class HybridRetriever:
         dense_retriever: DenseRetriever,
         sparse_retriever: SparseRetriever,
         query_expander: QueryExpander | None = None,
+        reranker: CrossEncoderReranker | None = None,
         rrf_k: int = 60,
     ) -> None:
 
@@ -79,6 +85,8 @@ class HybridRetriever:
             else QueryExpander()
         )
 
+        self.reranker = reranker
+
         self.rrf_k = rrf_k
 
     # ------------------------------------------------------------------
@@ -91,9 +99,6 @@ class HybridRetriever:
     ) -> None:
         """
         Add chunks to both dense and sparse indexes.
-
-        The same MedicalChunk objects are indexed by both retrieval
-        systems so their results can be fused consistently.
         """
 
         if not chunks:
@@ -128,18 +133,6 @@ class HybridRetriever:
     ) -> list[tuple[MedicalChunk, float]]:
         """
         Fuse multiple ranked retrieval lists using RRF.
-
-        Each dense/sparse result list contributes independently
-        to the final RRF score.
-
-        Args:
-            retrieval_lists:
-                Multiple ranked lists of
-                (MedicalChunk, score) tuples.
-
-        Returns:
-            List of (MedicalChunk, RRF score) tuples ordered by
-            descending fused score.
         """
 
         scores: dict[str, float] = {}
@@ -184,43 +177,38 @@ class HybridRetriever:
         top_k: int = 5,
         dense_top_k: int | None = None,
         sparse_top_k: int | None = None,
-        expand_query: bool = True,
-    ) -> list[
-        tuple[MedicalChunk, float]
-    ]:
+        rerank_top_k: int | None = None,
+    ) -> list[tuple[MedicalChunk, float]]:
         """
-        Perform hybrid retrieval with optional query expansion.
+        Perform query-expanded hybrid retrieval with optional
+        cross-encoder reranking.
 
         Args:
             query:
                 Natural-language medical question.
 
             top_k:
-                Number of final hybrid results.
+                Number of final results returned.
 
             dense_top_k:
-                Number of candidates retrieved from dense search
-                for each query variant.
-                Defaults to max(top_k, 10).
+                Number of dense candidates retrieved for each
+                expanded query.
 
             sparse_top_k:
-                Number of candidates retrieved from sparse search
-                for each query variant.
-                Defaults to max(top_k, 10).
+                Number of sparse candidates retrieved for each
+                expanded query.
 
-            expand_query:
-                Whether to generate multiple query formulations
-                before retrieval.
-
-                True:
-                    Original query + expanded variants are retrieved.
-
-                False:
-                    Only the original query is retrieved.
+            rerank_top_k:
+                Number of RRF candidates passed to the cross-encoder.
+                If None, defaults to max(top_k, 10).
 
         Returns:
-            List of (MedicalChunk, RRF score) tuples ordered by
-            descending fused score.
+            List of (MedicalChunk, score) tuples.
+
+            If reranking is enabled, score is the cross-encoder
+            relevance score.
+
+            Otherwise, score is the RRF score.
         """
 
         # --------------------------------------------------------------
@@ -260,6 +248,12 @@ class HybridRetriever:
                 10,
             )
 
+        if rerank_top_k is None:
+            rerank_top_k = max(
+                top_k,
+                10,
+            )
+
         if dense_top_k <= 0:
             raise ValueError(
                 "dense_top_k must be greater than zero."
@@ -270,14 +264,18 @@ class HybridRetriever:
                 "sparse_top_k must be greater than zero."
             )
 
+        if rerank_top_k <= 0:
+            raise ValueError(
+                "rerank_top_k must be greater than zero."
+            )
+
         # --------------------------------------------------------------
         # Query expansion
         # --------------------------------------------------------------
 
-        if expand_query:
-            queries = self.query_expander.expand(query)
-        else:
-            queries = [query]
+        expanded_queries = self.query_expander.expand(
+            query
+        )
 
         # --------------------------------------------------------------
         # Retrieve for every query variant
@@ -287,12 +285,11 @@ class HybridRetriever:
             list[tuple[MedicalChunk, float]]
         ] = []
 
-        for retrieval_query in queries:
+        for expanded_query in expanded_queries:
 
-            # Dense retrieval
             dense_results = (
                 self.dense_retriever.retrieve(
-                    query=retrieval_query,
+                    query=expanded_query,
                     top_k=dense_top_k,
                 )
             )
@@ -301,10 +298,9 @@ class HybridRetriever:
                 dense_results
             )
 
-            # Sparse retrieval
             sparse_results = (
                 self.sparse_retriever.retrieve(
-                    query=retrieval_query,
+                    query=expanded_query,
                     top_k=sparse_top_k,
                 )
             )
@@ -321,6 +317,29 @@ class HybridRetriever:
             retrieval_lists
         )
 
+        if not fused_results:
+            return []
+
+        # --------------------------------------------------------------
+        # Cross-encoder reranking
+        # --------------------------------------------------------------
+
+        if self.reranker is not None:
+
+            candidate_results = fused_results[
+                :rerank_top_k
+            ]
+
+            return self.reranker.rerank(
+                query=query,
+                results=candidate_results,
+                top_k=top_k,
+            )
+
+        # --------------------------------------------------------------
+        # No reranker
+        # --------------------------------------------------------------
+
         return fused_results[:top_k]
 
     # ------------------------------------------------------------------
@@ -331,8 +350,6 @@ class HybridRetriever:
     def size(self) -> int:
         """
         Return the number of chunks indexed.
-
-        Dense and sparse indexes should contain the same chunks.
         """
 
         return self.dense_retriever.size
