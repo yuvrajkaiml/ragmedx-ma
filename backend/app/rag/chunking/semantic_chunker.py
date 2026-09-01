@@ -22,7 +22,37 @@ class MedicalChunker:
         chunk_size: int = 800,
         chunk_overlap: int = 100,
         min_chunk_size: int = 150,
+        overlap: int | None = None,
     ):
+        """
+        Initialize the medical chunker.
+
+        Args:
+            chunk_size: Maximum target chunk size in characters.
+            chunk_overlap: Number of characters to preserve as overlap.
+            min_chunk_size: Minimum accepted chunk size.
+            overlap: Backward-compatible alias for chunk_overlap.
+        """
+
+        # Support both `chunk_overlap` and the older `overlap`
+        # parameter used by some tests.
+        if overlap is not None:
+            chunk_overlap = overlap
+
+        if chunk_size <= 0:
+            raise ValueError("chunk_size must be greater than 0")
+
+        if chunk_overlap < 0:
+            raise ValueError("chunk_overlap cannot be negative")
+
+        if min_chunk_size < 0:
+            raise ValueError("min_chunk_size cannot be negative")
+
+        if chunk_overlap >= chunk_size:
+            raise ValueError(
+                "chunk_overlap must be smaller than chunk_size"
+            )
+
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
         self.min_chunk_size = min_chunk_size
@@ -46,17 +76,17 @@ class MedicalChunker:
         if not text:
             return ""
 
-        # Normalize line endings
+        # Normalize line endings.
         text = text.replace("\r\n", "\n")
         text = text.replace("\r", "\n")
 
-        # Remove repeated whitespace
+        # Normalize spaces and tabs.
         text = re.sub(r"[ \t]+", " ", text)
 
-        # Normalize excessive blank lines
+        # Normalize excessive blank lines.
         text = re.sub(r"\n{3,}", "\n\n", text)
 
-        # Remove common article markers
+        # Remove common article markers.
         text = re.sub(
             r"^\s*(TEXT|ARTICLE)\s*$",
             "",
@@ -129,7 +159,7 @@ class MedicalChunker:
         if paragraph.endswith("."):
             return False
 
-        # Common heading characteristics
+        # Common heading characteristics.
         heading_keywords = [
             "introduction",
             "background",
@@ -226,7 +256,9 @@ class MedicalChunker:
             if not current_paragraphs:
                 return
 
-            content = " ".join(current_paragraphs).strip()
+            content = " ".join(
+                current_paragraphs
+            ).strip()
 
             if len(content) >= self.min_chunk_size:
                 chunks.append(
@@ -241,6 +273,7 @@ class MedicalChunker:
 
         for paragraph in paragraphs:
 
+            # Detect a new medical section.
             if self._looks_like_heading(paragraph):
                 flush_chunk()
 
@@ -250,8 +283,8 @@ class MedicalChunker:
 
             paragraph_length = len(paragraph)
 
-            # If adding the paragraph exceeds the limit,
-            # finalize the current chunk.
+            # If adding the paragraph exceeds the chunk limit,
+            # finalize the current chunk first.
             if (
                 current_length + paragraph_length
                 > self.chunk_size
@@ -259,12 +292,13 @@ class MedicalChunker:
             ):
                 flush_chunk()
 
-                # Add overlap from previous paragraph.
-                if chunks:
+                # Add contextual overlap from the previous chunk.
+                if chunks and self.chunk_overlap > 0:
                     previous_text = chunks[-1][1]
 
+                    # Approximate character overlap.
                     overlap_text = previous_text[
-                        -self.chunk_overlap * 4:
+                        -self.chunk_overlap:
                     ]
 
                     if overlap_text:
@@ -277,9 +311,9 @@ class MedicalChunker:
                         )
 
             current_paragraphs.append(paragraph)
-
             current_length += paragraph_length
 
+        # Flush the final chunk.
         flush_chunk()
 
         return chunks
@@ -300,18 +334,22 @@ class MedicalChunker:
             f"Chunking document: {document.id}"
         )
 
+        # Clean document text.
         text = self._clean_text(
             document.content
         )
 
+        # Remove references and publication metadata.
         text = self._remove_article_end_matter(
             text
         )
 
+        # Extract paragraphs.
         paragraphs = self._extract_paragraphs(
             text
         )
 
+        # Create raw section-aware chunks.
         raw_chunks = self._create_chunks(
             paragraphs
         )
