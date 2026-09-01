@@ -1,17 +1,18 @@
 """
 Hybrid retrieval for the RAGMedX-MA retrieval engine.
 
-Combines dense semantic retrieval and sparse lexical retrieval
-using Reciprocal Rank Fusion (RRF).
+Combines:
+    - Dense semantic retrieval (BGE-M3 + FAISS)
+    - Sparse lexical retrieval (BM25)
+    - Query expansion
+    - Reciprocal Rank Fusion (RRF)
 
-Dense retrieval:
-    BGE-M3 + FAISS
+Query expansion generates multiple retrieval-oriented formulations
+of the original query. Dense and sparse retrieval are performed for
+each formulation, and the resulting ranked lists are fused using RRF.
 
-Sparse retrieval:
-    BM25
-
-RRF combines the ranked lists without requiring the dense and
-sparse scores to be on the same numerical scale.
+This component is intentionally independent of the multi-agent
+and LLM orchestration layer.
 """
 
 from __future__ import annotations
@@ -21,31 +22,49 @@ from typing import Sequence
 from app.rag.chunking.models import MedicalChunk
 from app.rag.retrievers.dense_retriever import DenseRetriever
 from app.rag.retrievers.sparse_retriever import SparseRetriever
+from app.rag.retrievers.query_expander import QueryExpander
 
 
 class HybridRetriever:
     """
-    Hybrid retriever combining dense and sparse retrieval.
+    Hybrid retriever combining dense retrieval, sparse retrieval,
+    optional query expansion, and Reciprocal Rank Fusion (RRF).
 
-    Uses Reciprocal Rank Fusion (RRF):
+    Pipeline:
 
-        RRF(d) = Σ 1 / (k + rank(d))
+        Original Query
+              |
+        Query Expansion
+              |
+        Multiple Query Variants
+              |
+        +----------------------+
+        | Dense + Sparse       |
+        | Retrieval per query  |
+        +----------+-----------+
+                   |
+              RRF Fusion
+                   |
+             Ranked Results
+
+    RRF formula:
+
+        RRF(d) = sum 1 / (k + rank(d))
 
     where:
         k is the RRF constant.
-        rank(d) is the rank of document d in a retrieval list.
-
-    The default RRF constant of 60 is commonly used because it
-    prevents very high-ranked results from completely dominating
-    the fused ranking.
+        rank(d) is the 1-based rank of document d
+        in a retrieval list.
     """
 
     def __init__(
         self,
         dense_retriever: DenseRetriever,
         sparse_retriever: SparseRetriever,
+        query_expander: QueryExpander | None = None,
         rrf_k: int = 60,
     ) -> None:
+
         if rrf_k <= 0:
             raise ValueError(
                 "rrf_k must be greater than zero."
@@ -53,6 +72,13 @@ class HybridRetriever:
 
         self.dense_retriever = dense_retriever
         self.sparse_retriever = sparse_retriever
+
+        self.query_expander = (
+            query_expander
+            if query_expander is not None
+            else QueryExpander()
+        )
+
         self.rrf_k = rrf_k
 
     # ------------------------------------------------------------------
@@ -67,7 +93,7 @@ class HybridRetriever:
         Add chunks to both dense and sparse indexes.
 
         The same MedicalChunk objects are indexed by both retrieval
-        systems so that their results can be fused consistently.
+        systems so their results can be fused consistently.
         """
 
         if not chunks:
@@ -96,67 +122,43 @@ class HybridRetriever:
 
     def _fuse_results(
         self,
-        dense_results: list[
-            tuple[MedicalChunk, float]
+        retrieval_lists: Sequence[
+            list[tuple[MedicalChunk, float]]
         ],
-        sparse_results: list[
-            tuple[MedicalChunk, float]
-        ],
-    ) -> list[
-        tuple[MedicalChunk, float]
-    ]:
+    ) -> list[tuple[MedicalChunk, float]]:
         """
-        Fuse dense and sparse ranked results using RRF.
+        Fuse multiple ranked retrieval lists using RRF.
 
-        The original retrieval scores are intentionally not added
-        directly because FAISS cosine similarity and BM25 scores
-        have different numerical scales.
+        Each dense/sparse result list contributes independently
+        to the final RRF score.
+
+        Args:
+            retrieval_lists:
+                Multiple ranked lists of
+                (MedicalChunk, score) tuples.
 
         Returns:
-            List of (MedicalChunk, RRF score) tuples ordered from
-            highest fused score to lowest.
+            List of (MedicalChunk, RRF score) tuples ordered by
+            descending fused score.
         """
 
         scores: dict[str, float] = {}
         chunks: dict[str, MedicalChunk] = {}
 
-        # --------------------------------------------------------------
-        # Dense contribution
-        # --------------------------------------------------------------
+        for results in retrieval_lists:
 
-        for rank, (chunk, _) in enumerate(
-            dense_results,
-            start=1,
-        ):
-            chunk_key = chunk.id
+            for rank, (chunk, _) in enumerate(
+                results,
+                start=1,
+            ):
+                chunk_key = chunk.id
 
-            chunks[chunk_key] = chunk
+                chunks[chunk_key] = chunk
 
-            scores[chunk_key] = (
-                scores.get(chunk_key, 0.0)
-                + self._rrf_score(rank)
-            )
-
-        # --------------------------------------------------------------
-        # Sparse contribution
-        # --------------------------------------------------------------
-
-        for rank, (chunk, _) in enumerate(
-            sparse_results,
-            start=1,
-        ):
-            chunk_key = chunk.id
-
-            chunks[chunk_key] = chunk
-
-            scores[chunk_key] = (
-                scores.get(chunk_key, 0.0)
-                + self._rrf_score(rank)
-            )
-
-        # --------------------------------------------------------------
-        # Sort by fused RRF score
-        # --------------------------------------------------------------
+                scores[chunk_key] = (
+                    scores.get(chunk_key, 0.0)
+                    + self._rrf_score(rank)
+                )
 
         ranked_ids = sorted(
             scores,
@@ -182,11 +184,12 @@ class HybridRetriever:
         top_k: int = 5,
         dense_top_k: int | None = None,
         sparse_top_k: int | None = None,
+        expand_query: bool = True,
     ) -> list[
         tuple[MedicalChunk, float]
     ]:
         """
-        Perform hybrid retrieval.
+        Perform hybrid retrieval with optional query expansion.
 
         Args:
             query:
@@ -196,16 +199,33 @@ class HybridRetriever:
                 Number of final hybrid results.
 
             dense_top_k:
-                Number of candidates retrieved from dense search.
+                Number of candidates retrieved from dense search
+                for each query variant.
                 Defaults to max(top_k, 10).
 
             sparse_top_k:
-                Number of candidates retrieved from sparse search.
+                Number of candidates retrieved from sparse search
+                for each query variant.
                 Defaults to max(top_k, 10).
 
+            expand_query:
+                Whether to generate multiple query formulations
+                before retrieval.
+
+                True:
+                    Original query + expanded variants are retrieved.
+
+                False:
+                    Only the original query is retrieved.
+
         Returns:
-            List of (MedicalChunk, RRF score) tuples.
+            List of (MedicalChunk, RRF score) tuples ordered by
+            descending fused score.
         """
+
+        # --------------------------------------------------------------
+        # Validate query
+        # --------------------------------------------------------------
 
         if not isinstance(query, str):
             raise TypeError(
@@ -223,6 +243,10 @@ class HybridRetriever:
             raise ValueError(
                 "top_k must be greater than zero."
             )
+
+        # --------------------------------------------------------------
+        # Configure candidate counts
+        # --------------------------------------------------------------
 
         if dense_top_k is None:
             dense_top_k = max(
@@ -247,30 +271,54 @@ class HybridRetriever:
             )
 
         # --------------------------------------------------------------
-        # Retrieve independently
+        # Query expansion
         # --------------------------------------------------------------
 
-        dense_results = (
-            self.dense_retriever.retrieve(
-                query=query,
-                top_k=dense_top_k,
-            )
-        )
-
-        sparse_results = (
-            self.sparse_retriever.retrieve(
-                query=query,
-                top_k=sparse_top_k,
-            )
-        )
+        if expand_query:
+            queries = self.query_expander.expand(query)
+        else:
+            queries = [query]
 
         # --------------------------------------------------------------
-        # Fuse ranked lists
+        # Retrieve for every query variant
+        # --------------------------------------------------------------
+
+        retrieval_lists: list[
+            list[tuple[MedicalChunk, float]]
+        ] = []
+
+        for retrieval_query in queries:
+
+            # Dense retrieval
+            dense_results = (
+                self.dense_retriever.retrieve(
+                    query=retrieval_query,
+                    top_k=dense_top_k,
+                )
+            )
+
+            retrieval_lists.append(
+                dense_results
+            )
+
+            # Sparse retrieval
+            sparse_results = (
+                self.sparse_retriever.retrieve(
+                    query=retrieval_query,
+                    top_k=sparse_top_k,
+                )
+            )
+
+            retrieval_lists.append(
+                sparse_results
+            )
+
+        # --------------------------------------------------------------
+        # RRF fusion
         # --------------------------------------------------------------
 
         fused_results = self._fuse_results(
-            dense_results=dense_results,
-            sparse_results=sparse_results,
+            retrieval_lists
         )
 
         return fused_results[:top_k]
