@@ -1,336 +1,198 @@
-﻿"""FAISS vector-store adapter.
+"""
+FAISS vector store for the RAGMedX-MA retrieval engine.
 
-Implements the canonical :class:`~app.rag.interfaces.VectorStore` interface
-using ``faiss.IndexFlatIP`` (inner-product search).
-
-Normalisation contract
-----------------------
-``BGEEmbedder`` already produces L2-normalised vectors, so inner-product
-search is equivalent to cosine similarity and no further normalisation is
-performed inside this class.  **Embeddings passed to :meth:`upsert` and
-:meth:`search` must already be L2-normalised** (unit vectors).  If they are
-not, similarity scores will be incorrect but no exception is raised -- the
-caller is responsible for normalising before calling this class.
-
-Persistence layout
-------------------
-:meth:`save` writes two files to *index_dir*::
-
-    <index_dir>/
-        index.faiss      -- raw FAISS binary written by faiss.write_index()
-        metadata.json    -- JSON mapping: dim, ntotal, and DocumentChunk dicts
-
-:meth:`load` restores both and validates that the stored dimension matches
-the dimension this instance was constructed with.
-
-Thread safety
--------------
-``faiss.IndexFlatIP`` is not thread-safe for concurrent writes.  Use one
-``FAISSVectorStore`` per process and protect concurrent access externally if
-needed.
+Stores dense embeddings generated from MedicalChunk objects and
+maintains the corresponding chunk metadata for retrieval.
 """
 
 from __future__ import annotations
 
-import json
+import pickle
 from pathlib import Path
-from typing import Optional
-from collections.abc import Sequence
+from typing import Sequence
 
 import faiss
 import numpy as np
 
-from app.rag.interfaces import VectorStore
-from app.schemas.retrieval import DocumentChunk, RetrievalResult
-from app.utils.logger import logger
-
-_INDEX_FILENAME = "index.faiss"
-_METADATA_FILENAME = "metadata.json"
+from app.rag.chunking.models import MedicalChunk
 
 
-class FAISSVectorStore(VectorStore):
-    """FAISS-backed vector store using inner-product (cosine) similarity.
+class FAISSVectorStore:
+    """
+    Persistent FAISS vector store for medical document chunks.
 
-    Parameters
-    ----------
-    dim:
-        Embedding dimension.  Must match the output dimension of the
-        :class:`~app.rag.embeddings.bge_embedding.BGEEmbedder` (384).
-    index_dir:
-        Optional directory for :meth:`save` / :meth:`load`.  Defaults to
-        ``app.config.FAISS_INDEX_DIR``.  The directory is created on first
-        :meth:`save` if it does not exist.
+    Uses IndexFlatIP (inner product). Since BGE-M3 embeddings are
+    L2-normalized, inner product is equivalent to cosine similarity.
     """
 
-    def __init__(
+    def __init__(self, dimension: int = 1024) -> None:
+        self.dimension = dimension
+
+        self.index = faiss.IndexFlatIP(self.dimension)
+
+        # Position in this list corresponds directly to the FAISS vector ID.
+        self.chunks: list[MedicalChunk] = []
+
+    @property
+    def size(self) -> int:
+        """Return the number of vectors currently stored."""
+
+        return self.index.ntotal
+
+    def add(
         self,
-        dim: int = 384,
-        index_dir: Optional[Path] = None,
+        embeddings: np.ndarray,
+        chunks: Sequence[MedicalChunk],
     ) -> None:
-        if dim <= 0:
-            raise ValueError(f"Embedding dimension must be positive, got {dim}.")
-
-        self._dim = dim
-        self._index: faiss.IndexFlatIP = faiss.IndexFlatIP(dim)
-        # Ordered list of DocumentChunk dicts -- position i corresponds to
-        # FAISS internal id i.
-        self._chunks: list[dict] = []
-
-        if index_dir is None:
-            from app.config import FAISS_INDEX_DIR
-            index_dir = FAISS_INDEX_DIR
-        self._index_dir = Path(index_dir)
-
-        logger.info(
-            f"FAISSVectorStore initialised -- dim={dim}, "
-            f"index_dir={self._index_dir}"
-        )
-
-    # ------------------------------------------------------------------
-    # VectorStore interface
-    # ------------------------------------------------------------------
-
-    def upsert(
-        self,
-        chunks: Sequence[DocumentChunk],
-        embeddings: Sequence[Sequence[float]],
-    ) -> None:
-        """Add *chunks* with their pre-computed *embeddings* to the index.
-
-        Parameters
-        ----------
-        chunks:
-            Document chunks to store.
-        embeddings:
-            One L2-normalised embedding vector per chunk.  Must have the same
-            length as *chunks* and each vector must have ``self.dim`` elements.
-
-        Raises
-        ------
-        ValueError
-            If *chunks* and *embeddings* lengths differ, or if any embedding
-            has the wrong dimension.
-
-        Notes
-        -----
-        Calling :meth:`upsert` with an empty sequence is a documented no-op.
         """
-        if len(chunks) == 0:
-            logger.debug("FAISSVectorStore.upsert called with empty sequence -- no-op.")
-            return
+        Add embeddings and their corresponding MedicalChunk objects.
 
-        if len(chunks) != len(embeddings):
+        Args:
+            embeddings: Array of shape (n, dimension).
+            chunks: MedicalChunk objects corresponding to each embedding.
+        """
+
+        embeddings = np.asarray(embeddings, dtype=np.float32)
+
+        if embeddings.ndim != 2:
             raise ValueError(
-                f"chunks and embeddings must have the same length, "
-                f"got {len(chunks)} chunks and {len(embeddings)} embeddings."
+                f"Embeddings must be 2-dimensional. "
+                f"Received shape: {embeddings.shape}"
             )
 
-        # Validate and convert to float32 numpy array
-        matrix = self._to_float32_matrix(embeddings)
+        if embeddings.shape[1] != self.dimension:
+            raise ValueError(
+                f"Embedding dimension mismatch. "
+                f"Expected {self.dimension}, "
+                f"received {embeddings.shape[1]}."
+            )
 
-        # Store serialisable chunk dicts in insertion order
-        for chunk in chunks:
-            self._chunks.append(chunk.model_dump(mode="json"))
+        if len(embeddings) != len(chunks):
+            raise ValueError(
+                f"Number of embeddings ({len(embeddings)}) does not match "
+                f"number of chunks ({len(chunks)})."
+            )
 
-        self._index.add(matrix)
-        logger.info(
-            f"FAISSVectorStore.upsert: added {len(chunks)} vector(s), "
-            f"total={self._index.ntotal}"
-        )
+        if len(embeddings) == 0:
+            return
+
+        self.index.add(embeddings)
+        self.chunks.extend(chunks)
 
     def search(
         self,
-        query_embedding: Sequence[float],
-        top_k: int,
-    ) -> list[RetrievalResult]:
-        """Return the top-K most similar chunks for *query_embedding*.
-
-        Parameters
-        ----------
-        query_embedding:
-            An L2-normalised query vector of length ``self.dim``.
-        top_k:
-            Number of results to return.  If the index contains fewer vectors
-            than *top_k*, all indexed vectors are returned (no padding).
-
-        Returns
-        -------
-        list[RetrievalResult]
-            Ordered by descending similarity score.  Empty list if the index
-            contains no vectors.
-
-        Raises
-        ------
-        ValueError
-            If *top_k* <= 0 or if *query_embedding* has the wrong dimension.
+        query_embedding: np.ndarray,
+        top_k: int = 5,
+    ) -> list[tuple[MedicalChunk, float]]:
         """
-        if top_k <= 0:
-            raise ValueError(f"top_k must be a positive integer, got {top_k}.")
+        Search the vector store using a query embedding.
 
-        if self._index.ntotal == 0:
-            logger.debug("FAISSVectorStore.search: index is empty, returning [].")
+        Returns:
+            List of (MedicalChunk, similarity_score) tuples,
+            ordered from most similar to least similar.
+        """
+
+        if self.size == 0:
             return []
 
-        query_matrix = self._to_float32_matrix([query_embedding])
+        query_embedding = np.asarray(
+            query_embedding,
+            dtype=np.float32,
+        )
 
-        # Clamp top_k to the actual index size
-        effective_k = min(top_k, self._index.ntotal)
+        if query_embedding.ndim == 1:
+            query_embedding = query_embedding.reshape(1, -1)
 
-        distances, indices = self._index.search(query_matrix, effective_k)
+        if query_embedding.shape[1] != self.dimension:
+            raise ValueError(
+                f"Query embedding dimension mismatch. "
+                f"Expected {self.dimension}, "
+                f"received {query_embedding.shape[1]}."
+            )
 
-        results: list[RetrievalResult] = []
-        for dist, idx in zip(distances[0], indices[0]):
-            if idx == -1:
-                # FAISS returns -1 as a sentinel for unfilled slots
+        top_k = min(top_k, self.size)
+
+        scores, indices = self.index.search(
+            query_embedding,
+            top_k,
+        )
+
+        results: list[tuple[MedicalChunk, float]] = []
+
+        for score, index in zip(scores[0], indices[0]):
+            if index < 0:
                 continue
 
-            chunk_dict = self._chunks[int(idx)]
-            chunk = DocumentChunk(**chunk_dict)
-            # Clamp score to [0, 1] -- inner-product of unit vectors is in
-            # [-1, 1]; cosine similarity of 1 = identical direction.
-            score = float(max(0.0, min(1.0, dist)))
-            results.append(RetrievalResult(chunk=chunk, relevance_score=score))
+            results.append(
+                (
+                    self.chunks[index],
+                    float(score),
+                )
+            )
 
         return results
 
-    # ------------------------------------------------------------------
-    # Persistence
-    # ------------------------------------------------------------------
-
-    def save(self, index_dir: Optional[Path] = None) -> None:
-        """Persist the FAISS index and metadata mapping to *index_dir*.
-
-        Parameters
-        ----------
-        index_dir:
-            Target directory.  Defaults to the directory passed at
-            construction time.  Created if it does not exist.
-
-        Raises
-        ------
-        IOError
-            If writing either file fails.
+    def save(self, directory: str | Path) -> None:
         """
-        target = Path(index_dir) if index_dir is not None else self._index_dir
-        target.mkdir(parents=True, exist_ok=True)
+        Persist the FAISS index and chunk metadata to disk.
+        """
 
-        index_path = target / _INDEX_FILENAME
-        meta_path = target / _METADATA_FILENAME
+        directory = Path(directory)
+        directory.mkdir(parents=True, exist_ok=True)
 
-        faiss.write_index(self._index, str(index_path))
-        meta_path.write_text(
-            json.dumps(
-                {
-                    "dim": self._dim,
-                    "ntotal": self._index.ntotal,
-                    "chunks": self._chunks,
-                },
-                ensure_ascii=False,
-                indent=2,
-            ),
-            encoding="utf-8",
+        index_path = directory / "index.faiss"
+        metadata_path = directory / "chunks.pkl"
+
+        faiss.write_index(
+            self.index,
+            str(index_path),
         )
-        logger.info(
-            f"FAISSVectorStore.save: {self._index.ntotal} vector(s) -> {target}"
-        )
+
+        with open(metadata_path, "wb") as file:
+            pickle.dump(
+                self.chunks,
+                file,
+                protocol=pickle.HIGHEST_PROTOCOL,
+            )
 
     @classmethod
-    def load(cls, index_dir: Path) -> "FAISSVectorStore":
-        """Restore a previously saved index from *index_dir*.
-
-        Parameters
-        ----------
-        index_dir:
-            Directory containing ``index.faiss`` and ``metadata.json``.
-
-        Returns
-        -------
-        FAISSVectorStore
-            A fully initialised store with all previously added chunks.
-
-        Raises
-        ------
-        FileNotFoundError
-            If either persistence file is missing.
-        ValueError
-            If the stored dimension is incompatible with the loaded index.
+    def load(
+        cls,
+        directory: str | Path,
+    ) -> "FAISSVectorStore":
         """
-        index_dir = Path(index_dir)
-        index_path = index_dir / _INDEX_FILENAME
-        meta_path = index_dir / _METADATA_FILENAME
+        Load a previously persisted vector store.
+        """
+
+        directory = Path(directory)
+
+        index_path = directory / "index.faiss"
+        metadata_path = directory / "chunks.pkl"
 
         if not index_path.exists():
             raise FileNotFoundError(
-                f"FAISS index file not found: {index_path}"
+                f"FAISS index not found: {index_path}"
             )
-        if not meta_path.exists():
+
+        if not metadata_path.exists():
             raise FileNotFoundError(
-                f"FAISS metadata file not found: {meta_path}"
+                f"Chunk metadata not found: {metadata_path}"
             )
 
-        meta = json.loads(meta_path.read_text(encoding="utf-8"))
-        stored_dim: int = meta["dim"]
-        chunks: list[dict] = meta["chunks"]
+        index = faiss.read_index(str(index_path))
 
-        raw_index = faiss.read_index(str(index_path))
+        with open(metadata_path, "rb") as file:
+            chunks = pickle.load(file)
 
-        # Validate dimension consistency
-        if raw_index.d != stored_dim:
+        store = cls(dimension=index.d)
+        store.index = index
+        store.chunks = chunks
+
+        if store.index.ntotal != len(store.chunks):
             raise ValueError(
-                f"Dimension mismatch: index.faiss has d={raw_index.d} but "
-                f"metadata.json records dim={stored_dim}."
+                "FAISS index and chunk metadata are inconsistent: "
+                f"{store.index.ntotal} vectors vs "
+                f"{len(store.chunks)} chunks."
             )
 
-        store = cls.__new__(cls)
-        store._dim = stored_dim
-        store._index = raw_index
-        store._chunks = chunks
-        store._index_dir = index_dir
-
-        logger.info(
-            f"FAISSVectorStore.load: {raw_index.ntotal} vector(s) from {index_dir}"
-        )
         return store
-
-    # ------------------------------------------------------------------
-    # Convenience properties
-    # ------------------------------------------------------------------
-
-    @property
-    def dim(self) -> int:
-        """Expected embedding dimension."""
-        return self._dim
-
-    @property
-    def ntotal(self) -> int:
-        """Number of vectors currently in the index."""
-        return self._index.ntotal
-
-    # ------------------------------------------------------------------
-    # Private helpers
-    # ------------------------------------------------------------------
-
-    def _to_float32_matrix(
-        self, embeddings: Sequence[Sequence[float]]
-    ) -> np.ndarray:
-        """Validate and convert embeddings to a contiguous float32 matrix.
-
-        Raises
-        ------
-        ValueError
-            If any vector has the wrong dimension.
-        """
-        matrix = np.array(embeddings, dtype=np.float32)
-
-        if matrix.ndim != 2:
-            raise ValueError(
-                f"Expected a 2-D array of embeddings, got shape {matrix.shape}."
-            )
-        if matrix.shape[1] != self._dim:
-            raise ValueError(
-                f"Expected embedding dimension {self._dim}, "
-                f"received {matrix.shape[1]}."
-            )
-
-        # FAISS requires C-contiguous float32 arrays
-        return np.ascontiguousarray(matrix, dtype=np.float32)
