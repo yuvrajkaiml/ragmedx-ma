@@ -7,8 +7,8 @@ location without depending directly on the rag internals package.
 Usage::
 
     from app.retrieval.embeddings import BGEEmbedder
-    embedder = BGEEmbedder()               # uses Settings.embedding_model_name
-    embedder = BGEEmbedder("BAAI/bge-small-en-v1.5", device="cuda")
+    embedder = BGEEmbedder()               # alias of native BGE-M3 adapter
+    embedder = BGEEmbedder("BAAI/bge-m3", device="cuda")
 """
 
 from app.rag.embeddings.bge_embedding import BGEEmbedder  # noqa: F401

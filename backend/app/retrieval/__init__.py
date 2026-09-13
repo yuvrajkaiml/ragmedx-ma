@@ -4,10 +4,10 @@ app.retrieval -- retrieval pipeline boundary package.
 Public surface
 --------------
 ``DocumentLoader``         -- unified ingestion entry-point.
-``BGEEmbedder``            -- BAAI/bge-small-en-v1.5 adapter.
-``FAISSVectorStore``       -- FAISS inner-product vector store.
-``DenseRetriever``         -- query -> embedding -> FAISS -> RetrievalResult list.
-``SparseRetriever``        -- BM25 keyword retrieval -> RetrievalResult list.
+``BGEEmbedder``            -- compatibility alias of the BGE-M3 adapter.
+``FAISSVectorStore``       -- FAISS inner-product vector store for MedicalChunk.
+``DenseRetriever``         -- query -> BGE-M3 embedding -> FAISS.
+``SparseRetriever``        -- BM25 keyword retrieval over MedicalChunk.
 ``HybridRetriever``        -- RRF fusion of dense + sparse.
 ``CrossEncoderReranker``   -- cross-encoder re-scoring of first-stage results.
 ``RAGPipeline``            -- end-to-end retrieval provider (hybrid + reranking).

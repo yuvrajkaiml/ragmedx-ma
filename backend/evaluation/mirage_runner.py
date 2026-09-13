@@ -162,14 +162,7 @@ class BenchmarkRunner:
             Rebuild the index even if one already exists.
         """
         from app.config import FAISS_INDEX_DIR
-        from app.rag.embeddings.bge_embedding import BGEEmbedder
         from app.rag.pipeline import RAGPipeline
-        from app.rag.rerankers.cross_encoder import CrossEncoderReranker
-        from app.rag.retrievers.dense_retriever import DenseRetriever
-        from app.rag.retrievers.hybrid_retriever import HybridRetriever
-        from app.rag.retrievers.sparse_retriever import SparseRetriever
-        from app.rag.vectorstore.faiss_store import FAISSVectorStore
-        from app.schemas.retrieval import DocumentChunk
         from evaluation.index_builder import MedQAIndexBuilder
 
         # 1. Load dataset
@@ -196,27 +189,9 @@ class BenchmarkRunner:
         )
         store = builder.build(force=force_reindex)
 
-        # 3. Construct RAGPipeline
-        embedder = BGEEmbedder()
-        dense = DenseRetriever(
-            embedder=embedder,
-            store=store,
-            default_top_k=top_k_retrieval,
-        )
-        sparse = SparseRetriever(default_top_k=top_k_retrieval)
-        if store.ntotal > 0:
-            chunks = [DocumentChunk(**c) for c in store._chunks]
-            sparse.index(chunks)
-
-        hybrid = HybridRetriever(
-            dense=dense,
-            sparse=sparse,
-            default_top_k=top_k_retrieval,
-        )
-        reranker = CrossEncoderReranker()
-        pipeline = RAGPipeline(
-            hybrid_retriever=hybrid,
-            reranker=reranker,
+        # 3. Construct the async facade over Sana's native pipeline.
+        pipeline = RAGPipeline.build(
+            index_dir=index_dir,
             top_k_retrieval=top_k_retrieval,
             top_k_final=top_k_final,
         )
@@ -279,7 +254,7 @@ class BenchmarkRunner:
             **base_metrics,
             "retrieval_coverage":       retrieval_coverage,
             "answer_with_citation_rate": citation_rate,
-            "index_size":               store.ntotal,
+            "index_size":               store.size,
         }
 
         return {

@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 import pytest
+import numpy as np
 
 from evaluation.index_builder import MedQAIndexBuilder
 from evaluation.metrics import (
@@ -26,6 +27,17 @@ from evaluation.metrics import (
 from evaluation.mirage_runner import BenchmarkRunner
 
 FIXTURE_PATH = Path(__file__).parent.parent / "data" / "datasets" / "medqa" / "sample.jsonl"
+
+
+class _DeterministicBGEEmbedding:
+    """Model-free stand-in for testing native 1024-dimensional index wiring."""
+
+    def embed_documents(self, texts, batch_size=8):
+        vectors = np.zeros((len(texts), 1024), dtype=np.float32)
+        for index, text in enumerate(texts):
+            vectors[index, index % 1024] = max(len(text), 1)
+        vectors /= np.linalg.norm(vectors, axis=1, keepdims=True)
+        return vectors
 
 
 # ---------------------------------------------------------------------------
@@ -147,50 +159,54 @@ class TestRetrievalCoverage:
 # ===========================================================================
 
 class TestMedQAIndexBuilder:
-    def test_build_creates_files(self, tmp_path):
-        builder = MedQAIndexBuilder(dataset_path=FIXTURE_PATH, index_dir=tmp_path)
+    @pytest.fixture
+    def embedder(self):
+        return _DeterministicBGEEmbedding()
+
+    def test_build_creates_files(self, tmp_path, embedder):
+        builder = MedQAIndexBuilder(dataset_path=FIXTURE_PATH, index_dir=tmp_path, embedder=embedder)
         builder.build()
         assert (tmp_path / "index.faiss").exists()
-        assert (tmp_path / "metadata.json").exists()
+        assert (tmp_path / "chunks.pkl").exists()
 
-    def test_ntotal_matches_fixture(self, tmp_path):
-        builder = MedQAIndexBuilder(dataset_path=FIXTURE_PATH, index_dir=tmp_path)
+    def test_ntotal_matches_fixture(self, tmp_path, embedder):
+        builder = MedQAIndexBuilder(dataset_path=FIXTURE_PATH, index_dir=tmp_path, embedder=embedder)
         store = builder.build()
-        assert store.ntotal == 4
+        assert store.size == 4
 
-    def test_chunks_have_medqa_source_type(self, tmp_path):
+    def test_chunks_have_medqa_source_type(self, tmp_path, embedder):
         from app.rag.vectorstore.faiss_store import FAISSVectorStore
-        MedQAIndexBuilder(dataset_path=FIXTURE_PATH, index_dir=tmp_path).build()
+        MedQAIndexBuilder(dataset_path=FIXTURE_PATH, index_dir=tmp_path, embedder=embedder).build()
         loaded = FAISSVectorStore.load(tmp_path)
-        for c in loaded._chunks:
-            assert c["source_type"] == "medqa"
+        for chunk in loaded.chunks:
+            assert chunk.source == "medqa"
 
-    def test_chunk_text_is_question(self, tmp_path):
+    def test_chunk_text_is_question(self, tmp_path, embedder):
         from app.rag.vectorstore.faiss_store import FAISSVectorStore
-        MedQAIndexBuilder(dataset_path=FIXTURE_PATH, index_dir=tmp_path).build()
+        MedQAIndexBuilder(dataset_path=FIXTURE_PATH, index_dir=tmp_path, embedder=embedder).build()
         loaded = FAISSVectorStore.load(tmp_path)
         samples = BenchmarkRunner(dataset_path=FIXTURE_PATH).load_dataset()
         questions = {s["question"] for s in samples}
-        for c in loaded._chunks:
-            assert c["text"] in questions
+        for chunk in loaded.chunks:
+            assert chunk.content in questions
 
-    def test_metadata_contains_answer(self, tmp_path):
+    def test_metadata_contains_answer(self, tmp_path, embedder):
         from app.rag.vectorstore.faiss_store import FAISSVectorStore
-        MedQAIndexBuilder(dataset_path=FIXTURE_PATH, index_dir=tmp_path).build()
+        MedQAIndexBuilder(dataset_path=FIXTURE_PATH, index_dir=tmp_path, embedder=embedder).build()
         loaded = FAISSVectorStore.load(tmp_path)
-        for c in loaded._chunks:
-            assert "answer" in c["metadata"]
+        for chunk in loaded.chunks:
+            assert "answer" in chunk.metadata
 
-    def test_force_false_skips_rebuild(self, tmp_path):
-        builder = MedQAIndexBuilder(dataset_path=FIXTURE_PATH, index_dir=tmp_path)
+    def test_force_false_skips_rebuild(self, tmp_path, embedder):
+        builder = MedQAIndexBuilder(dataset_path=FIXTURE_PATH, index_dir=tmp_path, embedder=embedder)
         builder.build()
         mtime1 = (tmp_path / "index.faiss").stat().st_mtime
         builder.build(force=False)
         mtime2 = (tmp_path / "index.faiss").stat().st_mtime
         assert mtime1 == mtime2
 
-    def test_force_true_rebuilds(self, tmp_path):
-        builder = MedQAIndexBuilder(dataset_path=FIXTURE_PATH, index_dir=tmp_path)
+    def test_force_true_rebuilds(self, tmp_path, embedder):
+        builder = MedQAIndexBuilder(dataset_path=FIXTURE_PATH, index_dir=tmp_path, embedder=embedder)
         builder.build()
         mtime1 = (tmp_path / "index.faiss").stat().st_mtime
         time.sleep(0.05)

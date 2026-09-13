@@ -29,7 +29,9 @@ Those responsibilities belong to later stages of the system.
 
 from __future__ import annotations
 
-from typing import Sequence
+import time
+from pathlib import Path
+from typing import Any, Sequence
 
 from app.rag.chunking.models import MedicalChunk
 from app.rag.retrievers.hybrid_retriever import HybridRetriever
@@ -270,3 +272,122 @@ class RAGRetrievalPipeline:
         """
 
         return self.hybrid_retriever.size
+
+
+class RAGPipeline:
+    """Async evidence-provider facade over :class:`RAGRetrievalPipeline`.
+
+    This preserves the public boundary consumed by ``RetrievalService`` and
+    the agent orchestrator.  Retrieval itself remains entirely native: BGE-M3,
+    ``MedicalChunk``, FAISS, BM25/RRF, and Sana's cross-encoder reranker.
+    """
+
+    def __init__(
+        self,
+        retrieval_pipeline: RAGRetrievalPipeline | None = None,
+        top_k_final: int = 5,
+    ) -> None:
+        self._retrieval_pipeline = retrieval_pipeline
+        self._top_k_final = top_k_final
+
+    @classmethod
+    def build(
+        cls,
+        index_dir: str | Path | None = None,
+        model_name: str | None = None,
+        top_k_retrieval: int = 20,
+        top_k_final: int = 5,
+    ) -> "RAGPipeline":
+        """Load a native persisted index or return a safe empty facade."""
+        from app.config import FAISS_INDEX_DIR
+        from app.rag.embeddings.bge_embedding import BGEEmbedding
+        from app.rag.retrievers.dense_retriever import DenseRetriever
+        from app.rag.retrievers.sparse_retriever import SparseRetriever
+        from app.rag.vectorstore.faiss_store import FAISSVectorStore
+
+        directory = Path(index_dir) if index_dir is not None else FAISS_INDEX_DIR
+        if not (directory / "index.faiss").exists() or not (directory / "chunks.pkl").exists():
+            return cls(top_k_final=top_k_final)
+
+        try:
+            store = FAISSVectorStore.load(directory)
+            embedder = BGEEmbedding(model_name=model_name or BGEEmbedding.DEFAULT_MODEL)
+            dense = DenseRetriever(embedder=embedder, vector_store=store)
+            sparse = SparseRetriever()
+            sparse.add_chunks(store.chunks)
+            hybrid = HybridRetriever(
+                dense_retriever=dense,
+                sparse_retriever=sparse,
+            )
+            reranker = CrossEncoderReranker()
+            native_pipeline = RAGRetrievalPipeline(
+                hybrid_retriever=hybrid,
+                reranker=reranker,
+                retrieval_top_k=top_k_retrieval,
+                final_top_k=top_k_final,
+            )
+            return cls(native_pipeline, top_k_final=top_k_final)
+        except Exception:
+            # The service boundary deliberately degrades to no evidence when a
+            # model or persisted index cannot be loaded at process start.
+            return cls(top_k_final=top_k_final)
+
+    @property
+    def is_ready(self) -> bool:
+        return self._retrieval_pipeline is not None
+
+    async def retrieve_evidence(
+        self,
+        query: str,
+        optimized_query: str | None = None,
+        max_iterations: int = 3,
+        top_k_final: int | None = None,
+        **_: Any,
+    ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+        """Return native retrieval results in the agent evidence schema."""
+        search_query = (optimized_query or query or "").strip()
+        if not search_query:
+            return [], [{"iteration": 1, "query_used": "", "count": 0, "status": "empty_query"}]
+        if self._retrieval_pipeline is None:
+            return [], [{"iteration": 1, "query_used": search_query, "count": 0, "status": "no_retriever"}]
+
+        started = time.perf_counter()
+        try:
+            results = self._retrieval_pipeline.retrieve(
+                search_query,
+                final_top_k=top_k_final or self._top_k_final,
+            )
+            evidence = [
+                {
+                    "chunk_id": chunk.id,
+                    "document_id": chunk.document_id,
+                    "source_type": chunk.source,
+                    "title": chunk.title or "",
+                    "cited_text": chunk.content,
+                    "relevance_score": score,
+                    "cross_encoder_score": score,
+                    "evidence_quality_score": score,
+                    "citation_marker": f"[E{index}]",
+                    "journal": chunk.journal,
+                    "publication_year": chunk.publication_year,
+                    "doi": chunk.metadata.get("doi"),
+                    "url": chunk.metadata.get("url"),
+                }
+                for index, (chunk, score) in enumerate(results, start=1)
+            ]
+            return evidence, [{
+                "iteration": 1,
+                "query_used": search_query,
+                "count": len(evidence),
+                "status": "completed",
+                "elapsed_ms": int((time.perf_counter() - started) * 1000),
+            }]
+        except Exception as exc:
+            return [], [{
+                "iteration": 1,
+                "query_used": search_query,
+                "count": 0,
+                "status": "error",
+                "error": str(exc),
+                "elapsed_ms": int((time.perf_counter() - started) * 1000),
+            }]

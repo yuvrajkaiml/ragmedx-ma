@@ -143,3 +143,10 @@ class BGEEmbedding:
         embedding = self.embed(query)
 
         return embedding[0]
+
+
+# ``BGEEmbedder`` was the pre-merge public name for a different,
+# 384-dimensional adapter.  Keep its import path alive without reviving that
+# retired model or allowing callers to accidentally build incompatible FAISS
+# indexes.  New code should use ``BGEEmbedding`` explicitly.
+BGEEmbedder = BGEEmbedding
