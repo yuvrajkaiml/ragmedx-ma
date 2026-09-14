@@ -69,12 +69,12 @@ class CitationGenerator:
 
         Example:
 
-            [1]
-            [2]
-            [3]
+            [Doc 1]
+            [Doc 2]
+            [Doc 3]
         """
 
-        return f"[{index}]"
+        return f"[Doc {index}]"
 
     # ------------------------------------------------------------------
     # INDIVIDUAL CITATION
@@ -98,10 +98,10 @@ class CitationGenerator:
             citation_id=self._build_citation_id(index),
             chunk_id=chunk.id,
             document_id=chunk.document_id,
-            title=chunk.title.strip(),
-            journal=chunk.journal.strip(),
+            title=(chunk.title or "Untitled source").strip(),
+            journal=(chunk.journal or "Journal unavailable").strip(),
             publication_year=chunk.publication_year,
-            section=chunk.section.strip(),
+            section=(chunk.section or "").strip(),
             source_type=self.DEFAULT_SOURCE_TYPE,
         )
 

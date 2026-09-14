@@ -30,10 +30,12 @@ Those responsibilities belong to later stages of the system.
 from __future__ import annotations
 
 import time
+from math import exp, isfinite
 from pathlib import Path
 from typing import Any, Sequence
 
 from app.rag.chunking.models import MedicalChunk
+from app.rag.citations.citation_generator import CitationGenerator
 from app.rag.retrievers.hybrid_retriever import HybridRetriever
 from app.rag.rerankers.cross_encoder_reranker import CrossEncoderReranker
 
@@ -336,6 +338,26 @@ class RAGPipeline:
     def is_ready(self) -> bool:
         return self._retrieval_pipeline is not None
 
+    @staticmethod
+    def _normalize_cross_encoder_logit(score: Any) -> float:
+        """Map native cross-encoder logits to the agent contract's [0, 1] range.
+
+        ``CrossEncoderReranker`` returns the model's scalar relevance output,
+        which is not constrained by its public interface.  Preserve that raw
+        value separately and apply a documented sigmoid at the facade boundary
+        before constructing ``EvidenceSnippet``-compatible dictionaries.
+        """
+        try:
+            value = float(score)
+        except (TypeError, ValueError):
+            return 0.0
+        if not isfinite(value):
+            return 0.0
+        if value >= 0:
+            return 1.0 / (1.0 + exp(-value))
+        positive = exp(value)
+        return positive / (1.0 + positive)
+
     async def retrieve_evidence(
         self,
         query: str,
@@ -357,6 +379,10 @@ class RAGPipeline:
                 search_query,
                 final_top_k=top_k_final or self._top_k_final,
             )
+            citations_by_chunk = {
+                citation.chunk_id: citation.citation_id
+                for citation in CitationGenerator().generate(results)
+            }
             evidence = [
                 {
                     "chunk_id": chunk.id,
@@ -364,10 +390,13 @@ class RAGPipeline:
                     "source_type": chunk.source,
                     "title": chunk.title or "",
                     "cited_text": chunk.content,
-                    "relevance_score": score,
-                    "cross_encoder_score": score,
-                    "evidence_quality_score": score,
-                    "citation_marker": f"[E{index}]",
+                    "cross_encoder_logit": float(score),
+                    "relevance_score": self._normalize_cross_encoder_logit(score),
+                    "cross_encoder_score": self._normalize_cross_encoder_logit(score),
+                    "evidence_quality_score": self._normalize_cross_encoder_logit(score),
+                    # CitationGenerator is the authority for response-visible
+                    # markers. The marker maps to this exact reranked chunk.
+                    "citation_marker": citations_by_chunk.get(chunk.id, f"[Doc {index}]"),
                     "journal": chunk.journal,
                     "publication_year": chunk.publication_year,
                     "doi": chunk.metadata.get("doi"),

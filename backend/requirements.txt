@@ -19,10 +19,15 @@ passlib[bcrypt]
 bcrypt
 
 # AI / LLM (Yuvraj)
-torch>=2.13.0
-torchvision>=0.28.0
-transformers
-accelerate
+# CUDA wheels are hosted separately from PyPI. These pins are the reproducible
+# Windows CUDA 12.4 baseline (Python 3.10-3.12), but PyTorch 2.6 cu124 does not
+# contain sm_120 kernels; see docs/local_gpu_runtime.md before using on RTX 5060.
+--extra-index-url https://download.pytorch.org/whl/cu124
+torch==2.6.0+cu124
+torchvision==0.21.0+cu124
+transformers==4.51.3
+accelerate==1.6.0
+bitsandbytes==0.45.5
 sentence-transformers
 huggingface_hub
 datasets

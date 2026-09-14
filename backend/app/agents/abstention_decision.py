@@ -10,6 +10,7 @@ COPY_RETRIEVAL_FAILURE = "No relevant medical literature found."
 COPY_MODEL_FAILURE = "Unable to generate a response. Please try again."
 COPY_CONTRADICTORY_EVIDENCE = "Sources contain conflicting information."
 COPY_OUT_OF_DOMAIN = "Outside the scope of medical literature."
+COPY_TERMINAL_REVIEW_FAILURE = "The answer did not pass the required evidence review."
 
 
 class AbstentionDecisionAgent(BaseAgent):
@@ -120,6 +121,9 @@ class AbstentionDecisionAgent(BaseAgent):
 
         if state.get("model_failure", False):
             reasons.append(COPY_MODEL_FAILURE)
+
+        if state.get("force_abstention", False):
+            reasons.append(COPY_TERMINAL_REVIEW_FAILURE)
 
         # Rule 1: Always respect A7's explicit abstention flag
         if calibration.get("requires_abstention", False):

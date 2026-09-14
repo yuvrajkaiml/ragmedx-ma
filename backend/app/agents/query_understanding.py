@@ -2,6 +2,7 @@ from datetime import datetime, timezone
 from typing import Any, Dict
 
 from app.llm.parser import LLMParseError, extract_raw_text, parse_json_from_llm
+from app.llm.prompt_templates import render_prompt
 from .base import BaseAgent
 from .state import QueryUnderstandingOutput
 
@@ -37,32 +38,7 @@ class QueryUnderstandingAgent(BaseAgent):
             if not question or not str(question).strip():
                 raise ValueError("State must contain a non-empty 'original_question' or 'question'.")
 
-            prompt = f"""You are the Query Understanding Agent in a medical question answering system.
-
-Analyze the user's medical question.
-
-Identify:
-1. Medical specialty
-2. User intent
-3. Important abbreviations
-4. Expanded medical terminology
-5. An optimized retrieval query
-
-Do NOT answer the medical question.
-
-Question:
-{question}
-
-Return ONLY valid JSON:
-{{
-    "medical_specialty": "",
-    "intent": "",
-    "expanded_query": "",
-    "abbreviations": {{}},
-    "confidence": 0.0
-}}
-
-The confidence must be a number between 0.0 and 1.0."""
+            prompt = render_prompt("query_understanding", {"question": str(question).strip()})
 
             if self.llm_wrapper is None:
                 raise RuntimeError("QueryUnderstandingAgent requires an LLM wrapper.")

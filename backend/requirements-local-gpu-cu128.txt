@@ -1,0 +1,6 @@
+# Local-only RTX 50-series overlay. Install requirements.txt first, then this
+# file in a dedicated virtual environment. Do not use it as the shared default.
+--extra-index-url https://download.pytorch.org/whl/cu128
+torch==2.11.0+cu128
+torchvision==0.26.0+cu128
+bitsandbytes==0.50.2

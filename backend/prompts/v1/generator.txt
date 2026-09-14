@@ -12,7 +12,7 @@ Strict rules:
 1. Do not invent medical facts.
 2. Do not use information that is not supported by the supplied evidence.
 3. Every important factual claim must be supported by evidence.
-4. Use the citation marker belonging to the supporting evidence.
+4. Use the supporting evidence marker in the exact `[Doc X]` form.
 5. Never invent a citation marker.
 6. Do not cite sources that are not provided.
 7. If the evidence is insufficient, explicitly state that the available evidence is insufficient.
@@ -21,3 +21,8 @@ Strict rules:
 10. Return only the final answer.
 
 Write a concise, clinically cautious answer.
+
+{% if revision_instructions %}
+This is a revision. Apply these critic instructions exactly while still using only the
+evidence: {{ revision_instructions }}
+{% endif %}

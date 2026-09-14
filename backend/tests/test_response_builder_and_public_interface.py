@@ -18,6 +18,7 @@ from app.schemas.response import (
     VerifiedAnswerResponse,
 )
 from app.services.agent_service import AgentService
+from app.llm.temporary_retrieval_stub import retrieve_evidence as fixture_retrieval_provider
 
 
 class SequenceFakeLLM:
@@ -43,12 +44,15 @@ async def test_public_run_agent_pipeline_contract():
     gen_resp = "ACE inhibitors are first-line agents for hypertension [E1]."
     critic_resp = '{"passed": true, "factual_consistency": 0.95, "citation_support": 0.90, "hallucination_risk": 0.05, "confidence": 0.95}'
 
-    llm = SequenceFakeLLM([query_resp, gen_resp, critic_resp])
+    gap_resp = '{"sufficient": true, "reasoning": "Evidence is sufficient.", "missing_information": [], "sub_query": null, "confidence": 0.95}'
+    rerank_resp = '{"contradictory": false, "selected_markers": [], "reasoning": "Evidence agrees."}'
+    llm = SequenceFakeLLM([query_resp, gap_resp, rerank_resp, gen_resp, critic_resp])
 
     response, trace = await run_agent_pipeline(
         original_question="What is the first-line medication for essential hypertension?",
         include_trace=True,
         llm_wrapper=llm,
+        retrieval_provider=fixture_retrieval_provider,
     )
 
     assert isinstance(response, VerifiedAnswerResponse)
@@ -156,7 +160,9 @@ async def test_include_trace_flag_behavior():
     critic_resp = '{"passed": true, "factual_consistency": 0.90, "citation_support": 0.90, "hallucination_risk": 0.05, "confidence": 0.90}'
 
     # Run without trace
-    llm_1 = SequenceFakeLLM([query_resp, gen_resp, critic_resp])
+    gap_resp = '{"sufficient": true, "reasoning": "Evidence is sufficient.", "missing_information": [], "sub_query": null, "confidence": 0.95}'
+    rerank_resp = '{"contradictory": false, "selected_markers": [], "reasoning": "Evidence agrees."}'
+    llm_1 = SequenceFakeLLM([query_resp, gap_resp, rerank_resp, gen_resp, critic_resp])
     resp_no_trace, trace_no_trace = await run_agent_pipeline(
         original_question="What is hypertension?",
         include_trace=False,
@@ -166,7 +172,7 @@ async def test_include_trace_flag_behavior():
     assert resp_no_trace.agent_trace is None
 
     # Run with trace
-    llm_2 = SequenceFakeLLM([query_resp, gen_resp, critic_resp])
+    llm_2 = SequenceFakeLLM([query_resp, gap_resp, rerank_resp, gen_resp, critic_resp])
     resp_with_trace, trace_with_trace = await run_agent_pipeline(
         original_question="What is hypertension?",
         include_trace=True,
@@ -181,7 +187,12 @@ async def test_agent_service_execution():
     gen_resp = "Answer text [E1]."
     critic_resp = '{"passed": true, "factual_consistency": 0.90, "citation_support": 0.90, "hallucination_risk": 0.05, "confidence": 0.90}'
 
-    service = AgentService(llm_wrapper=SequenceFakeLLM([query_resp, gen_resp, critic_resp]))
+    gap_resp = '{"sufficient": true, "reasoning": "Evidence is sufficient.", "missing_information": [], "sub_query": null, "confidence": 0.95}'
+    rerank_resp = '{"contradictory": false, "selected_markers": [], "reasoning": "Evidence agrees."}'
+    service = AgentService(
+        llm_wrapper=SequenceFakeLLM([query_resp, gap_resp, rerank_resp, gen_resp, critic_resp]),
+        retrieval_provider=fixture_retrieval_provider,
+    )
     response, trace = await service.execute_query(
         question="What is hypertension?",
         include_trace=True,

@@ -97,6 +97,7 @@ class CriticVerdict(BaseModel):
     issues: List[str] = Field(default_factory=list)
     revision_instructions: Optional[str] = None
     confidence: float = Field(default=0.0, ge=0.0, le=1.0)
+    evidence_verification: Dict[str, Any] = Field(default_factory=dict)
 
 
 class ConfidenceCalibrationOutput(BaseModel):
@@ -137,12 +138,17 @@ class AgentState(BaseModel):
     evidence: List[Dict[str, Any]] = Field(default_factory=list)
     retrieval_iterations: List[Dict[str, Any]] = Field(default_factory=list)
     gap_analysis: Optional[Dict[str, Any]] = None
+    # Graph-only routing state. These fields are internal and are never exposed
+    # by response_builder as medical answer content.
+    pending_retrieval_sub_query: Optional[str] = None
+    evidence_reranking: Optional[Dict[str, Any]] = None
 
     # Generation & Revision
     answer: Optional[str] = None
     answer_citations: List[str] = Field(default_factory=list)
     critic_verdict: Optional[Dict[str, Any]] = None
     critic_reviews: List[Dict[str, Any]] = Field(default_factory=list)
+    revision_instructions: Optional[str] = None
 
     # Confidence & Abstention
     confidence_calibration: Optional[Dict[str, Any]] = None
@@ -158,6 +164,7 @@ class AgentState(BaseModel):
     out_of_domain: bool = False
     retrieval_failure: bool = False
     model_failure: bool = False
+    force_abstention: bool = False
     error: Optional[str] = None
     error_code: Optional[str] = None
 

@@ -2,6 +2,7 @@ from datetime import datetime, timezone
 from typing import Any, Dict, List
 
 from app.llm.parser import LLMParseError, extract_raw_text, parse_json_from_llm
+from app.llm.prompt_templates import render_prompt
 from .base import BaseAgent
 from .state import GapAnalysisOutput
 
@@ -39,40 +40,10 @@ class IterativeRetrievalAgent(BaseAgent):
             evidence = state.get("evidence", [])
             evidence_text = self._format_evidence(evidence)
 
-            prompt = f"""You are the Medical Gap Analysis Agent in a medical question answering system.
-
-Your task is to determine whether the supplied medical evidence is sufficient to safely answer the user's question.
-
-Do NOT answer the question.
-
-Analyze:
-1. Whether the evidence directly addresses the question.
-2. What important information is missing.
-3. Whether there are contradictions.
-4. Whether another retrieval iteration is needed.
-5. If another iteration is needed, create ONE focused medical retrieval sub-query.
-
-Question:
-{question}
-
-Retrieved evidence:
-{evidence_text}
-
-Return ONLY valid JSON:
-{{
-    "sufficient": true,
-    "reasoning": "",
-    "missing_information": [],
-    "sub_query": null,
-    "confidence": 0.0
-}}
-
-Rules:
-- "sufficient" must be true or false.
-- "missing_information" must be a JSON array.
-- "sub_query" must be null when evidence is sufficient.
-- If evidence is insufficient, sub_query must be specific and directly address the missing information.
-- confidence must be between 0.0 and 1.0."""
+            prompt = render_prompt(
+                "iterative_retrieval",
+                {"question": str(question).strip(), "evidence_text": evidence_text},
+            )
 
             if self.llm_wrapper is None:
                 raise RuntimeError("IterativeRetrievalAgent requires an LLM wrapper.")

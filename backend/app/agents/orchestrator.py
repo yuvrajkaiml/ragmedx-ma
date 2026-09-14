@@ -9,6 +9,7 @@ from app.agents.confidence_calibration import (
     ConfidenceCalibrationAgent,
 )
 from app.agents.critic import CriticAgent
+from app.agents.evidence_reranking import EvidenceRerankingAgent
 from app.agents.generator import GeneratorAgent
 from app.agents.iterative_retrieval import IterativeRetrievalAgent
 from app.agents.query_understanding import QueryUnderstandingAgent
@@ -19,7 +20,8 @@ from app.agents.state import (
     create_deterministic_uuid,
 )
 from app.llm.local_llm import LocalLLMWrapper
-from app.llm.temporary_retrieval_stub import retrieve_evidence as default_retrieval_provider
+from app.services.retrieval_service import RetrievalService
+from langgraph.graph import END, START, StateGraph
 
 # Fixed Pipeline Constants
 MAX_RETRIEVAL_ITERATIONS = 3
@@ -28,14 +30,14 @@ MAX_CRITIC_ROUNDS = 2
 
 class MultiAgentOrchestrator:
     """
-    Explicit Typed Async State Machine Orchestrator for RAGMedX-MA.
+    LangGraph-backed typed async state machine for RAGMedX-MA.
 
     Pipeline Flow:
     1. Query Understanding (Agent 1)
     2. Evidence Acquisition & Iterative Refinement (Agent 2 / Retrieval Provider, max 3 iters)
-    3. Evidence Validation & Normalization
-    4. Generation (Agent 5)
-    5. Critic Review (Agent 6)
+    3. Evidence Re-Ranking & Validation (Agent 3)
+    4. Generation (Agent 4)
+    5. Critic Review (Agent 5)
     6. Bounded Revision Loop (max 2 rounds)
     7. Confidence Calibration (Agent 7)
     8. Abstention Decision (Agent 8)
@@ -49,17 +51,26 @@ class MultiAgentOrchestrator:
         max_critic_rounds: int = MAX_CRITIC_ROUNDS,
     ):
         self.llm_wrapper = llm_wrapper or LocalLLMWrapper(use_mock_fallback=True)
-        self.retrieval_provider = retrieval_provider or default_retrieval_provider
-        self.max_retrieval_iterations = max(1, min(5, max_retrieval_iterations))
-        self.max_critic_rounds = max(1, min(3, max_critic_rounds))
+        # The native retrieval service is the production default.  The temporary
+        # retrieval stub remains available for tests only when callers inject it.
+        self.retrieval_service = None
+        if retrieval_provider is None:
+            self.retrieval_service = RetrievalService.build()
+            self.retrieval_provider = self.retrieval_service.retrieve_evidence
+        else:
+            self.retrieval_provider = retrieval_provider
+        self.max_retrieval_iterations = max(1, min(MAX_RETRIEVAL_ITERATIONS, max_retrieval_iterations))
+        self.max_critic_rounds = max(1, min(MAX_CRITIC_ROUNDS, max_critic_rounds))
 
         # Initialize domain agents
         self.query_agent = QueryUnderstandingAgent(llm_wrapper=self.llm_wrapper)
         self.gap_agent = IterativeRetrievalAgent(llm_wrapper=self.llm_wrapper)
+        self.reranking_agent = EvidenceRerankingAgent(llm_wrapper=self.llm_wrapper)
         self.generator_agent = GeneratorAgent(llm_wrapper=self.llm_wrapper)
         self.critic_agent = CriticAgent(llm_wrapper=self.llm_wrapper)
         self.confidence_agent = ConfidenceCalibrationAgent()
         self.abstention_agent = AbstentionDecisionAgent()
+        self.graph = self._build_graph()
 
     async def run(
         self,
@@ -75,41 +86,220 @@ class MultiAgentOrchestrator:
             Fully populated AgentState instance.
         """
         start_wall_time = time.perf_counter()
-        started_at = datetime.now(timezone.utc)
-
-        # Convert dict to AgentState if necessary
-        if isinstance(state, dict):
-            agent_state = self._init_state_from_dict(state)
-        else:
-            agent_state = state
-
-        # Ensure state has valid query_id
+        agent_state = self._init_state_from_dict(state) if isinstance(state, dict) else state
         if not agent_state.query_id:
             agent_state.query_id = create_deterministic_uuid(agent_state.original_question or "query")
 
-        # Step 1: Query Understanding
-        await self._step_query_understanding(agent_state)
+        graph_result = await self.graph.ainvoke(agent_state.model_dump())
+        final_state = AgentState.model_validate(graph_result)
+        final_state.processing_time_ms = int((time.perf_counter() - start_wall_time) * 1000)
+        return final_state
 
-        # Step 2: Evidence Acquisition & Retrieval Handoff
-        await self._step_evidence_acquisition(agent_state)
+    def _build_graph(self):
+        """Construct the seven-agent LangGraph workflow once per orchestrator."""
+        workflow = StateGraph(AgentState)
+        workflow.add_node("query_understanding", self._node_query_understanding)
+        workflow.add_node("retrieval", self._node_retrieval)
+        workflow.add_node("gap_analysis", self._node_gap_analysis)
+        workflow.add_node("evidence_reranking", self._node_evidence_reranking)
+        workflow.add_node("generator", self._node_generator)
+        workflow.add_node("critic", self._node_critic)
+        workflow.add_node("confidence", self._node_confidence)
+        workflow.add_node("abstention", self._node_abstention)
 
-        # Step 3: Evidence Validation and Boundary Normalization
-        self._normalize_and_validate_evidence(agent_state)
+        workflow.add_edge(START, "query_understanding")
+        workflow.add_edge("query_understanding", "retrieval")
+        workflow.add_edge("retrieval", "gap_analysis")
+        workflow.add_conditional_edges(
+            "gap_analysis",
+            self._route_after_gap_analysis,
+            {"retrieval": "retrieval", "rerank": "evidence_reranking", "confidence": "confidence"},
+        )
+        workflow.add_conditional_edges(
+            "evidence_reranking",
+            self._route_after_evidence_reranking,
+            {"generator": "generator", "confidence": "confidence"},
+        )
+        workflow.add_edge("generator", "critic")
+        workflow.add_conditional_edges(
+            "critic",
+            self._route_after_critic,
+            {"generator": "generator", "confidence": "confidence"},
+        )
+        # Confidence never terminates the graph directly.  Both verified and
+        # failed paths must be adjudicated by the Abstention Agent.
+        workflow.add_edge("confidence", "abstention")
+        workflow.add_edge("abstention", END)
+        return workflow.compile()
 
-        # Step 4: Generation & Bounded Critic Revision Loop
-        await self._step_generation_and_critic_loop(agent_state)
+    @staticmethod
+    def _as_agent_state(payload: Union[AgentState, Dict[str, Any]]) -> AgentState:
+        return payload if isinstance(payload, AgentState) else AgentState.model_validate(payload)
 
-        # Step 5: Confidence Calibration
-        await self._step_confidence_calibration(agent_state)
+    @staticmethod
+    def _state_update(state: AgentState) -> Dict[str, Any]:
+        return state.model_dump()
 
-        # Step 6: Abstention Decision
-        await self._step_abstention_decision(agent_state)
+    @staticmethod
+    def _record_graph_node(state: AgentState, node: str) -> None:
+        now = datetime.now(timezone.utc)
+        state.agent_trace.append({
+            "agent_type": "langgraph",
+            "status": "completed",
+            "started_at": now.isoformat(),
+            "completed_at": now.isoformat(),
+            "duration_ms": 0,
+            "details": {"node": node},
+        })
 
-        # Finalize timing and state status
-        end_wall_time = time.perf_counter()
-        agent_state.processing_time_ms = int((end_wall_time - start_wall_time) * 1000)
+    async def _node_query_understanding(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        state = self._as_agent_state(payload)
+        await self._step_query_understanding(state)
+        self._record_graph_node(state, "query_understanding")
+        return self._state_update(state)
 
-        return agent_state
+    async def _node_retrieval(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        state = self._as_agent_state(payload)
+        if state.evidence and state.retrieval_iteration_count == 0:
+            state.retrieval_iteration_count = 1
+            now = datetime.now(timezone.utc)
+            state.agent_trace.append({
+                "agent_type": AgentType.ITERATIVE_RETRIEVAL.value,
+                "status": "completed",
+                "started_at": now.isoformat(),
+                "completed_at": now.isoformat(),
+                "duration_ms": 0,
+                "details": {"action": "reused_supplied_evidence", "iteration": 1, "evidence_count": len(state.evidence)},
+            })
+        else:
+            await self._retrieve_evidence_pass(state, state.pending_retrieval_sub_query)
+        state.pending_retrieval_sub_query = None
+        self._normalize_and_validate_evidence(state)
+        self._record_graph_node(state, "retrieval")
+        return self._state_update(state)
+
+    async def _node_gap_analysis(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        state = self._as_agent_state(payload)
+        gap = None if state.retrieval_failure else await self._run_gap_analysis(state)
+        if gap is None:
+            state.retrieval_failure = True
+        elif gap.get("sufficient", False) and state.evidence:
+            pass
+        elif state.retrieval_iteration_count >= self.max_retrieval_iterations:
+            state.retrieval_failure = True
+            state.error_code = "RETRIEVAL_ITERATION_CAP"
+        elif gap.get("sub_query"):
+            state.pending_retrieval_sub_query = gap["sub_query"]
+        else:
+            state.retrieval_failure = True
+            state.error_code = "GAP_ANALYSIS_ERROR"
+        self._record_graph_node(state, "gap_analysis")
+        return self._state_update(state)
+
+    @staticmethod
+    def _route_after_gap_analysis(payload: Dict[str, Any]) -> str:
+        state = MultiAgentOrchestrator._as_agent_state(payload)
+        if state.retrieval_failure or not state.gap_analysis:
+            return "confidence"
+        if state.gap_analysis.get("sufficient", False) and state.evidence:
+            return "rerank"
+        return "retrieval"
+
+    async def _node_evidence_reranking(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        state = self._as_agent_state(payload)
+        try:
+            result = await self.reranking_agent.run(state.model_dump())
+            state.evidence = result["evidence"]
+            state.contradictory_evidence = result["contradictory_evidence"]
+            state.evidence_reranking = result["evidence_reranking"]
+            state.agent_trace.extend(result.get("agent_trace", []))
+        except Exception as exc:
+            state.retrieval_failure = True
+            state.error = str(exc)
+            state.error_code = "EVIDENCE_RERANKING_ERROR"
+        self._record_graph_node(state, "evidence_reranking")
+        return self._state_update(state)
+
+    @staticmethod
+    def _route_after_evidence_reranking(payload: Dict[str, Any]) -> str:
+        state = MultiAgentOrchestrator._as_agent_state(payload)
+        return "confidence" if state.retrieval_failure or state.contradictory_evidence else "generator"
+
+    async def _node_generator(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        state = self._as_agent_state(payload)
+        state.critic_round_count += 1
+        try:
+            result = await self.generator_agent.run({
+                "original_question": state.original_question,
+                "evidence": state.evidence,
+                "revision_instructions": state.revision_instructions,
+                "review_round": state.critic_round_count,
+            })
+            state.answer = result.get("answer")
+            state.answer_citations = result.get("answer_citations", [])
+            for trace in result.get("agent_trace", []):
+                trace["round"] = state.critic_round_count
+                state.agent_trace.append(trace)
+        except Exception as exc:
+            state.model_failure = True
+            state.error, state.error_code = str(exc), "GENERATOR_ERROR"
+        self._record_graph_node(state, "generator")
+        return self._state_update(state)
+
+    async def _node_critic(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        state = self._as_agent_state(payload)
+        if state.model_failure:
+            self._record_graph_node(state, "critic")
+            return self._state_update(state)
+        try:
+            result = await self.critic_agent.run({
+                "original_question": state.original_question,
+                "answer": state.answer,
+                "evidence": state.evidence,
+                "review_round": state.critic_round_count,
+            })
+            state.critic_verdict = result.get("critic_verdict", {})
+            state.critic_reviews.append(state.critic_verdict)
+            state.revision_instructions = state.critic_verdict.get("revision_instructions")
+            if (
+                state.critic_verdict.get("verdict") == CriticVerdictType.REJECTED.value
+                or (
+                    not state.critic_verdict.get("passed", False)
+                    and state.critic_round_count >= self.max_critic_rounds
+                )
+            ):
+                state.force_abstention = True
+            for trace in result.get("agent_trace", []):
+                trace["round"] = state.critic_round_count
+                state.agent_trace.append(trace)
+        except Exception as exc:
+            state.model_failure = True
+            state.error, state.error_code = str(exc), "CRITIC_ERROR"
+        self._record_graph_node(state, "critic")
+        return self._state_update(state)
+
+    def _route_after_critic(self, payload: Dict[str, Any]) -> str:
+        state = self._as_agent_state(payload)
+        verdict = state.critic_verdict or {}
+        if state.model_failure or verdict.get("verdict") == CriticVerdictType.REJECTED.value:
+            return "confidence"
+        if verdict.get("passed", False) or verdict.get("verdict") in (CriticVerdictType.VERIFIED.value, CriticVerdictType.REVISED.value):
+            return "confidence"
+        if state.critic_round_count < self.max_critic_rounds and state.revision_instructions:
+            return "generator"
+        return "confidence"
+
+    async def _node_confidence(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        state = self._as_agent_state(payload)
+        await self._step_confidence_calibration(state)
+        self._record_graph_node(state, "confidence")
+        return self._state_update(state)
+
+    async def _node_abstention(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        state = self._as_agent_state(payload)
+        await self._step_abstention_decision(state)
+        self._record_graph_node(state, "abstention")
+        return self._state_update(state)
 
     async def _step_query_understanding(self, state: AgentState) -> None:
         """Execute Agent 1 or reuse pre-supplied processed query."""
@@ -148,75 +338,146 @@ class MultiAgentOrchestrator:
             state.agent_trace.append(step)
 
     async def _step_evidence_acquisition(self, state: AgentState) -> None:
-        """Acquire evidence from supplied items or via injected retrieval provider."""
-        # If evidence was already supplied explicitly, skip retrieval
+        """Run bounded retrieval → MGA → focused-retrieval iterations.
+
+        A caller may supply initial evidence, but every evidence set still goes
+        through Medical Gap Analysis.  An insufficient MGA result causes a new
+        native retrieval request with its focused ``sub_query``.  The loop is
+        deliberately capped at three retrieval passes.
+        """
+        next_query = None
         if state.evidence:
-            step = {
+            state.retrieval_iteration_count = 1
+            now = datetime.now(timezone.utc)
+            state.agent_trace.append({
                 "agent_type": AgentType.ITERATIVE_RETRIEVAL.value,
                 "status": "completed",
-                "started_at": datetime.now(timezone.utc).isoformat(),
-                "completed_at": datetime.now(timezone.utc).isoformat(),
+                "started_at": now.isoformat(),
+                "completed_at": now.isoformat(),
                 "duration_ms": 0,
                 "details": {
                     "action": "reused_supplied_evidence",
+                    "iteration": 1,
                     "evidence_count": len(state.evidence),
                 },
-            }
-            state.agent_trace.append(step)
-            return
+            })
 
+        while state.retrieval_iteration_count < self.max_retrieval_iterations:
+            if state.retrieval_iteration_count == 0 or next_query:
+                await self._retrieve_evidence_pass(state, next_query)
+                if state.retrieval_failure:
+                    return
+
+            gap = await self._run_gap_analysis(state)
+            if gap is None:
+                state.retrieval_failure = True
+                return
+
+            if gap.get("sufficient", False) and state.evidence:
+                return
+
+            if state.retrieval_iteration_count >= self.max_retrieval_iterations:
+                break
+
+            next_query = gap.get("sub_query")
+            if not next_query:
+                state.retrieval_failure = True
+                state.error = "MGA reported insufficient evidence without a focused sub-query."
+                state.error_code = "GAP_ANALYSIS_ERROR"
+                return
+
+        # Reaching the cap with insufficient evidence is a safety failure; do
+        # not generate an answer from partial retrieval results.
+        state.retrieval_failure = True
+        now = datetime.now(timezone.utc)
+        state.agent_trace.append({
+            "agent_type": AgentType.ITERATIVE_RETRIEVAL.value,
+            "status": "failed",
+            "started_at": now.isoformat(),
+            "completed_at": now.isoformat(),
+            "duration_ms": 0,
+            "details": {
+                "action": "retrieval_iteration_cap_reached",
+                "max_iterations": self.max_retrieval_iterations,
+                "last_gap_analysis": state.gap_analysis,
+            },
+        })
+
+    async def _retrieve_evidence_pass(self, state: AgentState, sub_query: Optional[str]) -> None:
+        """Execute one provider pass and append its audit metadata to state."""
         started_at = datetime.now(timezone.utc)
+        state.retrieval_iteration_count += 1
+        iteration = state.retrieval_iteration_count
         try:
-            state.retrieval_iteration_count += 1
-            query_str = state.original_question
-            optimized_str = None
-            if state.processed_query:
-                optimized_str = state.processed_query.get("expanded_query")
-
-            retrieved_evidence, iteration_meta = await self.retrieval_provider(
-                query=query_str,
-                optimized_query=optimized_str,
+            optimized_query = sub_query
+            if optimized_query is None and state.processed_query:
+                optimized_query = state.processed_query.get("expanded_query")
+            evidence, metadata = await self.retrieval_provider(
+                query=state.original_question,
+                optimized_query=optimized_query,
                 max_iterations=self.max_retrieval_iterations,
             )
-
-            state.evidence = retrieved_evidence or []
-            state.retrieval_iterations.extend(iteration_meta or [])
-
-            if not state.evidence:
-                state.retrieval_failure = True
-
+            state.evidence.extend(evidence or [])
+            for item in metadata or []:
+                entry = dict(item)
+                entry["orchestrator_iteration"] = iteration
+                entry["sub_query"] = sub_query
+                state.retrieval_iterations.append(entry)
             completed_at = datetime.now(timezone.utc)
-            duration_ms = int((completed_at - started_at).total_seconds() * 1000)
-
-            step = {
+            state.agent_trace.append({
                 "agent_type": AgentType.ITERATIVE_RETRIEVAL.value,
-                "status": "completed" if state.evidence else "failed",
+                "status": "completed",
                 "started_at": started_at.isoformat(),
                 "completed_at": completed_at.isoformat(),
-                "duration_ms": duration_ms,
+                "duration_ms": int((completed_at - started_at).total_seconds() * 1000),
                 "details": {
-                    "iteration": state.retrieval_iteration_count,
-                    "retrieved_count": len(state.evidence),
-                    "retrieval_failure": state.retrieval_failure,
+                    "action": "native_retrieval",
+                    "iteration": iteration,
+                    "sub_query": sub_query,
+                    "retrieved_count": len(evidence or []),
+                    "total_evidence_count": len(state.evidence),
                 },
-            }
-            state.agent_trace.append(step)
-
-        except Exception as e:
+            })
+        except Exception as exc:
             state.retrieval_failure = True
-            state.error = str(e)
+            state.error = str(exc)
             state.error_code = "RETRIEVAL_ERROR"
             completed_at = datetime.now(timezone.utc)
-            duration_ms = int((completed_at - started_at).total_seconds() * 1000)
-            step = {
+            state.agent_trace.append({
                 "agent_type": AgentType.ITERATIVE_RETRIEVAL.value,
                 "status": "failed",
                 "started_at": started_at.isoformat(),
                 "completed_at": completed_at.isoformat(),
-                "duration_ms": duration_ms,
-                "details": {"error": str(e)},
-            }
-            state.agent_trace.append(step)
+                "duration_ms": int((completed_at - started_at).total_seconds() * 1000),
+                "details": {"error": str(exc), "iteration": iteration, "sub_query": sub_query},
+            })
+
+    async def _run_gap_analysis(self, state: AgentState) -> Optional[Dict[str, Any]]:
+        """Run MGA and preserve its result and trace for each retrieval pass."""
+        try:
+            result = await self.gap_agent.run({
+                "original_question": state.original_question,
+                "evidence": state.evidence,
+                "retrieval_iteration": state.retrieval_iteration_count,
+            })
+            state.gap_analysis = result.get("gap_analysis")
+            for trace_step in result.get("agent_trace", []):
+                trace_step["retrieval_iteration"] = state.retrieval_iteration_count
+                state.agent_trace.append(trace_step)
+            return state.gap_analysis
+        except Exception as exc:
+            state.error = str(exc)
+            state.error_code = "GAP_ANALYSIS_ERROR"
+            now = datetime.now(timezone.utc)
+            state.agent_trace.append({
+                "agent_type": AgentType.ITERATIVE_RETRIEVAL.value,
+                "status": "failed",
+                "started_at": now.isoformat(),
+                "completed_at": now.isoformat(),
+                "duration_ms": 0,
+                "details": {"action": "gap_analysis", "error": str(exc)},
+            })
+            return None
 
     def _normalize_and_validate_evidence(self, state: AgentState) -> None:
         """Deduplicate and normalize citation markers on evidence items."""
@@ -400,6 +661,7 @@ class MultiAgentOrchestrator:
             "out_of_domain": state.out_of_domain,
             "retrieval_failure": state.retrieval_failure,
             "model_failure": state.model_failure,
+            "force_abstention": state.force_abstention,
         }
 
         try:

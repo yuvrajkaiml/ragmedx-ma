@@ -89,6 +89,11 @@ class LocalLLMWrapper:
             quantization_config = None
             if self.quantization_bits == 4:
                 try:
+                    # Force the native extension import before downloading/loading
+                    # model weights. Windows Application Control can block these
+                    # DLLs; a blocked backend must be repaired by policy approval,
+                    # not hidden by a memory-unsafe full-precision retry.
+                    import bitsandbytes  # noqa: F401
                     compute_dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
                     quantization_config = BitsAndBytesConfig(
                         load_in_4bit=True,
@@ -98,36 +103,22 @@ class LocalLLMWrapper:
                     )
                     logger.info("Configured 4-bit bitsandbytes NF4 quantization.")
                 except Exception as bnb_err:
-                    logger.warning(
-                        f"bitsandbytes configuration error: {bnb_err}. Falling back to native PyTorch float16/bfloat16."
-                    )
-                    quantization_config = None
+                    raise ModelLoadError(
+                        "bitsandbytes 4-bit NF4 initialization failed. Do not retry "
+                        "this 8 GB deployment in unquantized mode; verify the approved "
+                        f"Windows bitsandbytes DLL installation. Original error: {bnb_err}"
+                    ) from bnb_err
 
             logger.info(f"Loading model {self.model_name_or_path}...")
             torch_dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
 
-            try:
-                self.model = AutoModelForCausalLM.from_pretrained(
-                    self.model_name_or_path,
-                    quantization_config=quantization_config,
-                    device_map=self.device_map,
-                    torch_dtype=torch_dtype,
-                    trust_remote_code=True,
-                )
-            except Exception as load_err:
-                if quantization_config is not None:
-                    logger.warning(
-                        f"Model load with bitsandbytes failed ({load_err}). Retrying with native PyTorch {torch_dtype}..."
-                    )
-                    self.model = AutoModelForCausalLM.from_pretrained(
-                        self.model_name_or_path,
-                        quantization_config=None,
-                        device_map=self.device_map,
-                        torch_dtype=torch_dtype,
-                        trust_remote_code=True,
-                    )
-                else:
-                    raise load_err
+            self.model = AutoModelForCausalLM.from_pretrained(
+                self.model_name_or_path,
+                quantization_config=quantization_config,
+                device_map=self.device_map,
+                torch_dtype=torch_dtype,
+                trust_remote_code=True,
+            )
 
             self.is_loaded = True
             self.active_runtime_mode = LLMRuntimeMode.LOCAL
@@ -273,6 +264,16 @@ class LocalLLMWrapper:
                 '    "missing_information": [],\n'
                 '    "sub_query": null,\n'
                 '    "confidence": 0.88\n'
+                '}'
+            )
+
+        # Evidence Re-Ranking Agent prompt
+        if "evidence re-ranking agent" in prompt_lower:
+            return (
+                '{\n'
+                '    "contradictory": false,\n'
+                '    "selected_markers": [],\n'
+                '    "reasoning": "No material contradiction identified in the supplied evidence."\n'
                 '}'
             )
 
