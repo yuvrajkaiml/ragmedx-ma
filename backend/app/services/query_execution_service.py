@@ -7,6 +7,7 @@ only subscribe to an existing ``query_id``; they never invoke the pipeline.
 from __future__ import annotations
 
 import asyncio
+import logging
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Any
@@ -15,7 +16,7 @@ from uuid import UUID, uuid4
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db import AsyncSessionLocal
-from app.db.models import QueryExecutionRecord
+from app.db.models import Conversation, QueryExecutionRecord
 from app.schemas.query import (
     MedicalQueryRequest,
     QueryAcceptedResponse,
@@ -25,6 +26,8 @@ from app.schemas.query import (
 from app.schemas.response import MedicalResponse
 from app.schemas.websocket import WebSocketEvent, WebSocketEventType
 from app.services.agent_service import AgentService
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -62,6 +65,11 @@ class QueryExecutionService:
         session: AsyncSession,
     ) -> QueryAcceptedResponse:
         """Create an execution and schedule its one and only pipeline task."""
+        if request.conversation_id is not None:
+            conversation = await session.get(Conversation, request.conversation_id)
+            if conversation is None or conversation.user_id != user_id:
+                raise ValueError("Conversation not found")
+
         query_id = uuid4()
         record = QueryExecutionRecord(
             id=query_id,
@@ -167,7 +175,22 @@ class QueryExecutionService:
 
     async def _run(self, execution: QueryExecution) -> None:
         execution.status = QueryExecutionStatus.RUNNING
-        await self._persist_status(execution)
+        try:
+            await self._persist_status(execution)
+        except Exception:
+            execution.status = QueryExecutionStatus.FAILED
+            execution.error = "Unable to persist query execution status"
+            try:
+                await self._persist_status(execution, error_code="QUERY_PERSISTENCE_ERROR")
+            except Exception:
+                logger.exception("Unable to persist terminal failure for query %s", execution.query_id)
+            self._publish(
+                execution,
+                WebSocketEventType.ERROR,
+                {"message": "Query execution failed", "error_code": "QUERY_PERSISTENCE_ERROR"},
+            )
+            return
+
         self._publish(
             execution,
             WebSocketEventType.AGENT_STATUS,

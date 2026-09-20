@@ -21,6 +21,7 @@ from app.agents.state import (
 )
 from app.llm.local_llm import LocalLLMWrapper
 from app.services.retrieval_service import RetrievalService
+from app.config import get_settings
 from langgraph.graph import END, START, StateGraph
 
 # Fixed Pipeline Constants
@@ -50,7 +51,15 @@ class MultiAgentOrchestrator:
         max_retrieval_iterations: int = MAX_RETRIEVAL_ITERATIONS,
         max_critic_rounds: int = MAX_CRITIC_ROUNDS,
     ):
-        self.llm_wrapper = llm_wrapper or LocalLLMWrapper(use_mock_fallback=True)
+        if llm_wrapper is not None:
+            self.llm_wrapper = llm_wrapper
+        else:
+            settings = get_settings()
+            self.llm_wrapper = LocalLLMWrapper(
+                model_name_or_path=settings.llm_model_name,
+                mode=settings.llm_runtime_mode,
+                allow_fallback=settings.llm_allow_fallback,
+            )
         # The native retrieval service is the production default.  The temporary
         # retrieval stub remains available for tests only when callers inject it.
         self.retrieval_service = None

@@ -109,6 +109,11 @@ class Settings(BaseSettings):
     # Embeddings
     embedding_model_name: str = "BAAI/bge-small-en-v1.5"
 
+    # LLM runtime
+    llm_model_name: str = "Qwen/Qwen3-8B"
+    llm_runtime_mode: str = "mock"
+    llm_allow_fallback: bool = False
+
 
 @lru_cache
 def get_settings() -> Settings:

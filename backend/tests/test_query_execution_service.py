@@ -136,6 +136,55 @@ async def test_persisted_query_status_is_available_to_its_owner():
     assert await service.get_persisted(query_id, uuid4(), session) is None
 
 
+async def test_start_rejects_missing_conversation_before_persisting():
+    service = QueryExecutionService(agent_service=FakeAgentService())
+    session = FakeSession()
+
+    request = MedicalQueryRequest(
+        question="What is the treatment for hypertension?",
+        conversation_id=uuid4(),
+    )
+
+    try:
+        await service.start(request, uuid4(), session)
+    except ValueError as exc:
+        assert str(exc) == "Conversation not found"
+    else:
+        raise AssertionError("Expected an invalid conversation to be rejected")
+
+    assert session.records == {}
+
+
+async def test_persistence_failure_does_not_start_pipeline(monkeypatch):
+    agent_service = FakeAgentService()
+    service = QueryExecutionService(agent_service=agent_service)
+    persistence_calls = 0
+
+    async def fail_running_then_persist_terminal(execution, error_code=None):
+        nonlocal persistence_calls
+        persistence_calls += 1
+        if error_code is None:
+            raise RuntimeError("database unavailable")
+
+    monkeypatch.setattr(service, "_persist_status", fail_running_then_persist_terminal)
+    accepted = await service.start(
+        MedicalQueryRequest(question="What is the treatment for hypertension?"),
+        uuid4(),
+        FakeSession(),
+    )
+
+    execution = service.get(accepted.query_id, uuid4())
+    assert execution is None
+    execution = service._executions[accepted.query_id]
+    await execution.task
+
+    assert execution.status == QueryExecutionStatus.FAILED
+    assert execution.error == "Unable to persist query execution status"
+    assert agent_service.calls == []
+    assert persistence_calls == 2
+    assert execution.events[-1].event_type == WebSocketEventType.ERROR
+
+
 async def test_websocket_replays_existing_execution_without_running_it_again(monkeypatch):
     monkeypatch.setattr(QueryExecutionService, "_persist_status", _skip_persistence)
     agent_service = FakeAgentService()
