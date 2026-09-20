@@ -2,6 +2,7 @@ import pytest
 from httpx import ASGITransport, AsyncClient
 from uuid import uuid4
 
+import app.main as main_module
 from app.api.deps import get_current_user
 from app.db import get_session
 from app.db.models import User
@@ -130,3 +131,32 @@ async def test_query_ask_accepts_trace_request_for_the_background_execution(monk
     data = response.json()
     assert data["query_id"]
     assert data["status"] in ("queued", "running")
+
+
+async def test_readiness_reports_missing_runtime_resources():
+    transport = ASGITransport(app=app)
+    async with AsyncClient(transport=transport, base_url="http://test") as client:
+        response = await client.get("/readiness")
+
+    assert response.status_code == 503
+    payload = response.json()
+    assert payload["status"] == "not_ready"
+    assert payload["checks"]["llm"]["ready"] is False
+    assert payload["checks"]["retrieval"]["ready"] is False
+
+
+async def test_readiness_reports_ready_when_runtime_resources_exist(monkeypatch, tmp_path):
+    monkeypatch.setattr(main_module, "FAISS_INDEX_DIR", tmp_path)
+    (tmp_path / "index.faiss").touch()
+    (tmp_path / "chunks.pkl").touch()
+    monkeypatch.setattr(main_module.get_settings(), "llm_runtime_mode", "local")
+
+    transport = ASGITransport(app=app)
+    async with AsyncClient(transport=transport, base_url="http://test") as client:
+        response = await client.get("/readiness")
+
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["status"] == "ready"
+    assert payload["checks"]["llm"]["ready"] is True
+    assert payload["checks"]["retrieval"]["ready"] is True
