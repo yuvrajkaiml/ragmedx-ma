@@ -1,172 +1,152 @@
-"""BGE embedding adapter.
+"""
+BGE-M3 embedding adapter for the RAGMedX-MA retrieval engine.
 
-Wraps ``BAAI/bge-small-en-v1.5`` (or any model configured via
-``Settings.embedding_model_name``) behind the ``Embedder`` interface so the
-rest of the pipeline never imports sentence-transformers directly.
-
-BGE-specific details
---------------------
-* All vectors are L2-normalised (``normalize_embeddings=True``) so dot-product
-  and cosine similarity are equivalent — this is required for FAISS IndexFlatIP.
-* Query encoding prepends the BGE query instruction prefix
-  ``"Represent this sentence for searching relevant passages: "``
-  as recommended in the BAAI model card for asymmetric retrieval.
-* Document encoding does *not* use a prefix (symmetric encoding).
-* Batch size defaults to 64 and can be tuned per deployment via the constructor.
-
-Thread / process safety
------------------------
-``SentenceTransformer`` is not thread-safe for concurrent ``encode()`` calls on
-the same instance.  Keep one ``BGEEmbedder`` per process and, if you need
-parallelism, use ``batch_size`` rather than threading.
+Generates dense vector embeddings for medical document chunks
+and user queries using BAAI/bge-m3.
 """
 
 from __future__ import annotations
 
-from collections.abc import Sequence
-from typing import Optional
+from typing import Sequence
 
 import numpy as np
-from sentence_transformers import SentenceTransformer
-
-from app.rag.interfaces import Embedder
-from app.utils.logger import logger
-
-# BGE asymmetric retrieval instruction — prepended to queries only.
-# Passages / documents are encoded without a prefix.
-_QUERY_PREFIX = "Represent this sentence for searching relevant passages: "
+import torch
+from transformers import AutoModel, AutoTokenizer
 
 
-class BGEEmbedder(Embedder):
-    """Sentence-Transformers adapter for ``BAAI/bge-small-en-v1.5``.
+class BGEEmbedding:
+    """Dense embedding generator using BGE-M3."""
 
-    Parameters
-    ----------
-    model_name:
-        HuggingFace model id or local path.  Defaults to
-        ``Settings.embedding_model_name`` (``BAAI/bge-small-en-v1.5``).
-    device:
-        ``"cpu"``, ``"cuda"``, or ``None`` (auto-detect).
-    batch_size:
-        Number of texts encoded per forward pass.  64 is a safe default for
-        CPU; raise to 256+ on GPU.
-    cache_folder:
-        Optional local directory for the downloaded model weights.
-        Useful for air-gapped deployments.  ``None`` → HuggingFace default
-        (``~/.cache/huggingface/hub``).
-    """
+    DEFAULT_MODEL = "BAAI/bge-m3"
 
     def __init__(
         self,
-        model_name: Optional[str] = None,
-        device: Optional[str] = None,
-        batch_size: int = 64,
-        cache_folder: Optional[str] = None,
+        model_name: str = DEFAULT_MODEL,
+        device: str | None = None,
+        normalize: bool = True,
     ) -> None:
-        # Resolve model name: explicit arg → settings default
-        if model_name is None:
-            from app.config import get_settings
-            model_name = get_settings().embedding_model_name
-
         self.model_name = model_name
-        self.batch_size = batch_size
+        self.normalize = normalize
 
-        logger.info(f"BGEEmbedder: loading '{model_name}' (device={device or 'auto'})")
-        self._model = SentenceTransformer(
-            model_name,
-            device=device,
-            cache_folder=cache_folder,
-        )
-        # Retrieve output dimension once so callers can inspect it cheaply.
-        # ST 5.x renamed get_sentence_embedding_dimension → get_embedding_dimension.
-        getter = getattr(
-            self._model,
-            "get_embedding_dimension",
-            getattr(self._model, "get_sentence_embedding_dimension", None),
-        )
-        self._dim: int = getter()
-        logger.info(
-            f"BGEEmbedder ready — model='{model_name}', dim={self._dim}, "
-            f"batch_size={batch_size}"
+        if device is None:
+            device = "cuda" if torch.cuda.is_available() else "cpu"
+
+        self.device = torch.device(device)
+
+        print(
+            f"Loading embedding model: {self.model_name} "
+            f"on {self.device}"
         )
 
-    # ------------------------------------------------------------------
-    # Embedder interface
-    # ------------------------------------------------------------------
+        self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
+        self.model = AutoModel.from_pretrained(self.model_name)
 
-    def embed_documents(self, texts: Sequence[str]) -> list[list[float]]:
-        """Encode a batch of document passages.
+        self.model.to(self.device)
+        self.model.eval()
 
-        Passages are encoded *without* an instruction prefix (symmetric
-        representation).  All vectors are L2-normalised.
+        print("BGE-M3 embedding model loaded successfully.")
 
-        Parameters
-        ----------
-        texts:
-            Non-empty sequence of passage strings.
+    @staticmethod
+    def _mean_pooling(
+        model_output: torch.Tensor,
+        attention_mask: torch.Tensor,
+    ) -> torch.Tensor:
+        """Mean-pool token embeddings while ignoring padding tokens."""
 
-        Returns
-        -------
-        list[list[float]]
-            One float vector per input text, shape ``(len(texts), dim)``.
+        token_embeddings = model_output
 
-        Raises
-        ------
-        ValueError
-            If *texts* is empty.
+        input_mask_expanded = (
+            attention_mask.unsqueeze(-1)
+            .expand(token_embeddings.size())
+            .float()
+        )
+
+        return torch.sum(
+            token_embeddings * input_mask_expanded,
+            dim=1,
+        ) / torch.clamp(
+            input_mask_expanded.sum(dim=1),
+            min=1e-9,
+        )
+
+    def embed(
+        self,
+        texts: str | Sequence[str],
+        batch_size: int = 8,
+    ) -> np.ndarray:
         """
-        if not texts:
-            raise ValueError("embed_documents requires at least one text.")
+        Generate embeddings for one or more texts.
+
+        Returns:
+            np.ndarray of shape (n_texts, embedding_dimension)
+        """
+
+        if isinstance(texts, str):
+            texts = [texts]
 
         texts = list(texts)
-        logger.debug(f"BGEEmbedder.embed_documents: encoding {len(texts)} passage(s)")
 
-        embeddings: np.ndarray = self._model.encode(
-            texts,
-            batch_size=self.batch_size,
-            normalize_embeddings=True,
-            convert_to_numpy=True,
-            show_progress_bar=False,
-        )
-        return embeddings.tolist()
+        if not texts:
+            return np.empty((0, 0), dtype=np.float32)
 
-    def embed_query(self, text: str) -> list[float]:
-        """Encode a single search query with the BGE instruction prefix.
+        embeddings: list[np.ndarray] = []
 
-        Parameters
-        ----------
-        text:
-            The user's search query string.
+        with torch.no_grad():
+            for start in range(0, len(texts), batch_size):
+                batch = texts[start : start + batch_size]
 
-        Returns
-        -------
-        list[float]
-            A single L2-normalised float vector of length ``self.dim``.
+                encoded = self.tokenizer(
+                    batch,
+                    padding=True,
+                    truncation=True,
+                    max_length=512,
+                    return_tensors="pt",
+                )
 
-        Raises
-        ------
-        ValueError
-            If *text* is empty or whitespace-only.
-        """
-        if not text or not text.strip():
-            raise ValueError("embed_query requires a non-empty query string.")
+                encoded = {
+                    key: value.to(self.device)
+                    for key, value in encoded.items()
+                }
 
-        logger.debug(f"BGEEmbedder.embed_query: '{text[:60]}{'...' if len(text) > 60 else ''}'")
+                model_output = self.model(**encoded)
 
-        embedding: np.ndarray = self._model.encode(
-            _QUERY_PREFIX + text,
-            batch_size=1,
-            normalize_embeddings=True,
-            convert_to_numpy=True,
-            show_progress_bar=False,
-        )
-        return embedding.tolist()
+                pooled = self._mean_pooling(
+                    model_output.last_hidden_state,
+                    encoded["attention_mask"],
+                )
 
-    # ------------------------------------------------------------------
-    # Convenience properties
-    # ------------------------------------------------------------------
+                if self.normalize:
+                    pooled = torch.nn.functional.normalize(
+                        pooled,
+                        p=2,
+                        dim=1,
+                    )
 
-    @property
-    def dim(self) -> int:
-        """Output embedding dimension (384 for bge-small-en-v1.5)."""
-        return self._dim
+                embeddings.append(
+                    pooled.cpu().numpy().astype(np.float32)
+                )
+
+        return np.vstack(embeddings)
+
+    def embed_documents(
+        self,
+        texts: Sequence[str],
+        batch_size: int = 8,
+    ) -> np.ndarray:
+        """Generate embeddings for document chunks."""
+
+        return self.embed(texts, batch_size=batch_size)
+
+    def embed_query(self, query: str) -> np.ndarray:
+        """Generate an embedding for a user query."""
+
+        embedding = self.embed(query)
+
+        return embedding[0]
+
+
+# ``BGEEmbedder`` was the pre-merge public name for a different,
+# 384-dimensional adapter.  Keep its import path alive without reviving that
+# retired model or allowing callers to accidentally build incompatible FAISS
+# indexes.  New code should use ``BGEEmbedding`` explicitly.
+BGEEmbedder = BGEEmbedding

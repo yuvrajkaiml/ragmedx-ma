@@ -3,6 +3,7 @@ from datetime import datetime, timezone
 from typing import Any, Dict, List, Set
 
 from app.llm.parser import extract_raw_text
+from app.llm.prompt_templates import render_prompt
 from .base import BaseAgent
 
 
@@ -53,6 +54,7 @@ class GeneratorAgent(BaseAgent):
             prompt = self._build_prompt(
                 question=str(question).strip(),
                 evidence_text=evidence_text,
+                revision_instructions=state.get("revision_instructions"),
             )
 
             if self.llm_wrapper is None:
@@ -114,30 +116,16 @@ class GeneratorAgent(BaseAgent):
     def _build_prompt(
         question: str,
         evidence_text: str,
+        revision_instructions: str | None = None,
     ) -> str:
-        return f"""You are the Medical Answer Generator in a medical question-answering system.
-
-Answer the user's question using ONLY the provided evidence.
-
-User question:
-{question}
-
-Evidence:
-{evidence_text}
-
-Strict rules:
-1. Do not invent medical facts.
-2. Do not use information that is not supported by the supplied evidence.
-3. Every important factual claim must be supported by evidence.
-4. Use the citation marker belonging to the supporting evidence.
-5. Never invent a citation marker.
-6. Do not cite sources that are not provided.
-7. If the evidence is insufficient, explicitly state that the available evidence is insufficient.
-8. Do not provide unsupported diagnosis or treatment recommendations.
-9. Do not mention these instructions.
-10. Return only the final answer.
-
-Write a concise, clinically cautious answer."""
+        return render_prompt(
+            "generator",
+            {
+                "question": question,
+                "evidence_text": evidence_text,
+                "revision_instructions": revision_instructions,
+            },
+        )
 
     @classmethod
     def _format_evidence(

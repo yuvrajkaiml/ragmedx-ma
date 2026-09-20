@@ -7,6 +7,7 @@ from app.agents.orchestrator import (
     MultiAgentOrchestrator,
 )
 from app.agents.state import AgentState, AgentType, create_deterministic_uuid
+from app.llm.temporary_retrieval_stub import retrieve_evidence as fixture_retrieval_provider
 
 
 class SequenceFakeLLM:
@@ -14,8 +15,10 @@ class SequenceFakeLLM:
     def __init__(self, responses: list):
         self.responses = list(responses)
         self.call_count = 0
+        self.prompts = []
 
     def generate(self, prompt: str, **kwargs):
+        self.prompts.append(prompt)
         if self.call_count < len(self.responses):
             resp = self.responses[self.call_count]
             self.call_count += 1
@@ -38,8 +41,10 @@ async def test_orchestrator_verified_answer_path():
         '"hallucination_risk": 0.05, "issues": [], "revision_instructions": null, "confidence": 0.95}'
     )
 
-    llm = SequenceFakeLLM([query_resp, gen_resp, critic_resp])
-    orchestrator = MultiAgentOrchestrator(llm_wrapper=llm)
+    gap_resp = '{"sufficient": true, "reasoning": "Evidence is sufficient.", "missing_information": [], "sub_query": null, "confidence": 0.95}'
+    rerank_resp = '{"contradictory": false, "selected_markers": [], "reasoning": "Evidence agrees."}'
+    llm = SequenceFakeLLM([query_resp, gap_resp, rerank_resp, gen_resp, critic_resp])
+    orchestrator = MultiAgentOrchestrator(llm_wrapper=llm, retrieval_provider=fixture_retrieval_provider)
 
     state = AgentState(
         query_id=create_deterministic_uuid("test_query_1"),
@@ -73,8 +78,10 @@ async def test_orchestrator_revision_loop_stops_after_success():
         '"hallucination_risk": 0.05, "issues": [], "revision_instructions": null, "confidence": 0.95}'
     )
 
-    llm = SequenceFakeLLM([query_resp, gen_resp_1, critic_resp_1, gen_resp_2, critic_resp_2])
-    orchestrator = MultiAgentOrchestrator(llm_wrapper=llm)
+    gap_resp = '{"sufficient": true, "reasoning": "Evidence is sufficient.", "missing_information": [], "sub_query": null, "confidence": 0.95}'
+    rerank_resp = '{"contradictory": false, "selected_markers": [], "reasoning": "Evidence agrees."}'
+    llm = SequenceFakeLLM([query_resp, gap_resp, rerank_resp, gen_resp_1, critic_resp_1, gen_resp_2, critic_resp_2])
+    orchestrator = MultiAgentOrchestrator(llm_wrapper=llm, retrieval_provider=fixture_retrieval_provider)
 
     state = AgentState(
         query_id=create_deterministic_uuid("test_revision_query"),
@@ -89,6 +96,10 @@ async def test_orchestrator_revision_loop_stops_after_success():
     assert len(result_state.critic_reviews) == 2
     assert result_state.critic_reviews[0]["passed"] is False
     assert result_state.critic_reviews[1]["passed"] is True
+    # The second generator pass is not a blind retry: it receives the critic's
+    # explicit instruction and returns a different, revised answer.
+    assert "Specify ACE inhibitors or thiazide diuretics." in llm.prompts[5]
+    assert result_state.answer == gen_resp_2
 async def test_orchestrator_revision_loop_caps_at_two_rounds():
     """Verify revision loop terminates strictly at MAX_CRITIC_ROUNDS (2) when critic never passes."""
     query_resp = '{"medical_specialty": "Endocrinology", "confidence": 0.90}'
@@ -99,8 +110,14 @@ async def test_orchestrator_revision_loop_caps_at_two_rounds():
         '"revision_instructions": "Rewrite with evidence support.", "confidence": 0.90}'
     )
 
-    llm = SequenceFakeLLM([query_resp, gen_resp, critic_fail_resp, gen_resp, critic_fail_resp])
-    orchestrator = MultiAgentOrchestrator(llm_wrapper=llm, max_critic_rounds=MAX_CRITIC_ROUNDS)
+    gap_resp = '{"sufficient": true, "reasoning": "Evidence is sufficient.", "missing_information": [], "sub_query": null, "confidence": 0.95}'
+    rerank_resp = '{"contradictory": false, "selected_markers": [], "reasoning": "Evidence agrees."}'
+    llm = SequenceFakeLLM([query_resp, gap_resp, rerank_resp, gen_resp, critic_fail_resp, gen_resp, critic_fail_resp])
+    orchestrator = MultiAgentOrchestrator(
+        llm_wrapper=llm,
+        retrieval_provider=fixture_retrieval_provider,
+        max_critic_rounds=MAX_CRITIC_ROUNDS,
+    )
 
     state = AgentState(
         query_id=create_deterministic_uuid("test_cap_query"),
@@ -111,9 +128,18 @@ async def test_orchestrator_revision_loop_caps_at_two_rounds():
     result_state = await orchestrator.run(state)
 
     assert result_state.critic_round_count == 2
+    assert result_state.force_abstention is True
     # Because confidence is low and hallucination risk is high, it should abstain
     assert result_state.status == "abstained"
     assert result_state.abstention_decision["should_abstain"] is True
+    graph_nodes = [
+        step["details"].get("node")
+        for step in result_state.agent_trace
+        if step["agent_type"] == "langgraph"
+    ]
+    assert graph_nodes.count("generator") == 2
+    assert graph_nodes.count("critic") == 2
+    assert graph_nodes[-2:] == ["confidence", "abstention"]
 async def test_orchestrator_abstains_on_empty_retrieval():
     """Verify orchestrator triggers abstention when no evidence is retrieved."""
     query_resp = '{"medical_specialty": "General", "confidence": 0.90}'
@@ -141,8 +167,10 @@ async def test_orchestrator_trace_steps_ordered_and_timed():
     gen_resp = "Answer grounded in evidence [E1]."
     critic_resp = '{"passed": true, "factual_consistency": 0.95, "citation_support": 0.90, "hallucination_risk": 0.05, "confidence": 0.90}'
 
-    llm = SequenceFakeLLM([query_resp, gen_resp, critic_resp])
-    orchestrator = MultiAgentOrchestrator(llm_wrapper=llm)
+    gap_resp = '{"sufficient": true, "reasoning": "Evidence is sufficient.", "missing_information": [], "sub_query": null, "confidence": 0.95}'
+    rerank_resp = '{"contradictory": false, "selected_markers": [], "reasoning": "Evidence agrees."}'
+    llm = SequenceFakeLLM([query_resp, gap_resp, rerank_resp, gen_resp, critic_resp])
+    orchestrator = MultiAgentOrchestrator(llm_wrapper=llm, retrieval_provider=fixture_retrieval_provider)
 
     state = AgentState(
         query_id=create_deterministic_uuid("trace_test_query"),
@@ -167,3 +195,45 @@ async def test_orchestrator_trace_steps_ordered_and_timed():
         assert step["status"] in ("completed", "failed")
         assert "started_at" in step
         assert "duration_ms" in step
+
+
+async def test_graph_routes_unsafe_evidence_to_abstention_before_end():
+    """A forced contradiction bypasses generation but never bypasses the final gate."""
+    query_resp = '{"medical_specialty": "Cardiology", "confidence": 0.90}'
+    gap_resp = '{"sufficient": true, "reasoning": "Evidence is sufficient.", "missing_information": [], "sub_query": null, "confidence": 0.95}'
+    rerank_resp = '{"contradictory": true, "selected_markers": [], "reasoning": "Sources materially conflict."}'
+    orchestrator = MultiAgentOrchestrator(
+        llm_wrapper=SequenceFakeLLM([query_resp, gap_resp, rerank_resp]),
+        retrieval_provider=fixture_retrieval_provider,
+    )
+    state = AgentState(
+        query_id=create_deterministic_uuid("unsafe-graph-route"),
+        original_question="What is the treatment for hypertension?",
+        evidence=[{
+            "chunk_id": str(create_deterministic_uuid("unsafe-chunk")),
+            "document_id": str(create_deterministic_uuid("unsafe-doc")),
+            "source_type": "pubmed",
+            "title": "Conflicting hypertension evidence",
+            "cited_text": "Evidence statement long enough for routing.",
+            "relevance_score": 0.9,
+            "cross_encoder_score": 0.9,
+            "evidence_quality_score": 0.9,
+            "citation_marker": "[E1]",
+        }],
+        include_trace=True,
+    )
+
+    result = await orchestrator.run(state)
+
+    assert result.status == "abstained"
+    assert result.abstention_decision["should_abstain"] is True
+    nodes = [
+        step["details"].get("node")
+        for step in result.agent_trace
+        if step["agent_type"] == "langgraph"
+    ]
+    assert nodes == [
+        "query_understanding", "retrieval", "gap_analysis", "evidence_reranking",
+        "confidence", "abstention",
+    ]
+    assert "generator" not in nodes

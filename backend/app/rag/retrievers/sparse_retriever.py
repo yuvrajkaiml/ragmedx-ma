@@ -1,262 +1,450 @@
-"""Sparse retriever using BM25 (rank-bm25).
+"""
+Sparse lexical retrieval for the RAGMedX-MA retrieval engine.
 
-Implements lexical keyword retrieval over a collection of
-:class:`~app.schemas.retrieval.DocumentChunk` objects using
-``BM25Okapi`` from the ``rank-bm25`` library.
+Implements Okapi BM25 retrieval over MedicalChunk objects.
 
-Design
-------
-``SparseRetriever`` is intentionally parallel in API to
-:class:`~app.rag.retrievers.dense_retriever.DenseRetriever`:
-
-* :meth:`index`    — add chunks to the BM25 corpus (equivalent to
-                     ``FAISSVectorStore.upsert``)
-* :meth:`retrieve` — tokenise query, score all indexed chunks, return top-K
-
-Tokenisation
-------------
-The default tokeniser lowercases and whitespace-splits each document / query.
-A custom callable tokeniser can be injected at construction time for
-domain-specific pre-processing (e.g. medical term normalisation, stop-word
-removal).
-
-Score normalisation
--------------------
-Raw BM25 scores are non-negative floats with no fixed upper bound.
-:meth:`retrieve` normalises them to ``[0, 1]`` by dividing by the maximum
-score in the result set before constructing :class:`RetrievalResult` objects.
-When every score is 0 (the query shares no tokens with any document), all
-returned results carry ``relevance_score = 0.0``.
-
-Thread safety
--------------
-``BM25Okapi`` rebuilds its IDF index on every call to :meth:`index` because
-the corpus must be provided up-front.  Keep one ``SparseRetriever`` per
-process and call :meth:`index` once after loading all chunks.
-
-Typical wiring::
-
-    from app.rag.retrievers.sparse_retriever import SparseRetriever
-
-    retriever = SparseRetriever()
-    retriever.index(chunks)              # call once after loading documents
-    results = retriever.retrieve("first-line hypertension therapy", top_k=5)
+BM25 complements dense semantic retrieval by matching important
+medical terms, abbreviations, drug names, disease names, and other
+lexical signals that may not always be captured by semantic similarity.
 """
 
 from __future__ import annotations
 
+import math
+import pickle
 import re
-from collections.abc import Callable, Sequence
-from typing import Optional
+from pathlib import Path
+from typing import Sequence
 
-from rank_bm25 import BM25Okapi
-
-from app.config import get_settings
-from app.schemas.retrieval import DocumentChunk, RetrievalResult
-from app.utils.logger import logger
-
-# ---------------------------------------------------------------------------
-# Default tokeniser — lowercase + split on non-alphanumeric boundaries
-# ---------------------------------------------------------------------------
-
-_TOKEN_RE = re.compile(r"[^\w]+")
-
-
-def _default_tokenise(text: str) -> list[str]:
-    """Lowercase and split *text* on non-word character boundaries.
-
-    Empty tokens produced by leading / trailing punctuation are filtered.
-    """
-    return [t for t in _TOKEN_RE.split(text.lower()) if t]
-
-
-# ---------------------------------------------------------------------------
-# SparseRetriever
-# ---------------------------------------------------------------------------
+from app.rag.chunking.models import MedicalChunk
 
 
 class SparseRetriever:
-    """BM25 lexical retriever over a collection of document chunks.
+    """
+    Sparse lexical retriever using the Okapi BM25 ranking function.
 
-    Parameters
-    ----------
-    tokeniser:
-        Callable ``(str) -> list[str]``.  Defaults to a simple
-        lowercase + word-boundary split.  Inject a custom callable for
-        domain-specific pre-processing (stop-word removal, stemming, etc.).
-    default_top_k:
-        Number of results returned by :meth:`retrieve` when *top_k* is not
-        supplied.  Defaults to ``Settings.retrieval_top_k`` (5).
-    k1:
-        BM25 term-saturation parameter.  Default 1.5 (rank-bm25 default).
-    b:
-        BM25 length-normalisation parameter.  Default 0.75 (rank-bm25 default).
+    The retriever stores MedicalChunk objects and builds an inverted
+    lexical representation of their content.
+
+    BM25 parameters:
+        k1:
+            Controls term-frequency saturation.
+
+        b:
+            Controls document-length normalization.
     """
 
     def __init__(
         self,
-        tokeniser: Optional[Callable[[str], list[str]]] = None,
-        default_top_k: Optional[int] = None,
         k1: float = 1.5,
         b: float = 0.75,
     ) -> None:
-        self._tokenise: Callable[[str], list[str]] = (
-            tokeniser if tokeniser is not None else _default_tokenise
-        )
-        self._default_top_k: int = (
-            default_top_k
-            if default_top_k is not None
-            else get_settings().retrieval_top_k
-        )
-        self._k1 = k1
-        self._b = b
+        if k1 < 0:
+            raise ValueError("k1 must be non-negative.")
 
-        # Populated by index()
-        self._chunks: list[DocumentChunk] = []
-        self._bm25: Optional[BM25Okapi] = None
+        if not 0 <= b <= 1:
+            raise ValueError("b must be between 0 and 1.")
 
-        logger.info(
-            f"SparseRetriever initialised — "
-            f"default_top_k={self._default_top_k}, k1={k1}, b={b}"
-        )
+        self.k1 = k1
+        self.b = b
+
+        # Position in this list corresponds to the internal
+        # document ID used by the BM25 index.
+        self.chunks: list[MedicalChunk] = []
+
+        # Tokenized representation of every chunk.
+        self.documents: list[list[str]] = []
+
+        # Term frequencies for every document.
+        #
+        # Example:
+        # {
+        #     "cancer": 4,
+        #     "therapy": 2,
+        # }
+        self.term_frequencies: list[dict[str, int]] = []
+
+        # Document frequency:
+        # number of documents containing each term.
+        self.document_frequency: dict[str, int] = {}
+
+        # Document lengths in tokens.
+        self.document_lengths: list[int] = []
+
+        self.total_documents = 0
+        self.average_document_length = 0.0
 
     # ------------------------------------------------------------------
-    # Indexing
+    # TOKENIZATION
     # ------------------------------------------------------------------
 
-    def index(self, chunks: Sequence[DocumentChunk]) -> None:
-        """Build the BM25 index from *chunks*.
-
-        Parameters
-        ----------
-        chunks:
-            Document chunks to index.  Each chunk's ``text`` field is
-            tokenised and added to the BM25 corpus.
-
-        Notes
-        -----
-        Calling :meth:`index` with an empty sequence clears any existing
-        index (safe no-op for retrieval — :meth:`retrieve` will return
-        ``[]``).
-
-        Calling :meth:`index` a second time **replaces** the existing index
-        entirely.  There is no incremental add because ``BM25Okapi`` requires
-        the full corpus at construction time to compute IDF correctly.
+    @staticmethod
+    def _tokenize(text: str) -> list[str]:
         """
-        if len(chunks) == 0:
-            logger.debug("SparseRetriever.index called with empty sequence — clearing index.")
-            self._chunks = []
-            self._bm25 = None
+        Convert text into normalized lexical tokens.
+
+        The tokenizer:
+        - converts text to lowercase
+        - preserves alphanumeric medical terms
+        - handles terms containing numbers
+        - removes punctuation
+        """
+
+        if not text:
+            return []
+
+        text = text.lower()
+
+        # Keep alphabetic and numeric sequences together.
+        #
+        # Examples:
+        #   FDG-PET -> fdg, pet
+        #   CTLA-4  -> ctla, 4
+        #   PD-1    -> pd, 1
+        #   18F     -> 18f
+        tokens = re.findall(
+            r"[a-z0-9]+",
+            text,
+        )
+
+        return tokens
+
+    # ------------------------------------------------------------------
+    # INDEXING
+    # ------------------------------------------------------------------
+
+    def add_chunks(
+        self,
+        chunks: Sequence[MedicalChunk],
+    ) -> None:
+        """
+        Add MedicalChunk objects to the BM25 index.
+
+        Existing chunks remain indexed, allowing the knowledge base
+        to be extended incrementally.
+        """
+
+        if not chunks:
             return
 
-        self._chunks = list(chunks)
-        tokenised_corpus = [self._tokenise(chunk.text) for chunk in self._chunks]
-        self._bm25 = BM25Okapi(tokenised_corpus, k1=self._k1, b=self._b)
+        for chunk in chunks:
+            if not isinstance(chunk, MedicalChunk):
+                raise TypeError(
+                    "All items must be MedicalChunk objects."
+                )
 
-        logger.info(
-            f"SparseRetriever.index: indexed {len(self._chunks)} chunk(s)"
+            tokens = self._tokenize(chunk.content)
+
+            term_frequency: dict[str, int] = {}
+
+            for token in tokens:
+                term_frequency[token] = (
+                    term_frequency.get(token, 0) + 1
+                )
+
+            document_id = len(self.chunks)
+
+            self.chunks.append(chunk)
+            self.documents.append(tokens)
+            self.term_frequencies.append(term_frequency)
+            self.document_lengths.append(len(tokens))
+
+            # Update document frequency only once per term
+            # within the current document.
+            for term in term_frequency:
+                self.document_frequency[term] = (
+                    self.document_frequency.get(term, 0) + 1
+                )
+
+            self.total_documents += 1
+
+        self._update_average_document_length()
+
+    def _update_average_document_length(self) -> None:
+        """Recalculate the average indexed document length."""
+
+        if self.total_documents == 0:
+            self.average_document_length = 0.0
+            return
+
+        self.average_document_length = (
+            sum(self.document_lengths)
+            / self.total_documents
         )
 
     # ------------------------------------------------------------------
-    # Retrieval
+    # BM25 SCORING
+    # ------------------------------------------------------------------
+
+    def _idf(self, term: str) -> float:
+        """
+        Calculate BM25 inverse document frequency.
+
+        Uses the standard smoothed BM25 formulation:
+
+            IDF = ln(
+                1 + (N - df + 0.5) / (df + 0.5)
+            )
+        """
+
+        document_frequency = self.document_frequency.get(
+            term,
+            0,
+        )
+
+        if document_frequency == 0:
+            return 0.0
+
+        numerator = (
+            self.total_documents
+            - document_frequency
+            + 0.5
+        )
+
+        denominator = document_frequency + 0.5
+
+        return math.log(
+            1.0 + numerator / denominator
+        )
+
+    def _score_document(
+        self,
+        query_terms: list[str],
+        document_index: int,
+    ) -> float:
+        """
+        Calculate the BM25 score for one document.
+        """
+
+        if self.total_documents == 0:
+            return 0.0
+
+        document_length = self.document_lengths[
+            document_index
+        ]
+
+        if self.average_document_length == 0:
+            return 0.0
+
+        term_frequency = self.term_frequencies[
+            document_index
+        ]
+
+        score = 0.0
+
+        for term in query_terms:
+
+            if term not in term_frequency:
+                continue
+
+            tf = term_frequency[term]
+            idf = self._idf(term)
+
+            normalization = (
+                self.k1
+                * (
+                    1
+                    - self.b
+                    + self.b
+                    * (
+                        document_length
+                        / self.average_document_length
+                    )
+                )
+            )
+
+            numerator = (
+                tf * (self.k1 + 1)
+            )
+
+            denominator = (
+                tf + normalization
+            )
+
+            score += (
+                idf
+                * numerator
+                / denominator
+            )
+
+        return score
+
+    # ------------------------------------------------------------------
+    # RETRIEVAL
     # ------------------------------------------------------------------
 
     def retrieve(
         self,
         query: str,
-        top_k: Optional[int] = None,
-    ) -> list[RetrievalResult]:
-        """Score all indexed chunks against *query* and return the top-K.
-
-        Parameters
-        ----------
-        query:
-            Free-text search query.  Tokenised with the same tokeniser used
-            during :meth:`index`.
-        top_k:
-            Number of results to return.  Falls back to ``default_top_k``
-            when omitted.  Clamped to the number of indexed chunks if the
-            corpus is smaller.
-
-        Returns
-        -------
-        list[RetrievalResult]
-            Ordered by descending BM25 score (normalised to ``[0, 1]``).
-            Empty list when no chunks are indexed.
-
-        Raises
-        ------
-        ValueError
-            If *query* is empty or whitespace-only, or if *top_k* is not a
-            positive integer.
+        top_k: int = 5,
+    ) -> list[tuple[MedicalChunk, float]]:
         """
-        if not query or not query.strip():
-            raise ValueError(
-                "SparseRetriever.retrieve requires a non-empty query string."
+        Retrieve the most lexically relevant medical chunks.
+
+        Args:
+            query:
+                Natural-language medical question.
+
+            top_k:
+                Number of results to return.
+
+        Returns:
+            List of (MedicalChunk, BM25 score) tuples ordered from
+            highest score to lowest score.
+        """
+
+        if not isinstance(query, str):
+            raise TypeError(
+                "Query must be a string."
             )
 
-        effective_top_k = top_k if top_k is not None else self._default_top_k
-        if effective_top_k <= 0:
+        query = query.strip()
+
+        if not query:
             raise ValueError(
-                f"top_k must be a positive integer, got {effective_top_k}."
+                "Query cannot be empty."
             )
 
-        if self._bm25 is None or not self._chunks:
-            logger.debug("SparseRetriever.retrieve: index is empty, returning [].")
+        if top_k <= 0:
+            raise ValueError(
+                "top_k must be greater than zero."
+            )
+
+        if self.total_documents == 0:
             return []
 
-        query_tokens = self._tokenise(query)
-        logger.debug(
-            f"SparseRetriever.retrieve: "
-            f"query='{query[:60]}{'...' if len(query) > 60 else ''}', "
-            f"tokens={query_tokens[:8]}, top_k={effective_top_k}"
-        )
+        query_terms = self._tokenize(query)
 
-        raw_scores = self._bm25.get_scores(query_tokens)  # ndarray, len == len(corpus)
+        if not query_terms:
+            return []
 
-        # Clamp to available corpus size
-        effective_top_k = min(effective_top_k, len(self._chunks))
+        # Calculate BM25 score for every indexed chunk.
+        scored_results: list[
+            tuple[MedicalChunk, float]
+        ] = []
 
-        # Indices of top-K scores in descending order
-        # argsort gives ascending; slice with [-effective_top_k:][::-1] for top-K desc
-        top_indices = raw_scores.argsort()[-effective_top_k:][::-1]
-
-        # Normalise scores to [0, 1] by max score in the *full* corpus
-        max_score = float(raw_scores.max())
-
-        results: list[RetrievalResult] = []
-        for idx in top_indices:
-            raw = float(raw_scores[idx])
-            normalised = (raw / max_score) if max_score > 0.0 else 0.0
-            # Clamp to [0, 1] to guard against floating-point edge cases
-            score = max(0.0, min(1.0, normalised))
-            results.append(
-                RetrievalResult(
-                    chunk=self._chunks[int(idx)],
-                    relevance_score=score,
-                )
+        for document_index in range(
+            self.total_documents
+        ):
+            score = self._score_document(
+                query_terms=query_terms,
+                document_index=document_index,
             )
 
-        logger.debug(
-            f"SparseRetriever.retrieve: returned {len(results)} result(s)"
+            # Only return documents with at least one
+            # matching query term.
+            if score > 0:
+                scored_results.append(
+                    (
+                        self.chunks[document_index],
+                        float(score),
+                    )
+                )
+
+        # Highest BM25 score first.
+        scored_results.sort(
+            key=lambda item: item[1],
+            reverse=True,
         )
-        return results
+
+        return scored_results[:top_k]
 
     # ------------------------------------------------------------------
-    # Convenience properties
+    # PERSISTENCE
+    # ------------------------------------------------------------------
+
+    def save(
+        self,
+        path: str | Path,
+    ) -> None:
+        """
+        Persist the sparse retriever to disk.
+        """
+
+        path = Path(path)
+
+        path.parent.mkdir(
+            parents=True,
+            exist_ok=True,
+        )
+
+        state = {
+            "k1": self.k1,
+            "b": self.b,
+            "chunks": self.chunks,
+            "documents": self.documents,
+            "term_frequencies": self.term_frequencies,
+            "document_frequency": self.document_frequency,
+            "document_lengths": self.document_lengths,
+            "total_documents": self.total_documents,
+            "average_document_length": (
+                self.average_document_length
+            ),
+        }
+
+        with open(path, "wb") as file:
+            pickle.dump(
+                state,
+                file,
+                protocol=pickle.HIGHEST_PROTOCOL,
+            )
+
+    @classmethod
+    def load(
+        cls,
+        path: str | Path,
+    ) -> "SparseRetriever":
+        """
+        Load a previously persisted sparse retriever.
+        """
+
+        path = Path(path)
+
+        if not path.exists():
+            raise FileNotFoundError(
+                f"Sparse retriever not found: {path}"
+            )
+
+        with open(path, "rb") as file:
+            state = pickle.load(file)
+
+        retriever = cls(
+            k1=state["k1"],
+            b=state["b"],
+        )
+
+        retriever.chunks = state["chunks"]
+        retriever.documents = state["documents"]
+        retriever.term_frequencies = (
+            state["term_frequencies"]
+        )
+        retriever.document_frequency = (
+            state["document_frequency"]
+        )
+        retriever.document_lengths = (
+            state["document_lengths"]
+        )
+        retriever.total_documents = (
+            state["total_documents"]
+        )
+        retriever.average_document_length = (
+            state["average_document_length"]
+        )
+
+        return retriever
+
+    # ------------------------------------------------------------------
+    # INFORMATION
     # ------------------------------------------------------------------
 
     @property
-    def ntotal(self) -> int:
-        """Number of chunks currently indexed."""
-        return len(self._chunks)
+    def size(self) -> int:
+        """Return the number of indexed chunks."""
+
+        return self.total_documents
 
     @property
-    def default_top_k(self) -> int:
-        """Default number of results returned by :meth:`retrieve`."""
-        return self._default_top_k
+    def vocabulary_size(self) -> int:
+        """Return the number of unique indexed terms."""
 
-    @property
-    def tokeniser(self) -> Callable[[str], list[str]]:
-        """The tokeniser callable used for both indexing and querying."""
-        return self._tokenise
+        return len(self.document_frequency)

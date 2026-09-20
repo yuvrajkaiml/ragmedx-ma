@@ -8,6 +8,8 @@ env/
 venv/
 ENV/
 .venv/
+.venv-cu124/
+.venv-cu128/
 
 # Node / Frontend
 node_modules/

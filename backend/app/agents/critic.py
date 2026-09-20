@@ -1,7 +1,11 @@
+import re
 from datetime import datetime, timezone
 from typing import Any, Dict, List
 
 from app.llm.parser import LLMParseError, extract_raw_text, parse_json_from_llm
+from app.llm.prompt_templates import render_prompt
+from app.rag.chunking.models import MedicalChunk
+from app.rag.verification.evidence_verifier import EvidenceVerifier
 from .base import BaseAgent
 from .state import CriticVerdict
 
@@ -73,6 +77,18 @@ class CriticAgent(BaseAgent):
                 confidence=float(data.get("confidence", 0.0)),
             )
 
+            verification = self._verify_claim_citations(answer=str(answer), evidence=evidence)
+            verdict.evidence_verification = verification
+            if verification["blocking_issues"]:
+                verdict.passed = False
+                verdict.citation_support = 0.0
+                verdict.hallucination_risk = max(verdict.hallucination_risk, 0.5)
+                verdict.issues = list(dict.fromkeys([*verdict.issues, *verification["blocking_issues"]]))
+                verdict.revision_instructions = (
+                    "Revise the answer so every cited claim uses only a valid [Doc X] "
+                    "marker mapped to the supplied evidence span."
+                )
+
             self._validate_scores(verdict)
 
             # A failed verdict must contain actionable revision information
@@ -92,6 +108,7 @@ class CriticAgent(BaseAgent):
                     "citation_support": verdict.citation_support,
                     "hallucination_risk": verdict.hallucination_risk,
                     "issue_count": len(verdict.issues),
+                    "evidence_verification": verification,
                 },
             )
 
@@ -120,46 +137,10 @@ class CriticAgent(BaseAgent):
         answer: str,
         evidence_text: str,
     ) -> str:
-        return f"""You are the Medical Answer Critic in a medical question-answering system.
-
-Evaluate the generated answer against ONLY the supplied evidence.
-
-Do NOT rewrite the answer.
-
-Question:
-{question}
-
-Generated answer:
-{answer}
-
-Evidence:
-{evidence_text}
-
-Evaluate:
-1. Factual consistency
-   Are the answer's factual claims supported by the evidence?
-2. Citation support
-   Do citations actually support the claims they are attached to?
-3. Hallucination risk
-   Does the answer contain claims that are unsupported by the evidence?
-
-Return ONLY valid JSON:
-{{
-    "passed": true,
-    "factual_consistency": 0.0,
-    "citation_support": 0.0,
-    "hallucination_risk": 0.0,
-    "issues": [],
-    "revision_instructions": null,
-    "confidence": 0.0
-}}
-
-Rules:
-- Scores must be between 0.0 and 1.0.
-- passed=true only when the answer is adequately supported by the evidence.
-- If passed=false, provide actionable revision instructions.
-- Do not invent evidence.
-- Do not introduce new medical facts."""
+        return render_prompt(
+            "critic",
+            {"question": question, "answer": answer, "evidence_text": evidence_text},
+        )
 
     @staticmethod
     def _format_evidence(evidence: List[Any]) -> str:
@@ -179,6 +160,60 @@ Rules:
             formatted.append(f"{marker_str}: {text}")
 
         return "\n\n".join(formatted)
+
+    @staticmethod
+    def _verify_claim_citations(answer: str, evidence: List[Any]) -> Dict[str, Any]:
+        """Verify that answer citations resolve to usable retrieved evidence spans.
+
+        ``EvidenceVerifier`` owns structural provenance checks on native chunks.
+        This method adds the agent-boundary check: every answer marker must map to
+        one supplied chunk span. It deliberately does not claim semantic entailment;
+        the LLM critic remains responsible for that judgement.
+        """
+        marker_to_item: Dict[str, Dict[str, Any]] = {}
+        chunks: List[MedicalChunk] = []
+        strict_provenance = True
+        for index, raw_item in enumerate(evidence, start=1):
+            item = dict(raw_item) if isinstance(raw_item, dict) else raw_item.__dict__
+            marker = str(item.get("citation_marker") or f"[Doc {index}]")
+            if not marker.startswith("["):
+                marker = f"[{marker}]"
+            marker_to_item[marker] = item
+            required = ("chunk_id", "document_id", "title", "journal", "publication_year")
+            strict_provenance = strict_provenance and all(item.get(field) not in (None, "") for field in required)
+            chunks.append(MedicalChunk(
+                id=str(item.get("chunk_id") or f"legacy-{index}"),
+                document_id=str(item.get("document_id") or f"legacy-document-{index}"),
+                content=str(item.get("cited_text") or ""),
+                title=item.get("title"),
+                journal=item.get("journal"),
+                publication_year=item.get("publication_year"),
+                source=str(item.get("source_type") or "unknown"),
+            ))
+
+        referenced = set(re.findall(r"\[(?:Doc\s+\d+|[A-Za-z0-9_-]+)\]", answer))
+        unresolved = sorted(referenced - set(marker_to_item))
+        report = EvidenceVerifier(min_content_length=1).verify(
+            [(chunk, 1.0) for chunk in chunks]
+        )
+        invalid_markers = [
+            marker for marker, result in zip(marker_to_item, report)
+            if not result.is_valid
+        ]
+        blocking_issues = []
+        if unresolved:
+            blocking_issues.append(f"Answer cites markers without evidence spans: {unresolved}.")
+        if strict_provenance and invalid_markers:
+            blocking_issues.append(
+                f"Cited evidence failed deterministic provenance validation: {invalid_markers}."
+            )
+        return {
+            "referenced_markers": sorted(referenced),
+            "mapped_markers": sorted(set(referenced) & set(marker_to_item)),
+            "unresolved_markers": unresolved,
+            "invalid_evidence_markers": invalid_markers,
+            "blocking_issues": blocking_issues,
+        }
 
     @staticmethod
     def _parse_response(raw_response: Any) -> Dict[str, Any]:

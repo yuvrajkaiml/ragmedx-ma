@@ -1,308 +1,422 @@
-﻿"""Medical RAG pipeline — composes retrieval, reranking, and evidence formatting.
+"""
+RAG retrieval pipeline for the RAGMedX-MA system.
 
-This module is the single composition boundary between the retrieval stack
-(``BGEEmbedder`` -> ``FAISSVectorStore`` -> ``HybridRetriever`` ->
-``CrossEncoderReranker``) and the multi-agent orchestrator.
+Composes the retrieval-stage components into a single interface:
 
-The orchestrator expects a *retrieval provider*: an async callable matching::
+    User Query
+        ↓
+    Hybrid Retrieval
+        ├── Query Expansion
+        ├── Dense Retrieval (BGE-M3 + FAISS)
+        ├── Sparse Retrieval (BM25)
+        └── Reciprocal Rank Fusion
+        ↓
+    Cross-Encoder Reranking
+        ↓
+    Final Evidence Chunks
 
-    async def retrieve_evidence(
-        query: str,
-        optimized_query: Optional[str] = None,
-        max_iterations: int = 3,
-        **kwargs,
-    ) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]
+This module acts as the composition boundary for the retrieval
+stage of RAGMedX-MA.
 
-This is a drop-in replacement for ``app.llm.temporary_retrieval_stub.retrieve_evidence``.
+It intentionally does not implement:
+    - LLM generation
+    - multi-agent orchestration
+    - answer verification
+    - citation generation
 
-Evidence dict schema (matches what the agents consume)::
-
-    {
-        "chunk_id":               str   # UUID string
-        "document_id":            str   # UUID string
-        "source_type":            str
-        "title":                  str
-        "cited_text":             str   # chunk.text
-        "relevance_score":        float # 0-1, from cross-encoder
-        "cross_encoder_score":    float # same
-        "evidence_quality_score": float # same
-        "citation_marker":        str   # "[E1]", "[E2]", ...
-        "journal":                Optional[str]
-        "publication_year":       Optional[int]
-        "doi":                    Optional[str]
-        "url":                    Optional[str]
-    }
-
-Graceful degradation
---------------------
-``RAGPipeline`` accepts ``None`` for any component.  ``retrieve_evidence``
-returns empty results (not an error) when no retriever is configured, so the
-orchestrator falls through to its abstention path cleanly.
-
-Usage::
-
-    from app.rag.pipeline import RAGPipeline
-
-    pipeline = RAGPipeline.build()   # loads saved FAISS index if present
-    orchestrator = MultiAgentOrchestrator(
-        retrieval_provider=pipeline.retrieve_evidence,
-    )
+Those responsibilities belong to later stages of the system.
 """
 
 from __future__ import annotations
 
 import time
-from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional, Tuple
+from math import exp, isfinite
+from pathlib import Path
+from typing import Any, Sequence
 
-from app.utils.logger import logger
+from app.rag.chunking.models import MedicalChunk
+from app.rag.citations.citation_generator import CitationGenerator
+from app.rag.retrievers.hybrid_retriever import HybridRetriever
+from app.rag.rerankers.cross_encoder_reranker import CrossEncoderReranker
 
 
-class RAGPipeline:
-    """Compose hybrid retrieval + cross-encoder reranking into a single callable.
+class RAGRetrievalPipeline:
+    """
+    Compose hybrid retrieval and cross-encoder reranking.
 
-    Parameters
-    ----------
-    hybrid_retriever:
-        Object with ``retrieve(query, top_k) -> list[RetrievalResult]``.
-        Pass ``None`` to operate in fallback (empty-result) mode.
-    reranker:
-        Object with ``rerank(query, results, top_k) -> list[RetrievalResult]``.
-        Pass ``None`` to skip reranking (first-stage order is preserved).
-    top_k_retrieval:
-        Candidates fetched from the hybrid retriever.  Default 20.
-    top_k_final:
-        Evidence items returned after reranking.  Default 5.
+    Pipeline:
+
+        Query
+          ↓
+        HybridRetriever
+          ↓
+        Candidate Chunks
+          ↓
+        CrossEncoderReranker
+          ↓
+        Ranked Evidence
     """
 
     def __init__(
         self,
-        hybrid_retriever=None,
-        reranker=None,
-        top_k_retrieval: int = 20,
-        top_k_final: int = 5,
+        hybrid_retriever: HybridRetriever,
+        reranker: CrossEncoderReranker,
+        retrieval_top_k: int = 10,
+        final_top_k: int = 5,
     ) -> None:
-        self._hybrid = hybrid_retriever
-        self._reranker = reranker
-        self._top_k_retrieval = top_k_retrieval
-        self._top_k_final = top_k_final
+        """
+        Initialize the retrieval pipeline.
 
-        logger.info(
-            f"RAGPipeline initialised -- "
-            f"hybrid={'yes' if self._hybrid else 'no'}, "
-            f"reranker={'yes' if self._reranker else 'no'}, "
-            f"top_k_retrieval={top_k_retrieval}, top_k_final={top_k_final}, "
-            f"ready={self.is_ready}"
+        Args:
+            hybrid_retriever:
+                Configured hybrid retriever containing query
+                expansion, dense retrieval, sparse retrieval,
+                and RRF fusion.
+
+            reranker:
+                Cross-encoder reranker used to score the retrieved
+                candidate chunks against the original query.
+
+            retrieval_top_k:
+                Number of candidates retrieved from the hybrid
+                retrieval stage before reranking.
+
+            final_top_k:
+                Number of final evidence chunks returned after
+                reranking.
+        """
+
+        if not isinstance(
+            hybrid_retriever,
+            HybridRetriever,
+        ):
+            raise TypeError(
+                "hybrid_retriever must be a HybridRetriever."
+            )
+
+        if not isinstance(
+            reranker,
+            CrossEncoderReranker,
+        ):
+            raise TypeError(
+                "reranker must be a CrossEncoderReranker."
+            )
+
+        if retrieval_top_k <= 0:
+            raise ValueError(
+                "retrieval_top_k must be greater than zero."
+            )
+
+        if final_top_k <= 0:
+            raise ValueError(
+                "final_top_k must be greater than zero."
+            )
+
+        if final_top_k > retrieval_top_k:
+            raise ValueError(
+                "final_top_k cannot be greater than "
+                "retrieval_top_k."
+            )
+
+        self.hybrid_retriever = hybrid_retriever
+        self.reranker = reranker
+
+        self.retrieval_top_k = retrieval_top_k
+        self.final_top_k = final_top_k
+
+    # ------------------------------------------------------------------
+    # INDEXING
+    # ------------------------------------------------------------------
+
+    def add_chunks(
+        self,
+        chunks: Sequence[MedicalChunk],
+    ) -> None:
+        """
+        Add medical chunks to the underlying hybrid retriever.
+
+        The hybrid retriever handles indexing into both the dense
+        and sparse retrieval systems.
+        """
+
+        if not chunks:
+            return
+
+        self.hybrid_retriever.add_chunks(chunks)
+
+    # ------------------------------------------------------------------
+    # RETRIEVAL
+    # ------------------------------------------------------------------
+
+    def retrieve(
+        self,
+        query: str,
+        retrieval_top_k: int | None = None,
+        final_top_k: int | None = None,
+    ) -> list[tuple[MedicalChunk, float]]:
+        """
+        Execute the complete retrieval pipeline.
+
+        Pipeline:
+
+            Query
+              ↓
+            Query Expansion
+              ↓
+            Dense + Sparse Retrieval
+              ↓
+            RRF Fusion
+              ↓
+            Cross-Encoder Reranking
+              ↓
+            Final Evidence
+
+        Args:
+            query:
+                Natural-language medical question.
+
+            retrieval_top_k:
+                Optional override for the number of candidates
+                retrieved before reranking.
+
+            final_top_k:
+                Optional override for the number of final
+                reranked results.
+
+        Returns:
+            List of:
+
+                [(MedicalChunk, reranker_score), ...]
+
+            ordered from highest relevance to lowest.
+        """
+
+        # --------------------------------------------------------------
+        # Validate query
+        # --------------------------------------------------------------
+
+        if not isinstance(query, str):
+            raise TypeError(
+                "Query must be a string."
+            )
+
+        query = query.strip()
+
+        if not query:
+            raise ValueError(
+                "Query cannot be empty."
+            )
+
+        # --------------------------------------------------------------
+        # Resolve configuration
+        # --------------------------------------------------------------
+
+        candidate_k = (
+            self.retrieval_top_k
+            if retrieval_top_k is None
+            else retrieval_top_k
         )
 
+        result_k = (
+            self.final_top_k
+            if final_top_k is None
+            else final_top_k
+        )
+
+        if candidate_k <= 0:
+            raise ValueError(
+                "retrieval_top_k must be greater than zero."
+            )
+
+        if result_k <= 0:
+            raise ValueError(
+                "final_top_k must be greater than zero."
+            )
+
+        if result_k > candidate_k:
+            raise ValueError(
+                "final_top_k cannot be greater than "
+                "retrieval_top_k."
+            )
+
+        # --------------------------------------------------------------
+        # Hybrid retrieval
+        # --------------------------------------------------------------
+
+        hybrid_results = self.hybrid_retriever.retrieve(
+            query=query,
+            top_k=candidate_k,
+        )
+
+        if not hybrid_results:
+            return []
+
+        # --------------------------------------------------------------
+        # Cross-encoder reranking
+        # --------------------------------------------------------------
+
+        reranked_results = self.reranker.rerank(
+            query=query,
+            results=hybrid_results,
+            top_k=result_k,
+        )
+
+        return reranked_results
+
     # ------------------------------------------------------------------
-    # Public retrieval callable -- drop-in for the stub
+    # INFORMATION
     # ------------------------------------------------------------------
+
+    @property
+    def size(self) -> int:
+        """
+        Return the number of indexed medical chunks.
+        """
+
+        return self.hybrid_retriever.size
+
+
+class RAGPipeline:
+    """Async evidence-provider facade over :class:`RAGRetrievalPipeline`.
+
+    This preserves the public boundary consumed by ``RetrievalService`` and
+    the agent orchestrator.  Retrieval itself remains entirely native: BGE-M3,
+    ``MedicalChunk``, FAISS, BM25/RRF, and Sana's cross-encoder reranker.
+    """
+
+    def __init__(
+        self,
+        retrieval_pipeline: RAGRetrievalPipeline | None = None,
+        top_k_final: int = 5,
+    ) -> None:
+        self._retrieval_pipeline = retrieval_pipeline
+        self._top_k_final = top_k_final
+
+    @classmethod
+    def build(
+        cls,
+        index_dir: str | Path | None = None,
+        model_name: str | None = None,
+        top_k_retrieval: int = 20,
+        top_k_final: int = 5,
+    ) -> "RAGPipeline":
+        """Load a native persisted index or return a safe empty facade."""
+        from app.config import FAISS_INDEX_DIR
+        from app.rag.embeddings.bge_embedding import BGEEmbedding
+        from app.rag.retrievers.dense_retriever import DenseRetriever
+        from app.rag.retrievers.sparse_retriever import SparseRetriever
+        from app.rag.vectorstore.faiss_store import FAISSVectorStore
+
+        directory = Path(index_dir) if index_dir is not None else FAISS_INDEX_DIR
+        if not (directory / "index.faiss").exists() or not (directory / "chunks.pkl").exists():
+            return cls(top_k_final=top_k_final)
+
+        try:
+            store = FAISSVectorStore.load(directory)
+            embedder = BGEEmbedding(model_name=model_name or BGEEmbedding.DEFAULT_MODEL)
+            dense = DenseRetriever(embedder=embedder, vector_store=store)
+            sparse = SparseRetriever()
+            sparse.add_chunks(store.chunks)
+            hybrid = HybridRetriever(
+                dense_retriever=dense,
+                sparse_retriever=sparse,
+            )
+            reranker = CrossEncoderReranker()
+            native_pipeline = RAGRetrievalPipeline(
+                hybrid_retriever=hybrid,
+                reranker=reranker,
+                retrieval_top_k=top_k_retrieval,
+                final_top_k=top_k_final,
+            )
+            return cls(native_pipeline, top_k_final=top_k_final)
+        except Exception:
+            # The service boundary deliberately degrades to no evidence when a
+            # model or persisted index cannot be loaded at process start.
+            return cls(top_k_final=top_k_final)
+
+    @property
+    def is_ready(self) -> bool:
+        return self._retrieval_pipeline is not None
+
+    @staticmethod
+    def _normalize_cross_encoder_logit(score: Any) -> float:
+        """Map native cross-encoder logits to the agent contract's [0, 1] range.
+
+        ``CrossEncoderReranker`` returns the model's scalar relevance output,
+        which is not constrained by its public interface.  Preserve that raw
+        value separately and apply a documented sigmoid at the facade boundary
+        before constructing ``EvidenceSnippet``-compatible dictionaries.
+        """
+        try:
+            value = float(score)
+        except (TypeError, ValueError):
+            return 0.0
+        if not isfinite(value):
+            return 0.0
+        if value >= 0:
+            return 1.0 / (1.0 + exp(-value))
+        positive = exp(value)
+        return positive / (1.0 + positive)
 
     async def retrieve_evidence(
         self,
         query: str,
-        optimized_query: Optional[str] = None,
+        optimized_query: str | None = None,
         max_iterations: int = 3,
-        top_k_initial: int = 50,
-        top_k_final: Optional[int] = None,
-        enable_contradiction_check: bool = True,
-        **kwargs: Any,
-    ) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
-        """Retrieve and rerank evidence for *query*.
-
-        Matches the signature of ``temporary_retrieval_stub.retrieve_evidence``
-        for drop-in injection into the orchestrator.
-        """
-        effective_top_k = top_k_final if top_k_final is not None else self._top_k_final
-        search_query = str(optimized_query or query or "").strip()
-
+        top_k_final: int | None = None,
+        **_: Any,
+    ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+        """Return native retrieval results in the agent evidence schema."""
+        search_query = (optimized_query or query or "").strip()
         if not search_query:
-            return [], [{"iteration": 1, "query_used": "", "count": 0,
-                         "status": "empty_query"}]
+            return [], [{"iteration": 1, "query_used": "", "count": 0, "status": "empty_query"}]
+        if self._retrieval_pipeline is None:
+            return [], [{"iteration": 1, "query_used": search_query, "count": 0, "status": "no_retriever"}]
 
-        if self._hybrid is None:
-            logger.warning(
-                "RAGPipeline.retrieve_evidence: no hybrid retriever configured -- "
-                "returning empty results."
-            )
-            return [], [{"iteration": 1, "query_used": search_query,
-                         "count": 0, "status": "no_retriever"}]
-
-        t0 = time.perf_counter()
-
+        started = time.perf_counter()
         try:
-            # Stage 1 -- hybrid retrieval (dense + sparse -> RRF)
-            candidates = self._hybrid.retrieve(
+            results = self._retrieval_pipeline.retrieve(
                 search_query,
-                top_k=self._top_k_retrieval,
+                final_top_k=top_k_final or self._top_k_final,
             )
-
-            # Stage 2 -- cross-encoder reranking (optional)
-            if self._reranker is not None and candidates:
-                candidates = self._reranker.rerank(
-                    search_query,
-                    candidates,
-                    top_k=effective_top_k,
-                )
-            else:
-                candidates = candidates[:effective_top_k]
-
-            elapsed_ms = int((time.perf_counter() - t0) * 1000)
-            evidence_dicts = [
-                self._result_to_evidence_dict(result, index)
-                for index, result in enumerate(candidates, start=1)
+            citations_by_chunk = {
+                citation.chunk_id: citation.citation_id
+                for citation in CitationGenerator().generate(results)
+            }
+            evidence = [
+                {
+                    "chunk_id": chunk.id,
+                    "document_id": chunk.document_id,
+                    "source_type": chunk.source,
+                    "title": chunk.title or "",
+                    "cited_text": chunk.content,
+                    "cross_encoder_logit": float(score),
+                    "relevance_score": self._normalize_cross_encoder_logit(score),
+                    "cross_encoder_score": self._normalize_cross_encoder_logit(score),
+                    "evidence_quality_score": self._normalize_cross_encoder_logit(score),
+                    # CitationGenerator is the authority for response-visible
+                    # markers. The marker maps to this exact reranked chunk.
+                    "citation_marker": citations_by_chunk.get(chunk.id, f"[Doc {index}]"),
+                    "journal": chunk.journal,
+                    "publication_year": chunk.publication_year,
+                    "doi": chunk.metadata.get("doi"),
+                    "url": chunk.metadata.get("url"),
+                }
+                for index, (chunk, score) in enumerate(results, start=1)
             ]
-
-            iteration_meta = [{
+            return evidence, [{
                 "iteration": 1,
                 "query_used": search_query,
-                "count": len(evidence_dicts),
+                "count": len(evidence),
                 "status": "completed",
-                "contradiction_detected": False,
-                "elapsed_ms": elapsed_ms,
+                "elapsed_ms": int((time.perf_counter() - started) * 1000),
             }]
-
-            logger.info(
-                f"RAGPipeline.retrieve_evidence: '{search_query[:60]}' -> "
-                f"{len(evidence_dicts)} results ({elapsed_ms}ms)"
-            )
-            return evidence_dicts, iteration_meta
-
         except Exception as exc:
-            elapsed_ms = int((time.perf_counter() - t0) * 1000)
-            logger.error(f"RAGPipeline.retrieve_evidence failed: {exc}")
             return [], [{
                 "iteration": 1,
                 "query_used": search_query,
                 "count": 0,
                 "status": "error",
                 "error": str(exc),
-                "elapsed_ms": elapsed_ms,
+                "elapsed_ms": int((time.perf_counter() - started) * 1000),
             }]
-
-    # ------------------------------------------------------------------
-    # Factory
-    # ------------------------------------------------------------------
-
-    @classmethod
-    def build(
-        cls,
-        index_dir=None,
-        model_name: Optional[str] = None,
-        top_k_retrieval: int = 20,
-        top_k_final: int = 5,
-    ) -> "RAGPipeline":
-        """Construct a fully wired pipeline from a persisted FAISS index.
-
-        If the index does not exist, returns a degraded pipeline that returns
-        empty results.  No exception is raised so the agent pipeline starts
-        cleanly even before any documents are indexed.
-        """
-        from pathlib import Path
-        from app.config import FAISS_INDEX_DIR
-
-        if index_dir is None:
-            index_dir = FAISS_INDEX_DIR
-
-        index_dir = Path(index_dir)
-        index_file = index_dir / "index.faiss"
-
-        if not index_file.exists():
-            logger.warning(
-                f"RAGPipeline.build: FAISS index not found at {index_dir} -- "
-                "pipeline will return empty results until the index is built."
-            )
-            return cls(
-                hybrid_retriever=None,
-                reranker=None,
-                top_k_retrieval=top_k_retrieval,
-                top_k_final=top_k_final,
-            )
-
-        try:
-            from app.rag.embeddings.bge_embedding import BGEEmbedder
-            from app.rag.rerankers.cross_encoder import CrossEncoderReranker
-            from app.rag.retrievers.dense_retriever import DenseRetriever
-            from app.rag.retrievers.hybrid_retriever import HybridRetriever
-            from app.rag.retrievers.sparse_retriever import SparseRetriever
-            from app.rag.vectorstore.faiss_store import FAISSVectorStore
-            from app.schemas.retrieval import DocumentChunk
-
-            embedder = BGEEmbedder(model_name=model_name)
-            store = FAISSVectorStore.load(index_dir)
-
-            dense = DenseRetriever(
-                embedder=embedder,
-                store=store,
-                default_top_k=top_k_retrieval,
-            )
-
-            sparse = SparseRetriever(default_top_k=top_k_retrieval)
-            if store.ntotal > 0:
-                chunks = [DocumentChunk(**c) for c in store._chunks]
-                sparse.index(chunks)
-
-            hybrid = HybridRetriever(
-                dense=dense,
-                sparse=sparse,
-                default_top_k=top_k_retrieval,
-            )
-            reranker = CrossEncoderReranker()
-
-            logger.info(
-                f"RAGPipeline.build: loaded {store.ntotal} vectors -- "
-                f"BGE + HybridRetriever + CrossEncoderReranker ready."
-            )
-            return cls(
-                hybrid_retriever=hybrid,
-                reranker=reranker,
-                top_k_retrieval=top_k_retrieval,
-                top_k_final=top_k_final,
-            )
-
-        except Exception as exc:
-            logger.error(f"RAGPipeline.build failed: {exc}")
-            return cls(
-                hybrid_retriever=None,
-                reranker=None,
-                top_k_retrieval=top_k_retrieval,
-                top_k_final=top_k_final,
-            )
-
-    # ------------------------------------------------------------------
-    # Properties
-    # ------------------------------------------------------------------
-
-    @property
-    def is_ready(self) -> bool:
-        """True when a hybrid retriever is available."""
-        return self._hybrid is not None
-
-    # ------------------------------------------------------------------
-    # Private helpers
-    # ------------------------------------------------------------------
-
-    @staticmethod
-    def _result_to_evidence_dict(result, index: int) -> Dict[str, Any]:
-        """Convert a RetrievalResult to the evidence dict schema agents expect."""
-        chunk = result.chunk
-        score = result.relevance_score
-        return {
-            "chunk_id":               str(chunk.chunk_id),
-            "document_id":            str(chunk.document_id),
-            "source_type":            chunk.source_type,
-            "title":                  chunk.title,
-            "cited_text":             chunk.text,
-            "relevance_score":        score,
-            "cross_encoder_score":    score,
-            "evidence_quality_score": score,
-            "citation_marker":        f"[E{index}]",
-            "journal":                chunk.metadata.get("journal"),
-            "publication_year":       (
-                int(chunk.metadata["publication_year"])
-                if "publication_year" in chunk.metadata else None
-            ),
-            "doi":                    chunk.metadata.get("doi"),
-            "url":                    chunk.metadata.get("url"),
-        }

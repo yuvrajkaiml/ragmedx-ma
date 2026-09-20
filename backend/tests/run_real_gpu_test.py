@@ -7,7 +7,7 @@ backend_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, backend_path)
 
 import torch
-from app.llm.local_llm import LocalLLMWrapper
+from app.llm.local_llm import LLMRuntimeMode, LocalLLMWrapper
 
 def run_test():
     print("=== REAL GPU EXECUTION TEST ===")
@@ -35,8 +35,8 @@ def run_test():
     )
     
     loaded_ok = llm.load_model()
-    if not loaded_ok or llm.use_mock_fallback:
-        print(f"Model load failed or fell back to mock mode. Exception/Fallback triggered.")
+    if not loaded_ok or llm.active_runtime_mode != LLMRuntimeMode.LOCAL:
+        print("Model load failed or did not remain in explicit local mode.")
         sys.exit(1)
 
     print("\nModel loaded successfully into VRAM. Executing inference generation...")

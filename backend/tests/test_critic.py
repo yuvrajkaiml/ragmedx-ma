@@ -235,3 +235,26 @@ async def test_critic_requires_revision_instructions():
     with pytest.raises(RuntimeError):
 
         await agent.run(state)
+
+
+async def test_critic_rejects_answer_marker_without_a_real_evidence_span():
+    llm = FakeLLM(
+        '{"passed": true, "factual_consistency": 0.9, "citation_support": 0.9, '
+        '"hallucination_risk": 0.1, "issues": [], "revision_instructions": null, "confidence": 0.9}'
+    )
+    result = await CriticAgent(llm_wrapper=llm).run({
+        "original_question": "What is hypertension?",
+        "answer": "Hypertension is high blood pressure [Doc 99].",
+        "evidence": [{
+            "chunk_id": "chunk-1", "document_id": "doc-1", "title": "Review",
+            "journal": "Journal", "publication_year": 2025,
+            "citation_marker": "[Doc 1]",
+            "cited_text": "Hypertension is high blood pressure.",
+        }],
+    })
+
+    verdict = result["critic_verdict"]
+    assert verdict["passed"] is False
+    assert verdict["citation_support"] == 0.0
+    assert verdict["evidence_verification"]["unresolved_markers"] == ["[Doc 99]"]
+    assert verdict["revision_instructions"]
