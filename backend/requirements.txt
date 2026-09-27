@@ -41,6 +41,7 @@ rank-bm25
 # Document Processing
 pymupdf
 pypdf
+reportlab
 jinja2
 
 # Data

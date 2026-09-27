@@ -1,5 +1,5 @@
 # Owner: Pranav Sukale — not yet implemented, see Task_Assignment.md
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Response, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.deps import get_current_user
@@ -27,3 +27,14 @@ async def update_my_profile(
     await session.commit()
     await session.refresh(current_user)
     return current_user
+
+
+@router.delete("/me", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_my_account(
+    current_user: User = Depends(get_current_user),
+    session: AsyncSession = Depends(get_session),
+):
+    current_user.is_active = False
+    current_user.auth_version += 1
+    await session.commit()
+    return Response(status_code=status.HTTP_204_NO_CONTENT)

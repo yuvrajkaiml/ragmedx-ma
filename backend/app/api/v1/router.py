@@ -7,6 +7,7 @@ from app.api.v1.endpoints import (
     auth_router,
     chat_router,
     documents_router,
+    feedback_router,
     query_router,
     users_router,
 )
@@ -18,6 +19,7 @@ api_router.include_router(auth_router)
 api_router.include_router(users_router)
 api_router.include_router(chat_router)
 api_router.include_router(documents_router)
+api_router.include_router(feedback_router)
 api_router.include_router(query_router)
 
 

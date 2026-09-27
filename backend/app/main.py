@@ -3,6 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy import inspect, text
 
 from app.api.v1.router import api_router
 from app.config import FAISS_INDEX_DIR, get_settings
@@ -19,6 +20,15 @@ import app.db.models  # noqa: F401 - registers ORM models before create_all
 async def lifespan(app: FastAPI):
     async with engine.begin() as connection:
         await connection.run_sync(Base.metadata.create_all)
+        user_columns = await connection.run_sync(
+            lambda sync_connection: {
+                column["name"] for column in inspect(sync_connection).get_columns("users")
+            }
+        )
+        if "auth_version" not in user_columns:
+            await connection.execute(
+                text("ALTER TABLE users ADD COLUMN auth_version INTEGER NOT NULL DEFAULT 0")
+            )
 
     settings = get_settings()
 

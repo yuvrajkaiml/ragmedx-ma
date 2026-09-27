@@ -1,5 +1,6 @@
 import pytest
 from httpx import ASGITransport, AsyncClient
+from datetime import datetime, timezone
 from uuid import uuid4
 
 import app.main as main_module
@@ -7,6 +8,12 @@ from app.api.deps import get_current_user
 from app.db import get_session
 from app.db.models import User
 from app.main import app
+from app.schemas.conversation import (
+    ConversationDetail,
+    ConversationMessageResponse,
+    MessageRole,
+)
+from app.services.chat_service import ChatService
 from app.services.query_execution_service import QueryExecutionService
 
 
@@ -69,6 +76,51 @@ async def test_query_ask_unauthenticated_returns_401():
         )
 
     assert response.status_code == 401
+
+
+async def test_conversation_export_pdf_returns_pdf_attachment(monkeypatch):
+    conversation_id = uuid4()
+    now = datetime.now(timezone.utc)
+    conversation = ConversationDetail(
+        id=conversation_id,
+        title="Hypertension follow-up",
+        is_archived=False,
+        created_at=now,
+        updated_at=now,
+        message_count=1,
+        messages=[
+            ConversationMessageResponse(
+                id=uuid4(),
+                role=MessageRole.USER,
+                content="Does <ACE> inhibitor therapy help?",
+                created_at=now,
+            )
+        ],
+    )
+
+    async def fake_get_conversation(self, requested_id, user, session):
+        assert requested_id == conversation_id
+        return conversation
+
+    monkeypatch.setattr(ChatService, "get_conversation", fake_get_conversation)
+    app.dependency_overrides[get_current_user] = lambda: MockUser()
+    app.dependency_overrides[get_session] = _fake_session_dependency
+
+    try:
+        transport = ASGITransport(app=app)
+        async with AsyncClient(transport=transport, base_url="http://test") as client:
+            response = await client.get(
+                f"/api/v1/chat/conversations/{conversation_id}/export?format=pdf"
+            )
+    finally:
+        app.dependency_overrides.clear()
+
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "application/pdf"
+    assert response.headers["content-disposition"].endswith(
+        f'conversation-{conversation_id}.pdf"'
+    )
+    assert response.content.startswith(b"%PDF-")
 async def test_query_ask_authenticated_creates_single_execution(monkeypatch):
     """HTTP starts a query once and returns its WebSocket subscription ID."""
 

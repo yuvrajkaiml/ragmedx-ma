@@ -24,4 +24,28 @@ class AdminMetricsResponse(BaseModel):
     generated_at: datetime
 
 class AdminUserStatusUpdate(BaseModel):
-    is_active: bool    
+    is_active: bool
+
+
+class AgentLatencySummary(BaseModel):
+    agent_type: str
+    sample_count: int = Field(ge=0)
+    average_duration_ms: float = Field(ge=0)
+
+
+class AdminLatencyResponse(BaseModel):
+    sampled_queries: int = Field(ge=0)
+    measured_queries: int = Field(ge=0)
+    failed_queries: int = Field(ge=0)
+    average_processing_time_ms: float | None = Field(default=None, ge=0)
+    p50_processing_time_ms: int | None = Field(default=None, ge=0)
+    p95_processing_time_ms: int | None = Field(default=None, ge=0)
+    by_agent: list[AgentLatencySummary]
+    generated_at: datetime
+
+
+class KnowledgeBaseStatsResponse(BaseModel):
+    index_loaded: bool
+    index_directory: str
+    required_files_present: dict[str, bool]
+    total_index_bytes: int = Field(ge=0)
