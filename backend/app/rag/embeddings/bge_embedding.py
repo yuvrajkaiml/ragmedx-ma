@@ -110,10 +110,14 @@ class BGEEmbedding:
 
                 model_output = self.model(**encoded)
 
-                pooled = self._mean_pooling(
-                    model_output.last_hidden_state,
-                    encoded["attention_mask"],
-                )
+                # Extract only what we need before releasing the full output.
+                # Keeping model_output alive would accumulate the entire
+                # hidden-state tensor (batch × 512 tokens × 1024 dims) in
+                # VRAM across all batches, causing progressive VRAM exhaustion.
+                last_hidden = model_output.last_hidden_state
+                attention_mask = encoded["attention_mask"]
+
+                pooled = self._mean_pooling(last_hidden, attention_mask)
 
                 if self.normalize:
                     pooled = torch.nn.functional.normalize(
@@ -122,9 +126,14 @@ class BGEEmbedding:
                         dim=1,
                     )
 
-                embeddings.append(
-                    pooled.cpu().numpy().astype(np.float32)
-                )
+                # Move result to CPU immediately; release GPU tensors.
+                embeddings.append(pooled.cpu().numpy().astype(np.float32))
+
+                del model_output, last_hidden, encoded, attention_mask, pooled
+                # self.device may be a torch.device or a plain string in tests.
+                device_type = self.device.type if hasattr(self.device, "type") else str(self.device)
+                if device_type == "cuda":
+                    torch.cuda.empty_cache()
 
         return np.vstack(embeddings)
 

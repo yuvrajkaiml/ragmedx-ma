@@ -38,6 +38,7 @@ from app.rag.chunking.models import MedicalChunk
 from app.rag.citations.citation_generator import CitationGenerator
 from app.rag.retrievers.hybrid_retriever import HybridRetriever
 from app.rag.rerankers.cross_encoder_reranker import CrossEncoderReranker
+from app.utils.logger import logger
 
 
 class RAGRetrievalPipeline:
@@ -301,13 +302,24 @@ class RAGPipeline:
         top_k_final: int = 5,
     ) -> "RAGPipeline":
         """Load a native persisted index or return a safe empty facade."""
-        from app.config import FAISS_INDEX_DIR
+        from app.config import get_settings
         from app.rag.embeddings.bge_embedding import BGEEmbedding
         from app.rag.retrievers.dense_retriever import DenseRetriever
         from app.rag.retrievers.sparse_retriever import SparseRetriever
         from app.rag.vectorstore.faiss_store import FAISSVectorStore
 
-        directory = Path(index_dir) if index_dir is not None else FAISS_INDEX_DIR
+        settings = get_settings()
+        # Resolve relative paths against BASE_DIR (backend/) so the index is
+        # found consistently regardless of the process working directory.
+        from app.config import BASE_DIR
+        if index_dir is not None:
+            directory = Path(index_dir)
+            if not directory.is_absolute():
+                directory = BASE_DIR / directory
+        else:
+            directory = settings.faiss_index_dir
+            if not directory.is_absolute():
+                directory = BASE_DIR / directory
         if not (directory / "index.faiss").exists() or not (directory / "chunks.pkl").exists():
             return cls(top_k_final=top_k_final)
 
@@ -321,7 +333,7 @@ class RAGPipeline:
                 dense_retriever=dense,
                 sparse_retriever=sparse,
             )
-            reranker = CrossEncoderReranker()
+            reranker = CrossEncoderReranker(device="cpu")
             native_pipeline = RAGRetrievalPipeline(
                 hybrid_retriever=hybrid,
                 reranker=reranker,
@@ -329,9 +341,20 @@ class RAGPipeline:
                 final_top_k=top_k_final,
             )
             return cls(native_pipeline, top_k_final=top_k_final)
-        except Exception:
-            # The service boundary deliberately degrades to no evidence when a
-            # model or persisted index cannot be loaded at process start.
+        except Exception as exc:
+            if settings.llm_mode == "real":
+                # In real mode a load failure must be loud: don't serve requests
+                # with an empty retriever when a real index was expected.
+                raise RuntimeError(
+                    f"Failed to load FAISS index from '{directory}': {exc}. "
+                    "Verify the index files are intact and all retrieval dependencies "
+                    "(BGE-M3, bitsandbytes, CUDA) are installed."
+                ) from exc
+            # mock/dev mode: degrade to empty facade so dev workflows aren't broken.
+            logger.warning(
+                f"Failed to load FAISS index from '{directory}': {exc}. "
+                "Falling back to empty retrieval facade (mock mode)."
+            )
             return cls(top_k_final=top_k_final)
 
     @property

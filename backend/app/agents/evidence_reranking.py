@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
+import re
 from typing import Any, Dict, List
 
 from app.llm.parser import LLMParseError, parse_json_from_llm
@@ -55,7 +56,9 @@ class EvidenceRerankingAgent(BaseAgent):
                 },
             )
             assessment = self._parse_assessment(self.llm_wrapper.generate(prompt, temperature=0.0))
-            selected_markers = set(assessment.get("selected_markers", []))
+            selected_markers = self._resolve_selected_markers(
+                assessment.get("selected_markers", []), ranked
+            )
             if selected_markers:
                 ranked = [item for item in ranked if item["citation_marker"] in selected_markers]
             if not ranked:
@@ -132,3 +135,27 @@ class EvidenceRerankingAgent(BaseAgent):
             "selected_markers": selected,
             "reasoning": str(data.get("reasoning", "")),
         }
+
+    @staticmethod
+    def _resolve_selected_markers(
+        selected_markers: List[str],
+        ranked: List[Dict[str, Any]],
+    ) -> set[str]:
+        """Map an unambiguous legacy ordinal to the current canonical marker.
+
+        Current retrieval emits `[Doc X]`, but pre-existing prompt/model behavior
+        can return `[EX]`.  Only translate a marker that identifies one ranked
+        item by ordinal; unknown markers remain unknown and cannot select evidence.
+        """
+        canonical = {item["citation_marker"] for item in ranked}
+        resolved = set()
+        for marker in selected_markers:
+            if marker in canonical:
+                resolved.add(marker)
+                continue
+            match = re.fullmatch(r"\[E(\d+)\]", marker.strip(), flags=re.IGNORECASE)
+            if match:
+                ordinal = int(match.group(1))
+                if 1 <= ordinal <= len(ranked):
+                    resolved.add(ranked[ordinal - 1]["citation_marker"])
+        return resolved

@@ -1,5 +1,6 @@
 from functools import lru_cache
 from pathlib import Path
+from typing import Literal
 
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -50,6 +51,7 @@ class Settings(BaseSettings):
         env_file_encoding="utf-8",
         case_sensitive=False,
         extra="ignore",
+        populate_by_name=True,
     )
 
     # Application
@@ -100,6 +102,16 @@ class Settings(BaseSettings):
         le=1_000,
     )
 
+    retrieval_chunk_min_chars: int = Field(
+        default=50,
+        ge=0,
+        le=500,
+        description=(
+            "Chunks shorter than this many characters are discarded by MedicalChunker. "
+            "Set low (default 50) so BioASQ short snippets (~215 chars avg) are kept."
+        ),
+    )
+
     retrieval_top_k: int = Field(
         default=5,
         ge=1,
@@ -108,6 +120,32 @@ class Settings(BaseSettings):
 
     # Embeddings
     embedding_model_name: str = "BAAI/bge-small-en-v1.5"
+
+    # LLM runtime
+    llm_mode: Literal["real", "mock"] = Field(
+        default="mock",
+        validation_alias="RAGMEDX_LLM_MODE",
+        description=(
+            "Controls whether the local GPU LLM is used for inference. "
+            "'real' loads the model via bitsandbytes 4-bit NF4 and raises on failure. "
+            "'mock' (default) returns deterministic stub responses — safe for dev/CI."
+        ),
+    )
+    llm_model_name: str = Field(
+        default="Qwen/Qwen3-8B",
+        validation_alias="RAGMEDX_LLM_MODEL_NAME",
+        description="HuggingFace model ID or local path used when llm_mode='real'.",
+    )
+
+    # FAISS index location (resolved relative to the backend/ directory)
+    faiss_index_dir: Path = Field(
+        default=Path("data/faiss_index"),
+        validation_alias="RAGMEDX_FAISS_INDEX_DIR",
+        description=(
+            "Directory containing index.faiss and chunks.pkl. "
+            "Used by RetrievalService.build to locate the persisted FAISS index."
+        ),
+    )
 
 
 @lru_cache

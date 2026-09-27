@@ -28,7 +28,8 @@ Return ONLY valid JSON:
 
 Rules:
 - "sufficient" must be true or false.
-- "missing_information" must be a JSON array.
+- "reasoning" must be at most 20 words.
+- "missing_information" must be a JSON array containing at most three concise items.
 - "sub_query" must be null when evidence is sufficient.
-- If evidence is insufficient, sub_query must be specific and directly address the missing information.
+- If evidence is insufficient, sub_query must be specific, directly address the missing information, and be at most 16 words.
 - confidence must be between 0.0 and 1.0.

@@ -113,7 +113,10 @@ def build_citations_output(
 
         doc_id_val = ev.get("document_id")
         if isinstance(doc_id_val, str):
-            doc_id = UUID(doc_id_val)
+            try:
+                doc_id = UUID(doc_id_val)
+            except ValueError:
+                doc_id = create_deterministic_uuid(doc_id_val)
         elif isinstance(doc_id_val, UUID):
             doc_id = doc_id_val
         else:
@@ -155,8 +158,18 @@ def build_evidence_snippets_output(evidence_list: List[Dict[str, Any]]) -> List[
         chunk_id_val = ev.get("chunk_id")
         doc_id_val = ev.get("document_id")
 
-        chunk_id = UUID(chunk_id_val) if isinstance(chunk_id_val, str) else (chunk_id_val or create_deterministic_uuid("chunk"))
-        doc_id = UUID(doc_id_val) if isinstance(doc_id_val, str) else (doc_id_val or create_deterministic_uuid("doc"))
+        def _to_uuid(val: Any, seed: str) -> UUID:
+            if isinstance(val, UUID):
+                return val
+            if isinstance(val, str):
+                try:
+                    return UUID(val)
+                except ValueError:
+                    return create_deterministic_uuid(val)
+            return create_deterministic_uuid(seed)
+
+        chunk_id = _to_uuid(chunk_id_val, "chunk")
+        doc_id = _to_uuid(doc_id_val, "doc")
 
         source_type_val = ev.get("source_type", "pubmed")
         if source_type_val not in ("pubmed", "pmc", "medqa", "bioasq", "uploaded_document"):

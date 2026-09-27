@@ -19,8 +19,10 @@ from app.agents.state import (
     CriticVerdictType,
     create_deterministic_uuid,
 )
-from app.llm.local_llm import LocalLLMWrapper
+from app.config import get_settings
+from app.llm.local_llm import LLMRuntimeMode, LocalLLMWrapper
 from app.services.retrieval_service import RetrievalService
+from app.utils.logger import logger
 from langgraph.graph import END, START, StateGraph
 
 # Fixed Pipeline Constants
@@ -50,11 +52,33 @@ class MultiAgentOrchestrator:
         max_retrieval_iterations: int = MAX_RETRIEVAL_ITERATIONS,
         max_critic_rounds: int = MAX_CRITIC_ROUNDS,
     ):
-        self.llm_wrapper = llm_wrapper or LocalLLMWrapper(use_mock_fallback=True)
+        if llm_wrapper is not None:
+            self.llm_wrapper = llm_wrapper
+        else:
+            settings = get_settings()
+            if settings.llm_mode == "real":
+                # LOCAL mode: raises ModelLoadError on any load failure — no silent fallback.
+                self.llm_wrapper = LocalLLMWrapper(
+                    model_name_or_path=settings.llm_model_name,
+                    mode=LLMRuntimeMode.LOCAL,
+                    allow_fallback=False,
+                )
+            else:
+                # mock mode (default): deterministic stub responses, safe for dev/CI.
+                self.llm_wrapper = LocalLLMWrapper(use_mock_fallback=True)
         # The native retrieval service is the production default.  The temporary
         # retrieval stub remains available for tests only when callers inject it.
         self.retrieval_service = None
         if retrieval_provider is None:
+            # Production path should inject retrieval_provider from app.state
+            # via the query endpoint. If we reach here without one, either a
+            # test is using the default wiring, or the endpoint DI is broken.
+            logger.warning(
+                "MultiAgentOrchestrator: no retrieval_provider injected — "
+                "building a new RetrievalService. This is expected in tests; "
+                "in production it means the app.state singleton is not being "
+                "threaded through the query endpoint correctly."
+            )
             self.retrieval_service = RetrievalService.build()
             self.retrieval_provider = self.retrieval_service.retrieve_evidence
         else:

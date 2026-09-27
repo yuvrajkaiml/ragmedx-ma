@@ -47,3 +47,1225 @@
 2026-08-16 21:02:28.126 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
 2026-08-16 21:02:28.126 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
 2026-08-16 21:02:28.126 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 2 MedQA documents.
+2026-09-26 13:01:30.646 | WARNING  | app.services.retrieval_service:build:81 - No FAISS index found at '%s' (looked for index.faiss and chunks.pkl). RetrievalService will return no evidence for every query. Set RAGMEDX_LLM_MODE=real and build the index before deploying to production.
+2026-09-26 13:01:30.646 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=False
+2026-09-26 13:01:30.693 | WARNING  | app.services.retrieval_service:build:81 - No FAISS index found at '%s' (looked for index.faiss and chunks.pkl). RetrievalService will return no evidence for every query. Set RAGMEDX_LLM_MODE=real and build the index before deploying to production.
+2026-09-26 13:01:30.693 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=False
+2026-09-26 13:01:30.842 | INFO     | app.retrieval.document_loader:__init__:58 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-26 13:01:30.845 | INFO     | app.retrieval.document_loader:__init__:58 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-26 13:01:30.847 | INFO     | app.retrieval.document_loader:__init__:58 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-26 13:01:30.848 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-26 13:01:30.849 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-26 13:01:30.849 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-26 13:01:30.849 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-26 13:01:30.857 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-26 13:01:30.857 | INFO     | app.retrieval.document_loader:load_all:80 - Loaded 4 document(s) from 'medqa'
+2026-09-26 13:01:30.857 | INFO     | app.retrieval.document_loader:load_all:85 - DocumentLoader.load_all — 4 total documents
+2026-09-26 13:01:30.859 | INFO     | app.retrieval.document_loader:__init__:58 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-26 13:01:30.860 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-26 13:01:30.860 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-26 13:01:30.860 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-26 13:01:30.860 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-26 13:01:30.861 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-26 13:01:30.861 | INFO     | app.retrieval.document_loader:load_all:80 - Loaded 4 document(s) from 'medqa'
+2026-09-26 13:01:30.861 | INFO     | app.retrieval.document_loader:load_all:85 - DocumentLoader.load_all — 4 total documents
+2026-09-26 13:01:30.863 | INFO     | app.retrieval.document_loader:__init__:58 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-26 13:01:30.864 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-26 13:01:30.864 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-26 13:01:30.864 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-26 13:01:30.864 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-26 13:01:30.864 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-26 13:01:30.864 | INFO     | app.retrieval.document_loader:load_all:80 - Loaded 4 document(s) from 'medqa'
+2026-09-26 13:01:30.865 | INFO     | app.retrieval.document_loader:load_all:85 - DocumentLoader.load_all — 4 total documents
+2026-09-26 13:01:30.867 | INFO     | app.retrieval.document_loader:__init__:58 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-26 13:01:30.868 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-26 13:01:30.868 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-26 13:01:30.868 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-26 13:01:30.869 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-26 13:01:30.869 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-26 13:01:30.869 | INFO     | app.retrieval.document_loader:load_all:80 - Loaded 4 document(s) from 'medqa'
+2026-09-26 13:01:30.869 | INFO     | app.retrieval.document_loader:load_all:85 - DocumentLoader.load_all — 4 total documents
+2026-09-26 13:01:30.872 | INFO     | app.retrieval.document_loader:__init__:58 - DocumentLoader initialised — datasets_dir=C:\Users\Yuvraj\AppData\Local\Temp\tmpbfvnhynr
+2026-09-26 13:01:30.873 | WARNING  | app.retrieval.document_loader:load_all:75 - Dataset sub-directory not found, skipping: C:\Users\Yuvraj\AppData\Local\Temp\tmpbfvnhynr\medqa
+2026-09-26 13:01:30.874 | INFO     | app.retrieval.document_loader:load_all:85 - DocumentLoader.load_all — 0 total documents
+2026-09-26 13:01:30.885 | INFO     | app.retrieval.document_loader:__init__:58 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-26 13:01:30.900 | INFO     | app.retrieval.document_loader:__init__:58 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-26 13:01:30.912 | INFO     | app.retrieval.document_loader:__init__:58 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-26 13:01:30.917 | INFO     | app.retrieval.document_loader:__init__:58 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-26 13:01:30.977 | WARNING  | app.services.retrieval_service:build:81 - No FAISS index found at '%s' (looked for index.faiss and chunks.pkl). RetrievalService will return no evidence for every query. Set RAGMEDX_LLM_MODE=real and build the index before deploying to production.
+2026-09-26 13:01:30.978 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=False
+2026-09-26 13:01:42.007 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-26 13:01:44.388 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-26 13:01:44.389 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-26 13:01:44.389 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-26 13:01:44.389 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-26 13:01:44.390 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-26 13:01:44.394 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-26 13:01:44.395 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-26 13:01:44.395 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-26 13:01:44.395 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-26 13:01:44.395 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-26 13:01:44.398 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-26 13:01:44.399 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-26 13:01:44.399 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-26 13:01:44.399 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-26 13:01:44.399 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-26 13:01:44.402 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-26 13:01:44.403 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-26 13:01:44.403 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-26 13:01:44.403 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-26 13:01:44.403 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-26 13:01:44.407 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-26 13:01:44.407 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-26 13:01:44.408 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-26 13:01:44.408 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-26 13:01:44.408 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-26 13:01:44.423 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: \nonexistent\medqa_dir
+2026-09-26 13:01:44.424 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 0 dataset file(s).
+2026-09-26 13:01:44.424 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 0 file(s).
+2026-09-26 13:01:44.424 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 0 MedQA documents.
+2026-09-26 13:01:44.464 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-26 13:01:44.465 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-26 13:01:44.466 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-0\test_build_creates_files0
+2026-09-26 13:01:44.471 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-26 13:01:44.471 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-26 13:01:44.473 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-0\test_ntotal_matches_fixture0
+2026-09-26 13:01:44.478 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-26 13:01:44.478 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-26 13:01:44.480 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-0\test_chunks_have_medqa_source_0
+2026-09-26 13:01:44.508 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-26 13:01:44.508 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-26 13:01:44.509 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-0\test_chunk_text_is_question0
+2026-09-26 13:01:44.522 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-26 13:01:44.523 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-26 13:01:44.524 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-0\test_metadata_contains_answer0
+2026-09-26 13:01:44.538 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-26 13:01:44.538 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-26 13:01:44.540 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-0\test_force_false_skips_rebuild0
+2026-09-26 13:01:44.540 | INFO     | evaluation.index_builder:build:88 - MedQAIndexBuilder: index already exists at C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-0\test_force_false_skips_rebuild0 (pass force=True to rebuild).
+2026-09-26 13:01:44.555 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-26 13:01:44.555 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-26 13:01:44.556 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-0\test_force_true_rebuilds0
+2026-09-26 13:01:44.608 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-26 13:01:44.608 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-26 13:01:44.609 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-0\test_force_true_rebuilds0
+2026-09-26 13:01:44.619 | WARNING  | app.services.retrieval_service:build:81 - No FAISS index found at '%s' (looked for index.faiss and chunks.pkl). RetrievalService will return no evidence for every query. Set RAGMEDX_LLM_MODE=real and build the index before deploying to production.
+2026-09-26 13:01:44.619 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=False
+2026-09-26 13:01:44.646 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-26 13:01:47.985 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-26 13:01:48.491 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-0\mirage_index0
+2026-09-26 13:02:01.664 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-26 13:02:02.101 | WARNING  | app.services.retrieval_service:build:81 - No FAISS index found at '%s' (looked for index.faiss and chunks.pkl). RetrievalService will return no evidence for every query. Set RAGMEDX_LLM_MODE=real and build the index before deploying to production.
+2026-09-26 13:02:02.101 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=False
+2026-09-26 13:02:02.117 | WARNING  | app.services.retrieval_service:build:81 - No FAISS index found at '%s' (looked for index.faiss and chunks.pkl). RetrievalService will return no evidence for every query. Set RAGMEDX_LLM_MODE=real and build the index before deploying to production.
+2026-09-26 13:02:02.117 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=False
+2026-09-26 13:26:41.761 | WARNING  | app.services.retrieval_service:build:81 - No FAISS index found at 'data\faiss_index' (looked for index.faiss and chunks.pkl). RetrievalService will return no evidence for every query. Set RAGMEDX_LLM_MODE=real and build the index before deploying to production.
+2026-09-26 13:26:41.761 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=False
+2026-09-26 13:26:41.807 | WARNING  | app.services.retrieval_service:build:81 - No FAISS index found at 'data\faiss_index' (looked for index.faiss and chunks.pkl). RetrievalService will return no evidence for every query. Set RAGMEDX_LLM_MODE=real and build the index before deploying to production.
+2026-09-26 13:26:41.807 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=False
+2026-09-26 13:26:41.928 | INFO     | app.retrieval.document_loader:__init__:58 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-26 13:26:41.931 | INFO     | app.retrieval.document_loader:__init__:58 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-26 13:26:41.934 | INFO     | app.retrieval.document_loader:__init__:58 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-26 13:26:41.934 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-26 13:26:41.935 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-26 13:26:41.935 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-26 13:26:41.935 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-26 13:26:41.944 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-26 13:26:41.944 | INFO     | app.retrieval.document_loader:load_all:80 - Loaded 4 document(s) from 'medqa'
+2026-09-26 13:26:41.944 | INFO     | app.retrieval.document_loader:load_all:85 - DocumentLoader.load_all — 4 total documents
+2026-09-26 13:26:41.947 | INFO     | app.retrieval.document_loader:__init__:58 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-26 13:26:41.948 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-26 13:26:41.948 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-26 13:26:41.948 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-26 13:26:41.948 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-26 13:26:41.949 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-26 13:26:41.949 | INFO     | app.retrieval.document_loader:load_all:80 - Loaded 4 document(s) from 'medqa'
+2026-09-26 13:26:41.949 | INFO     | app.retrieval.document_loader:load_all:85 - DocumentLoader.load_all — 4 total documents
+2026-09-26 13:26:41.951 | INFO     | app.retrieval.document_loader:__init__:58 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-26 13:26:41.951 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-26 13:26:41.952 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-26 13:26:41.952 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-26 13:26:41.952 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-26 13:26:41.953 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-26 13:26:41.953 | INFO     | app.retrieval.document_loader:load_all:80 - Loaded 4 document(s) from 'medqa'
+2026-09-26 13:26:41.953 | INFO     | app.retrieval.document_loader:load_all:85 - DocumentLoader.load_all — 4 total documents
+2026-09-26 13:26:41.957 | INFO     | app.retrieval.document_loader:__init__:58 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-26 13:26:41.958 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-26 13:26:41.959 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-26 13:26:41.960 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-26 13:26:41.960 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-26 13:26:41.961 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-26 13:26:41.961 | INFO     | app.retrieval.document_loader:load_all:80 - Loaded 4 document(s) from 'medqa'
+2026-09-26 13:26:41.961 | INFO     | app.retrieval.document_loader:load_all:85 - DocumentLoader.load_all — 4 total documents
+2026-09-26 13:26:41.963 | INFO     | app.retrieval.document_loader:__init__:58 - DocumentLoader initialised — datasets_dir=C:\Users\Yuvraj\AppData\Local\Temp\tmpqksos44k
+2026-09-26 13:26:41.963 | WARNING  | app.retrieval.document_loader:load_all:75 - Dataset sub-directory not found, skipping: C:\Users\Yuvraj\AppData\Local\Temp\tmpqksos44k\medqa
+2026-09-26 13:26:41.963 | INFO     | app.retrieval.document_loader:load_all:85 - DocumentLoader.load_all — 0 total documents
+2026-09-26 13:26:41.971 | INFO     | app.retrieval.document_loader:__init__:58 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-26 13:26:41.984 | INFO     | app.retrieval.document_loader:__init__:58 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-26 13:26:41.992 | INFO     | app.retrieval.document_loader:__init__:58 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-26 13:26:41.995 | INFO     | app.retrieval.document_loader:__init__:58 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-26 13:26:42.037 | WARNING  | app.services.retrieval_service:build:81 - No FAISS index found at 'data\faiss_index' (looked for index.faiss and chunks.pkl). RetrievalService will return no evidence for every query. Set RAGMEDX_LLM_MODE=real and build the index before deploying to production.
+2026-09-26 13:26:42.037 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=False
+2026-09-26 13:26:51.358 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-26 13:26:52.373 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-26 13:26:52.374 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-26 13:26:52.374 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-26 13:26:52.374 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-26 13:26:52.375 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-26 13:26:52.377 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-26 13:26:52.378 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-26 13:26:52.378 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-26 13:26:52.378 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-26 13:26:52.379 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-26 13:26:52.381 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-26 13:26:52.381 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-26 13:26:52.381 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-26 13:26:52.381 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-26 13:26:52.382 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-26 13:26:52.384 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-26 13:26:52.384 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-26 13:26:52.384 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-26 13:26:52.384 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-26 13:26:52.385 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-26 13:26:52.387 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-26 13:26:52.387 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-26 13:26:52.387 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-26 13:26:52.387 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-26 13:26:52.387 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-26 13:26:52.397 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: \nonexistent\medqa_dir
+2026-09-26 13:26:52.398 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 0 dataset file(s).
+2026-09-26 13:26:52.398 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 0 file(s).
+2026-09-26 13:26:52.398 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 0 MedQA documents.
+2026-09-26 13:26:52.423 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-26 13:26:52.423 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-26 13:26:52.424 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-2\test_build_creates_files0
+2026-09-26 13:26:52.431 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-26 13:26:52.432 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-26 13:26:52.433 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-2\test_ntotal_matches_fixture0
+2026-09-26 13:26:52.437 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-26 13:26:52.438 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-26 13:26:52.439 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-2\test_chunks_have_medqa_source_0
+2026-09-26 13:26:52.466 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-26 13:26:52.467 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-26 13:26:52.468 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-2\test_chunk_text_is_question0
+2026-09-26 13:26:52.484 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-26 13:26:52.484 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-26 13:26:52.485 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-2\test_metadata_contains_answer0
+2026-09-26 13:26:52.499 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-26 13:26:52.499 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-26 13:26:52.500 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-2\test_force_false_skips_rebuild0
+2026-09-26 13:26:52.501 | INFO     | evaluation.index_builder:build:88 - MedQAIndexBuilder: index already exists at C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-2\test_force_false_skips_rebuild0 (pass force=True to rebuild).
+2026-09-26 13:26:52.513 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-26 13:26:52.513 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-26 13:26:52.515 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-2\test_force_true_rebuilds0
+2026-09-26 13:26:52.566 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-26 13:26:52.567 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-26 13:26:52.568 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-2\test_force_true_rebuilds0
+2026-09-26 13:26:52.578 | WARNING  | app.services.retrieval_service:build:81 - No FAISS index found at 'data\faiss_index' (looked for index.faiss and chunks.pkl). RetrievalService will return no evidence for every query. Set RAGMEDX_LLM_MODE=real and build the index before deploying to production.
+2026-09-26 13:26:52.578 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=False
+2026-09-26 13:26:52.604 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-26 13:26:55.797 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-26 13:26:56.216 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-2\mirage_index0
+2026-09-26 13:27:09.051 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-26 13:27:09.299 | WARNING  | app.services.retrieval_service:build:81 - No FAISS index found at 'data\faiss_index' (looked for index.faiss and chunks.pkl). RetrievalService will return no evidence for every query. Set RAGMEDX_LLM_MODE=real and build the index before deploying to production.
+2026-09-26 13:27:09.299 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=False
+2026-09-26 13:27:09.314 | WARNING  | app.services.retrieval_service:build:81 - No FAISS index found at 'data\faiss_index' (looked for index.faiss and chunks.pkl). RetrievalService will return no evidence for every query. Set RAGMEDX_LLM_MODE=real and build the index before deploying to production.
+2026-09-26 13:27:09.314 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=False
+2026-09-27 16:34:01.030 | WARNING  | app.services.retrieval_service:build:81 - No FAISS index found at 'data\faiss_index' (looked for index.faiss and chunks.pkl). RetrievalService will return no evidence for every query. Set RAGMEDX_LLM_MODE=real and build the index before deploying to production.
+2026-09-27 16:34:01.037 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=False
+2026-09-27 16:34:01.895 | WARNING  | app.services.retrieval_service:build:81 - No FAISS index found at 'data\faiss_index' (looked for index.faiss and chunks.pkl). RetrievalService will return no evidence for every query. Set RAGMEDX_LLM_MODE=real and build the index before deploying to production.
+2026-09-27 16:34:01.907 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=False
+2026-09-27 16:34:03.877 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 16:34:03.915 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 16:34:03.941 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 16:34:03.945 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 16:34:03.950 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 16:34:03.951 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 16:34:03.952 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 16:34:03.969 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 16:34:03.976 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 4 document(s) from 'medqa'
+2026-09-27 16:34:03.982 | INFO     | app.rag.loaders.bioasq_loader:__init__:69 - BioASQLoader initialised: D:\Ragmed_2\backend\data\datasets\bioasq
+2026-09-27 16:34:03.989 | INFO     | app.rag.loaders.bioasq_loader:_find_dataset_files:77 - BioASQLoader found 1 JSON file(s).
+2026-09-27 16:34:03.991 | INFO     | app.rag.loaders.bioasq_loader:load:100 - BioASQLoader reading training13b.json
+2026-09-27 16:34:06.045 | INFO     | app.rag.loaders.bioasq_loader:load:109 -   training13b.json: 5389 questions
+2026-09-27 16:34:06.776 | INFO     | app.rag.loaders.bioasq_loader:load:162 -   training13b.json: emitted 68860 snippet documents
+2026-09-27 16:34:06.776 | SUCCESS  | app.rag.loaders.bioasq_loader:load:164 - BioASQLoader complete — 68860 snippet documents from 1 file(s).
+2026-09-27 16:34:06.931 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 68860 document(s) from 'bioasq'
+2026-09-27 16:34:06.958 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 68864 total documents
+2026-09-27 16:34:07.505 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 16:34:07.509 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 16:34:07.515 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 16:34:07.516 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 16:34:07.517 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 16:34:07.520 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 16:34:07.520 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 4 document(s) from 'medqa'
+2026-09-27 16:34:07.522 | INFO     | app.rag.loaders.bioasq_loader:__init__:69 - BioASQLoader initialised: D:\Ragmed_2\backend\data\datasets\bioasq
+2026-09-27 16:34:07.523 | INFO     | app.rag.loaders.bioasq_loader:_find_dataset_files:77 - BioASQLoader found 1 JSON file(s).
+2026-09-27 16:34:07.523 | INFO     | app.rag.loaders.bioasq_loader:load:100 - BioASQLoader reading training13b.json
+2026-09-27 16:34:10.392 | INFO     | app.rag.loaders.bioasq_loader:load:109 -   training13b.json: 5389 questions
+2026-09-27 16:34:12.116 | INFO     | app.rag.loaders.bioasq_loader:load:162 -   training13b.json: emitted 68860 snippet documents
+2026-09-27 16:34:12.116 | SUCCESS  | app.rag.loaders.bioasq_loader:load:164 - BioASQLoader complete — 68860 snippet documents from 1 file(s).
+2026-09-27 16:34:12.201 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 68860 document(s) from 'bioasq'
+2026-09-27 16:34:12.204 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 68864 total documents
+2026-09-27 16:34:12.376 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 16:34:12.377 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 16:34:12.377 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 16:34:12.378 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 16:34:12.378 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 16:34:12.378 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 16:34:12.378 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 4 document(s) from 'medqa'
+2026-09-27 16:34:12.379 | INFO     | app.rag.loaders.bioasq_loader:__init__:69 - BioASQLoader initialised: D:\Ragmed_2\backend\data\datasets\bioasq
+2026-09-27 16:34:12.380 | INFO     | app.rag.loaders.bioasq_loader:_find_dataset_files:77 - BioASQLoader found 1 JSON file(s).
+2026-09-27 16:34:12.380 | INFO     | app.rag.loaders.bioasq_loader:load:100 - BioASQLoader reading training13b.json
+2026-09-27 16:34:12.838 | INFO     | app.rag.loaders.bioasq_loader:load:109 -   training13b.json: 5389 questions
+2026-09-27 16:34:15.351 | INFO     | app.rag.loaders.bioasq_loader:load:162 -   training13b.json: emitted 68860 snippet documents
+2026-09-27 16:34:15.352 | SUCCESS  | app.rag.loaders.bioasq_loader:load:164 - BioASQLoader complete — 68860 snippet documents from 1 file(s).
+2026-09-27 16:34:15.610 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 68860 document(s) from 'bioasq'
+2026-09-27 16:34:15.632 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 68864 total documents
+2026-09-27 16:34:16.401 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 16:34:16.406 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 16:34:16.408 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 16:34:16.409 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 16:34:16.409 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 16:34:16.412 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 16:34:16.413 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 4 document(s) from 'medqa'
+2026-09-27 16:34:16.415 | INFO     | app.rag.loaders.bioasq_loader:__init__:69 - BioASQLoader initialised: D:\Ragmed_2\backend\data\datasets\bioasq
+2026-09-27 16:34:16.417 | INFO     | app.rag.loaders.bioasq_loader:_find_dataset_files:77 - BioASQLoader found 1 JSON file(s).
+2026-09-27 16:34:16.418 | INFO     | app.rag.loaders.bioasq_loader:load:100 - BioASQLoader reading training13b.json
+2026-09-27 16:34:18.222 | INFO     | app.rag.loaders.bioasq_loader:load:109 -   training13b.json: 5389 questions
+2026-09-27 16:34:18.554 | INFO     | app.rag.loaders.bioasq_loader:load:162 -   training13b.json: emitted 68860 snippet documents
+2026-09-27 16:34:18.554 | SUCCESS  | app.rag.loaders.bioasq_loader:load:164 - BioASQLoader complete — 68860 snippet documents from 1 file(s).
+2026-09-27 16:34:18.616 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 68860 document(s) from 'bioasq'
+2026-09-27 16:34:18.619 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 68864 total documents
+2026-09-27 16:34:18.706 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=C:\Users\Yuvraj\AppData\Local\Temp\tmpewzzp42g
+2026-09-27 16:34:18.706 | WARNING  | app.retrieval.document_loader:load_all:77 - Dataset sub-directory not found, skipping: C:\Users\Yuvraj\AppData\Local\Temp\tmpewzzp42g\medqa
+2026-09-27 16:34:18.707 | WARNING  | app.retrieval.document_loader:load_all:77 - Dataset sub-directory not found, skipping: C:\Users\Yuvraj\AppData\Local\Temp\tmpewzzp42g\bioasq
+2026-09-27 16:34:18.707 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 0 total documents
+2026-09-27 16:34:18.715 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 16:34:18.733 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 16:34:18.751 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 16:34:18.759 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 16:34:18.826 | WARNING  | app.services.retrieval_service:build:81 - No FAISS index found at 'data\faiss_index' (looked for index.faiss and chunks.pkl). RetrievalService will return no evidence for every query. Set RAGMEDX_LLM_MODE=real and build the index before deploying to production.
+2026-09-27 16:34:18.827 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=False
+2026-09-27 16:34:18.913 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 16:34:18.913 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 16:34:18.913 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 16:34:18.913 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 16:34:18.913 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 16:34:18.915 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 16:34:18.916 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 16:34:18.916 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 16:34:18.916 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 16:34:18.916 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 16:34:18.919 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 16:34:18.919 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 16:34:18.920 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 16:34:18.920 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 16:34:18.920 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 16:34:18.922 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 16:34:18.923 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 16:34:18.923 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 16:34:18.923 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 16:34:18.923 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 16:34:18.926 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 16:34:18.927 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 16:34:18.927 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 16:34:18.927 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 16:34:18.927 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 16:34:18.939 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: \nonexistent\medqa_dir
+2026-09-27 16:34:18.940 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 0 dataset file(s).
+2026-09-27 16:34:18.940 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 0 file(s).
+2026-09-27 16:34:18.940 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 0 MedQA documents.
+2026-09-27 16:34:18.973 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 16:34:18.974 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 16:34:18.981 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-3\test_build_creates_files0
+2026-09-27 16:34:18.989 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 16:34:18.990 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 16:34:18.992 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-3\test_ntotal_matches_fixture0
+2026-09-27 16:34:18.998 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 16:34:18.998 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 16:34:19.000 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-3\test_chunks_have_medqa_source_0
+2026-09-27 16:34:19.042 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 16:34:19.043 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 16:34:19.045 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-3\test_chunk_text_is_question0
+2026-09-27 16:34:19.062 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 16:34:19.062 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 16:34:19.064 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-3\test_metadata_contains_answer0
+2026-09-27 16:34:19.085 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 16:34:19.086 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 16:34:19.088 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-3\test_force_false_skips_rebuild0
+2026-09-27 16:34:19.089 | INFO     | evaluation.index_builder:build:88 - MedQAIndexBuilder: index already exists at C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-3\test_force_false_skips_rebuild0 (pass force=True to rebuild).
+2026-09-27 16:34:19.106 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 16:34:19.106 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 16:34:19.108 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-3\test_force_true_rebuilds0
+2026-09-27 16:34:19.160 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 16:34:19.160 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 16:34:19.163 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-3\test_force_true_rebuilds0
+2026-09-27 16:34:19.184 | WARNING  | app.services.retrieval_service:build:81 - No FAISS index found at 'data\faiss_index' (looked for index.faiss and chunks.pkl). RetrievalService will return no evidence for every query. Set RAGMEDX_LLM_MODE=real and build the index before deploying to production.
+2026-09-27 16:34:19.186 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=False
+2026-09-27 16:34:19.235 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 16:34:36.640 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 16:34:38.194 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-3\mirage_index0
+2026-09-27 16:35:19.653 | WARNING  | app.services.retrieval_service:build:81 - No FAISS index found at 'data\faiss_index' (looked for index.faiss and chunks.pkl). RetrievalService will return no evidence for every query. Set RAGMEDX_LLM_MODE=real and build the index before deploying to production.
+2026-09-27 16:35:19.653 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=False
+2026-09-27 16:35:19.669 | WARNING  | app.services.retrieval_service:build:81 - No FAISS index found at 'data\faiss_index' (looked for index.faiss and chunks.pkl). RetrievalService will return no evidence for every query. Set RAGMEDX_LLM_MODE=real and build the index before deploying to production.
+2026-09-27 16:35:19.670 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=False
+2026-09-27 17:10:52.367 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:10:52.369 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:10:52.370 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:10:52.370 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:10:52.371 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:10:52.371 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:10:52.371 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:10:52.371 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:10:52.371 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 4 document(s) from 'medqa'
+2026-09-27 17:10:52.371 | INFO     | app.rag.loaders.bioasq_loader:__init__:69 - BioASQLoader initialised: D:\Ragmed_2\backend\data\datasets\bioasq
+2026-09-27 17:10:52.372 | INFO     | app.rag.loaders.bioasq_loader:_find_dataset_files:77 - BioASQLoader found 1 JSON file(s).
+2026-09-27 17:10:52.372 | INFO     | app.rag.loaders.bioasq_loader:load:100 - BioASQLoader reading training13b.json
+2026-09-27 17:10:52.494 | INFO     | app.rag.loaders.bioasq_loader:load:109 -   training13b.json: 5389 questions
+2026-09-27 17:10:52.777 | INFO     | app.rag.loaders.bioasq_loader:load:162 -   training13b.json: emitted 68860 snippet documents
+2026-09-27 17:10:52.777 | SUCCESS  | app.rag.loaders.bioasq_loader:load:164 - BioASQLoader complete — 68860 snippet documents from 1 file(s).
+2026-09-27 17:10:52.798 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 68860 document(s) from 'bioasq'
+2026-09-27 17:10:52.799 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 68864 total documents
+2026-09-27 17:10:52.849 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:10:52.850 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:10:52.850 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:10:52.850 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:10:52.850 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:10:52.851 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:10:52.851 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 4 document(s) from 'medqa'
+2026-09-27 17:10:52.851 | INFO     | app.rag.loaders.bioasq_loader:__init__:69 - BioASQLoader initialised: D:\Ragmed_2\backend\data\datasets\bioasq
+2026-09-27 17:10:52.852 | INFO     | app.rag.loaders.bioasq_loader:_find_dataset_files:77 - BioASQLoader found 1 JSON file(s).
+2026-09-27 17:10:52.852 | INFO     | app.rag.loaders.bioasq_loader:load:100 - BioASQLoader reading training13b.json
+2026-09-27 17:10:52.972 | INFO     | app.rag.loaders.bioasq_loader:load:109 -   training13b.json: 5389 questions
+2026-09-27 17:10:53.092 | INFO     | app.rag.loaders.bioasq_loader:load:162 -   training13b.json: emitted 68860 snippet documents
+2026-09-27 17:10:53.092 | SUCCESS  | app.rag.loaders.bioasq_loader:load:164 - BioASQLoader complete — 68860 snippet documents from 1 file(s).
+2026-09-27 17:10:53.111 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 68860 document(s) from 'bioasq'
+2026-09-27 17:10:53.112 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 68864 total documents
+2026-09-27 17:10:53.153 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:10:53.153 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:10:53.153 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:10:53.153 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:10:53.153 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:10:53.153 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:10:53.154 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 4 document(s) from 'medqa'
+2026-09-27 17:10:53.154 | INFO     | app.rag.loaders.bioasq_loader:__init__:69 - BioASQLoader initialised: D:\Ragmed_2\backend\data\datasets\bioasq
+2026-09-27 17:10:53.154 | INFO     | app.rag.loaders.bioasq_loader:_find_dataset_files:77 - BioASQLoader found 1 JSON file(s).
+2026-09-27 17:10:53.154 | INFO     | app.rag.loaders.bioasq_loader:load:100 - BioASQLoader reading training13b.json
+2026-09-27 17:10:53.272 | INFO     | app.rag.loaders.bioasq_loader:load:109 -   training13b.json: 5389 questions
+2026-09-27 17:10:53.389 | INFO     | app.rag.loaders.bioasq_loader:load:162 -   training13b.json: emitted 68860 snippet documents
+2026-09-27 17:10:53.389 | SUCCESS  | app.rag.loaders.bioasq_loader:load:164 - BioASQLoader complete — 68860 snippet documents from 1 file(s).
+2026-09-27 17:10:53.409 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 68860 document(s) from 'bioasq'
+2026-09-27 17:10:53.410 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 68864 total documents
+2026-09-27 17:10:53.476 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:10:53.476 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:10:53.476 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:10:53.477 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:10:53.477 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:10:53.477 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:10:53.478 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 4 document(s) from 'medqa'
+2026-09-27 17:10:53.478 | INFO     | app.rag.loaders.bioasq_loader:__init__:69 - BioASQLoader initialised: D:\Ragmed_2\backend\data\datasets\bioasq
+2026-09-27 17:10:53.478 | INFO     | app.rag.loaders.bioasq_loader:_find_dataset_files:77 - BioASQLoader found 1 JSON file(s).
+2026-09-27 17:10:53.478 | INFO     | app.rag.loaders.bioasq_loader:load:100 - BioASQLoader reading training13b.json
+2026-09-27 17:10:53.602 | INFO     | app.rag.loaders.bioasq_loader:load:109 -   training13b.json: 5389 questions
+2026-09-27 17:10:53.726 | INFO     | app.rag.loaders.bioasq_loader:load:162 -   training13b.json: emitted 68860 snippet documents
+2026-09-27 17:10:53.727 | SUCCESS  | app.rag.loaders.bioasq_loader:load:164 - BioASQLoader complete — 68860 snippet documents from 1 file(s).
+2026-09-27 17:10:53.747 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 68860 document(s) from 'bioasq'
+2026-09-27 17:10:53.748 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 68864 total documents
+2026-09-27 17:10:53.789 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=C:\Users\Yuvraj\AppData\Local\Temp\tmph7gjpvh5
+2026-09-27 17:10:53.789 | WARNING  | app.retrieval.document_loader:load_all:77 - Dataset sub-directory not found, skipping: C:\Users\Yuvraj\AppData\Local\Temp\tmph7gjpvh5\medqa
+2026-09-27 17:10:53.789 | WARNING  | app.retrieval.document_loader:load_all:77 - Dataset sub-directory not found, skipping: C:\Users\Yuvraj\AppData\Local\Temp\tmph7gjpvh5\bioasq
+2026-09-27 17:10:53.789 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 0 total documents
+2026-09-27 17:10:53.795 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:10:53.800 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:10:53.802 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:10:53.806 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:10:53.915 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:10:53.915 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:10:53.915 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:10:53.915 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:10:53.916 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:10:53.917 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:10:53.917 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:10:53.917 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:10:53.917 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:10:53.917 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:10:53.919 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:10:53.919 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:10:53.919 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:10:53.919 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:10:53.919 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:10:53.920 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:10:53.921 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:10:53.921 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:10:53.921 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:10:53.921 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:10:53.922 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:10:53.923 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:10:53.923 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:10:53.923 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:10:53.923 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:10:53.929 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: \nonexistent\medqa_dir
+2026-09-27 17:10:53.929 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 0 dataset file(s).
+2026-09-27 17:10:53.930 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 0 file(s).
+2026-09-27 17:10:53.930 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 0 MedQA documents.
+2026-09-27 17:10:53.948 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:10:53.948 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:10:53.950 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-4\test_build_creates_files0
+2026-09-27 17:10:53.953 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:10:53.954 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:10:53.955 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-4\test_ntotal_matches_fixture0
+2026-09-27 17:10:53.959 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:10:53.959 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:10:53.961 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-4\test_chunks_have_medqa_source_0
+2026-09-27 17:10:53.990 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:10:53.990 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:10:53.992 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-4\test_chunk_text_is_question0
+2026-09-27 17:10:54.005 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:10:54.005 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:10:54.007 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-4\test_metadata_contains_answer0
+2026-09-27 17:10:54.020 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:10:54.020 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:10:54.022 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-4\test_force_false_skips_rebuild0
+2026-09-27 17:10:54.022 | INFO     | evaluation.index_builder:build:88 - MedQAIndexBuilder: index already exists at C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-4\test_force_false_skips_rebuild0 (pass force=True to rebuild).
+2026-09-27 17:10:54.035 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:10:54.036 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:10:54.037 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-4\test_force_true_rebuilds0
+2026-09-27 17:10:54.088 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:10:54.089 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:10:54.091 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-4\test_force_true_rebuilds0
+2026-09-27 17:10:54.140 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:10:57.988 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:10:58.526 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-4\mirage_index0
+2026-09-27 17:12:14.351 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:12:14.392 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:12:14.393 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:12:14.394 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-5\test_build_creates_files0
+2026-09-27 17:12:14.398 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:12:14.399 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:12:14.400 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-5\test_ntotal_matches_fixture0
+2026-09-27 17:12:14.405 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:12:14.406 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:12:14.407 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-5\test_chunks_have_medqa_source_0
+2026-09-27 17:12:14.438 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:12:14.438 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:12:14.440 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-5\test_chunk_text_is_question0
+2026-09-27 17:12:14.453 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:12:14.453 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:12:14.455 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-5\test_metadata_contains_answer0
+2026-09-27 17:12:14.469 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:12:14.469 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:12:14.470 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-5\test_force_false_skips_rebuild0
+2026-09-27 17:12:14.471 | INFO     | evaluation.index_builder:build:88 - MedQAIndexBuilder: index already exists at C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-5\test_force_false_skips_rebuild0 (pass force=True to rebuild).
+2026-09-27 17:12:14.485 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:12:14.485 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:12:14.486 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-5\test_force_true_rebuilds0
+2026-09-27 17:12:14.537 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:12:14.538 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:12:14.539 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-5\test_force_true_rebuilds0
+2026-09-27 17:12:14.545 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:12:14.735 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:12:18.476 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:12:19.010 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-5\mirage_index0
+2026-09-27 17:15:03.391 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:16:44.395 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:16:54.026 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:16:59.397 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:17:09.967 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:17:14.996 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:17:14.997 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:17:14.998 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:17:14.999 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:17:14.999 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:17:15.000 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:17:15.000 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:17:15.000 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:17:15.000 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 4 document(s) from 'medqa'
+2026-09-27 17:17:15.000 | INFO     | app.rag.loaders.bioasq_loader:__init__:69 - BioASQLoader initialised: D:\Ragmed_2\backend\data\datasets\bioasq
+2026-09-27 17:17:15.001 | INFO     | app.rag.loaders.bioasq_loader:_find_dataset_files:77 - BioASQLoader found 1 JSON file(s).
+2026-09-27 17:17:15.001 | INFO     | app.rag.loaders.bioasq_loader:load:100 - BioASQLoader reading training13b.json
+2026-09-27 17:17:15.139 | INFO     | app.rag.loaders.bioasq_loader:load:109 -   training13b.json: 5389 questions
+2026-09-27 17:17:15.272 | INFO     | app.rag.loaders.bioasq_loader:load:162 -   training13b.json: emitted 68860 snippet documents
+2026-09-27 17:17:15.272 | SUCCESS  | app.rag.loaders.bioasq_loader:load:164 - BioASQLoader complete — 68860 snippet documents from 1 file(s).
+2026-09-27 17:17:15.294 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 68860 document(s) from 'bioasq'
+2026-09-27 17:17:15.295 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 68864 total documents
+2026-09-27 17:17:15.338 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:17:15.339 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:17:15.339 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:17:15.339 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:17:15.339 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:17:15.339 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:17:15.340 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 4 document(s) from 'medqa'
+2026-09-27 17:17:15.340 | INFO     | app.rag.loaders.bioasq_loader:__init__:69 - BioASQLoader initialised: D:\Ragmed_2\backend\data\datasets\bioasq
+2026-09-27 17:17:15.340 | INFO     | app.rag.loaders.bioasq_loader:_find_dataset_files:77 - BioASQLoader found 1 JSON file(s).
+2026-09-27 17:17:15.340 | INFO     | app.rag.loaders.bioasq_loader:load:100 - BioASQLoader reading training13b.json
+2026-09-27 17:17:15.497 | INFO     | app.rag.loaders.bioasq_loader:load:109 -   training13b.json: 5389 questions
+2026-09-27 17:17:15.642 | INFO     | app.rag.loaders.bioasq_loader:load:162 -   training13b.json: emitted 68860 snippet documents
+2026-09-27 17:17:15.642 | SUCCESS  | app.rag.loaders.bioasq_loader:load:164 - BioASQLoader complete — 68860 snippet documents from 1 file(s).
+2026-09-27 17:17:15.665 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 68860 document(s) from 'bioasq'
+2026-09-27 17:17:15.666 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 68864 total documents
+2026-09-27 17:17:15.712 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:17:15.713 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:17:15.713 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:17:15.713 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:17:15.713 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:17:15.713 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:17:15.713 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 4 document(s) from 'medqa'
+2026-09-27 17:17:15.714 | INFO     | app.rag.loaders.bioasq_loader:__init__:69 - BioASQLoader initialised: D:\Ragmed_2\backend\data\datasets\bioasq
+2026-09-27 17:17:15.714 | INFO     | app.rag.loaders.bioasq_loader:_find_dataset_files:77 - BioASQLoader found 1 JSON file(s).
+2026-09-27 17:17:15.714 | INFO     | app.rag.loaders.bioasq_loader:load:100 - BioASQLoader reading training13b.json
+2026-09-27 17:17:15.853 | INFO     | app.rag.loaders.bioasq_loader:load:109 -   training13b.json: 5389 questions
+2026-09-27 17:17:15.991 | INFO     | app.rag.loaders.bioasq_loader:load:162 -   training13b.json: emitted 68860 snippet documents
+2026-09-27 17:17:15.991 | SUCCESS  | app.rag.loaders.bioasq_loader:load:164 - BioASQLoader complete — 68860 snippet documents from 1 file(s).
+2026-09-27 17:17:16.015 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 68860 document(s) from 'bioasq'
+2026-09-27 17:17:16.016 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 68864 total documents
+2026-09-27 17:17:16.070 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:17:16.071 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:17:16.071 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:17:16.071 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:17:16.071 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:17:16.071 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:17:16.071 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 4 document(s) from 'medqa'
+2026-09-27 17:17:16.072 | INFO     | app.rag.loaders.bioasq_loader:__init__:69 - BioASQLoader initialised: D:\Ragmed_2\backend\data\datasets\bioasq
+2026-09-27 17:17:16.072 | INFO     | app.rag.loaders.bioasq_loader:_find_dataset_files:77 - BioASQLoader found 1 JSON file(s).
+2026-09-27 17:17:16.072 | INFO     | app.rag.loaders.bioasq_loader:load:100 - BioASQLoader reading training13b.json
+2026-09-27 17:17:16.242 | INFO     | app.rag.loaders.bioasq_loader:load:109 -   training13b.json: 5389 questions
+2026-09-27 17:17:16.484 | INFO     | app.rag.loaders.bioasq_loader:load:162 -   training13b.json: emitted 68860 snippet documents
+2026-09-27 17:17:16.484 | SUCCESS  | app.rag.loaders.bioasq_loader:load:164 - BioASQLoader complete — 68860 snippet documents from 1 file(s).
+2026-09-27 17:17:16.510 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 68860 document(s) from 'bioasq'
+2026-09-27 17:17:16.511 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 68864 total documents
+2026-09-27 17:17:16.561 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=C:\Users\Yuvraj\AppData\Local\Temp\tmp_k2tf2f6
+2026-09-27 17:17:16.561 | WARNING  | app.retrieval.document_loader:load_all:77 - Dataset sub-directory not found, skipping: C:\Users\Yuvraj\AppData\Local\Temp\tmp_k2tf2f6\medqa
+2026-09-27 17:17:16.561 | WARNING  | app.retrieval.document_loader:load_all:77 - Dataset sub-directory not found, skipping: C:\Users\Yuvraj\AppData\Local\Temp\tmp_k2tf2f6\bioasq
+2026-09-27 17:17:16.561 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 0 total documents
+2026-09-27 17:17:16.566 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:17:16.571 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:17:16.575 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:17:16.578 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:17:16.605 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:17:27.156 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:17:36.313 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:17:36.313 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:17:36.313 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:17:36.313 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:17:36.314 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:17:36.316 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:17:36.316 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:17:36.316 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:17:36.316 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:17:36.317 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:17:36.319 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:17:36.319 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:17:36.319 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:17:36.319 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:17:36.319 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:17:36.321 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:17:36.321 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:17:36.321 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:17:36.321 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:17:36.322 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:17:36.325 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:17:36.325 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:17:36.325 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:17:36.326 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:17:36.326 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:17:36.336 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: \nonexistent\medqa_dir
+2026-09-27 17:17:36.337 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 0 dataset file(s).
+2026-09-27 17:17:36.337 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 0 file(s).
+2026-09-27 17:17:36.337 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 0 MedQA documents.
+2026-09-27 17:17:36.359 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:17:36.360 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:17:36.362 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-6\test_build_creates_files0
+2026-09-27 17:17:36.368 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:17:36.368 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:17:36.371 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-6\test_ntotal_matches_fixture0
+2026-09-27 17:17:36.376 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:17:36.377 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:17:36.379 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-6\test_chunks_have_medqa_source_0
+2026-09-27 17:17:36.421 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:17:36.422 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:17:36.423 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-6\test_chunk_text_is_question0
+2026-09-27 17:17:36.443 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:17:36.443 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:17:36.444 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-6\test_metadata_contains_answer0
+2026-09-27 17:17:36.460 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:17:36.461 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:17:36.463 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-6\test_force_false_skips_rebuild0
+2026-09-27 17:17:36.463 | INFO     | evaluation.index_builder:build:88 - MedQAIndexBuilder: index already exists at C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-6\test_force_false_skips_rebuild0 (pass force=True to rebuild).
+2026-09-27 17:17:36.479 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:17:36.479 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:17:36.481 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-6\test_force_true_rebuilds0
+2026-09-27 17:17:36.532 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:17:36.532 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:17:36.534 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-6\test_force_true_rebuilds0
+2026-09-27 17:17:36.543 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:17:48.378 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:17:56.960 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:18:00.584 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:18:01.085 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-6\mirage_index0
+2026-09-27 17:18:14.735 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:18:25.247 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:18:57.434 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:19:07.884 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:19:13.067 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:19:23.924 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:19:31.649 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:19:41.350 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:20:00.190 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:20:10.352 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:20:52.831 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:21:02.971 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:21:07.873 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:21:18.292 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:21:23.307 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:21:23.308 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:21:23.310 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:21:23.310 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:21:23.311 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:21:23.311 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:21:23.311 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:21:23.311 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:21:23.311 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 4 document(s) from 'medqa'
+2026-09-27 17:21:23.311 | INFO     | app.rag.loaders.bioasq_loader:__init__:69 - BioASQLoader initialised: D:\Ragmed_2\backend\data\datasets\bioasq
+2026-09-27 17:21:23.312 | INFO     | app.rag.loaders.bioasq_loader:_find_dataset_files:77 - BioASQLoader found 1 JSON file(s).
+2026-09-27 17:21:23.312 | INFO     | app.rag.loaders.bioasq_loader:load:100 - BioASQLoader reading training13b.json
+2026-09-27 17:21:23.452 | INFO     | app.rag.loaders.bioasq_loader:load:109 -   training13b.json: 5389 questions
+2026-09-27 17:21:23.581 | INFO     | app.rag.loaders.bioasq_loader:load:162 -   training13b.json: emitted 68860 snippet documents
+2026-09-27 17:21:23.581 | SUCCESS  | app.rag.loaders.bioasq_loader:load:164 - BioASQLoader complete — 68860 snippet documents from 1 file(s).
+2026-09-27 17:21:23.603 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 68860 document(s) from 'bioasq'
+2026-09-27 17:21:23.604 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 68864 total documents
+2026-09-27 17:21:23.643 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:21:23.643 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:21:23.644 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:21:23.644 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:21:23.644 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:21:23.644 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:21:23.644 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 4 document(s) from 'medqa'
+2026-09-27 17:21:23.644 | INFO     | app.rag.loaders.bioasq_loader:__init__:69 - BioASQLoader initialised: D:\Ragmed_2\backend\data\datasets\bioasq
+2026-09-27 17:21:23.644 | INFO     | app.rag.loaders.bioasq_loader:_find_dataset_files:77 - BioASQLoader found 1 JSON file(s).
+2026-09-27 17:21:23.644 | INFO     | app.rag.loaders.bioasq_loader:load:100 - BioASQLoader reading training13b.json
+2026-09-27 17:21:23.792 | INFO     | app.rag.loaders.bioasq_loader:load:109 -   training13b.json: 5389 questions
+2026-09-27 17:21:23.916 | INFO     | app.rag.loaders.bioasq_loader:load:162 -   training13b.json: emitted 68860 snippet documents
+2026-09-27 17:21:23.917 | SUCCESS  | app.rag.loaders.bioasq_loader:load:164 - BioASQLoader complete — 68860 snippet documents from 1 file(s).
+2026-09-27 17:21:23.939 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 68860 document(s) from 'bioasq'
+2026-09-27 17:21:23.940 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 68864 total documents
+2026-09-27 17:21:23.983 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:21:23.983 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:21:23.983 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:21:23.983 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:21:23.983 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:21:23.984 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:21:23.984 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 4 document(s) from 'medqa'
+2026-09-27 17:21:23.984 | INFO     | app.rag.loaders.bioasq_loader:__init__:69 - BioASQLoader initialised: D:\Ragmed_2\backend\data\datasets\bioasq
+2026-09-27 17:21:23.984 | INFO     | app.rag.loaders.bioasq_loader:_find_dataset_files:77 - BioASQLoader found 1 JSON file(s).
+2026-09-27 17:21:23.984 | INFO     | app.rag.loaders.bioasq_loader:load:100 - BioASQLoader reading training13b.json
+2026-09-27 17:21:24.145 | INFO     | app.rag.loaders.bioasq_loader:load:109 -   training13b.json: 5389 questions
+2026-09-27 17:21:24.280 | INFO     | app.rag.loaders.bioasq_loader:load:162 -   training13b.json: emitted 68860 snippet documents
+2026-09-27 17:21:24.280 | SUCCESS  | app.rag.loaders.bioasq_loader:load:164 - BioASQLoader complete — 68860 snippet documents from 1 file(s).
+2026-09-27 17:21:24.312 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 68860 document(s) from 'bioasq'
+2026-09-27 17:21:24.313 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 68864 total documents
+2026-09-27 17:21:24.367 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:21:24.367 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:21:24.367 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:21:24.367 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:21:24.367 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:21:24.368 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:21:24.368 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 4 document(s) from 'medqa'
+2026-09-27 17:21:24.368 | INFO     | app.rag.loaders.bioasq_loader:__init__:69 - BioASQLoader initialised: D:\Ragmed_2\backend\data\datasets\bioasq
+2026-09-27 17:21:24.368 | INFO     | app.rag.loaders.bioasq_loader:_find_dataset_files:77 - BioASQLoader found 1 JSON file(s).
+2026-09-27 17:21:24.368 | INFO     | app.rag.loaders.bioasq_loader:load:100 - BioASQLoader reading training13b.json
+2026-09-27 17:21:24.517 | INFO     | app.rag.loaders.bioasq_loader:load:109 -   training13b.json: 5389 questions
+2026-09-27 17:21:24.654 | INFO     | app.rag.loaders.bioasq_loader:load:162 -   training13b.json: emitted 68860 snippet documents
+2026-09-27 17:21:24.654 | SUCCESS  | app.rag.loaders.bioasq_loader:load:164 - BioASQLoader complete — 68860 snippet documents from 1 file(s).
+2026-09-27 17:21:24.679 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 68860 document(s) from 'bioasq'
+2026-09-27 17:21:24.681 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 68864 total documents
+2026-09-27 17:21:24.729 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=C:\Users\Yuvraj\AppData\Local\Temp\tmp0fc7zl6j
+2026-09-27 17:21:24.729 | WARNING  | app.retrieval.document_loader:load_all:77 - Dataset sub-directory not found, skipping: C:\Users\Yuvraj\AppData\Local\Temp\tmp0fc7zl6j\medqa
+2026-09-27 17:21:24.729 | WARNING  | app.retrieval.document_loader:load_all:77 - Dataset sub-directory not found, skipping: C:\Users\Yuvraj\AppData\Local\Temp\tmp0fc7zl6j\bioasq
+2026-09-27 17:21:24.729 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 0 total documents
+2026-09-27 17:21:24.735 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:21:24.741 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:21:24.744 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:21:24.747 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:21:24.771 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:21:34.714 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:21:42.481 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:21:42.482 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:21:42.482 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:21:42.482 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:21:42.482 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:21:42.483 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:21:42.484 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:21:42.484 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:21:42.484 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:21:42.484 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:21:42.486 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:21:42.486 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:21:42.486 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:21:42.486 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:21:42.486 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:21:42.488 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:21:42.488 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:21:42.488 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:21:42.488 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:21:42.489 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:21:42.490 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:21:42.490 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:21:42.490 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:21:42.490 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:21:42.490 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:21:42.497 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: \nonexistent\medqa_dir
+2026-09-27 17:21:42.497 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 0 dataset file(s).
+2026-09-27 17:21:42.497 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 0 file(s).
+2026-09-27 17:21:42.497 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 0 MedQA documents.
+2026-09-27 17:21:42.514 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:21:42.514 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:21:42.515 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-7\test_build_creates_files0
+2026-09-27 17:21:42.518 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:21:42.519 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:21:42.520 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-7\test_ntotal_matches_fixture0
+2026-09-27 17:21:42.524 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:21:42.525 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:21:42.526 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-7\test_chunks_have_medqa_source_0
+2026-09-27 17:21:42.553 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:21:42.554 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:21:42.555 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-7\test_chunk_text_is_question0
+2026-09-27 17:21:42.567 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:21:42.568 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:21:42.569 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-7\test_metadata_contains_answer0
+2026-09-27 17:21:42.582 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:21:42.582 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:21:42.584 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-7\test_force_false_skips_rebuild0
+2026-09-27 17:21:42.584 | INFO     | evaluation.index_builder:build:88 - MedQAIndexBuilder: index already exists at C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-7\test_force_false_skips_rebuild0 (pass force=True to rebuild).
+2026-09-27 17:21:42.599 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:21:42.599 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:21:42.601 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-7\test_force_true_rebuilds0
+2026-09-27 17:21:42.652 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:21:42.652 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:21:42.654 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-7\test_force_true_rebuilds0
+2026-09-27 17:21:42.659 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:21:52.298 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:22:00.343 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:22:03.747 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:22:04.329 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-7\mirage_index0
+2026-09-27 17:22:17.632 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:22:27.620 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:22:31.226 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:22:41.813 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:23:29.903 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:23:39.943 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:23:44.519 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:23:54.289 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:23:59.196 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:23:59.197 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:23:59.198 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:23:59.199 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:23:59.199 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:23:59.199 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:23:59.199 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:23:59.200 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:23:59.200 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 4 document(s) from 'medqa'
+2026-09-27 17:23:59.200 | INFO     | app.rag.loaders.bioasq_loader:__init__:69 - BioASQLoader initialised: D:\Ragmed_2\backend\data\datasets\bioasq
+2026-09-27 17:23:59.200 | INFO     | app.rag.loaders.bioasq_loader:_find_dataset_files:77 - BioASQLoader found 1 JSON file(s).
+2026-09-27 17:23:59.200 | INFO     | app.rag.loaders.bioasq_loader:load:100 - BioASQLoader reading training13b.json
+2026-09-27 17:23:59.367 | INFO     | app.rag.loaders.bioasq_loader:load:109 -   training13b.json: 5389 questions
+2026-09-27 17:23:59.505 | INFO     | app.rag.loaders.bioasq_loader:load:162 -   training13b.json: emitted 68860 snippet documents
+2026-09-27 17:23:59.505 | SUCCESS  | app.rag.loaders.bioasq_loader:load:164 - BioASQLoader complete — 68860 snippet documents from 1 file(s).
+2026-09-27 17:23:59.527 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 68860 document(s) from 'bioasq'
+2026-09-27 17:23:59.528 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 68864 total documents
+2026-09-27 17:23:59.569 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:23:59.570 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:23:59.570 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:23:59.570 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:23:59.570 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:23:59.570 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:23:59.570 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 4 document(s) from 'medqa'
+2026-09-27 17:23:59.570 | INFO     | app.rag.loaders.bioasq_loader:__init__:69 - BioASQLoader initialised: D:\Ragmed_2\backend\data\datasets\bioasq
+2026-09-27 17:23:59.571 | INFO     | app.rag.loaders.bioasq_loader:_find_dataset_files:77 - BioASQLoader found 1 JSON file(s).
+2026-09-27 17:23:59.571 | INFO     | app.rag.loaders.bioasq_loader:load:100 - BioASQLoader reading training13b.json
+2026-09-27 17:23:59.719 | INFO     | app.rag.loaders.bioasq_loader:load:109 -   training13b.json: 5389 questions
+2026-09-27 17:23:59.859 | INFO     | app.rag.loaders.bioasq_loader:load:162 -   training13b.json: emitted 68860 snippet documents
+2026-09-27 17:23:59.859 | SUCCESS  | app.rag.loaders.bioasq_loader:load:164 - BioASQLoader complete — 68860 snippet documents from 1 file(s).
+2026-09-27 17:23:59.885 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 68860 document(s) from 'bioasq'
+2026-09-27 17:23:59.886 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 68864 total documents
+2026-09-27 17:23:59.933 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:23:59.933 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:23:59.934 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:23:59.934 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:23:59.934 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:23:59.934 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:23:59.934 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 4 document(s) from 'medqa'
+2026-09-27 17:23:59.934 | INFO     | app.rag.loaders.bioasq_loader:__init__:69 - BioASQLoader initialised: D:\Ragmed_2\backend\data\datasets\bioasq
+2026-09-27 17:23:59.934 | INFO     | app.rag.loaders.bioasq_loader:_find_dataset_files:77 - BioASQLoader found 1 JSON file(s).
+2026-09-27 17:23:59.934 | INFO     | app.rag.loaders.bioasq_loader:load:100 - BioASQLoader reading training13b.json
+2026-09-27 17:24:00.092 | INFO     | app.rag.loaders.bioasq_loader:load:109 -   training13b.json: 5389 questions
+2026-09-27 17:24:00.254 | INFO     | app.rag.loaders.bioasq_loader:load:162 -   training13b.json: emitted 68860 snippet documents
+2026-09-27 17:24:00.254 | SUCCESS  | app.rag.loaders.bioasq_loader:load:164 - BioASQLoader complete — 68860 snippet documents from 1 file(s).
+2026-09-27 17:24:00.284 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 68860 document(s) from 'bioasq'
+2026-09-27 17:24:00.285 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 68864 total documents
+2026-09-27 17:24:00.343 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:24:00.343 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:24:00.343 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:24:00.343 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:24:00.343 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:24:00.344 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:24:00.344 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 4 document(s) from 'medqa'
+2026-09-27 17:24:00.344 | INFO     | app.rag.loaders.bioasq_loader:__init__:69 - BioASQLoader initialised: D:\Ragmed_2\backend\data\datasets\bioasq
+2026-09-27 17:24:00.344 | INFO     | app.rag.loaders.bioasq_loader:_find_dataset_files:77 - BioASQLoader found 1 JSON file(s).
+2026-09-27 17:24:00.344 | INFO     | app.rag.loaders.bioasq_loader:load:100 - BioASQLoader reading training13b.json
+2026-09-27 17:24:00.505 | INFO     | app.rag.loaders.bioasq_loader:load:109 -   training13b.json: 5389 questions
+2026-09-27 17:24:00.689 | INFO     | app.rag.loaders.bioasq_loader:load:162 -   training13b.json: emitted 68860 snippet documents
+2026-09-27 17:24:00.690 | SUCCESS  | app.rag.loaders.bioasq_loader:load:164 - BioASQLoader complete — 68860 snippet documents from 1 file(s).
+2026-09-27 17:24:00.713 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 68860 document(s) from 'bioasq'
+2026-09-27 17:24:00.714 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 68864 total documents
+2026-09-27 17:24:00.766 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=C:\Users\Yuvraj\AppData\Local\Temp\tmpx96zrofs
+2026-09-27 17:24:00.766 | WARNING  | app.retrieval.document_loader:load_all:77 - Dataset sub-directory not found, skipping: C:\Users\Yuvraj\AppData\Local\Temp\tmpx96zrofs\medqa
+2026-09-27 17:24:00.766 | WARNING  | app.retrieval.document_loader:load_all:77 - Dataset sub-directory not found, skipping: C:\Users\Yuvraj\AppData\Local\Temp\tmpx96zrofs\bioasq
+2026-09-27 17:24:00.766 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 0 total documents
+2026-09-27 17:24:00.772 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:24:00.776 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:24:00.780 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:24:00.782 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:24:00.808 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:24:12.169 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:24:19.656 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:24:19.656 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:24:19.657 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:24:19.657 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:24:19.657 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:24:19.658 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:24:19.658 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:24:19.658 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:24:19.659 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:24:19.659 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:24:19.660 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:24:19.660 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:24:19.660 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:24:19.660 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:24:19.660 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:24:19.661 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:24:19.662 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:24:19.662 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:24:19.662 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:24:19.662 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:24:19.663 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:24:19.664 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:24:19.664 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:24:19.664 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:24:19.664 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:24:19.670 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: \nonexistent\medqa_dir
+2026-09-27 17:24:19.670 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 0 dataset file(s).
+2026-09-27 17:24:19.670 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 0 file(s).
+2026-09-27 17:24:19.670 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 0 MedQA documents.
+2026-09-27 17:24:19.688 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:24:19.688 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:24:19.690 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-8\test_build_creates_files0
+2026-09-27 17:24:19.694 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:24:19.695 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:24:19.696 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-8\test_ntotal_matches_fixture0
+2026-09-27 17:24:19.701 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:24:19.701 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:24:19.703 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-8\test_chunks_have_medqa_source_0
+2026-09-27 17:24:19.735 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:24:19.735 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:24:19.736 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-8\test_chunk_text_is_question0
+2026-09-27 17:24:19.755 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:24:19.755 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:24:19.757 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-8\test_metadata_contains_answer0
+2026-09-27 17:24:19.774 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:24:19.775 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:24:19.777 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-8\test_force_false_skips_rebuild0
+2026-09-27 17:24:19.777 | INFO     | evaluation.index_builder:build:88 - MedQAIndexBuilder: index already exists at C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-8\test_force_false_skips_rebuild0 (pass force=True to rebuild).
+2026-09-27 17:24:19.793 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:24:19.793 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:24:19.795 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-8\test_force_true_rebuilds0
+2026-09-27 17:24:19.847 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:24:19.847 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:24:19.848 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-8\test_force_true_rebuilds0
+2026-09-27 17:24:19.856 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:24:31.185 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:24:38.759 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:24:42.273 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:24:42.739 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-8\mirage_index0
+2026-09-27 17:24:57.382 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:25:07.653 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:25:11.945 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:25:23.369 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:49:03.282 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:49:13.510 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:49:18.984 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:49:32.964 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:49:40.208 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:49:40.211 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:49:40.213 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:49:40.214 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:49:40.215 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:49:40.216 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:49:40.216 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:49:40.216 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:49:40.216 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 4 document(s) from 'medqa'
+2026-09-27 17:49:40.217 | INFO     | app.rag.loaders.bioasq_loader:__init__:69 - BioASQLoader initialised: D:\Ragmed_2\backend\data\datasets\bioasq
+2026-09-27 17:49:40.217 | INFO     | app.rag.loaders.bioasq_loader:_find_dataset_files:77 - BioASQLoader found 1 JSON file(s).
+2026-09-27 17:49:40.217 | INFO     | app.rag.loaders.bioasq_loader:load:100 - BioASQLoader reading training13b.json
+2026-09-27 17:49:40.482 | INFO     | app.rag.loaders.bioasq_loader:load:109 -   training13b.json: 5389 questions
+2026-09-27 17:49:40.755 | INFO     | app.rag.loaders.bioasq_loader:load:162 -   training13b.json: emitted 68860 snippet documents
+2026-09-27 17:49:40.756 | SUCCESS  | app.rag.loaders.bioasq_loader:load:164 - BioASQLoader complete — 68860 snippet documents from 1 file(s).
+2026-09-27 17:49:40.787 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 68860 document(s) from 'bioasq'
+2026-09-27 17:49:40.788 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 68864 total documents
+2026-09-27 17:49:40.847 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:49:40.848 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:49:40.848 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:49:40.849 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:49:40.849 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:49:40.849 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:49:40.850 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 4 document(s) from 'medqa'
+2026-09-27 17:49:40.850 | INFO     | app.rag.loaders.bioasq_loader:__init__:69 - BioASQLoader initialised: D:\Ragmed_2\backend\data\datasets\bioasq
+2026-09-27 17:49:40.850 | INFO     | app.rag.loaders.bioasq_loader:_find_dataset_files:77 - BioASQLoader found 1 JSON file(s).
+2026-09-27 17:49:40.851 | INFO     | app.rag.loaders.bioasq_loader:load:100 - BioASQLoader reading training13b.json
+2026-09-27 17:49:41.087 | INFO     | app.rag.loaders.bioasq_loader:load:109 -   training13b.json: 5389 questions
+2026-09-27 17:49:41.363 | INFO     | app.rag.loaders.bioasq_loader:load:162 -   training13b.json: emitted 68860 snippet documents
+2026-09-27 17:49:41.364 | SUCCESS  | app.rag.loaders.bioasq_loader:load:164 - BioASQLoader complete — 68860 snippet documents from 1 file(s).
+2026-09-27 17:49:41.398 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 68860 document(s) from 'bioasq'
+2026-09-27 17:49:41.400 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 68864 total documents
+2026-09-27 17:49:41.460 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:49:41.461 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:49:41.461 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:49:41.461 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:49:41.461 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:49:41.462 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:49:41.462 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 4 document(s) from 'medqa'
+2026-09-27 17:49:41.462 | INFO     | app.rag.loaders.bioasq_loader:__init__:69 - BioASQLoader initialised: D:\Ragmed_2\backend\data\datasets\bioasq
+2026-09-27 17:49:41.462 | INFO     | app.rag.loaders.bioasq_loader:_find_dataset_files:77 - BioASQLoader found 1 JSON file(s).
+2026-09-27 17:49:41.463 | INFO     | app.rag.loaders.bioasq_loader:load:100 - BioASQLoader reading training13b.json
+2026-09-27 17:49:41.615 | INFO     | app.rag.loaders.bioasq_loader:load:109 -   training13b.json: 5389 questions
+2026-09-27 17:49:41.770 | INFO     | app.rag.loaders.bioasq_loader:load:162 -   training13b.json: emitted 68860 snippet documents
+2026-09-27 17:49:41.770 | SUCCESS  | app.rag.loaders.bioasq_loader:load:164 - BioASQLoader complete — 68860 snippet documents from 1 file(s).
+2026-09-27 17:49:41.808 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 68860 document(s) from 'bioasq'
+2026-09-27 17:49:41.810 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 68864 total documents
+2026-09-27 17:49:41.869 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:49:41.869 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:49:41.869 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:49:41.869 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:49:41.869 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:49:41.870 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:49:41.870 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 4 document(s) from 'medqa'
+2026-09-27 17:49:41.870 | INFO     | app.rag.loaders.bioasq_loader:__init__:69 - BioASQLoader initialised: D:\Ragmed_2\backend\data\datasets\bioasq
+2026-09-27 17:49:41.870 | INFO     | app.rag.loaders.bioasq_loader:_find_dataset_files:77 - BioASQLoader found 1 JSON file(s).
+2026-09-27 17:49:41.870 | INFO     | app.rag.loaders.bioasq_loader:load:100 - BioASQLoader reading training13b.json
+2026-09-27 17:49:42.019 | INFO     | app.rag.loaders.bioasq_loader:load:109 -   training13b.json: 5389 questions
+2026-09-27 17:49:42.196 | INFO     | app.rag.loaders.bioasq_loader:load:162 -   training13b.json: emitted 68860 snippet documents
+2026-09-27 17:49:42.197 | SUCCESS  | app.rag.loaders.bioasq_loader:load:164 - BioASQLoader complete — 68860 snippet documents from 1 file(s).
+2026-09-27 17:49:42.222 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 68860 document(s) from 'bioasq'
+2026-09-27 17:49:42.222 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 68864 total documents
+2026-09-27 17:49:42.266 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=C:\Users\Yuvraj\AppData\Local\Temp\tmp6wrzkpah
+2026-09-27 17:49:42.267 | WARNING  | app.retrieval.document_loader:load_all:77 - Dataset sub-directory not found, skipping: C:\Users\Yuvraj\AppData\Local\Temp\tmp6wrzkpah\medqa
+2026-09-27 17:49:42.267 | WARNING  | app.retrieval.document_loader:load_all:77 - Dataset sub-directory not found, skipping: C:\Users\Yuvraj\AppData\Local\Temp\tmp6wrzkpah\bioasq
+2026-09-27 17:49:42.267 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 0 total documents
+2026-09-27 17:49:42.272 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:49:42.278 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:49:42.281 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:49:42.284 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:49:42.311 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:49:55.327 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:50:05.925 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:50:05.925 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:50:05.925 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:50:05.925 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:50:05.926 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:50:05.928 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:50:05.929 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:50:05.929 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:50:05.929 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:50:05.929 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:50:05.931 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:50:05.932 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:50:05.932 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:50:05.932 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:50:05.932 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:50:05.934 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:50:05.935 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:50:05.935 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:50:05.935 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:50:05.936 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:50:05.938 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:50:05.939 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:50:05.939 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:50:05.939 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:50:05.940 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:50:05.951 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: \nonexistent\medqa_dir
+2026-09-27 17:50:05.952 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 0 dataset file(s).
+2026-09-27 17:50:05.952 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 0 file(s).
+2026-09-27 17:50:05.952 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 0 MedQA documents.
+2026-09-27 17:50:05.985 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:50:05.985 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:50:05.988 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-9\test_build_creates_files0
+2026-09-27 17:50:05.994 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:50:05.994 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:50:05.996 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-9\test_ntotal_matches_fixture0
+2026-09-27 17:50:06.002 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:50:06.003 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:50:06.006 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-9\test_chunks_have_medqa_source_0
+2026-09-27 17:50:06.042 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:50:06.042 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:50:06.045 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-9\test_chunk_text_is_question0
+2026-09-27 17:50:06.065 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:50:06.066 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:50:06.069 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-9\test_metadata_contains_answer0
+2026-09-27 17:50:06.086 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:50:06.087 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:50:06.089 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-9\test_force_false_skips_rebuild0
+2026-09-27 17:50:06.090 | INFO     | evaluation.index_builder:build:88 - MedQAIndexBuilder: index already exists at C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-9\test_force_false_skips_rebuild0 (pass force=True to rebuild).
+2026-09-27 17:50:06.106 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:50:06.106 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:50:06.108 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-9\test_force_true_rebuilds0
+2026-09-27 17:50:06.160 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:50:06.161 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:50:06.162 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-9\test_force_true_rebuilds0
+2026-09-27 17:50:06.175 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:50:20.209 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:50:30.494 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:50:34.896 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:50:35.617 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-9\mirage_index0
+2026-09-27 17:50:49.410 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:51:01.025 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:51:04.609 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:51:14.963 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:53:54.711 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:54:05.085 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:54:09.938 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:54:19.739 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:54:24.645 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:54:24.647 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:54:24.648 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:54:24.648 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:54:24.649 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:54:24.649 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:54:24.649 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:54:24.649 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:54:24.649 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 4 document(s) from 'medqa'
+2026-09-27 17:54:24.649 | INFO     | app.rag.loaders.bioasq_loader:__init__:69 - BioASQLoader initialised: D:\Ragmed_2\backend\data\datasets\bioasq
+2026-09-27 17:54:24.650 | INFO     | app.rag.loaders.bioasq_loader:_find_dataset_files:77 - BioASQLoader found 1 JSON file(s).
+2026-09-27 17:54:24.650 | INFO     | app.rag.loaders.bioasq_loader:load:100 - BioASQLoader reading training13b.json
+2026-09-27 17:54:24.790 | INFO     | app.rag.loaders.bioasq_loader:load:109 -   training13b.json: 5389 questions
+2026-09-27 17:54:24.927 | INFO     | app.rag.loaders.bioasq_loader:load:162 -   training13b.json: emitted 68860 snippet documents
+2026-09-27 17:54:24.928 | SUCCESS  | app.rag.loaders.bioasq_loader:load:164 - BioASQLoader complete — 68860 snippet documents from 1 file(s).
+2026-09-27 17:54:24.952 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 68860 document(s) from 'bioasq'
+2026-09-27 17:54:24.953 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 68864 total documents
+2026-09-27 17:54:24.992 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:54:24.992 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:54:24.992 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:54:24.992 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:54:24.992 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:54:24.993 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:54:24.993 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 4 document(s) from 'medqa'
+2026-09-27 17:54:24.993 | INFO     | app.rag.loaders.bioasq_loader:__init__:69 - BioASQLoader initialised: D:\Ragmed_2\backend\data\datasets\bioasq
+2026-09-27 17:54:24.993 | INFO     | app.rag.loaders.bioasq_loader:_find_dataset_files:77 - BioASQLoader found 1 JSON file(s).
+2026-09-27 17:54:24.993 | INFO     | app.rag.loaders.bioasq_loader:load:100 - BioASQLoader reading training13b.json
+2026-09-27 17:54:25.127 | INFO     | app.rag.loaders.bioasq_loader:load:109 -   training13b.json: 5389 questions
+2026-09-27 17:54:25.253 | INFO     | app.rag.loaders.bioasq_loader:load:162 -   training13b.json: emitted 68860 snippet documents
+2026-09-27 17:54:25.253 | SUCCESS  | app.rag.loaders.bioasq_loader:load:164 - BioASQLoader complete — 68860 snippet documents from 1 file(s).
+2026-09-27 17:54:25.275 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 68860 document(s) from 'bioasq'
+2026-09-27 17:54:25.276 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 68864 total documents
+2026-09-27 17:54:25.320 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:54:25.320 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:54:25.320 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:54:25.320 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:54:25.321 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:54:25.321 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:54:25.321 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 4 document(s) from 'medqa'
+2026-09-27 17:54:25.321 | INFO     | app.rag.loaders.bioasq_loader:__init__:69 - BioASQLoader initialised: D:\Ragmed_2\backend\data\datasets\bioasq
+2026-09-27 17:54:25.321 | INFO     | app.rag.loaders.bioasq_loader:_find_dataset_files:77 - BioASQLoader found 1 JSON file(s).
+2026-09-27 17:54:25.321 | INFO     | app.rag.loaders.bioasq_loader:load:100 - BioASQLoader reading training13b.json
+2026-09-27 17:54:25.461 | INFO     | app.rag.loaders.bioasq_loader:load:109 -   training13b.json: 5389 questions
+2026-09-27 17:54:25.591 | INFO     | app.rag.loaders.bioasq_loader:load:162 -   training13b.json: emitted 68860 snippet documents
+2026-09-27 17:54:25.592 | SUCCESS  | app.rag.loaders.bioasq_loader:load:164 - BioASQLoader complete — 68860 snippet documents from 1 file(s).
+2026-09-27 17:54:25.615 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 68860 document(s) from 'bioasq'
+2026-09-27 17:54:25.616 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 68864 total documents
+2026-09-27 17:54:25.671 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:54:25.671 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:54:25.671 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:54:25.671 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:54:25.671 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:54:25.672 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:54:25.672 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 4 document(s) from 'medqa'
+2026-09-27 17:54:25.672 | INFO     | app.rag.loaders.bioasq_loader:__init__:69 - BioASQLoader initialised: D:\Ragmed_2\backend\data\datasets\bioasq
+2026-09-27 17:54:25.672 | INFO     | app.rag.loaders.bioasq_loader:_find_dataset_files:77 - BioASQLoader found 1 JSON file(s).
+2026-09-27 17:54:25.672 | INFO     | app.rag.loaders.bioasq_loader:load:100 - BioASQLoader reading training13b.json
+2026-09-27 17:54:25.809 | INFO     | app.rag.loaders.bioasq_loader:load:109 -   training13b.json: 5389 questions
+2026-09-27 17:54:25.985 | INFO     | app.rag.loaders.bioasq_loader:load:162 -   training13b.json: emitted 68860 snippet documents
+2026-09-27 17:54:25.985 | SUCCESS  | app.rag.loaders.bioasq_loader:load:164 - BioASQLoader complete — 68860 snippet documents from 1 file(s).
+2026-09-27 17:54:26.009 | INFO     | app.retrieval.document_loader:load_all:82 - Loaded 68860 document(s) from 'bioasq'
+2026-09-27 17:54:26.010 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 68864 total documents
+2026-09-27 17:54:26.053 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=C:\Users\Yuvraj\AppData\Local\Temp\tmp8b0_an83
+2026-09-27 17:54:26.053 | WARNING  | app.retrieval.document_loader:load_all:77 - Dataset sub-directory not found, skipping: C:\Users\Yuvraj\AppData\Local\Temp\tmp8b0_an83\medqa
+2026-09-27 17:54:26.053 | WARNING  | app.retrieval.document_loader:load_all:77 - Dataset sub-directory not found, skipping: C:\Users\Yuvraj\AppData\Local\Temp\tmp8b0_an83\bioasq
+2026-09-27 17:54:26.053 | INFO     | app.retrieval.document_loader:load_all:87 - DocumentLoader.load_all — 0 total documents
+2026-09-27 17:54:26.059 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:54:26.073 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:54:26.076 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:54:26.080 | INFO     | app.retrieval.document_loader:__init__:60 - DocumentLoader initialised — datasets_dir=D:\Ragmed_2\backend\data\datasets
+2026-09-27 17:54:26.104 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:54:36.838 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:54:46.502 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:54:46.502 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:54:46.502 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:54:46.503 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:54:46.503 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:54:46.505 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:54:46.506 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:54:46.506 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:54:46.506 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:54:46.506 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:54:46.508 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:54:46.509 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:54:46.509 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:54:46.509 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:54:46.509 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:54:46.512 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:54:46.512 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:54:46.512 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:54:46.512 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:54:46.513 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:54:46.515 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: D:\Ragmed_2\backend\data\datasets\medqa
+2026-09-27 17:54:46.515 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 1 dataset file(s).
+2026-09-27 17:54:46.515 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 1 file(s).
+2026-09-27 17:54:46.515 | INFO     | app.rag.loaders.medqa_loader:load:43 - Reading sample.jsonl
+2026-09-27 17:54:46.516 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 4 MedQA documents.
+2026-09-27 17:54:46.527 | INFO     | app.rag.loaders.medqa_loader:__init__:18 - MedQA Loader initialized: \nonexistent\medqa_dir
+2026-09-27 17:54:46.527 | INFO     | app.rag.loaders.medqa_loader:_find_dataset_files:30 - Found 0 dataset file(s).
+2026-09-27 17:54:46.527 | INFO     | app.rag.loaders.medqa_loader:load:40 - Preparing to load 0 file(s).
+2026-09-27 17:54:46.527 | SUCCESS  | app.rag.loaders.medqa_loader:load:68 - Loaded 0 MedQA documents.
+2026-09-27 17:54:46.559 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:54:46.560 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:54:46.562 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-10\test_build_creates_files0
+2026-09-27 17:54:46.569 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:54:46.569 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:54:46.573 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-10\test_ntotal_matches_fixture0
+2026-09-27 17:54:46.577 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:54:46.578 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:54:46.580 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-10\test_chunks_have_medqa_source_0
+2026-09-27 17:54:46.619 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:54:46.619 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:54:46.622 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-10\test_chunk_text_is_question0
+2026-09-27 17:54:46.644 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:54:46.644 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:54:46.646 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-10\test_metadata_contains_answer0
+2026-09-27 17:54:46.662 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:54:46.662 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:54:46.665 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-10\test_force_false_skips_rebuild0
+2026-09-27 17:54:46.665 | INFO     | evaluation.index_builder:build:88 - MedQAIndexBuilder: index already exists at C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-10\test_force_false_skips_rebuild0 (pass force=True to rebuild).
+2026-09-27 17:54:46.681 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:54:46.681 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:54:46.684 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-10\test_force_true_rebuilds0
+2026-09-27 17:54:46.735 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:54:46.736 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:54:46.738 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-10\test_force_true_rebuilds0
+2026-09-27 17:54:46.749 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:54:58.717 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:55:09.331 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from D:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-09-27 17:55:14.088 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-09-27 17:55:14.912 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-10\mirage_index0
+2026-09-27 17:55:34.281 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:55:47.309 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-09-27 17:55:52.278 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-09-27 17:56:03.954 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
