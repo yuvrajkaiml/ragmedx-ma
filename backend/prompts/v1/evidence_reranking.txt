@@ -15,6 +15,10 @@ Evidence:
 Return only valid JSON:
 {
   "contradictory": false,
-  "selected_markers": ["[E1]"],
+  "selected_markers": ["[Doc 1]"],
   "reasoning": ""
 }
+
+Rules:
+- Select every usable supplied marker needed for a grounded answer; do not invent a marker.
+- Keep reasoning to at most 20 words.

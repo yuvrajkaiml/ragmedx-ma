@@ -228,6 +228,10 @@ class TestMedQAIndexBuilder:
 # ===========================================================================
 
 class TestBenchmarkRunnerScaffold:
+    def test_runner_owns_one_default_wrapper(self):
+        runner = BenchmarkRunner(dataset_path=FIXTURE_PATH)
+        assert runner.llm_wrapper is not None
+
     async def test_returns_completed_mock_scaffold(self):
         runner = BenchmarkRunner(dataset_path=FIXTURE_PATH, llm_wrapper=_FakeLLM())
         result = await runner.run_evaluation(max_samples=1)

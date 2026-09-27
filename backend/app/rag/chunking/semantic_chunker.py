@@ -64,6 +64,23 @@ class MedicalChunker:
             f"min_chunk_size={min_chunk_size}"
         )
 
+    @classmethod
+    def from_settings(cls) -> "MedicalChunker":
+        """Construct a MedicalChunker from the application Settings.
+
+        Reads ``retrieval_chunk_size``, ``retrieval_chunk_overlap``, and
+        ``retrieval_chunk_min_chars`` from the pydantic Settings singleton.
+        Constructor-arg overrides used by tests are unaffected because they
+        bypass this factory method and call ``__init__`` directly.
+        """
+        from app.config import get_settings  # local import avoids circular deps
+        s = get_settings()
+        return cls(
+            chunk_size=s.retrieval_chunk_size,
+            chunk_overlap=s.retrieval_chunk_overlap,
+            min_chunk_size=s.retrieval_chunk_min_chars,
+        )
+
     # ---------------------------------------------------------
     # TEXT CLEANING
     # ---------------------------------------------------------

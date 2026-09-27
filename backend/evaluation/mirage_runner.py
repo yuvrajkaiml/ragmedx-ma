@@ -19,6 +19,7 @@ from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional
 
 from app.agents import run_agent_pipeline
+from app.llm.local_llm import LocalLLMWrapper
 from evaluation.metrics import (
     compute_answer_with_citation_rate,
     compute_retrieval_coverage,
@@ -46,7 +47,10 @@ class BenchmarkRunner:
         retrieval_provider: Optional[Callable] = None,
     ):
         self.dataset_path = dataset_path
-        self.llm_wrapper = llm_wrapper
+        # Own exactly one wrapper for the complete evaluation.  Supplying a real
+        # local wrapper makes its model residency span all questions; the default
+        # remains explicit mock mode for lightweight existing scaffold callers.
+        self.llm_wrapper = llm_wrapper or LocalLLMWrapper(use_mock_fallback=True)
         self.retrieval_provider = retrieval_provider
 
     # ------------------------------------------------------------------
@@ -68,6 +72,22 @@ class BenchmarkRunner:
                     except json.JSONDecodeError:
                         pass
         return samples
+
+    def _load_llm_once(self) -> int:
+        """Warm an injected local wrapper once and return its load duration.
+
+        A benchmark must pass the *same* wrapper to every graph invocation.
+        ``LocalLLMWrapper.generate`` is lazy, so without this explicit warm-up the
+        first question absorbs model initialization and timing becomes ambiguous.
+        Wrappers already loaded by the caller are reused without reloading.
+        """
+        if self.llm_wrapper is None or not hasattr(self.llm_wrapper, "load_model"):
+            return 0
+        if getattr(self.llm_wrapper, "is_loaded", False):
+            return 0
+        started = time.perf_counter()
+        self.llm_wrapper.load_model()
+        return int((time.perf_counter() - started) * 1000)
 
     # ------------------------------------------------------------------
     # Original scaffold evaluation (API unchanged)
@@ -165,7 +185,10 @@ class BenchmarkRunner:
         from app.rag.pipeline import RAGPipeline
         from evaluation.index_builder import MedQAIndexBuilder
 
-        # 1. Load dataset
+        # 1. Warm exactly one injected local model before any question timing.
+        model_load_ms = self._load_llm_once()
+
+        # 2. Load dataset
         samples = self.load_dataset()
         if not samples:
             return {
@@ -178,7 +201,7 @@ class BenchmarkRunner:
 
         eval_samples = samples[:max_samples] if max_samples else samples
 
-        # 2. Build / load FAISS index
+        # 3. Build / load FAISS index
         if index_dir is None:
             index_dir = FAISS_INDEX_DIR / "mirage_eval"
         index_dir = Path(index_dir)
@@ -189,14 +212,15 @@ class BenchmarkRunner:
         )
         store = builder.build(force=force_reindex)
 
-        # 3. Construct the async facade over Sana's native pipeline.
+        # 4. Construct the async facade over Sana's native pipeline.
         pipeline = RAGPipeline.build(
             index_dir=index_dir,
             top_k_retrieval=top_k_retrieval,
             top_k_final=top_k_final,
         )
 
-        # 4. Evaluation loop
+        # 5. Evaluation loop. The already-warmed self.llm_wrapper is passed into
+        # every run_agent_pipeline call, so no model is reinstantiated per sample.
         predictions: List[Dict[str, Any]] = []
         ground_truths: List[Dict[str, Any]] = []
         per_sample_results: List[Dict[str, Any]] = []
@@ -240,7 +264,7 @@ class BenchmarkRunner:
                 "elapsed_ms":        elapsed_ms,
             })
 
-        # 5. Aggregate metrics
+        # 6. Aggregate metrics
         base_metrics = evaluate_batch(predictions, ground_truths)
 
         keyword_sets = [
@@ -262,6 +286,10 @@ class BenchmarkRunner:
             "dataset_path":        str(self.dataset_path),
             "index_dir":           str(index_dir),
             "samples_evaluated":   len(eval_samples),
+            "timing": {
+                "model_load_ms": model_load_ms,
+                "questions_wall_clock_ms": sum(item["elapsed_ms"] for item in per_sample_results),
+            },
             "metrics":             metrics,
             "per_sample_results":  per_sample_results,
         }

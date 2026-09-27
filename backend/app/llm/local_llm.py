@@ -27,7 +27,7 @@ class LocalLLMWrapper:
         self,
         model_name_or_path: str = "Qwen/Qwen3-8B",
         quantization_bits: int = 4,
-        device_map: str = "auto",
+        device_map: str = "cuda:0",
         max_context_length: int = 8192,
         mode: Union[LLMRuntimeMode, str] = LLMRuntimeMode.AUTO,
         allow_fallback: bool = False,
@@ -194,7 +194,30 @@ class LocalLLMWrapper:
             max_input_tokens = self.max_context_length - max_new_tokens
             truncated_prompt = truncate_to_max_tokens(full_prompt, max_input_tokens, self.tokenizer)
 
-            inputs = self.tokenizer(truncated_prompt, return_tensors="pt").to(self.model.device)
+            # Qwen and other instruction-tuned chat models expect their native
+            # chat template. Raw completion prompts make structured control-plane
+            # agents prepend prose before JSON, which can exhaust their bounded
+            # response budget. Keep the raw path only for tokenizers without a
+            # usable template.
+            chat_template = getattr(self.tokenizer, "chat_template", None)
+            if chat_template:
+                messages = []
+                if system_prompt:
+                    messages.append({"role": "system", "content": system_prompt})
+                    # ``full_prompt`` already embeds system text for legacy raw
+                    # prompts; give chat models the clean user content instead.
+                    truncated_prompt = truncate_to_max_tokens(prompt, max_input_tokens, self.tokenizer)
+                messages.append({"role": "user", "content": truncated_prompt})
+                model_prompt = self.tokenizer.apply_chat_template(
+                    messages,
+                    tokenize=False,
+                    add_generation_prompt=True,
+                    enable_thinking=False,
+                )
+            else:
+                model_prompt = truncated_prompt
+
+            inputs = self.tokenizer(model_prompt, return_tensors="pt").to(self.model.device)
 
             with torch.no_grad():
                 outputs = self.model.generate(

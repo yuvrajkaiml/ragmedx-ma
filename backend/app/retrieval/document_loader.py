@@ -29,6 +29,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Sequence
 
+from app.rag.loaders.bioasq_loader import BioASQLoader
 from app.rag.loaders.medqa_loader import MedQALoader
 from app.rag.loaders.models import MedicalDocument
 from app.rag.loaders.pdf_loader import PDFLoader
@@ -38,6 +39,7 @@ from app.utils.logger import logger
 # Sub-directory names inside ``datasets_dir`` that are auto-discovered.
 _KNOWN_SUBDIRS: dict[str, str] = {
     "medqa": "MedQA",
+    "bioasq": "BioASQ",
 }
 
 
@@ -125,7 +127,8 @@ class DocumentLoader:
         """Dispatch to the correct specialised loader for *path*."""
         if source_name == "MedQA":
             return MedQALoader(path).load()
-        # Future sources (BioASQ, PubMed, PMC, …) will be dispatched here.
+        if source_name == "BioASQ":
+            return BioASQLoader(path).load()
         logger.warning(f"No loader registered for source '{source_name}', skipping.")
         return []
 

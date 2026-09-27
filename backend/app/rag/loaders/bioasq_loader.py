@@ -1,129 +1,167 @@
 """
 BioASQ Dataset Loader
 
-Loads and parses the BioASQ training dataset into the
-standard MedicalDocument representation.
+Loads BioASQ training data into the standard MedicalDocument representation.
 
-Author: Sana
+Schema expected (Task 13b and compatible formats):
+  {
+    "questions": [
+      {
+        "id": "...",
+        "body": "...",           -- question text (used as context title only)
+        "snippets": [
+          {
+            "text":                 "...",  -- corpus content; one doc per snippet
+            "document":             "http://www.ncbi.nlm.nih.gov/pubmed/PMID",
+            "beginSection":         "title" | "abstract",
+            "endSection":           "title" | "abstract",
+            "offsetInBeginSection": int,
+            "offsetInEndSection":   int
+          },
+          ...
+        ],
+        "documents":    [...],  -- PubMed URLs for provenance only, NOT corpus
+        "ideal_answer": [...],  -- gold answers, NOT corpus content
+        ...
+      }
+    ]
+  }
+
+Each snippet's ``text`` becomes one MedicalDocument.  The snippet's
+``document`` URL is stored as ``source`` and in ``metadata`` for citation.
+The parent question's ``documents`` list and ``ideal_answer`` are deliberately
+ignored to prevent evaluation-answer leakage into the retrieval corpus.
+
+Deduplication (exact-text) is the caller's responsibility; the loader
+does not deduplicate across files to keep it stateless and composable.
 """
 
+from __future__ import annotations
+
+import json
 from pathlib import Path
 from typing import List
-import json
 
-from app.utils.logger import logger
 from app.rag.loaders.models import MedicalDocument
+from app.utils.logger import logger
+
+
+def _pmid_from_url(url: str) -> str:
+    """Extract a bare PMID string from a PubMed URL, or return the URL as-is."""
+    return url.rstrip("/").rsplit("/", 1)[-1] if url else ""
 
 
 class BioASQLoader:
     """
-    Loads and parses the BioASQ dataset.
+    Loads BioASQ training data, emitting one MedicalDocument per snippet.
+
+    Each snippet's ``text`` field is the corpus passage.  The snippet's
+    ``document`` URL (PMID URL) is stored as the document source so the
+    retrieval pipeline can surface it as a citation.
+
+    The question body is stored as ``metadata["question"]`` for traceability
+    but is NOT mixed into the passage text — the snippets are already
+    extracted evidence spans and should be embedded as-is.
     """
 
-    def __init__(self, dataset_path: Path):
-        self.dataset_path = dataset_path
+    def __init__(self, dataset_path: Path) -> None:
+        self.dataset_path = Path(dataset_path)
+        logger.info(f"BioASQLoader initialised: {self.dataset_path}")
 
-        logger.info(
-            f"BioASQ Loader initialized: {self.dataset_path}"
-        )
+    # ------------------------------------------------------------------
+    # Private helpers
+    # ------------------------------------------------------------------
 
     def _find_dataset_files(self) -> List[Path]:
-        """
-        Find JSON files in the BioASQ dataset directory.
-        """
-
-        json_files = list(self.dataset_path.glob("*.json"))
-
-        logger.info(
-            f"Found {len(json_files)} BioASQ dataset file(s)."
-        )
-
+        json_files = sorted(self.dataset_path.glob("*.json"))
+        logger.info(f"BioASQLoader found {len(json_files)} JSON file(s).")
         return json_files
+
+    # ------------------------------------------------------------------
+    # Public API
+    # ------------------------------------------------------------------
 
     def load(self) -> List[MedicalDocument]:
         """
-        Load BioASQ questions and convert them into
-        MedicalDocument objects.
+        Parse all JSON files in ``dataset_path`` and return one
+        MedicalDocument per non-empty snippet text.
+
+        Returns
+        -------
+        list[MedicalDocument]
+            Documents in file-then-question-then-snippet order.
+            Exact-text deduplication is NOT performed here; the caller
+            (build script) deduplicates before chunking.
         """
-
         files = self._find_dataset_files()
-
         documents: List[MedicalDocument] = []
 
         for file_path in files:
-
-            logger.info(f"Reading {file_path.name}")
-
+            logger.info(f"BioASQLoader reading {file_path.name}")
             try:
-                with open(
-                    file_path,
-                    "r",
-                    encoding="utf-8"
-                ) as file:
-
-                    data = json.load(file)
-
-            except (json.JSONDecodeError, OSError) as error:
-
-                logger.error(
-                    f"Failed to read {file_path.name}: {error}"
-                )
-
+                with open(file_path, "r", encoding="utf-8") as fh:
+                    data = json.load(fh)
+            except (json.JSONDecodeError, OSError) as err:
+                logger.error(f"BioASQLoader failed to read {file_path.name}: {err}")
                 continue
 
             questions = data.get("questions", [])
-
             logger.info(
-                f"Found {len(questions)} questions in {file_path.name}"
+                f"  {file_path.name}: {len(questions)} questions"
             )
 
+            file_docs = 0
             for question in questions:
-
                 question_id = question.get("id", "")
                 question_body = question.get("body", "")
-
                 snippets = question.get("snippets", [])
 
-                # Extract the actual evidence text from snippets
-                snippet_texts = []
+                # Deliberately skip: question["documents"] (provenance URLs only)
+                # Deliberately skip: question["ideal_answer"]  (eval-answer leakage)
 
-                for snippet in snippets:
-
+                for snippet_idx, snippet in enumerate(snippets):
                     text = snippet.get("text", "").strip()
+                    if not text:
+                        continue
 
-                    if text:
-                        snippet_texts.append(text)
+                    pmid_url = snippet.get("document", "")
+                    pmid = _pmid_from_url(pmid_url)
 
-                # Combine question and evidence into searchable content
-                content_parts = [question_body]
+                    # Stable, collision-resistant ID: file stem + question id + snippet index
+                    doc_id = f"bioasq_{question_id}_s{snippet_idx}"
 
-                if snippet_texts:
-                    content_parts.append(
-                        "\n\n".join(snippet_texts)
+                    # Build a short, human-readable title from the source section
+                    begin_section = snippet.get("beginSection", "abstract")
+                    end_section = snippet.get("endSection", "abstract")
+                    section_label = begin_section if begin_section == end_section else f"{begin_section}–{end_section}"
+                    title = f"PubMed {pmid} [{section_label}]" if pmid else f"BioASQ snippet {doc_id}"
+
+                    documents.append(
+                        MedicalDocument(
+                            id=doc_id,
+                            title=title,
+                            content=text,
+                            source=pmid_url or "bioasq",
+                            metadata={
+                                # Citation / provenance
+                                "pmid_url": pmid_url,
+                                "pmid": pmid,
+                                "begin_section": begin_section,
+                                "end_section": end_section,
+                                "offset_begin": snippet.get("offsetInBeginSection", 0),
+                                "offset_end": snippet.get("offsetInEndSection", 0),
+                                # Traceability back to the originating question
+                                "question_id": question_id,
+                                "question": question_body[:300],
+                                "source_file": file_path.name,
+                            },
+                        )
                     )
+                    file_docs += 1
 
-                content = "\n\n".join(content_parts)
-
-                metadata = {
-                    "documents": question.get("documents", []),
-                    "ideal_answer": question.get("ideal_answer", []),
-                    "concepts": question.get("concepts", []),
-                    "type": question.get("type"),
-                    "snippets": snippets,
-                }
-
-                medical_document = MedicalDocument(
-                    id=f"bioasq_{question_id}",
-                    title=question_body[:200],
-                    content=content,
-                    source="BioASQ",
-                    metadata=metadata,
-                )
-
-                documents.append(medical_document)
+            logger.info(f"  {file_path.name}: emitted {file_docs} snippet documents")
 
         logger.success(
-            f"Loaded {len(documents)} BioASQ documents."
+            f"BioASQLoader complete — {len(documents)} snippet documents from {len(files)} file(s)."
         )
-
         return documents
