@@ -1,44 +1,16 @@
 /**
- * ============================================================================
- *  RAGMedX-MA  —  Authentication Service  (MOCK / DEMO-ONLY)
- * ============================================================================
+ * RAGMedX-MA — Authentication Service (Real backend integration)
  *
- *  ⚠️  DEMO-ONLY: This module simulates authentication entirely on the client
- *  using localStorage.  Passwords are hashed with SHA-256 via SubtleCrypto,
- *  but this is NOT a substitute for a real server-side auth system.
+ * Connects to the FastAPI backend at /api/v1/auth/*.
+ * JWT access + refresh tokens are stored in localStorage.
+ * Every outbound API request should include:
+ *   Authorization: Bearer <access_token>
  *
- *  ── REPLACING WITH REAL API CALLS ──────────────────────────────────────────
- *
- *  When connecting to a real backend, replace the body of these functions:
- *
- *  1. signIn(email, password)
- *     → POST /api/auth/login  { email, password }
- *     ← { user: { id, name, email }, token }
- *     Store the token (httpOnly cookie or secure header).
- *
- *  2. signUp(name, email, password)
- *     → POST /api/auth/register  { name, email, password }
- *     ← { user: { id, name, email }, token }
- *
- *  3. signOut()
- *     → POST /api/auth/logout  (with token)
- *     ← 204 No Content
- *     Clear stored token / cookie.
- *
- *  4. getCurrentUser()
- *     → GET /api/auth/me  (with token)
- *     ← { user: { id, name, email } } | null
- *     Called on app boot to restore the session.
- *
- *  5. continueAsGuest()
- *     → No backend call needed (or POST /api/auth/guest if you track guests).
- *     Returns a synthetic guest user object.
- *
- *  The AuthUser interface below is the shape every consumer expects.
- * ============================================================================
+ * Token storage keys:
+ *   ragmedx_access_token  — short-lived JWT access token
+ *   ragmedx_refresh_token — long-lived refresh token
+ *   ragmedx_session       — AuthUser object (id, name, email, isGuest)
  */
-
-// ── Public types ────────────────────────────────────────────────────────────
 
 export interface AuthUser {
   id: string;
@@ -47,39 +19,32 @@ export interface AuthUser {
   isGuest: boolean;
 }
 
-// ── Internal storage helpers (demo-only) ─────────────────────────────────────
+// ── Storage helpers ──────────────────────────────────────────────────────────
 
-interface StoredUser {
-  id: string;
-  name: string;
-  email: string;
-  passwordHash: string;
-}
-
-const USERS_KEY = 'ragmedx_users';
+const ACCESS_KEY = 'ragmedx_access_token';
+const REFRESH_KEY = 'ragmedx_refresh_token';
 const SESSION_KEY = 'ragmedx_session';
 
-function getStoredUsers(): StoredUser[] {
-  try {
-    return JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
-  } catch {
-    return [];
-  }
+export function getAccessToken(): string | null {
+  return localStorage.getItem(ACCESS_KEY);
 }
 
-function saveStoredUsers(users: StoredUser[]): void {
-  localStorage.setItem(USERS_KEY, JSON.stringify(users));
+function saveTokens(access: string, refresh: string): void {
+  localStorage.setItem(ACCESS_KEY, access);
+  localStorage.setItem(REFRESH_KEY, refresh);
+}
+
+function clearTokens(): void {
+  localStorage.removeItem(ACCESS_KEY);
+  localStorage.removeItem(REFRESH_KEY);
+  localStorage.removeItem(SESSION_KEY);
 }
 
 function saveSession(user: AuthUser): void {
   localStorage.setItem(SESSION_KEY, JSON.stringify(user));
 }
 
-function clearSession(): void {
-  localStorage.removeItem(SESSION_KEY);
-}
-
-function loadSession(): AuthUser | null {
+export function getCurrentUser(): AuthUser | null {
   try {
     const raw = localStorage.getItem(SESSION_KEY);
     return raw ? (JSON.parse(raw) as AuthUser) : null;
@@ -88,84 +53,74 @@ function loadSession(): AuthUser | null {
   }
 }
 
-// ── SHA-256 hashing (SubtleCrypto) ──────────────────────────────────────────
-// ⚠️  Demo-only.  Real auth should hash passwords SERVER-SIDE with bcrypt/argon2.
+// ── API base ─────────────────────────────────────────────────────────────────
 
-async function sha256(text: string): Promise<string> {
-  const msgBuffer = new TextEncoder().encode(text);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
-}
+const BASE = '/api/v1';
 
-// ── Simulated network delay ─────────────────────────────────────────────────
-
-function delay(ms = 600): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-// ── Unique ID generator ─────────────────────────────────────────────────────
-
-function uid(): string {
-  return `u_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
-}
-
-// ── Public API ──────────────────────────────────────────────────────────────
-
-export async function signIn(
-  email: string,
-  password: string,
-): Promise<AuthUser> {
-  await delay();
-  const users = getStoredUsers();
-  const hash = await sha256(password);
-  const found = users.find(
-    (u) => u.email.toLowerCase() === email.toLowerCase() && u.passwordHash === hash,
-  );
-
-  if (!found) {
-    throw new Error('Incorrect email or password');
+async function apiPost<T>(path: string, body: unknown, token?: string): Promise<T> {
+  const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+  const res = await fetch(`${BASE}${path}`, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(body),
+  });
+  const json = await res.json();
+  if (!res.ok) {
+    // Backend returns { message } or { detail }
+    throw new Error(json.message || json.detail || `Request failed (${res.status})`);
   }
+  return json as T;
+}
 
+// ── Backend response shapes ──────────────────────────────────────────────────
+
+interface TokenResponse {
+  access_token: string;
+  refresh_token: string;
+  user: {
+    id: string;
+    email: string;
+    username: string;
+    full_name: string | null;
+    role: string;
+    is_active: boolean;
+    is_verified: boolean;
+    created_at: string;
+  };
+}
+
+// ── Public API ───────────────────────────────────────────────────────────────
+
+export async function signIn(email: string, password: string): Promise<AuthUser> {
+  const data = await apiPost<TokenResponse>('/auth/login', { email, password });
+  saveTokens(data.access_token, data.refresh_token);
   const user: AuthUser = {
-    id: found.id,
-    name: found.name,
-    email: found.email,
+    id: data.user.id,
+    name: data.user.full_name || data.user.username,
+    email: data.user.email,
     isGuest: false,
   };
   saveSession(user);
   return user;
 }
 
-export async function signUp(
-  name: string,
-  email: string,
-  password: string,
-): Promise<AuthUser> {
-  await delay();
-  const users = getStoredUsers();
-  const exists = users.some(
-    (u) => u.email.toLowerCase() === email.toLowerCase(),
-  );
-
-  if (exists) {
-    throw new Error('An account with this email already exists');
-  }
-
-  const hash = await sha256(password);
-  const newUser: StoredUser = {
-    id: uid(),
-    name,
-    email: email.toLowerCase(),
-    passwordHash: hash,
-  };
-  users.push(newUser);
-  saveStoredUsers(users);
-
+export async function signUp(name: string, email: string, password: string): Promise<AuthUser> {
+  // Backend expects: email, username, password, full_name
+  // Derive username from name (lowercase, no spaces)
+  const username = name.toLowerCase().replace(/\s+/g, '_');
+  const data = await apiPost<TokenResponse>('/auth/register', {
+    email,
+    username,
+    password,
+    full_name: name,
+    role: 'healthcare_professional',
+  });
+  saveTokens(data.access_token, data.refresh_token);
   const user: AuthUser = {
-    id: newUser.id,
-    name: newUser.name,
-    email: newUser.email,
+    id: data.user.id,
+    name: data.user.full_name || data.user.username,
+    email: data.user.email,
     isGuest: false,
   };
   saveSession(user);
@@ -173,21 +128,19 @@ export async function signUp(
 }
 
 export async function signOut(): Promise<void> {
-  await delay(300);
-  clearSession();
-}
-
-export function getCurrentUser(): AuthUser | null {
-  return loadSession();
+  const refresh = localStorage.getItem(REFRESH_KEY);
+  if (refresh) {
+    try {
+      await apiPost('/auth/logout', { refresh_token: refresh });
+    } catch {
+      // Logout best-effort — clear local state regardless
+    }
+  }
+  clearTokens();
 }
 
 export function continueAsGuest(): AuthUser {
-  const guest: AuthUser = {
-    id: 'guest',
-    name: 'Guest',
-    email: '',
-    isGuest: true,
-  };
+  const guest: AuthUser = { id: 'guest', name: 'Guest', email: '', isGuest: true };
   saveSession(guest);
   return guest;
 }

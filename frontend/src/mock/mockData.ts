@@ -12,7 +12,8 @@ import { HistorySessionItem } from '../types/history';
 import { ErrorType } from '../components/common/ErrorCard';
 
 // Single toggle to enable/disable mock testing mode across the frontend
-export const MOCK_MODE_ENABLED = true;
+// Set to false when connecting to the real backend.
+export const MOCK_MODE_ENABLED = false;
 
 // ----------------------------------------------------------------------
 // 1. MOCK VERIFIED ANSWER FIXTURE

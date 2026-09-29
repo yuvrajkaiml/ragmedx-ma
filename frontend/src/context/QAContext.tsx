@@ -4,14 +4,7 @@ import { CitationItem } from '../types/citation';
 import { AgentTraceStep, PipelineStage } from '../types/agent';
 import { PassageItem, EvidenceSourceItem } from '../types/evidence';
 import { HistorySessionItem } from '../types/history';
-import {
-  MOCK_MODE_ENABLED,
-  MOCK_VERIFIED_ANSWER,
-  MOCK_AGENT_TRACE_STEPS,
-  MOCK_PASSAGES,
-  MOCK_SOURCES,
-  MOCK_HISTORY_SESSIONS,
-} from '../mock/mockData';
+import { askQuestion } from '../services/api';
 
 interface QAContextState {
   activeQuestion: string | null;
@@ -20,15 +13,14 @@ interface QAContextState {
   agentTraceSteps: AgentTraceStep[];
   activeStage: PipelineStage;
   subQueries: string[];
-  retrievedEvidence: {
-    passages: PassageItem[];
-    sources: EvidenceSourceItem[];
-  };
+  retrievedEvidence: { passages: PassageItem[]; sources: EvidenceSourceItem[] };
   historySessions: HistorySessionItem[];
   selectedCitationIndex: number | null;
   isEvidencePanelOpen: boolean;
+  isLoading: boolean;
+  loadingMessage: string;
+  error: string | null;
 
-  // Action Handlers
   submitQuestion: (question: string) => void;
   clearQuestion: () => void;
   setAnswerData: (data: AnswerData | null) => void;
@@ -53,34 +45,64 @@ export const QAProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     passages: PassageItem[];
     sources: EvidenceSourceItem[];
   }>({ passages: [], sources: [] });
-
-  // Initialize history sessions (loads mock history if MOCK_MODE_ENABLED is true)
-  const [historySessions, setHistorySessions] = useState<HistorySessionItem[]>(
-    MOCK_MODE_ENABLED ? MOCK_HISTORY_SESSIONS : []
-  );
-
+  const [historySessions, setHistorySessions] = useState<HistorySessionItem[]>([]);
   const [selectedCitationIndex, setSelectedCitationIndex] = useState<number | null>(null);
   const [isEvidencePanelOpen, setIsEvidencePanelOpen] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadingMessage, setLoadingMessage] = useState('Processing…');
+  const [error, setError] = useState<string | null>(null);
 
   const submitQuestion = (question: string) => {
     setActiveQuestion(question);
-
-    if (MOCK_MODE_ENABLED) {
-      // In Mock Testing Mode: Populate mock verified answer fixtures
-      setAnswerData({ ...MOCK_VERIFIED_ANSWER, query: question });
-      setCitations(MOCK_VERIFIED_ANSWER.citationObjects || []);
-      setAgentTraceSteps(MOCK_AGENT_TRACE_STEPS);
-      setRetrievedEvidence({
-        passages: MOCK_PASSAGES,
-        sources: MOCK_SOURCES,
-      });
-    } else {
-      setAnswerData(null);
-      setCitations([]);
-      setAgentTraceSteps([]);
-      setRetrievedEvidence({ passages: [], sources: [] });
-    }
+    setAnswerData(null);
+    setCitations([]);
+    setAgentTraceSteps([]);
+    setRetrievedEvidence({ passages: [], sources: [] });
     setSelectedCitationIndex(null);
+    setError(null);
+    setIsLoading(true);
+    setLoadingMessage('Starting pipeline…');
+
+    askQuestion(
+      question,
+      // onTraceStep — append each step as it streams in
+      (step: AgentTraceStep) => {
+        setAgentTraceSteps((prev) => [...prev, step]);
+        setLoadingMessage(`Running ${step.phase}…`);
+      },
+      // onStatusMessage
+      (msg: string) => setLoadingMessage(msg),
+    )
+      .then(({ answerData: result, traceSteps, evidence }) => {
+        setAnswerData(result);
+        setAgentTraceSteps(traceSteps);
+        setRetrievedEvidence(evidence);
+        setCitations(result.citationObjects ?? []);
+        // Save to history
+        const session: HistorySessionItem = {
+          id: result.id,
+          question,
+          answerSummary: result.summary?.slice(0, 120) ?? '',
+          state: result.state,
+          confidenceScore: result.confidence.score,
+          confidenceLevel: result.confidence.level,
+          date: new Date().toLocaleString(),
+          sourceCount: evidence.sources.length,
+          citations: result.citationObjects ?? [],
+          agentTraceSteps: traceSteps,
+          passages: evidence.passages,
+          sources: evidence.sources,
+          fullAnswerData: result,
+        };
+        setHistorySessions((prev) => [session, ...prev]);
+      })
+      .catch((err: unknown) => {
+        const msg = err instanceof Error ? err.message : 'An unexpected error occurred';
+        setError(msg);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const clearQuestion = () => {
@@ -90,23 +112,22 @@ export const QAProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     setAgentTraceSteps([]);
     setRetrievedEvidence({ passages: [], sources: [] });
     setSelectedCitationIndex(null);
+    setError(null);
+    setIsLoading(false);
   };
 
   const reopenSession = (session: HistorySessionItem) => {
     setActiveQuestion(session.question);
-    if (session.fullAnswerData) {
-      setAnswerData(session.fullAnswerData);
-    } else {
-      setAnswerData(null);
-    }
-    setCitations(session.citations || []);
-    setAgentTraceSteps(session.agentTraceSteps || []);
+    setAnswerData(session.fullAnswerData ?? null);
+    setCitations(session.citations ?? []);
+    setAgentTraceSteps(session.agentTraceSteps ?? []);
     setRetrievedEvidence({
-      passages: session.passages || [],
-      sources: session.sources || [],
+      passages: session.passages ?? [],
+      sources: session.sources ?? [],
     });
     setSelectedCitationIndex(null);
     setIsEvidencePanelOpen(true);
+    setError(null);
   };
 
   return (
@@ -122,6 +143,9 @@ export const QAProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         historySessions,
         selectedCitationIndex,
         isEvidencePanelOpen,
+        isLoading,
+        loadingMessage,
+        error,
         submitQuestion,
         clearQuestion,
         setAnswerData,
@@ -139,9 +163,7 @@ export const QAProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 };
 
 export const useQA = (): QAContextState => {
-  const context = useContext(QAContext);
-  if (!context) {
-    throw new Error('useQA must be used within a QAProvider');
-  }
-  return context;
+  const ctx = useContext(QAContext);
+  if (!ctx) throw new Error('useQA must be used within a QAProvider');
+  return ctx;
 };

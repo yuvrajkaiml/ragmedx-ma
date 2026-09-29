@@ -18,6 +18,8 @@ export const AskPage: React.FC = () => {
     retrievedEvidence,
     selectedCitationIndex,
     isEvidencePanelOpen,
+    isLoading,
+    error,
     submitQuestion,
     clearQuestion,
     setSelectedCitationIndex,
@@ -97,7 +99,8 @@ export const AskPage: React.FC = () => {
             agentTraceSteps={agentTraceSteps}
             activeStage={activeStage}
             subQueries={subQueries}
-            onClearQuestion={clearQuestion}
+            errorType={error ? 'retrieval_failure' : null}
+            onClearQuestion={isLoading ? undefined : clearQuestion}
             onSelectCitation={handleSelectCitation}
             onSelectExampleQuestion={handleSelectExampleQuestion}
           />

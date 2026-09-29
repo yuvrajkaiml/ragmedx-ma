@@ -8,5 +8,13 @@ export default defineConfig({
   server: {
     port: 3000,
     open: false,
+    proxy: {
+      // Forward every /api request to the FastAPI backend.
+      // The frontend can call fetch('/api/v1/...') without CORS issues.
+      '/api': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+      },
+    },
   },
 });
