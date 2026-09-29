@@ -5,6 +5,12 @@ import { AgentTraceStep, PipelineStage } from '../types/agent';
 import { PassageItem, EvidenceSourceItem } from '../types/evidence';
 import { HistorySessionItem } from '../types/history';
 import { askQuestion } from '../services/api';
+import {
+  uploadDocument,
+  pollUntilIndexed,
+  deleteDocument,
+  DocumentStatus,
+} from '../services/documentService';
 
 interface QAContextState {
   activeQuestion: string | null;
@@ -21,8 +27,16 @@ interface QAContextState {
   loadingMessage: string;
   error: string | null;
 
+  // Document upload state
+  activeDocumentId: string | null;
+  activeDocumentName: string | null;
+  uploadStatus: DocumentStatus | null; // null = no doc, 'queued'/'processing'/'indexed'/'failed'
+  uploadChunkCount: number | null;
+
   submitQuestion: (question: string) => void;
   clearQuestion: () => void;
+  uploadAndAttachDocument: (file: File) => Promise<void>;
+  detachDocument: () => void;
   setAnswerData: (data: AnswerData | null) => void;
   setCitations: (citations: CitationItem[]) => void;
   setAgentTraceSteps: (steps: AgentTraceStep[]) => void;
@@ -52,6 +66,51 @@ export const QAProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [loadingMessage, setLoadingMessage] = useState('Processing…');
   const [error, setError] = useState<string | null>(null);
 
+  // Document upload state
+  const [activeDocumentId, setActiveDocumentId] = useState<string | null>(null);
+  const [activeDocumentName, setActiveDocumentName] = useState<string | null>(null);
+  const [uploadStatus, setUploadStatus] = useState<DocumentStatus | null>(null);
+  const [uploadChunkCount, setUploadChunkCount] = useState<number | null>(null);
+
+  const uploadAndAttachDocument = async (file: File): Promise<void> => {
+    setUploadStatus('queued');
+    setActiveDocumentName(file.name);
+    setActiveDocumentId(null);
+    setUploadChunkCount(null);
+    try {
+      const uploaded = await uploadDocument(file);
+      setActiveDocumentId(uploaded.document_id);
+      setUploadStatus('processing');
+      const result = await pollUntilIndexed(
+        uploaded.document_id,
+        (status, chunkCount) => {
+          setUploadStatus(status);
+          setUploadChunkCount(chunkCount);
+        },
+      );
+      setUploadStatus(result.status);
+      setUploadChunkCount(result.chunk_count);
+      if (result.status === 'failed') {
+        setActiveDocumentId(null);
+        setError(`Document indexing failed: ${result.error_message ?? 'unknown error'}`);
+      }
+    } catch (err: unknown) {
+      setUploadStatus('failed');
+      setActiveDocumentId(null);
+      setError(err instanceof Error ? err.message : 'Upload failed');
+    }
+  };
+
+  const detachDocument = () => {
+    if (activeDocumentId) {
+      deleteDocument(activeDocumentId).catch(() => {/* best effort */});
+    }
+    setActiveDocumentId(null);
+    setActiveDocumentName(null);
+    setUploadStatus(null);
+    setUploadChunkCount(null);
+  };
+
   const submitQuestion = (question: string) => {
     setActiveQuestion(question);
     setAnswerData(null);
@@ -65,6 +124,7 @@ export const QAProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
     askQuestion(
       question,
+      activeDocumentId ?? undefined,
       // onTraceStep — append each step as it streams in
       (step: AgentTraceStep) => {
         setAgentTraceSteps((prev) => [...prev, step]);
@@ -146,8 +206,14 @@ export const QAProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         isLoading,
         loadingMessage,
         error,
+        activeDocumentId,
+        activeDocumentName,
+        uploadStatus,
+        uploadChunkCount,
         submitQuestion,
         clearQuestion,
+        uploadAndAttachDocument,
+        detachDocument,
         setAnswerData,
         setCitations,
         setAgentTraceSteps,

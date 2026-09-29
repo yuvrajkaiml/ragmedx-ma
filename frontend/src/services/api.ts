@@ -262,6 +262,7 @@ async function pollUntilComplete(
 
 export async function askQuestion(
   question: string,
+  documentId?: string,
   onTraceStep?: (step: AgentTraceStep) => void,
   onStatusMessage?: (msg: string) => void,
 ): Promise<QueryResult> {
@@ -272,7 +273,11 @@ export async function askQuestion(
   const startRes = await fetch(`${BASE}/query/ask`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-    body: JSON.stringify({ question, include_agent_trace: true }),
+    body: JSON.stringify({
+      question,
+      include_agent_trace: true,
+      ...(documentId ? { document_id: documentId } : {}),
+    }),
   });
   if (!startRes.ok) {
     const err = await startRes.json();
