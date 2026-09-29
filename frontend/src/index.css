@@ -1,0 +1,435 @@
+@import "tailwindcss";
+
+:root {
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* ── Dark Theme Palette ── */
+  --bg: #050b0e;
+  --bg-2: #08141a;
+  --surface: #0b1a20;
+  --surface-2: #10262d;
+  --border: #1a3a42;
+  --border-strong: #24505a;
+  --text: #e8f5f4;
+  --text-muted: #8fb0b6;
+  --text-faint: #5f8189;
+  --accent: #14b8a6;
+  --accent-bright: #2dd4bf;
+  --mint: #5eead4;
+  --cyan: #22d3ee;
+  --accent-deep: #0f766e;
+  --warn-bg: #2a2108;
+  --warn-border: #7a5c10;
+  --warn-text: #fbbf24;
+  --success: #34d399;
+
+  /* Card elevation */
+  --card-shadow: 0 8px 32px rgba(0,0,0,.45);
+  --card-highlight: inset 0 1px 0 rgba(94,234,212,.08);
+}
+
+/* Dark page background with subtle dotted grid */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg) !important;
+  background-image: radial-gradient(rgba(20, 184, 166, 0.06) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+  color: var(--text);
+  min-height: 100vh;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  background-color: transparent !important;
+}
+
+/* ── Dark scrollbars ── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+*::-webkit-scrollbar { width: 6px; height: 6px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
+*::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ----------------------------------------------------------------------
+ * HIGH-ENERGY MOTION SPECIFICATION & KEYFRAMES
+ * ---------------------------------------------------------------------- */
+
+/* 1. Aurora Background Blobs */
+@keyframes auroraBlobSpec1 {
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  100% { transform: translate(12vw, -10vh) scale(1.3) rotate(40deg); }
+}
+@keyframes auroraBlobSpec2 {
+  0% { transform: translate(0, 0) scale(1.1) rotate(0deg); }
+  100% { transform: translate(-10vw, 8vh) scale(1.25) rotate(-35deg); }
+}
+@keyframes auroraBlobSpec3 {
+  0% { transform: translate(0, 0) scale(0.9) rotate(0deg); }
+  100% { transform: translate(8vw, 12vh) scale(1.35) rotate(45deg); }
+}
+.animate-aurora-spec-1 { animation: auroraBlobSpec1 14s ease-in-out infinite alternate; }
+.animate-aurora-spec-2 { animation: auroraBlobSpec2 18s ease-in-out infinite alternate; }
+.animate-aurora-spec-3 { animation: auroraBlobSpec3 22s ease-in-out infinite alternate; }
+
+/* 2. Logo Heart Heartbeat */
+@keyframes specHeartbeat {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(20, 184, 166, 0.6);
+  }
+  15% {
+    transform: scale(1.14);
+  }
+  30% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.08);
+    box-shadow: 0 0 0 14px rgba(20, 184, 166, 0);
+  }
+}
+.animate-spec-heartbeat {
+  animation: specHeartbeat 1.4s ease-in-out infinite;
+}
+
+/* 3. Card Entrance 3D */
+@keyframes specCardEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) rotateX(-12deg) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg) scale(1);
+  }
+}
+.animate-card-entrance-spec {
+  animation: specCardEntrance 0.8s cubic-bezier(0.2, 1.2, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+/* 4. Active Nav Item Sweeping Sheen */
+@keyframes specActiveSheen {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+.animate-active-sheen-spec::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent 30%, rgba(94, 234, 212, 0.15) 50%, transparent 70%);
+  animation: specActiveSheen 3s ease-in-out infinite;
+}
+
+/* 5. Floating Icons (Shield / Bolt) */
+@keyframes specIconFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.animate-icon-float {
+  animation: specIconFloat 2.8s ease-in-out infinite;
+}
+
+/* 6. Sample Chips Stagger Left Entrance & Hover */
+@keyframes specChipSlideLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px) scale(0.9);
+  }
+  70% {
+    transform: translateX(4px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+.animate-chip-slide {
+  animation: specChipSlideLeft 0.5s cubic-bezier(0.2, 1.4, 0.3, 1) forwards;
+}
+.chip-hover-spec {
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+.chip-hover-spec:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 6px 16px -2px rgba(20, 184, 166, 0.4);
+}
+
+/* 7. How It Works Steps & Badges */
+@keyframes specRowSlideRight {
+  0% {
+    opacity: 0;
+    transform: translateX(35px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.animate-row-slide {
+  animation: specRowSlideRight 0.6s cubic-bezier(0.2, 1.2, 0.3, 1) forwards;
+}
+
+@keyframes specBadgePop {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.animate-badge-pop {
+  animation: specBadgePop 0.4s cubic-bezier(0.2, 1.8, 0.4, 1) forwards;
+}
+
+@keyframes specMintGlowSequence {
+  0%, 100% { box-shadow: none; background-color: transparent; }
+  50% { box-shadow: 0 0 12px 2px rgba(52, 211, 153, 0.5); background-color: rgba(167, 243, 208, 0.25); }
+}
+
+@keyframes specYellowBreathingBorder {
+  0%, 100% { border-color: rgba(245, 158, 11, 0.4); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+  50% { border-color: rgba(245, 158, 11, 0.9); box-shadow: 0 0 12px 2px rgba(245, 158, 11, 0.25); }
+}
+.animate-yellow-breathing {
+  animation: specYellowBreathingBorder 3s ease-in-out infinite;
+}
+
+/* 8. Chat Input Conic Gradient Border & Outer Glow */
+@keyframes specConicRotateFast {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.input-conic-wrapper {
+  position: relative;
+  border-radius: 1rem;
+  padding: 2px;
+  background: conic-gradient(from 0deg, #14b8a6, #06b6d4, #10b981, #14b8a6);
+  box-shadow: 0 0 16px 2px rgba(20, 184, 166, 0.35);
+  transition: box-shadow 200ms ease;
+}
+.input-conic-wrapper:focus-within {
+  box-shadow: 0 0 26px 6px rgba(20, 184, 166, 0.6);
+}
+
+/* 9. Pipeline Stage Rotating Conic & Completion Pop */
+@keyframes specPipelineConicOverlay {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.animate-pipeline-conic {
+  animation: specPipelineConicOverlay 1s linear infinite;
+}
+
+@keyframes specStagePop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.1) rotate(-2deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+.animate-stage-pop {
+  animation: specStagePop 0.4s ease-out forwards;
+}
+
+@keyframes specDotPing {
+  0% {
+    box-shadow: 0 0 0 0 rgba(20, 184, 166, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgba(20, 184, 166, 0);
+  }
+}
+.animate-dot-ping {
+  animation: specDotPing 1.4s ease-out infinite;
+}
+
+/* 10. Checkmark SVG Stroke Draw */
+@keyframes specCheckmarkDraw {
+  0% { stroke-dashoffset: 24; }
+  100% { stroke-dashoffset: 0; }
+}
+.animate-checkmark-draw-spec {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  animation: specCheckmarkDraw 0.5s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+/* 11. Verified Badge Glow */
+@keyframes specVerifiedGlow {
+  0%, 100% {
+    box-shadow: 0 0 8px 1px rgba(20, 184, 166, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 22px 5px rgba(20, 184, 166, 0.7);
+  }
+}
+.animate-verified-glow-spec {
+  animation: specVerifiedGlow 2.4s ease-in-out infinite;
+}
+
+/* 12. Button Micro-Interactions & Ripple */
+.btn-spec {
+  transition: transform 150ms cubic-bezier(0.2, 1.2, 0.3, 1), box-shadow 150ms ease;
+  will-change: transform;
+}
+.btn-spec:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 20px -3px rgba(20, 184, 166, 0.35);
+}
+.btn-spec:active {
+  transform: scale(0.92);
+}
+
+/* ----------------------------------------------------------------------
+ * AUTH PAGE ANIMATIONS
+ * ---------------------------------------------------------------------- */
+
+/* 13. ECG heartbeat line SVG stroke draw */
+@keyframes specEcgDraw {
+  0% { stroke-dashoffset: 1200; }
+  100% { stroke-dashoffset: 0; }
+}
+.animate-ecg-draw {
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  animation: specEcgDraw 4s linear infinite;
+}
+
+/* 14. Auth form card teal glow border */
+.auth-form-card {
+  box-shadow: 0 8px 32px rgba(0,0,0,.45), 0 0 30px -6px rgba(20, 184, 166, 0.15);
+  transition: box-shadow 300ms ease;
+}
+.auth-form-card:focus-within {
+  box-shadow: 0 8px 32px rgba(0,0,0,.45), 0 0 40px -4px rgba(20, 184, 166, 0.35);
+}
+
+/* 15. Auth form cross-fade and slide */
+@keyframes specAuthFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.animate-auth-fade-in {
+  animation: specAuthFadeIn 0.4s cubic-bezier(0.2, 1.2, 0.3, 1) forwards;
+}
+
+/* 16. Shake on invalid submit */
+@keyframes specAuthShake {
+  0%, 100% { transform: translateX(0); }
+  15% { transform: translateX(-8px); }
+  30% { transform: translateX(7px); }
+  45% { transform: translateX(-6px); }
+  60% { transform: translateX(5px); }
+  75% { transform: translateX(-3px); }
+  90% { transform: translateX(2px); }
+}
+.animate-auth-shake {
+  animation: specAuthShake 0.5s ease-in-out;
+}
+
+/* 17. Caret blink for typewriter */
+@keyframes specCaretBlink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+.animate-caret-blink {
+  animation: specCaretBlink 0.8s step-end infinite;
+}
+
+/* 18. Brand pulse (waiting icon) */
+@keyframes specBrandPulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+.animate-brand-pulse {
+  animation: specBrandPulse 2s ease-in-out infinite;
+}
+
+/* 19. Icon ripple (question box icon) */
+@keyframes specIconRipple {
+  0% { box-shadow: 0 0 0 0 rgba(20, 184, 166, 0.5); }
+  100% { box-shadow: 0 0 0 10px rgba(20, 184, 166, 0); }
+}
+.animate-icon-ripple {
+  animation: specIconRipple 1.5s ease-out infinite;
+}
+
+/* 20. Card 3D entrance (used in AnswerContainer) */
+@keyframes specCard3d {
+  0% {
+    opacity: 0;
+    transform: perspective(800px) translateY(30px) rotateX(-8deg) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(800px) translateY(0) rotateX(0deg) scale(1);
+  }
+}
+.animate-card-3d {
+  animation: specCard3d 0.7s cubic-bezier(0.2, 1.2, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+/* ----------------------------------------------------------------------
+ * ACCESSIBILITY: REDUCED MOTION OVERRIDE
+ * ---------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .animate-aurora-spec-1,
+  .animate-aurora-spec-2,
+  .animate-aurora-spec-3,
+  .animate-spec-heartbeat,
+  .animate-card-entrance-spec,
+  .animate-active-sheen-spec::after,
+  .animate-icon-float,
+  .animate-chip-slide,
+  .animate-row-slide,
+  .animate-badge-pop,
+  .animate-yellow-breathing,
+  .animate-pipeline-conic,
+  .animate-stage-pop,
+  .animate-dot-ping,
+  .animate-checkmark-draw-spec,
+  .animate-verified-glow-spec,
+  .animate-ecg-draw,
+  .animate-auth-fade-in,
+  .animate-auth-shake,
+  .animate-caret-blink,
+  .animate-brand-pulse,
+  .animate-icon-ripple,
+  .animate-card-3d,
+  .btn-spec {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
