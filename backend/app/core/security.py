@@ -10,12 +10,19 @@ from app.config import get_settings
 password_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
+def _truncate(password: str) -> str:
+    """bcrypt silently truncates at 72 bytes; newer passlib raises instead.
+    Pre-truncate so behaviour is identical across all passlib/bcrypt versions."""
+    encoded = password.encode("utf-8")
+    return encoded[:72].decode("utf-8", errors="ignore")
+
+
 def hash_password(password: str) -> str:
-    return password_context.hash(password)
+    return password_context.hash(_truncate(password))
 
 
 def verify_password(plain_password: str, password_hash: str) -> bool:
-    return password_context.verify(plain_password, password_hash)
+    return password_context.verify(_truncate(plain_password), password_hash)
 
 
 def create_token(
