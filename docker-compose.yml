@@ -1,1 +1,55 @@
-# Owner: Pranav Sukale — not yet implemented, see Task_Assignment.md
+# Owner: Pranav Sukale
+# Project-level orchestration for RAGMedX-MA. Run from the repository root:
+#   docker compose up --build
+#
+# Currently starts the backend API (CPU / mock-LLM default). The frontend
+# service is stubbed below and can be enabled once Shravani's frontend ships a
+# Dockerfile. Redis is likewise stubbed for the future multi-worker deployment
+# (see B12); the backend runs single-worker without it today.
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: ragmedx-backend:latest
+    container_name: ragmedx-backend
+    ports:
+      - "8000:8000"
+    environment:
+      RAGMEDX_LLM_MODE: ${RAGMEDX_LLM_MODE:-mock}
+      RAGMEDX_FAISS_INDEX_DIR: data/faiss_index
+      DATABASE_URL: ${DATABASE_URL:-sqlite+aiosqlite:///./data/ragmedx.db}
+    env_file:
+      # Optional: copy backend/.env.example to backend/.env. Missing file is fine.
+      - path: ./backend/.env
+        required: false
+    volumes:
+      - ./backend/data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 40s
+
+  # --- Enable when the frontend ships a Dockerfile ------------------------
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   image: ragmedx-frontend:latest
+  #   container_name: ragmedx-frontend
+  #   ports:
+  #     - "5173:5173"
+  #   depends_on:
+  #     - backend
+
+  # --- Enable for multi-worker session/response caching (B12) -------------
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: ragmedx-redis
+  #   ports:
+  #     - "6379:6379"
+  #   restart: unless-stopped

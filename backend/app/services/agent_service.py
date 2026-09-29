@@ -28,9 +28,14 @@ class AgentService:
         include_trace: bool = False,
         processed_query: Optional[Dict[str, Any]] = None,
         evidence: Optional[List[Dict[str, Any]]] = None,
+        retrieval_provider: Optional[Callable] = None,
     ) -> Tuple[MedicalResponse, Optional[AgentTraceOutput]]:
         """
         Execute the multi-agent question-answering workflow.
+
+        A per-call ``retrieval_provider`` overrides the service default, which
+        lets a single query be scoped to an uploaded document's isolated index
+        without disturbing the shared knowledge-base provider.
         """
         return await run_agent_pipeline(
             original_question=question,
@@ -40,5 +45,5 @@ class AgentService:
             evidence=evidence,
             include_trace=include_trace,
             llm_wrapper=self.llm_wrapper,
-            retrieval_provider=self.retrieval_provider,
+            retrieval_provider=retrieval_provider or self.retrieval_provider,
         )

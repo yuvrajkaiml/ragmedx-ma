@@ -17,6 +17,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db import AsyncSessionLocal
 from app.db.models import Conversation, QueryExecutionRecord
+from app.schemas.document import DocumentStatus
 from app.schemas.query import (
     MedicalQueryRequest,
     QueryAcceptedResponse,
@@ -70,11 +71,17 @@ class QueryExecutionService:
             if conversation is None or conversation.user_id != user_id:
                 raise ValueError("Conversation not found")
 
+        # Scope retrieval to an uploaded document when requested. The document
+        # must belong to the caller and have finished indexing.
+        if request.document_id is not None:
+            self._validate_document_scope(request.document_id, user_id)
+
         query_id = uuid4()
         record = QueryExecutionRecord(
             id=query_id,
             user_id=user_id,
             conversation_id=request.conversation_id,
+            document_id=request.document_id,
             question=request.question,
             include_agent_trace=request.include_agent_trace,
             status=QueryExecutionStatus.QUEUED.value,
@@ -97,6 +104,26 @@ class QueryExecutionService:
         )
         execution.task = asyncio.create_task(self._run(execution))
         return QueryAcceptedResponse(query_id=query_id, status=execution.status)
+
+    @staticmethod
+    def _validate_document_scope(document_id: UUID, user_id: UUID) -> None:
+        """Ensure a document-scoped query targets the caller's indexed document.
+
+        Raises ``ValueError`` (rendered as 404 by the endpoint) when the
+        document does not exist or is not owned by the user, and a distinct
+        message when it exists but is not yet indexed.
+        """
+        from app.services.document_service import DocumentService
+
+        service = DocumentService()
+        document = service.get_status(document_id, user_id)
+        if document is None:
+            raise ValueError("Document not found")
+        if document.status != DocumentStatus.INDEXED:
+            raise ValueError(
+                "Document is not ready for retrieval yet "
+                f"(current status: {document.status.value})."
+            )
 
     async def get_persisted(
         self,
@@ -202,12 +229,23 @@ class QueryExecutionService:
             {"status": "retrieval_requested"},
         )
 
+        # When the query targets an uploaded document, retrieval is served from
+        # that document's isolated index instead of the shared knowledge base.
+        scoped_provider = None
+        if execution.request.document_id is not None:
+            from app.services.uploaded_document_index import UploadedDocumentIndexService
+
+            scoped_provider = UploadedDocumentIndexService().evidence_provider(
+                execution.request.document_id
+            )
+
         try:
             response, trace = await self.agent_service.execute_query(
                 question=execution.request.question,
                 query_id=execution.query_id,
                 conversation_id=execution.request.conversation_id,
                 include_trace=execution.request.include_agent_trace,
+                retrieval_provider=scoped_provider,
             )
             execution.response = response
             execution.status = QueryExecutionStatus.COMPLETED

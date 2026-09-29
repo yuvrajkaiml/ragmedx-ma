@@ -123,6 +123,7 @@ class QueryExecutionRecord(Base):
         index=True,
     )
     conversation_id: Mapped[uuid.UUID | None] = mapped_column(nullable=True, index=True)
+    document_id: Mapped[uuid.UUID | None] = mapped_column(nullable=True, index=True)
     question: Mapped[str] = mapped_column(Text)
     include_agent_trace: Mapped[bool] = mapped_column(Boolean, default=False)
     status: Mapped[str] = mapped_column(String(20), default="queued", index=True)

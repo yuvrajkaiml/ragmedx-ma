@@ -19,6 +19,14 @@ class MedicalQueryRequest(BaseModel):
         default=None,
         description="Optional existing conversation ID.",
     )
+    document_id: UUID | None = Field(
+        default=None,
+        description=(
+            "Optional uploaded-document ID. When provided, retrieval is scoped "
+            "to that document's index instead of the shared knowledge base. "
+            "The document must belong to the authenticated user and be indexed."
+        ),
+    )
     include_agent_trace: bool = Field(
         default=False,
         description="Whether to include the internal agent-processing trace.",

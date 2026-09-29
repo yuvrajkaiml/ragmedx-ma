@@ -1,0 +1,45 @@
+# Keep the build context small and reproducible.
+
+# Virtual environments
+.venv/
+env/
+venv/
+ENV/
+
+# Python caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Secrets & local env
+.env
+.env.local
+
+# Local data artifacts (mounted as a volume at runtime instead)
+data/faiss_index/
+data/vectorstore/
+data/uploads/
+data/cache/
+data/embeddings/
+data/results/
+data/experiments/
+data/datasets/
+*.db
+
+# Logs
+logs/
+*.log
+
+# Model weights (downloaded at runtime into the mounted cache)
+*.bin
+*.safetensors
+*.pt
+*.pth
+*.onnx
+*.gguf
+
+# Docs / misc not needed in the image
+*.md
+tests/
