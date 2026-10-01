@@ -14,11 +14,19 @@ Pipeline:
   settings.faiss_index_dir/        — index.faiss + chunks.pkl
 
 Usage (from backend/):
-    python -m scripts.build_index                   # default settings
-    RAGMEDX_FAISS_INDEX_DIR=data/faiss_index \\
-        python -m scripts.build_index               # explicit output dir
+    python -m scripts.build_index                    # full production index
+    python -m scripts.build_index \\
+        --corpus-file data/datasets/bioasq_eval_split/train_corpus.json \\
+        --output-dir  data/faiss_index/eval_split    # eval-split index
 
-Env vars read via Settings:
+    RAGMEDX_FAISS_INDEX_DIR=data/faiss_index \\
+        python -m scripts.build_index               # explicit output dir (env)
+
+When --corpus-file is supplied the script reads that JSON file directly
+(a list of snippet dicts as written by build_eval_split.py) instead of
+calling DocumentLoader.load_all().  The production index is never touched.
+
+Env vars read via Settings (apply to both modes unless overridden by flags):
     RAGMEDX_FAISS_INDEX_DIR   — output directory (default: data/faiss_index)
     RAGMEDX_LLM_MODE          — informational only; index build always runs
     RETRIEVAL_CHUNK_SIZE      — MedicalChunker.chunk_size   (default 1000)
@@ -28,6 +36,7 @@ Env vars read via Settings:
 
 from __future__ import annotations
 
+import argparse
 import sys
 import time
 from pathlib import Path
@@ -41,6 +50,7 @@ if str(_BACKEND_DIR) not in sys.path:
 from app.config import DATASETS_DIR, get_settings
 from app.rag.chunking.semantic_chunker import MedicalChunker
 from app.rag.embeddings.bge_embedding import BGEEmbedding
+from app.rag.loaders.models import MedicalDocument
 from app.rag.vectorstore.faiss_store import FAISSVectorStore
 from app.retrieval.document_loader import DocumentLoader
 from app.utils.logger import logger
@@ -69,18 +79,64 @@ def _deduplicate(documents):
 
 
 def main() -> None:
+    # ------------------------------------------------------------------ #
+    # CLI argument parsing
+    # ------------------------------------------------------------------ #
+    ap = argparse.ArgumentParser(
+        description=(
+            "Build a FAISS index for RAGMedX-MA. "
+            "Without --corpus-file, scans the standard datasets directory. "
+            "With --corpus-file, reads a pre-built snippet JSON (e.g. from "
+            "build_eval_split.py) and writes to --output-dir."
+        )
+    )
+    ap.add_argument(
+        "--corpus-file",
+        type=Path,
+        default=None,
+        help=(
+            "Path to a train_corpus.json produced by build_eval_split.py. "
+            "When supplied, skips DocumentLoader.load_all() entirely. "
+            "The production index (data/faiss_index/) is never touched."
+        ),
+    )
+    ap.add_argument(
+        "--output-dir",
+        type=Path,
+        default=None,
+        help=(
+            "Directory to write index.faiss and chunks.pkl into. "
+            "Overrides RAGMEDX_FAISS_INDEX_DIR when supplied. "
+            "Use a path DIFFERENT from data/faiss_index/ to avoid "
+            "overwriting the production index."
+        ),
+    )
+    args = ap.parse_args()
+
     t_total = time.perf_counter()
     settings = get_settings()
 
-    output_dir: Path = settings.faiss_index_dir
-    # Resolve relative paths against the backend/ directory so the script
-    # works regardless of the current working directory.
-    if not output_dir.is_absolute():
-        output_dir = _BACKEND_DIR / output_dir
+    # Resolve output directory: CLI flag > env var/settings default
+    if args.output_dir is not None:
+        output_dir = args.output_dir
+        if not output_dir.is_absolute():
+            output_dir = _BACKEND_DIR / output_dir
+    else:
+        output_dir = settings.faiss_index_dir
+        if not output_dir.is_absolute():
+            output_dir = _BACKEND_DIR / output_dir
+
+    corpus_file: Path | None = args.corpus_file
+    if corpus_file is not None and not corpus_file.is_absolute():
+        corpus_file = _BACKEND_DIR / corpus_file
 
     logger.info("=" * 60)
-    logger.info("RAGMedX-MA — production index build")
-    logger.info(f"  datasets_dir : {DATASETS_DIR}")
+    if corpus_file:
+        logger.info("RAGMedX-MA — eval-split index build")
+        logger.info(f"  corpus_file  : {corpus_file}")
+    else:
+        logger.info("RAGMedX-MA — production index build")
+        logger.info(f"  datasets_dir : {DATASETS_DIR}")
     logger.info(f"  output_dir   : {output_dir}")
     logger.info(f"  chunk_size   : {settings.retrieval_chunk_size}")
     logger.info(f"  chunk_overlap: {settings.retrieval_chunk_overlap}")
@@ -93,17 +149,63 @@ def main() -> None:
     # ------------------------------------------------------------------ #
     logger.info("Step 1/4 — loading documents …")
     t0 = time.perf_counter()
-    loader = DocumentLoader(DATASETS_DIR)
-    raw_docs = loader.load_all()
-    logger.info(
-        f"  Loaded {len(raw_docs)} raw documents "
-        f"({time.perf_counter() - t0:.1f}s)"
-    )
+
+    if corpus_file is not None:
+        # --corpus-file path: read snippet dicts written by build_eval_split.py
+        if not corpus_file.exists():
+            logger.error(f"Corpus file not found: {corpus_file}")
+            sys.exit(1)
+        import json as _json
+        with open(corpus_file, "r", encoding="utf-8") as fh:
+            snippet_dicts = _json.load(fh)
+        # Convert to MedicalDocument objects matching the BioASQLoader contract
+        raw_docs: list[MedicalDocument] = []
+        for idx, s in enumerate(snippet_dicts):
+            pmid_url      = s.get("document", "")
+            pmid          = pmid_url.rstrip("/").rsplit("/", 1)[-1] if pmid_url else ""
+            begin_section = s.get("beginSection", "abstract")
+            end_section   = s.get("endSection", "abstract")
+            section_label = (
+                begin_section if begin_section == end_section
+                else f"{begin_section}–{end_section}"
+            )
+            q_id  = s.get("question_id", f"snippet_{idx}")
+            title = f"PubMed {pmid} [{section_label}]" if pmid else f"BioASQ snippet {idx}"
+            raw_docs.append(
+                MedicalDocument(
+                    id=f"bioasq_{q_id}_s{idx}",
+                    title=title,
+                    content=s.get("text", ""),
+                    source=pmid_url or "bioasq",
+                    metadata={
+                        "pmid_url":    pmid_url,
+                        "pmid":        pmid,
+                        "begin_section": begin_section,
+                        "end_section":   end_section,
+                        "offset_begin":  s.get("offsetInBeginSection", 0),
+                        "offset_end":    s.get("offsetInEndSection", 0),
+                        "question_id":   q_id,
+                        "source_file":   s.get("source_file", ""),
+                    },
+                )
+            )
+        logger.info(
+            f"  Loaded {len(raw_docs)} documents from corpus file "
+            f"({time.perf_counter() - t0:.1f}s)"
+        )
+    else:
+        # Default path: discover all datasets via DocumentLoader
+        loader = DocumentLoader(DATASETS_DIR)
+        raw_docs = loader.load_all()
+        logger.info(
+            f"  Loaded {len(raw_docs)} raw documents "
+            f"({time.perf_counter() - t0:.1f}s)"
+        )
 
     if not raw_docs:
         logger.error(
-            "No documents loaded — check that backend/data/datasets/bioasq/ "
-            "exists and contains training13b.json (or any *.json file)."
+            "No documents loaded — check the corpus file or "
+            "backend/data/datasets/bioasq/."
         )
         sys.exit(1)
 
