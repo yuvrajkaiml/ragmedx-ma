@@ -185,7 +185,11 @@ async def test_query_ask_accepts_trace_request_for_the_background_execution(monk
     assert data["status"] in ("queued", "running")
 
 
-async def test_readiness_reports_missing_runtime_resources():
+async def test_readiness_reports_missing_runtime_resources(monkeypatch, tmp_path):
+    # Point faiss_index_dir at an empty temp directory so index.faiss and
+    # chunks.pkl are guaranteed absent, regardless of the developer's local data.
+    monkeypatch.setattr(main_module.get_settings(), "faiss_index_dir", tmp_path)
+
     transport = ASGITransport(app=app)
     async with AsyncClient(transport=transport, base_url="http://test") as client:
         response = await client.get("/readiness")
