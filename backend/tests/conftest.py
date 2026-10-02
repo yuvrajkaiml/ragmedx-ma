@@ -26,11 +26,14 @@ def force_mock_llm_mode():
     """Remove RAGMEDX_LLM_MODE from the process environment for the test session
     and clear the lru_cache so every get_settings() call sees mock mode."""
     original = os.environ.pop("RAGMEDX_LLM_MODE", None)
+    # Override with mock so the .env file's value cannot bleed through.
+    os.environ["RAGMEDX_LLM_MODE"] = "mock"
     # Clear cached Settings singleton so the mode change takes effect.
     from app.config import get_settings
     get_settings.cache_clear()
     yield
     # Restore after the session (safe for interactive re-runs in the same shell).
+    del os.environ["RAGMEDX_LLM_MODE"]
     if original is not None:
         os.environ["RAGMEDX_LLM_MODE"] = original
     get_settings.cache_clear()

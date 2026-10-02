@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import inspect, text
 
 from app.api.v1.router import api_router
-from app.config import FAISS_INDEX_DIR, get_settings
+from app.config import get_settings
 from app.core.exceptions import register_exception_handlers
 from app.db import Base, engine
 from app.llm.local_llm import LLMRuntimeMode, LocalLLMWrapper
@@ -97,8 +97,9 @@ def create_app() -> FastAPI:
     @app.get("/readiness", tags=["Health"])
     async def readiness_check():
         runtime_settings = get_settings()
-        index_ready = (FAISS_INDEX_DIR / "index.faiss").is_file() and (
-            FAISS_INDEX_DIR / "chunks.pkl"
+        faiss_dir = runtime_settings.faiss_index_dir
+        index_ready = (faiss_dir / "index.faiss").is_file() and (
+            faiss_dir / "chunks.pkl"
         ).is_file()
         llm_mode = (runtime_settings.llm_runtime_mode or runtime_settings.llm_mode).lower()
         llm_ready = llm_mode != "mock"
@@ -111,7 +112,7 @@ def create_app() -> FastAPI:
             },
             "retrieval": {
                 "ready": index_ready,
-                "index_directory": str(FAISS_INDEX_DIR),
+                "index_directory": str(faiss_dir),
                 "required_files": ["index.faiss", "chunks.pkl"],
             },
         }

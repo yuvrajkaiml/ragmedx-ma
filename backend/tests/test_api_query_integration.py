@@ -198,7 +198,7 @@ async def test_readiness_reports_missing_runtime_resources():
 
 
 async def test_readiness_reports_ready_when_runtime_resources_exist(monkeypatch, tmp_path):
-    monkeypatch.setattr(main_module, "FAISS_INDEX_DIR", tmp_path)
+    monkeypatch.setattr(main_module.get_settings(), "faiss_index_dir", tmp_path)
     (tmp_path / "index.faiss").touch()
     (tmp_path / "chunks.pkl").touch()
     monkeypatch.setattr(main_module.get_settings(), "llm_runtime_mode", "local")
