@@ -231,16 +231,24 @@ class BenchmarkRunner:
             true_answer = sample.get("answer", "")
             t_start = time.perf_counter()
 
-            # Retrieve evidence for per-sample trace
+            # Retrieve evidence exactly once.  The result is both recorded in
+            # the per-sample trace and passed directly into run_agent_pipeline
+            # via the ``evidence`` parameter so the orchestrator reuses it
+            # instead of triggering a second retrieval call.
             raw_evidence, _ = await pipeline.retrieve_evidence(question)
             passage_texts = [ev.get("cited_text", "") for ev in raw_evidence]
             evidence_lists.append(passage_texts)
 
-            # Run full agent pipeline (retrieval happens again inside)
+            # Run full agent pipeline with pre-retrieved evidence.
+            # Passing evidence= causes the orchestrator's _node_retrieval to
+            # skip its own retrieval pass (see orchestrator._node_retrieval:
+            # "if state.evidence and state.retrieval_iteration_count == 0").
+            # retrieval_provider is intentionally omitted so no fallback
+            # retrieval can occur inside the pipeline.
             response, _ = await run_agent_pipeline(
                 original_question=question,
+                evidence=raw_evidence,
                 llm_wrapper=self.llm_wrapper,
-                retrieval_provider=pipeline.retrieve_evidence,
                 include_trace=False,
             )
 
