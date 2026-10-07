@@ -1269,3 +1269,72 @@
 2026-09-27 17:55:47.309 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
 2026-09-27 17:55:52.278 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
 2026-09-27 17:56:03.954 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-10-02 20:52:08.571 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-10-03 03:28:26.915 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from d:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-10-03 03:28:26.916 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-10-03 03:28:26.918 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-24\test_build_creates_files0
+2026-10-03 03:28:26.923 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from d:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-10-03 03:28:26.923 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-10-03 03:28:26.926 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-24\test_ntotal_matches_fixture0
+2026-10-03 03:28:26.932 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from d:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-10-03 03:28:26.933 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-10-03 03:28:26.935 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-24\test_chunks_have_medqa_source_0
+2026-10-03 03:28:26.970 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from d:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-10-03 03:28:26.970 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-10-03 03:28:26.972 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-24\test_chunk_text_is_question0
+2026-10-03 03:28:26.988 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from d:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-10-03 03:28:26.988 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-10-03 03:28:26.990 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-24\test_metadata_contains_answer0
+2026-10-03 03:28:27.005 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from d:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-10-03 03:28:27.006 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-10-03 03:28:27.007 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-24\test_force_false_skips_rebuild0
+2026-10-03 03:28:27.008 | INFO     | evaluation.index_builder:build:88 - MedQAIndexBuilder: index already exists at C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-24\test_force_false_skips_rebuild0 (pass force=True to rebuild).
+2026-10-03 03:28:27.028 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from d:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-10-03 03:28:27.029 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-10-03 03:28:27.031 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-24\test_force_true_rebuilds0
+2026-10-03 03:28:27.082 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from d:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-10-03 03:28:27.082 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-10-03 03:28:27.084 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-24\test_force_true_rebuilds0
+2026-10-03 03:28:27.095 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-10-03 03:28:41.680 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-10-03 03:29:00.356 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from d:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-10-03 03:29:05.263 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-10-03 03:29:08.379 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-24\mirage_index0
+2026-10-03 03:29:24.970 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-10-03 03:29:39.106 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-10-03 03:29:47.666 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-10-03 03:30:02.005 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-10-03 13:49:19.282 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from d:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-10-03 13:49:19.283 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-10-03 13:49:19.287 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-25\test_build_creates_files0
+2026-10-03 13:49:19.295 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from d:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-10-03 13:49:19.295 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-10-03 13:49:19.297 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-25\test_ntotal_matches_fixture0
+2026-10-03 13:49:19.304 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from d:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-10-03 13:49:19.305 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-10-03 13:49:19.308 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-25\test_chunks_have_medqa_source_0
+2026-10-03 13:49:19.346 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from d:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-10-03 13:49:19.347 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-10-03 13:49:19.349 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-25\test_chunk_text_is_question0
+2026-10-03 13:49:19.370 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from d:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-10-03 13:49:19.370 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-10-03 13:49:19.372 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-25\test_metadata_contains_answer0
+2026-10-03 13:49:19.392 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from d:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-10-03 13:49:19.392 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-10-03 13:49:19.394 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-25\test_force_false_skips_rebuild0
+2026-10-03 13:49:19.394 | INFO     | evaluation.index_builder:build:88 - MedQAIndexBuilder: index already exists at C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-25\test_force_false_skips_rebuild0 (pass force=True to rebuild).
+2026-10-03 13:49:19.414 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from d:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-10-03 13:49:19.414 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-10-03 13:49:19.418 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-25\test_force_true_rebuilds0
+2026-10-03 13:49:19.469 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from d:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-10-03 13:49:19.469 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-10-03 13:49:19.471 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-25\test_force_true_rebuilds0
+2026-10-03 13:49:19.489 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-10-03 13:49:33.193 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-10-03 13:49:51.773 | INFO     | evaluation.index_builder:_load_records:141 - MedQAIndexBuilder: loaded 4 records from d:\Ragmed_2\backend\data\datasets\medqa\sample.jsonl
+2026-10-03 13:49:56.040 | INFO     | evaluation.index_builder:build:104 - MedQAIndexBuilder: embedding 4 records (batch_size=64)
+2026-10-03 13:49:58.699 | INFO     | evaluation.index_builder:build:114 - MedQAIndexBuilder: saved 4 vectors to C:\Users\Yuvraj\AppData\Local\Temp\pytest-of-Yuvraj\pytest-25\mirage_index0
+2026-10-03 13:50:14.470 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-10-03 13:50:27.393 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True
+2026-10-03 13:50:34.527 | WARNING  | app.agents.orchestrator:__init__:76 - MultiAgentOrchestrator: no retrieval_provider injected — building a new RetrievalService. This is expected in tests; in production it means the app.state singleton is not being threaded through the query endpoint correctly.
+2026-10-03 13:50:47.843 | INFO     | app.services.retrieval_service:__init__:43 - RetrievalService ready -- pipeline.is_ready=True

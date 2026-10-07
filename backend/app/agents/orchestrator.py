@@ -348,9 +348,10 @@ class MultiAgentOrchestrator:
             for trace_step in result.get("agent_trace", []):
                 state.agent_trace.append(trace_step)
         except Exception as e:
-            # Query understanding failed
-            state.error = str(e)
-            state.error_code = "QUERY_UNDERSTANDING_ERROR"
+            # Query understanding failed — mirror generator/critic pattern so the
+            # graph routes to abstention instead of continuing with a broken state.
+            state.model_failure = True
+            state.error, state.error_code = str(e), "QUERY_UNDERSTANDING_ERROR"
             step = {
                 "agent_type": AgentType.QUERY_UNDERSTANDING.value,
                 "status": "failed",

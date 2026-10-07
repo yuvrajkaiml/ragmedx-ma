@@ -51,3 +51,6 @@ Thumbs.db
 
 # Test artifacts
 backend/tests/__pycache__/
+
+# Agent / workflow working state (session artifacts, audit reports, tool scratch)
+.agents/

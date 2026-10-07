@@ -423,7 +423,7 @@ class RAGPipeline:
                     "journal": chunk.journal,
                     "publication_year": chunk.publication_year,
                     "doi": chunk.metadata.get("doi"),
-                    "url": chunk.metadata.get("url"),
+                    "url": chunk.metadata.get("url") or chunk.metadata.get("pmid_url"),
                 }
                 for index, (chunk, score) in enumerate(results, start=1)
             ]
