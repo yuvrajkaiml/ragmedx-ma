@@ -51,6 +51,9 @@ class MultiAgentOrchestrator:
         retrieval_provider: Optional[Callable] = None,
         max_retrieval_iterations: int = MAX_RETRIEVAL_ITERATIONS,
         max_critic_rounds: int = MAX_CRITIC_ROUNDS,
+        generator_temperature: Optional[float] = None,
+        disable_critic: bool = False,
+        disable_calibration: bool = False,
     ):
         if llm_wrapper is not None:
             self.llm_wrapper = llm_wrapper
@@ -85,12 +88,19 @@ class MultiAgentOrchestrator:
             self.retrieval_provider = retrieval_provider
         self.max_retrieval_iterations = max(1, min(MAX_RETRIEVAL_ITERATIONS, max_retrieval_iterations))
         self.max_critic_rounds = max(1, min(MAX_CRITIC_ROUNDS, max_critic_rounds))
+        self.disable_critic = disable_critic
+        self.disable_calibration = disable_calibration
 
         # Initialize domain agents
         self.query_agent = QueryUnderstandingAgent(llm_wrapper=self.llm_wrapper)
         self.gap_agent = IterativeRetrievalAgent(llm_wrapper=self.llm_wrapper)
         self.reranking_agent = EvidenceRerankingAgent(llm_wrapper=self.llm_wrapper)
-        self.generator_agent = GeneratorAgent(llm_wrapper=self.llm_wrapper)
+        # generator_temperature=None means GeneratorAgent uses its own DEFAULT_TEMPERATURE (0.1).
+        # Pass an explicit value (e.g. 0.0) to override for deterministic benchmark runs.
+        self.generator_agent = GeneratorAgent(
+            llm_wrapper=self.llm_wrapper,
+            temperature=generator_temperature,
+        )
         self.critic_agent = CriticAgent(llm_wrapper=self.llm_wrapper)
         self.confidence_agent = ConfidenceCalibrationAgent()
         self.abstention_agent = AbstentionDecisionAgent()
@@ -272,33 +282,34 @@ class MultiAgentOrchestrator:
 
     async def _node_critic(self, payload: Dict[str, Any]) -> Dict[str, Any]:
         state = self._as_agent_state(payload)
-        if state.model_failure:
-            self._record_graph_node(state, "critic")
-            return self._state_update(state)
-        try:
-            result = await self.critic_agent.run({
-                "original_question": state.original_question,
-                "answer": state.answer,
-                "evidence": state.evidence,
-                "review_round": state.critic_round_count,
-            })
-            state.critic_verdict = result.get("critic_verdict", {})
-            state.critic_reviews.append(state.critic_verdict)
-            state.revision_instructions = state.critic_verdict.get("revision_instructions")
-            if (
-                state.critic_verdict.get("verdict") == CriticVerdictType.REJECTED.value
-                or (
-                    not state.critic_verdict.get("passed", False)
-                    and state.critic_round_count >= self.max_critic_rounds
-                )
-            ):
-                state.force_abstention = True
-            for trace in result.get("agent_trace", []):
-                trace["round"] = state.critic_round_count
-                state.agent_trace.append(trace)
-        except Exception as exc:
-            state.model_failure = True
-            state.error, state.error_code = str(exc), "CRITIC_ERROR"
+        if not self.disable_critic:
+            if state.model_failure:
+                self._record_graph_node(state, "critic")
+                return self._state_update(state)
+            try:
+                result = await self.critic_agent.run({
+                    "original_question": state.original_question,
+                    "answer": state.answer,
+                    "evidence": state.evidence,
+                    "review_round": state.critic_round_count,
+                })
+                state.critic_verdict = result.get("critic_verdict", {})
+                state.critic_reviews.append(state.critic_verdict)
+                state.revision_instructions = state.critic_verdict.get("revision_instructions")
+                if (
+                    state.critic_verdict.get("verdict") == CriticVerdictType.REJECTED.value
+                    or (
+                        not state.critic_verdict.get("passed", False)
+                        and state.critic_round_count >= self.max_critic_rounds
+                    )
+                ):
+                    state.force_abstention = True
+                for trace in result.get("agent_trace", []):
+                    trace["round"] = state.critic_round_count
+                    state.agent_trace.append(trace)
+            except Exception as exc:
+                state.model_failure = True
+                state.error, state.error_code = str(exc), "CRITIC_ERROR"
         self._record_graph_node(state, "critic")
         return self._state_update(state)
 
@@ -315,13 +326,41 @@ class MultiAgentOrchestrator:
 
     async def _node_confidence(self, payload: Dict[str, Any]) -> Dict[str, Any]:
         state = self._as_agent_state(payload)
-        await self._step_confidence_calibration(state)
+        if self.disable_calibration:
+            # Check retrieval/answer guard first
+            if state.retrieval_failure or not state.answer:
+                state.confidence_calibration = {
+                    "requires_abstention": True,
+                    "calibrated_confidence": 0.0,
+                    "confidence_band": "low",
+                }
+            else:
+                state.confidence_calibration = {
+                    "requires_abstention": False,
+                    "calibrated_confidence": 1.0,
+                    "confidence_band": "high",
+                    "factual_consistency": 1.0,
+                    "citation_support": 1.0,
+                    "hallucination_risk": 0.0,
+                    "confidence": 1.0,
+                }
+        else:
+            await self._step_confidence_calibration(state)
         self._record_graph_node(state, "confidence")
         return self._state_update(state)
 
     async def _node_abstention(self, payload: Dict[str, Any]) -> Dict[str, Any]:
         state = self._as_agent_state(payload)
-        await self._step_abstention_decision(state)
+        if self.disable_calibration:
+            # Guard: if no valid answer, still abstain
+            if state.retrieval_failure or not state.answer:
+                state.abstention_decision = {"decision": "ABSTAIN", "should_abstain": True, "reasons": ["no_answer_or_retrieval_failed"]}
+                state.status = "abstained"
+            else:
+                state.abstention_decision = {"decision": "PROCEED", "should_abstain": False, "reasons": []}
+                state.status = "verified"
+        else:
+            await self._step_abstention_decision(state)
         self._record_graph_node(state, "abstention")
         return self._state_update(state)
 
@@ -641,13 +680,11 @@ class MultiAgentOrchestrator:
     async def _step_confidence_calibration(self, state: AgentState) -> None:
         """Execute Confidence Calibration (Agent 7)."""
         # Ensure a default critic verdict exists if generation/critic was skipped
-        critic_data = state.critic_verdict or {
-            "passed": False,
-            "factual_consistency": 0.0,
-            "citation_support": 0.0,
-            "hallucination_risk": 1.0,
-            "confidence": 0.0,
-        }
+        critic_data = state.critic_verdict or (
+            {"passed": True, "factual_consistency": 1.0, "citation_support": 1.0, "hallucination_risk": 0.0, "confidence": 1.0}
+            if self.disable_critic
+            else {"passed": False, "factual_consistency": 0.0, "citation_support": 0.0, "hallucination_risk": 1.0, "confidence": 0.0}
+        )
 
         calib_state = {
             "evidence": state.evidence,

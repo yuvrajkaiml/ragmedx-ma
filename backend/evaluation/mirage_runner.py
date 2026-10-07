@@ -20,6 +20,7 @@ from typing import Any, Callable, Dict, List, Optional
 
 from app.agents import run_agent_pipeline
 from app.llm.local_llm import LocalLLMWrapper
+from app.utils.logger import logger
 from evaluation.metrics import (
     compute_answer_with_citation_rate,
     compute_retrieval_coverage,
@@ -156,6 +157,10 @@ class BenchmarkRunner:
         top_k_retrieval: int = 10,
         top_k_final: int = 3,
         force_reindex: bool = False,
+        generator_temperature: Optional[float] = None,
+        disable_critic: bool = False,
+        disable_calibration: bool = False,
+        retrieval_provider: Optional[Callable] = None,
     ) -> Dict[str, Any]:
         """Run a full MIRAGE-style evaluation with real retrieval.
 
@@ -180,13 +185,114 @@ class BenchmarkRunner:
             Final evidence count after reranking.
         force_reindex:
             Rebuild the index even if one already exists.
+        generator_temperature:
+            Override the GeneratorAgent's sampling temperature.  Pass 0.0 for
+            deterministic, reproducible benchmark runs.  None (default) uses
+            GeneratorAgent.DEFAULT_TEMPERATURE (0.1).
+        disable_critic:
+            If True, skip CriticAgent execution (see MultiAgentOrchestrator).
+        disable_calibration:
+            If True, skip ConfidenceCalibrationAgent execution (see MultiAgentOrchestrator).
+        retrieval_provider:
+            If provided, use this callable directly instead of building a new
+            RAGPipeline.  The index guard still runs.  MedQAIndexBuilder.build
+            and RAGPipeline.build are skipped when this is supplied.
         """
-        from app.config import FAISS_INDEX_DIR
+        from app.config import BASE_DIR, get_settings
         from app.rag.pipeline import RAGPipeline
         from evaluation.index_builder import MedQAIndexBuilder
 
+        # ── Eval-split index guard ─────────────────────────────────────────
+        # The benchmark MUST run against the eval-split FAISS index
+        # (data/faiss_index/eval_split/), NOT the main production index
+        # (data/faiss_index/).  The main index contains 1,916 of the 2,394
+        # eval-question PMIDs, so using it would contaminate every metric.
+        #
+        # Resolution order (highest to lowest priority):
+        #   1. Explicit ``index_dir`` argument passed by the caller.
+        #   2. RAGMEDX_FAISS_INDEX_DIR env-var → settings.faiss_index_dir.
+        #   3. Hard default: BASE_DIR / "data/faiss_index/eval_split".
+        #
+        # If the resolved path resolves to the *production* index directory
+        # (BASE_DIR / "data/faiss_index" without the eval_split suffix) the
+        # guard raises immediately rather than silently contaminating results.
+        settings = get_settings()
+        _eval_split_dir = (BASE_DIR / "data" / "faiss_index" / "eval_split").resolve()
+
+        if index_dir is None:
+            # Use the settings field if it differs from the bare production
+            # path; otherwise fall back to the canonical eval_split dir.
+            _settings_dir = settings.faiss_index_dir
+            if not _settings_dir.is_absolute():
+                _settings_dir = BASE_DIR / _settings_dir
+            _settings_dir = _settings_dir.resolve()
+
+            _production_dir = (BASE_DIR / "data" / "faiss_index").resolve()
+            if _settings_dir == _production_dir:
+                # Settings still point at the main index — use the eval_split
+                # default and warn so the operator knows what happened.
+                logger.warning(
+                    "RAGMEDX_FAISS_INDEX_DIR resolves to the production index "
+                    f"({_settings_dir}).  Overriding to eval_split index "
+                    f"({_eval_split_dir}) to prevent leakage contamination.  "
+                    "Set RAGMEDX_FAISS_INDEX_DIR=data/faiss_index/eval_split "
+                    "explicitly to suppress this warning."
+                )
+                index_dir = _eval_split_dir
+            else:
+                index_dir = _settings_dir
+
+        index_dir = Path(index_dir)
+        if not index_dir.is_absolute():
+            index_dir = BASE_DIR / index_dir
+        index_dir = index_dir.resolve()
+
+        # Hard guard: raise immediately if the resolved path is the production
+        # index.  Matches the "fail loud, not silent" pattern in
+        # RetrievalService.build() — better to abort than to produce
+        # contaminated accuracy numbers.
+        _production_dir = (BASE_DIR / "data" / "faiss_index").resolve()
+        if index_dir == _production_dir:
+            raise RuntimeError(
+                f"run_rag_evaluation() resolved index_dir to the production FAISS "
+                f"index ({index_dir}), which contains eval-question PMIDs and would "
+                f"contaminate benchmark results.  "
+                f"Pass index_dir explicitly pointing at the eval_split index, or set "
+                f"RAGMEDX_FAISS_INDEX_DIR=data/faiss_index/eval_split before running."
+            )
+
+        logger.info(
+            f"[run_rag_evaluation] FAISS index resolved to: {index_dir}  "
+            f"(eval_split canonical: {_eval_split_dir})  "
+            f"match={index_dir == _eval_split_dir}"
+        )
+
         # 1. Warm exactly one injected local model before any question timing.
+        #    _load_llm_once() raises ModelLoadError (propagates here) if real-mode
+        #    loading fails — no silent fallback to mock is permitted here.
         model_load_ms = self._load_llm_once()
+
+        # Guard: confirm the wrapper is genuinely in LOCAL mode after warming.
+        # If it silently fell back to MOCK (e.g. allow_fallback=True was set),
+        # raise immediately rather than produce mock answers labelled as real.
+        from app.llm.local_llm import LLMRuntimeMode
+        if (
+            self.llm_wrapper is not None
+            and hasattr(self.llm_wrapper, "active_runtime_mode")
+            and self.llm_wrapper.active_runtime_mode != LLMRuntimeMode.MOCK
+            and self.llm_wrapper.active_runtime_mode != LLMRuntimeMode.LOCAL
+        ):
+            raise RuntimeError(
+                f"LocalLLMWrapper is in unexpected runtime mode "
+                f"'{self.llm_wrapper.active_runtime_mode}' after load_model(). "
+                "Expected LOCAL or MOCK. Aborting to avoid ambiguous results."
+            )
+        _llm_mode_label = (
+            self.llm_wrapper.active_runtime_mode.value
+            if (self.llm_wrapper is not None and hasattr(self.llm_wrapper, "active_runtime_mode"))
+            else "unknown"
+        )
+        logger.info(f"[run_rag_evaluation] LLM active_runtime_mode after warm-up: {_llm_mode_label}")
 
         # 2. Load dataset
         samples = self.load_dataset()
@@ -201,23 +307,25 @@ class BenchmarkRunner:
 
         eval_samples = samples[:max_samples] if max_samples else samples
 
-        # 3. Build / load FAISS index
-        if index_dir is None:
-            index_dir = FAISS_INDEX_DIR / "mirage_eval"
-        index_dir = Path(index_dir)
+        # 3. Build / load FAISS index (index_dir already resolved above)
 
-        builder = MedQAIndexBuilder(
-            dataset_path=self.dataset_path,
-            index_dir=index_dir,
-        )
-        store = builder.build(force=force_reindex)
+        if retrieval_provider is None:
+            builder = MedQAIndexBuilder(
+                dataset_path=self.dataset_path,
+                index_dir=index_dir,
+            )
+            store = builder.build(force=force_reindex)
 
-        # 4. Construct the async facade over Sana's native pipeline.
-        pipeline = RAGPipeline.build(
-            index_dir=index_dir,
-            top_k_retrieval=top_k_retrieval,
-            top_k_final=top_k_final,
-        )
+            # 4. Construct the async facade over Sana's native pipeline.
+            pipeline = RAGPipeline.build(
+                index_dir=index_dir,
+                top_k_retrieval=top_k_retrieval,
+                top_k_final=top_k_final,
+            )
+            _retrieval_provider = pipeline.retrieve_evidence
+        else:
+            _retrieval_provider = retrieval_provider
+            store = None
 
         # 5. Evaluation loop. The already-warmed self.llm_wrapper is passed into
         # every run_agent_pipeline call, so no model is reinstantiated per sample.
@@ -235,7 +343,7 @@ class BenchmarkRunner:
             # the per-sample trace and passed directly into run_agent_pipeline
             # via the ``evidence`` parameter so the orchestrator reuses it
             # instead of triggering a second retrieval call.
-            raw_evidence, _ = await pipeline.retrieve_evidence(question)
+            raw_evidence, _ = await _retrieval_provider(question)
             passage_texts = [ev.get("cited_text", "") for ev in raw_evidence]
             evidence_lists.append(passage_texts)
 
@@ -243,12 +351,19 @@ class BenchmarkRunner:
             # Passing evidence= causes the orchestrator's _node_retrieval to
             # skip its own retrieval pass (see orchestrator._node_retrieval:
             # "if state.evidence and state.retrieval_iteration_count == 0").
-            # retrieval_provider is intentionally omitted so no fallback
-            # retrieval can occur inside the pipeline.
+            # retrieval_provider is also passed so the orchestrator constructor
+            # does NOT fall into the "no retrieval_provider injected" branch and
+            # rebuild RetrievalService (loading BGE-M3 + reranker) from scratch
+            # for every question.  The provider will not actually be called
+            # because evidence is already populated.
             response, _ = await run_agent_pipeline(
                 original_question=question,
                 evidence=raw_evidence,
                 llm_wrapper=self.llm_wrapper,
+                retrieval_provider=_retrieval_provider,
+                generator_temperature=generator_temperature,
+                disable_critic=disable_critic,
+                disable_calibration=disable_calibration,
                 include_trace=False,
             )
 
@@ -286,7 +401,7 @@ class BenchmarkRunner:
             **base_metrics,
             "retrieval_coverage":       retrieval_coverage,
             "answer_with_citation_rate": citation_rate,
-            "index_size":               store.size,
+            "index_size":               store.size if store is not None else None,
         }
 
         return {

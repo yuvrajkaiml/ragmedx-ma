@@ -20,6 +20,9 @@ async def run_agent_pipeline(
     conversation_id: str | None = None,
     llm_wrapper=None,
     retrieval_provider=None,
+    generator_temperature: float | None = None,
+    disable_critic: bool = False,
+    disable_calibration: bool = False,
 ):
     """
     Canonical public pipeline entry point.
@@ -45,6 +48,9 @@ async def run_agent_pipeline(
     orchestrator = MultiAgentOrchestrator(
         llm_wrapper=llm_wrapper,
         retrieval_provider=retrieval_provider,
+        generator_temperature=generator_temperature,
+        disable_critic=disable_critic,
+        disable_calibration=disable_calibration,
     )
 
     final_state = await orchestrator.run(initial_state)
