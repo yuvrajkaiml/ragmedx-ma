@@ -161,6 +161,7 @@ class BenchmarkRunner:
         disable_critic: bool = False,
         disable_calibration: bool = False,
         retrieval_provider: Optional[Callable] = None,
+        max_retrieval_iterations: Optional[int] = None,
     ) -> Dict[str, Any]:
         """Run a full MIRAGE-style evaluation with real retrieval.
 
@@ -197,6 +198,10 @@ class BenchmarkRunner:
             If provided, use this callable directly instead of building a new
             RAGPipeline.  The index guard still runs.  MedQAIndexBuilder.build
             and RAGPipeline.build are skipped when this is supplied.
+        max_retrieval_iterations:
+            Override the orchestrator's maximum retrieval iteration count.
+            Pass 1 to disable iterative retrieval (single-pass).  None uses
+            the orchestrator default (MAX_RETRIEVAL_ITERATIONS = 3).
         """
         from app.config import BASE_DIR, get_settings
         from app.rag.pipeline import RAGPipeline
@@ -364,6 +369,7 @@ class BenchmarkRunner:
                 generator_temperature=generator_temperature,
                 disable_critic=disable_critic,
                 disable_calibration=disable_calibration,
+                max_retrieval_iterations=max_retrieval_iterations,
                 include_trace=False,
             )
 

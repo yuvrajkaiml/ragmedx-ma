@@ -23,6 +23,7 @@ async def run_agent_pipeline(
     generator_temperature: float | None = None,
     disable_critic: bool = False,
     disable_calibration: bool = False,
+    max_retrieval_iterations: int | None = None,
 ):
     """
     Canonical public pipeline entry point.
@@ -51,6 +52,7 @@ async def run_agent_pipeline(
         generator_temperature=generator_temperature,
         disable_critic=disable_critic,
         disable_calibration=disable_calibration,
+        **({"max_retrieval_iterations": max_retrieval_iterations} if max_retrieval_iterations is not None else {}),
     )
 
     final_state = await orchestrator.run(initial_state)
