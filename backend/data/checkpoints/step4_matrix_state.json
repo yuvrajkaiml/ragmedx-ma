@@ -1,0 +1,37 @@
+{
+  "run_id": "20261008_010119",
+  "configs": {
+    "full-pipeline": {
+      "status": "done",
+      "completed_questions": 30,
+      "output_file": "D:\\Ragmed_2\\backend\\data\\results\\step4_full-pipeline_n30_20261008_010119.json"
+    },
+    "no-critic": {
+      "status": "done",
+      "completed_questions": 30,
+      "output_file": "D:\\Ragmed_2\\backend\\data\\results\\step4_no-critic_n30_20261008_010119.json"
+    },
+    "no-iterative-retrieval": {
+      "status": "done",
+      "completed_questions": 30,
+      "output_file": "D:\\Ragmed_2\\backend\\data\\results\\step4_no-iterative-retrieval_n30_20261008_010119.json"
+    },
+    "no-calibration": {
+      "status": "done",
+      "completed_questions": 30,
+      "output_file": "D:\\Ragmed_2\\backend\\data\\results\\step4_no-calibration_n30_20261008_010119.json"
+    },
+    "basic-rag": {
+      "status": "done",
+      "completed_questions": 30,
+      "output_file": "D:\\Ragmed_2\\backend\\data\\results\\step4_basic-rag_n30_20261008_010119.json"
+    },
+    "plain-llm-no-rag": {
+      "status": "done",
+      "completed_questions": 30,
+      "output_file": "D:\\Ragmed_2\\backend\\data\\results\\step4_plain-llm-no-rag_n30_20261008_010119.json"
+    }
+  },
+  "llm_loaded": true,
+  "index_dir_verified": "D:\\Ragmed_2\\backend\\data\\faiss_index\\eval_split"
+}
