@@ -41,6 +41,10 @@ class EvidenceSnippet(BaseModel):
     """
     Pipeline evidence snippet model.
     IDs must be explicitly provided by the data source/retriever (no automatic random UUIDs).
+
+    Provenance fields (Phase 3, backward-compatible additions):
+    - index_id: identifies which FAISS/retrieval index the chunk came from
+    - retrieval_iteration: which iterative-retrieval pass surfaced this chunk (1-based)
     """
     chunk_id: UUID
     document_id: UUID
@@ -55,6 +59,9 @@ class EvidenceSnippet(BaseModel):
     cross_encoder_score: float = Field(default=0.0, ge=0.0, le=1.0)
     evidence_quality_score: float = Field(default=0.0, ge=0.0, le=1.0)
     citation_marker: str
+    # --- Provenance fields (Phase 3) — optional so existing code with no provenance still works ---
+    index_id: Optional[str] = None
+    retrieval_iteration: Optional[int] = None
 
 
 class QueryUnderstandingOutput(BaseModel):
@@ -132,6 +139,9 @@ class AgentState(BaseModel):
     conversation_id: Optional[UUID] = None
     original_question: str
     include_trace: bool = False
+    # Provenance fields (Phase 3, backward-compatible — default None keeps old code working)
+    index_id: Optional[str] = None
+    pipeline_version: Optional[str] = None
 
     # Agent Artifacts
     processed_query: Optional[Dict[str, Any]] = None

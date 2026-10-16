@@ -424,6 +424,13 @@ class RAGPipeline:
                     "publication_year": chunk.publication_year,
                     "doi": chunk.metadata.get("doi"),
                     "url": chunk.metadata.get("url") or chunk.metadata.get("pmid_url"),
+                    # Provenance (Phase 3): index_id embedded at retrieval boundary
+                    "index_id": str(self._retrieval_pipeline.hybrid_retriever.dense_retriever.vector_store.index_dir)
+                    if hasattr(self._retrieval_pipeline, "hybrid_retriever")
+                    and hasattr(self._retrieval_pipeline.hybrid_retriever, "dense_retriever")
+                    and hasattr(self._retrieval_pipeline.hybrid_retriever.dense_retriever, "vector_store")
+                    and hasattr(self._retrieval_pipeline.hybrid_retriever.dense_retriever.vector_store, "index_dir")
+                    else None,
                 }
                 for index, (chunk, score) in enumerate(results, start=1)
             ]

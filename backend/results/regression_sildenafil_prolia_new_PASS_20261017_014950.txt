@@ -1,0 +1,40 @@
+﻿Phase 3b Sildenafil/Prolia Regression Test — RUN AGAINST NEW (FIXED) CODE
+Date: 2026-10-17 01:49:50
+Code version: Phase 3 changes applied — backend/app/agents/evidence_reranking.py (fixed)
+Command: d:\Ragmed_2\.venv\Scripts\python.exe -m pytest backend\tests\test_workstream_a_verification.py -v
+
+RESULT: 20 passed, 0 failed
+
+REGRESSION TESTS THAT NOW PASS (were FAILING on old code):
+1. test_sildenafil_prolia_regression — PASSED
+   Verified: fabricated marker "[Doc 1 states trade name of sildenafil as Prolia]" is not in 
+   selected_markers; reasoning is tagged with non_source_text=True.
+
+2. test_reranker_reasoning_tagged_non_source — PASSED
+   Verified: evidence_reranking dict contains non_source_text=True.
+
+3. test_reranker_rejects_unknown_ids — PASSED (also passed on old code, now confirmed correct)
+
+ALL 20 PHASE 3 TESTS:
+1. test_valid_claim_with_valid_citation          PASSED
+2. test_valid_citation_unrelated_claim          PASSED
+3. test_nonexistent_doc_id                      PASSED
+4. test_fabricated_quote                        PASSED
+5. test_claim_contradicted_by_passage           PASSED
+6. test_contradictory_sources                   PASSED
+7. test_on_topic_non_answering_passage          PASSED
+8. test_insufficient_evidence                   PASSED
+9. test_conflicting_dates_contexts              PASSED
+10. test_invalid_verifier_json                  PASSED
+11. test_verifier_failure                       PASSED
+12. test_empty_retrieval                        PASSED
+13. test_mixed_supported_unsupported            PASSED
+14. test_should_abstain                         PASSED
+15. test_should_answer                          PASSED
+16. test_provenance_ids_in_verify_claim         PASSED
+17. test_reranker_rejects_unknown_ids           PASSED
+18. test_reranker_reasoning_tagged_non_source   PASSED
+19. test_reranker_malformed_json_safe_fallback  PASSED
+20. test_sildenafil_prolia_regression           PASSED
+
+Evidence tier: SOFTWARE TEST

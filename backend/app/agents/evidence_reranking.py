@@ -2,14 +2,20 @@
 
 from __future__ import annotations
 
+import logging
 from datetime import datetime, timezone
 import re
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional, Set
 
 from app.llm.parser import LLMParseError, parse_json_from_llm
 from app.llm.prompt_templates import render_prompt
 
 from .base import BaseAgent
+
+logger = logging.getLogger(__name__)
+
+# Maximum number of LLM-parse retries before falling back to original order
+_MAX_PARSE_RETRIES = 2
 
 
 class EvidenceRerankingAgent(BaseAgent):
@@ -19,6 +25,12 @@ class EvidenceRerankingAgent(BaseAgent):
     cross-encoder scoring.  This agent is the workflow-stage owner: it consumes
     those scores, applies a transparent evidence-hierarchy adjustment, and asks
     for a bounded contradiction assessment over the retrieved evidence.
+
+    Phase 3 fixes:
+    - Unknown IDs from the LLM are rejected; only IDs in the input set are accepted
+    - Generated explanation/reasoning text is tagged as non_source_text (never a passage)
+    - Malformed LLM output triggers bounded retry (max 2), then safe failure (original order)
+    - Unvalidated evidence is never treated as verified
     """
 
     _GRADE_TERMS = (
@@ -47,6 +59,9 @@ class EvidenceRerankingAgent(BaseAgent):
                 raise RuntimeError("Evidence Re-Ranking Agent requires an LLM wrapper.")
 
             ranked = self._rank_evidence(evidence)
+            # Record the set of valid canonical markers BEFORE calling the LLM
+            valid_markers: Set[str] = {item["citation_marker"] for item in ranked}
+
             evidence_text = self._format_evidence(ranked)
             prompt = render_prompt(
                 "evidence_reranking",
@@ -55,14 +70,73 @@ class EvidenceRerankingAgent(BaseAgent):
                     "evidence_text": evidence_text,
                 },
             )
-            assessment = self._parse_assessment(self.llm_wrapper.generate(prompt, temperature=0.0))
+
+            # --- Bounded retry on LLM parse failure ---
+            assessment: Optional[Dict[str, Any]] = None
+            parse_error_logged = False
+            for attempt in range(1 + _MAX_PARSE_RETRIES):
+                try:
+                    raw = self.llm_wrapper.generate(prompt, temperature=0.0)
+                    assessment = self._parse_assessment(raw)
+                    break
+                except (ValueError, LLMParseError) as exc:
+                    if attempt < _MAX_PARSE_RETRIES:
+                        logger.warning(
+                            "EvidenceRerankingAgent: LLM parse attempt %d failed (%s); retrying.",
+                            attempt + 1,
+                            exc,
+                        )
+                    else:
+                        logger.warning(
+                            "EvidenceRerankingAgent: all %d parse attempts failed; "
+                            "falling back to original retrieval order (unvalidated).",
+                            _MAX_PARSE_RETRIES + 1,
+                        )
+                        parse_error_logged = True
+
+            if assessment is None:
+                # Safe failure: return original ranked order, mark as unvalidated
+                completed_at = datetime.now(timezone.utc)
+                trace = self.create_trace_step(
+                    status="completed",
+                    started_at=started_at,
+                    completed_at=completed_at,
+                    details={
+                        "input_evidence_count": len(evidence),
+                        "selected_evidence_count": len(ranked),
+                        "contradictory_evidence": False,
+                        "assessment": "parse_failure_fallback_to_original_order",
+                        "validated": False,
+                    },
+                )
+                return {
+                    "evidence": ranked,
+                    "contradictory_evidence": False,
+                    "evidence_reranking": {
+                        "selected_markers": [item["citation_marker"] for item in ranked],
+                        "contradictory": False,
+                        "reasoning": "parse_failure_fallback",
+                        # non_source_text: the reasoning here is a system note, not a passage
+                        "non_source_text": True,
+                        "validated": False,
+                    },
+                    "agent_trace": [trace],
+                }
+
+            # --- Reject unknown IDs: LLM may only reference items in the input set ---
             selected_markers = self._resolve_selected_markers(
                 assessment.get("selected_markers", []), ranked
             )
+            # Filter to items whose marker was in the input and the LLM selected
             if selected_markers:
                 ranked = [item for item in ranked if item["citation_marker"] in selected_markers]
             if not ranked:
                 raise ValueError("Evidence Re-Ranking Agent selected no usable evidence.")
+
+            # Tag the LLM's reasoning as non-source text so it's never treated as
+            # a retrieved passage or cited evidence
+            reasoning_text = assessment["reasoning"]
+            assessment["_reasoning_is_non_source_text"] = True
 
             completed_at = datetime.now(timezone.utc)
             trace = self.create_trace_step(
@@ -73,7 +147,9 @@ class EvidenceRerankingAgent(BaseAgent):
                     "input_evidence_count": len(evidence),
                     "selected_evidence_count": len(ranked),
                     "contradictory_evidence": bool(assessment["contradictory"]),
-                    "assessment": assessment["reasoning"],
+                    "assessment": reasoning_text,
+                    "validated": True,
+                    "parse_attempts": 1 if not parse_error_logged else _MAX_PARSE_RETRIES + 1,
                 },
             )
             return {
@@ -82,7 +158,10 @@ class EvidenceRerankingAgent(BaseAgent):
                 "evidence_reranking": {
                     "selected_markers": [item["citation_marker"] for item in ranked],
                     "contradictory": bool(assessment["contradictory"]),
-                    "reasoning": assessment["reasoning"],
+                    "reasoning": reasoning_text,
+                    # Explicitly tag that reasoning is NOT a source passage
+                    "non_source_text": True,
+                    "validated": True,
                 },
                 "agent_trace": [trace],
             }
@@ -146,6 +225,10 @@ class EvidenceRerankingAgent(BaseAgent):
         Current retrieval emits `[Doc X]`, but pre-existing prompt/model behavior
         can return `[EX]`.  Only translate a marker that identifies one ranked
         item by ordinal; unknown markers remain unknown and cannot select evidence.
+
+        Phase 3 fix: markers not in the input set are silently dropped.
+        Unknown IDs injected by the LLM are rejected here — they cannot
+        select evidence items that were not part of the retrieved set.
         """
         canonical = {item["citation_marker"] for item in ranked}
         resolved = set()
@@ -158,4 +241,5 @@ class EvidenceRerankingAgent(BaseAgent):
                 ordinal = int(match.group(1))
                 if 1 <= ordinal <= len(ranked):
                     resolved.add(ranked[ordinal - 1]["citation_marker"])
+            # Unknown markers (not in canonical, not a valid ordinal) are rejected — no action
         return resolved

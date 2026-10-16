@@ -54,6 +54,7 @@ class MultiAgentOrchestrator:
         generator_temperature: Optional[float] = None,
         disable_critic: bool = False,
         disable_calibration: bool = False,
+        enable_claim_verification: bool = False,  # Phase 3: default OFF per versioning rule
     ):
         if llm_wrapper is not None:
             self.llm_wrapper = llm_wrapper
@@ -90,6 +91,7 @@ class MultiAgentOrchestrator:
         self.max_critic_rounds = max(1, min(MAX_CRITIC_ROUNDS, max_critic_rounds))
         self.disable_critic = disable_critic
         self.disable_calibration = disable_calibration
+        self.enable_claim_verification = enable_claim_verification
 
         # Initialize domain agents
         self.query_agent = QueryUnderstandingAgent(llm_wrapper=self.llm_wrapper)
@@ -326,6 +328,10 @@ class MultiAgentOrchestrator:
 
     async def _node_confidence(self, payload: Dict[str, Any]) -> Dict[str, Any]:
         state = self._as_agent_state(payload)
+        # Phase 3: run claim verification before calibration if enabled (default OFF)
+        # Verification must always precede calibration when enabled — no bypass.
+        if self.enable_claim_verification and state.answer and state.evidence:
+            self._run_claim_verification(state)
         if self.disable_calibration:
             # Check retrieval/answer guard first
             if state.retrieval_failure or not state.answer:
@@ -348,6 +354,91 @@ class MultiAgentOrchestrator:
             await self._step_confidence_calibration(state)
         self._record_graph_node(state, "confidence")
         return self._state_update(state)
+
+    def _run_claim_verification(self, state: "AgentState") -> None:
+        """
+        Run the claim verifier (Phase 3) before confidence calibration.
+
+        This method is only called when enable_claim_verification=True (default OFF).
+        Verification always precedes calibration — there is no code path that
+        enables verification and skips it without logging.
+
+        Injects 'verification_result' into state.confidence_calibration-prep area
+        via the critic_verdict dict so the calibration agent can consume support_rate
+        and contradiction signals.
+
+        If the NLI model is not installed, logs a warning and skips — does not
+        silently substitute lexical-only verification as "supported".
+        """
+        try:
+            from verification.claim_verifier import ClaimVerifier
+            from verification.sufficiency import SufficiencyAssessor
+        except ImportError as exc:
+            logger.warning(
+                "Claim verification skipped: %s. "
+                "Install sentence-transformers to enable NLI verification.",
+                exc,
+            )
+            return
+
+        try:
+            verifier = ClaimVerifier()
+            claims = verifier.segment_claims(state.answer or "")
+            retrieved_docs = {
+                item.get("chunk_id", item.get("document_id", str(i))): item.get("cited_text", item.get("text", ""))
+                for i, item in enumerate(state.evidence)
+                if isinstance(item, dict)
+            }
+            citation_map = verifier.map_citations(claims, retrieved_docs)
+            verified_claims = []
+            for idx, claim in enumerate(claims):
+                cited_ids = citation_map.get(idx, [])
+                result = verifier.verify_claim(claim, cited_ids, retrieved_docs)
+                verified_claims.append(result)
+
+            assessor = SufficiencyAssessor()
+            sufficiency = assessor.assess(
+                query=state.original_question,
+                retrieved_docs=list(state.evidence),
+                verified_claims=verified_claims,
+            )
+
+            # Inject signals into critic_verdict (if not present, create a minimal one)
+            if state.critic_verdict is None:
+                state.critic_verdict = {}
+            support_rate = sufficiency.get("claim_support_rate", 0.0)
+            contradictions = sufficiency.get("contradictions_present", False)
+            # Update calibration signals; don't override existing critic verdicts
+            state.critic_verdict.setdefault("citation_support", support_rate)
+            if contradictions:
+                # Contradictions lower factual consistency
+                current_fc = float(state.critic_verdict.get("factual_consistency", 0.5))
+                state.critic_verdict["factual_consistency"] = min(current_fc, 0.4)
+
+            # If contradictions present and evidence is insufficient, recommend abstention
+            if contradictions and not sufficiency.get("sufficient", True):
+                state.force_abstention = True
+
+            # Store full verification results in evidence_reranking for traceability
+            if state.evidence_reranking is None:
+                state.evidence_reranking = {}
+            state.evidence_reranking["claim_verification"] = {
+                "verified_claims": verified_claims,
+                "sufficiency": sufficiency,
+            }
+
+            logger.info(
+                "Claim verification complete: support_rate=%.2f, contradictions=%s, sufficient=%s",
+                support_rate,
+                contradictions,
+                sufficiency.get("sufficient"),
+            )
+        except Exception as exc:
+            logger.warning(
+                "Claim verification failed (non-fatal): %s. "
+                "Proceeding without verification signals.",
+                exc,
+            )
 
     async def _node_abstention(self, payload: Dict[str, Any]) -> Dict[str, Any]:
         state = self._as_agent_state(payload)
@@ -481,6 +572,12 @@ class MultiAgentOrchestrator:
                 optimized_query=optimized_query,
                 max_iterations=self.max_retrieval_iterations,
             )
+            # Stamp retrieval_iteration and index_id on every evidence item (Phase 3 provenance)
+            for item in evidence or []:
+                if isinstance(item, dict):
+                    item.setdefault("retrieval_iteration", iteration)
+                    if state.index_id is not None:
+                        item.setdefault("index_id", state.index_id)
             state.evidence.extend(evidence or [])
             for item in metadata or []:
                 entry = dict(item)
