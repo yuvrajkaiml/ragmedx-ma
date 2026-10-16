@@ -1,6 +1,6 @@
 # RAGMedX-MA — Progress Tracker
 
-**Last updated:** 2026-10-17 (Phase 1 complete)  
+**Last updated:** 2026-10-17 (Phase 3 complete)  
 **Branch:** `yuvraj/llm`  
 **Protocol:** Re-read this file + handoff.md at the start of every phase.
 
@@ -210,22 +210,113 @@ Note: 500-question eval split (100 dev / 150 cal / 250 test) remains NOT BUILT �
 
 ## Phase 3 — Workstream A: Evidence Verification, Citation Faithfulness, Contradiction
 
-**Status:** NOT IMPLEMENTED  
+**Status:** IMPLEMENTED AND TESTED  
 **Target env:** CPU (`.venv\Scripts\python.exe`) for tests + mocks  
-**Files to create/modify:**
+**Completed:** 2026-10-17
+
+### Files changed
 
 | File | Action | Description |
 |------|--------|-------------|
-| `backend/app/agents/state.py` | MODIFY | Add index_id, retrieval_iteration per-evidence-item; add pipeline_version; backward compatible |
-| `backend/app/rag/pipeline.py` | MODIFY | Embed index_id in evidence dict |
-| `backend/app/agents/orchestrator.py` | MODIFY | Carry retrieval_iteration into each evidence item |
-| `backend/app/rag/verification/claim_verifier.py` | CREATE | Claim segmenter → citation mapper → ID check → quote fidelity → NLI (CPU, small model) |
-| `backend/tests/test_claim_verifier.py` | CREATE | Unit + regression tests (sildenafil/Prolia MUST fail old code, pass new) |
-| `backend/app/agents/evidence_reranking.py` | MODIFY | Strengthen unknown-marker rejection; bounded retry on malformed JSON |
-| `backend/tests/test_evidence_reranking.py` | MODIFY | Add sildenafil/Prolia regression |
-| `backend/evaluation/sufficiency_evaluator.py` | CREATE | Evidence sufficiency evaluator |
+| `backend/app/agents/state.py` | MODIFIED | Added `index_id`, `retrieval_iteration` fields to `EvidenceSnippet`; added `index_id`, `pipeline_version` to `AgentState` — backward compatible (all Optional, default None) |
+| `backend/app/rag/pipeline.py` | MODIFIED | Embeds `index_id` (resolved from vector_store) in each evidence dict at retrieval boundary |
+| `backend/app/agents/orchestrator.py` | MODIFIED | (1) Stamps `retrieval_iteration` and `index_id` on each evidence item in `_retrieve_evidence_pass`; (2) Added `enable_claim_verification=False` constructor flag (default OFF per versioning rule); (3) Added `_run_claim_verification()` method called before confidence calibration when flag is ON |
+| `backend/app/agents/evidence_reranking.py` | REWRITTEN | Phase 3b fixes: bounded retry (max 2) on LLM parse failure; safe fallback to original order on exhausted retries; `non_source_text=True` tag on all reasoning outputs; unknown/fabricated markers rejected by `_resolve_selected_markers`; `validated` field distinguishes verified vs fallback results |
+| `backend/verification/__init__.py` | CREATED | Package init for backend/verification/ |
+| `backend/verification/claim_verifier.py` | CREATED | `ClaimVerifier` class with 6 methods: `segment_claims`, `map_citations`, `check_ids_exist`, `check_quote_fidelity`, `check_entailment` (CPU NLI), `verify_claim` (full pipeline). Hard rules enforced: entailment must confirm support; NLI-model ImportError raised with instructions if not installed; all outputs validated. |
+| `backend/verification/contradiction_detector.py` | CREATED | `ContradictionDetector.detect_contradictions()`: checks all passage pairs; returns 4 types: `true_contradiction`, `scope_difference`, `temporal_difference`, `population_difference`; `abstention_recommended` on material conflicts; does NOT assume newest source correct |
+| `backend/verification/sufficiency.py` | CREATED | `SufficiencyAssessor.assess()`: returns all 9 required fields; docstring + inline note explicitly disclaims clinical validation; NEVER returns bare `sufficient=True` without all fields |
+| `backend/tests/test_workstream_a_verification.py` | CREATED | 20 tests (15 required + 4 additional: provenance, reranker structural fixes, malformed JSON fallback) |
+| `backend/results/regression_sildenafil_prolia_old_FAIL_20261017_014722.txt` | CREATED | Regression run against old code: 2 FAILED (non_source_text not set) |
+| `backend/results/regression_sildenafil_prolia_new_PASS_20261017_014950.txt` | CREATED | Regression run against new code: 20 PASSED |
 
-**Gate:** Provenance tests pass; sildenafil regression: FAIL on old code, PASS on new.
+### Commands run
+
+```
+# Step 1: Stash new reranker, run regression against OLD code
+git stash -- backend/app/agents/evidence_reranking.py
+d:\Ragmed_2\.venv\Scripts\python.exe -m pytest backend\tests\test_workstream_a_verification.py::test_sildenafil_prolia_regression backend\tests\test_workstream_a_verification.py::test_reranker_reasoning_tagged_non_source backend\tests\test_workstream_a_verification.py::test_reranker_rejects_unknown_ids -v
+  → 2 FAILED (test_sildenafil_prolia_regression, test_reranker_reasoning_tagged_non_source)
+  → 1 PASSED (test_reranker_rejects_unknown_ids)
+
+# Step 2: Restore new code, run full suite
+git stash pop
+d:\Ragmed_2\.venv\Scripts\python.exe -m pytest backend\tests\test_workstream_a_verification.py -v
+  → 20 passed, 0 failed
+
+# Step 3: Verify non-regression on Phases 1 and 2
+d:\Ragmed_2\.venv\Scripts\python.exe -m pytest backend\tests\test_workstream_d_checkpoint.py -q
+  → 45 passed
+d:\Ragmed_2\.venv\Scripts\python.exe -m pytest backend\tests\test_workstream_b_metrics.py backend\tests\test_workstream_b_leakage.py -q
+  → 130 passed, 1 skipped
+
+# Step 4: Commit
+git commit -m "feat: Phase 3: Workstream A evidence verification, claim verifier, contradiction detection, provenance"
+  → Commit: 7b70239b
+```
+
+### Test counts
+
+| Test file | Passed | Failed | Skipped |
+|-----------|--------|--------|---------|
+| test_workstream_a_verification.py | **20** | **0** | 0 |
+| test_workstream_d_checkpoint.py (non-regression) | 45 | 0 | 0 |
+| test_workstream_b_metrics.py (non-regression) | 95 | 0 | 0 |
+| test_workstream_b_leakage.py (non-regression) | 35 | 0 | 1 |
+
+### Sub-item status
+
+**3a — Provenance:** IMPLEMENTED AND TESTED  
+Evidence tier: SOFTWARE TEST  
+`EvidenceSnippet` now has `index_id: Optional[str]` and `retrieval_iteration: Optional[int]` (backward compatible). `AgentState` has `index_id` and `pipeline_version`. The pipeline embeds `index_id` at the retrieval boundary. The orchestrator stamps `retrieval_iteration` on each evidence item per pass. Test `test_provenance_ids_in_verify_claim` verifies ID propagation.
+
+**3b — Reranker Structural Fix:** IMPLEMENTED AND TESTED  
+Evidence tier: SOFTWARE TEST  
+Fixes: (1) unknown/fabricated markers rejected — only markers from input set accepted; (2) `non_source_text=True` tag on all reasoning outputs in `evidence_reranking` dict; (3) bounded retry (max 2) on parse failure → safe fallback to original order; (4) `validated=False` flag distinguishes fallback from verified results.  
+Sildenafil/Prolia regression: FAILED on old code (2 tests), PASSED on new code (both pass).
+
+**3c — Claim Verifier:** IMPLEMENTED AND TESTED  
+Evidence tier: SOFTWARE TEST  
+`ClaimVerifier` in `backend/verification/claim_verifier.py`. All 6 methods implemented. Hard rules enforced: entailment must confirm; citation/lexical overlap alone is NOT 'supported'; NLI runs CPU only; ImportError raised (not silent fallback) if model missing; structured outputs validated.
+
+**3d — Contradiction Detection:** IMPLEMENTED AND TESTED  
+Evidence tier: SOFTWARE TEST  
+`ContradictionDetector` in `backend/verification/contradiction_detector.py`. Handles: direct negation, conflicting numbers/dosages, scope differences (population, time, design). Does NOT assume newest source correct. 4 distinct types returned. `abstention_recommended=True` on material conflicts.
+
+**3e — Sufficiency Assessment:** IMPLEMENTED AND TESTED  
+Evidence tier: SOFTWARE TEST  
+`SufficiencyAssessor` in `backend/verification/sufficiency.py`. All 9 fields always populated. Docstring explicitly disclaims clinical validation. `reasoning` field always non-empty. `sufficient=True` never returned without all supporting fields.
+
+**3f — Gate Ordering:** IMPLEMENTED  
+Evidence tier: SOFTWARE INSPECTION  
+Verification placement: `enable_claim_verification=False` by default (versioning rule). When enabled, `_run_claim_verification()` is called in `_node_confidence` BEFORE calibration logic — no bypass. Confidence computation receives `support_rate` and `contradiction` signals when verifier runs. Answerable questions (sufficient=True, no contradictions) are not incorrectly abstained (force_abstention only set when `contradictions AND not sufficient`).
+
+**3g — Tests:** IMPLEMENTED AND TESTED  
+Evidence tier: SOFTWARE TEST  
+All 15 required tests pass (numbered 1–15 in test file). Additional tests: `test_provenance_ids_in_verify_claim`, `test_reranker_rejects_unknown_ids`, `test_reranker_reasoning_tagged_non_source`, `test_reranker_malformed_json_safe_fallback`.
+
+### Regression test result
+
+| Code version | Test | Result |
+|---|---|---|
+| Old (git stash, pre-Phase-3) | test_sildenafil_prolia_regression | **FAIL** — non_source_text not set in evidence_reranking |
+| Old (git stash, pre-Phase-3) | test_reranker_reasoning_tagged_non_source | **FAIL** — non_source_text not set |
+| New (Phase 3 fix) | test_sildenafil_prolia_regression | **PASS** |
+| New (Phase 3 fix) | test_reranker_reasoning_tagged_non_source | **PASS** |
+
+Regression log files:
+- `backend/results/regression_sildenafil_prolia_old_FAIL_20261017_014722.txt`
+- `backend/results/regression_sildenafil_prolia_new_PASS_20261017_014950.txt`
+
+### Open issues / blocked items
+
+| Item | Reason | What is needed |
+|------|--------|----------------|
+| NLI model not installed | `cross-encoder/nli-deberta-v3-small` not present in `.venv` | All NLI tests use mocks; real model requires `pip install sentence-transformers` and model download |
+| `enable_claim_verification` default OFF | Per versioning rule: new behavior behind config flag | Set `enable_claim_verification=True` in orchestrator constructor when NLI model is available |
+| Human annotation labels | Phase 3 verifier outputs AUTOMATED MODEL JUDGE tier | Human review pending (schema from Phase 2 covers this) |
+
+---
 
 ---
 
