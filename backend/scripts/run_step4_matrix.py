@@ -181,6 +181,75 @@ def _load_partial_output(output_file: str | None) -> list[dict[str, Any]]:
 
 
 # ---------------------------------------------------------------------------
+# Dataset manifest / duplicate-ID helpers
+# ---------------------------------------------------------------------------
+
+def _detect_duplicate_question_ids(questions: list[dict[str, Any]]) -> set[str]:
+    """Return the set of question texts (IDs) that appear more than once.
+
+    Question identity is based on the 'question' field (text), which is the
+    same key used by IncrementalResultWriter.completed_question_texts for
+    resume deduplication.  Callers should raise or log loudly when this set
+    is non-empty.
+    """
+    seen: set[str] = set()
+    duplicates: set[str] = set()
+    for item in questions:
+        q_text = item.get("question", "")
+        if q_text in seen:
+            duplicates.add(q_text)
+        else:
+            seen.add(q_text)
+    return duplicates
+
+
+import hashlib as _hashlib  # noqa: E402 — placed here to keep helpers co-located
+
+
+def _compute_dataset_manifest_hash(questions: list[dict[str, Any]]) -> str:
+    """Return a stable SHA-256 hex digest of the ordered question texts.
+
+    The hash is deterministic for the same ordered list of questions and
+    changes whenever a question is added, removed, or its text is altered.
+    Used by _check_manifest_consistency to detect dataset drift between runs.
+    """
+    h = _hashlib.sha256()
+    for item in questions:
+        q_text = item.get("question", "")
+        h.update(q_text.encode("utf-8"))
+        h.update(b"\x00")  # null separator so ["ab", "c"] != ["a", "bc"]
+    return h.hexdigest()
+
+
+def _check_manifest_consistency(
+    state: dict[str, Any],
+    questions: list[dict[str, Any]],
+) -> bool:
+    """Return True if the dataset matches the hash stored in *state*.
+
+    - If no hash is stored yet (first run), always returns True (first-run
+      acceptance) and does NOT modify *state*; the caller is responsible for
+      storing the hash after a successful first verification.
+    - If a hash is stored and does NOT match, returns False and logs a warning.
+    """
+    stored_hash = state.get("dataset_manifest_hash")
+    if stored_hash is None:
+        # First run — no prior hash to compare against; accept unconditionally.
+        return True
+    current_hash = _compute_dataset_manifest_hash(questions)
+    if current_hash != stored_hash:
+        logger.warning(
+            f"[Matrix] Dataset manifest mismatch: "
+            f"stored_hash={stored_hash[:12]}… "
+            f"current_hash={current_hash[:12]}… "
+            "The dataset appears to have changed since the checkpoint was created. "
+            "Refusing to resume silently."
+        )
+        return False
+    return True
+
+
+# ---------------------------------------------------------------------------
 # Incremental output-file writer
 # ---------------------------------------------------------------------------
 
