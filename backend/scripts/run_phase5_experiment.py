@@ -496,6 +496,40 @@ def _load_split(out_root: Path, name: str) -> List[Dict[str, Any]]:
         return json.load(fh)
 
 
+def _stratified_sample(records, n, seed, stratify_by="source"):
+    """Return a seeded, source-stratified sample of ~n records from `records`.
+
+    Allocation is proportional to each stratum's share of the pool; a fixed
+    random seed makes the selection reproducible. Order within strata is
+    shuffled with the same seed.
+    """
+    import random as _random
+
+    rng = _random.Random(seed)
+    strata: Dict[Any, List[Dict[str, Any]]] = {}
+    for r in records:
+        strata.setdefault(r.get(stratify_by, "__unknown__"), []).append(r)
+
+    total = len(records)
+    picked: List[Dict[str, Any]] = []
+    for key in sorted(strata.keys(), key=str):
+        pool = strata[key][:]
+        rng.shuffle(pool)
+        take = max(1, round(n * len(strata[key]) / total)) if total else 0
+        picked.extend(pool[:take])
+
+    # Trim/pad to exactly n (trim from the end; pad from leftover unused records).
+    if len(picked) > n:
+        picked = picked[:n]
+    elif len(picked) < n:
+        chosen_ids = {id(x) for x in picked}
+        leftovers = [r for r in records if id(r) not in chosen_ids]
+        rng.shuffle(leftovers)
+        picked.extend(leftovers[: n - len(picked)])
+    rng.shuffle(picked)
+    return picked
+
+
 def _atomic_write_json(path: Path, payload: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_suffix(path.suffix + ".tmp")
@@ -566,15 +600,23 @@ async def _amain(args: argparse.Namespace) -> None:
 
     dev = _load_split(out_root, "dev")
     test = _load_split(out_root, "test")
-    if dev_n is not None:
-        dev = dev[:dev_n]
-    if test_n is not None:
-        test = test[:test_n]
-    questions: List[Tuple[str, Dict[str, Any]]] = (
-        [("dev", q) for q in dev] + [("test", q) for q in test]
-    )
-    logger.info("[P5] Running %d questions/config (dev=%d test=%d) over %d configs",
-                len(questions), len(dev), len(test), len(_CONFIGS))
+
+    if args.pilot_n is not None:
+        # Budget-bounded pilot: a stratified (by source), seeded sample drawn
+        # from the TEST split only. dev is not used in pilot mode.
+        pilot = _stratified_sample(test, n=args.pilot_n, seed=args.pilot_seed, stratify_by="source")
+        questions = [("test", q) for q in pilot]
+        dev, test = [], pilot
+        logger.info("[P5][pilot] %d test questions (seed=%d, stratified by source) over %d configs",
+                    len(pilot), args.pilot_seed, len(_CONFIGS))
+    else:
+        if dev_n is not None:
+            dev = dev[:dev_n]
+        if test_n is not None:
+            test = test[:test_n]
+        questions = [("dev", q) for q in dev] + [("test", q) for q in test]
+        logger.info("[P5] Running %d questions/config (dev=%d test=%d) over %d configs",
+                    len(questions), len(dev), len(test), len(_CONFIGS))
 
     # Build base pipeline (cache OFF) and a cached pipeline (cache ON) once.
     from app.rag.pipeline import RAGPipeline
@@ -592,18 +634,44 @@ async def _amain(args: argparse.Namespace) -> None:
         _atomic_write_json(configs_dir / f"{name}.json", {"config_name": name, **cdef})
 
     per_q_dir = out_root / "per_question"
-
-    # Run each config.
     config_order = list(_CONFIGS.keys())
-    counts: Dict[str, int] = {}
+
+    # Fresh output files for this invocation.
     for config_name in config_order:
-        cdef = _CONFIGS[config_name]
         out_path = per_q_dir / f"{config_name}.jsonl"
         if out_path.exists():
-            out_path.unlink()  # fresh run for this invocation
-        pipeline = cached_pipeline if cdef.get("cache_enabled") else base_pipeline
-        n_done = 0
-        for split_name, q in questions:
+            out_path.unlink()
+
+    # Run question-OUTER so a wall-clock budget stop leaves every config with
+    # the same completed question set (comparable). Each question is run through
+    # all 8 configs before advancing.
+    counts: Dict[str, int] = {c: 0 for c in config_order}
+    budget_s = args.budget_hours * 3600.0 if args.budget_hours else None
+    run_start = time.perf_counter()
+    per_question_wall: List[float] = []
+    budget_stopped = False
+    questions_completed = 0
+
+    for qi, (split_name, q) in enumerate(questions, start=1):
+        # Budget guard: before starting a new question, stop if the elapsed time
+        # plus the observed mean per-question wall-clock would exceed the budget.
+        if budget_s is not None and per_question_wall:
+            elapsed = time.perf_counter() - run_start
+            mean_q = sum(per_question_wall) / len(per_question_wall)
+            if elapsed + mean_q > budget_s:
+                logger.warning(
+                    "[P5][budget] Stopping before question %d: elapsed %.0fs + mean/q %.0fs "
+                    "> budget %.0fs. Completed %d questions x %d configs.",
+                    qi, elapsed, mean_q, budget_s, questions_completed, len(config_order),
+                )
+                budget_stopped = True
+                break
+
+        q_start = time.perf_counter()
+        for config_name in config_order:
+            cdef = _CONFIGS[config_name]
+            out_path = per_q_dir / f"{config_name}.jsonl"
+            pipeline = cached_pipeline if cdef.get("cache_enabled") else base_pipeline
             if cdef["kind"] == "plain":
                 record = _run_plain_question(
                     question_item=q, split_name=split_name, config_name=config_name,
@@ -616,9 +684,15 @@ async def _amain(args: argparse.Namespace) -> None:
                     llm_wrapper=llm, measure_warm=True,
                 )
             _append_jsonl(out_path, record)
-            n_done += 1
-        counts[config_name] = n_done
-        logger.info("[P5] config %s done: %d records → %s", config_name, n_done, out_path)
+            counts[config_name] += 1
+        q_wall = time.perf_counter() - q_start
+        per_question_wall.append(q_wall)
+        questions_completed += 1
+        logger.info("[P5] question %d/%d done across %d configs in %.0fs (elapsed %.0fs)",
+                    qi, len(questions), len(config_order), q_wall,
+                    time.perf_counter() - run_start)
+
+    run_wall_s = round(time.perf_counter() - run_start, 1)
 
     environment = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -631,12 +705,34 @@ async def _amain(args: argparse.Namespace) -> None:
         "configs": list(_CONFIGS.keys()),
         "subset": {"dev": len(dev), "test": len(test), "full": bool(args.full)},
         "records_per_config": counts,
+        "mode": ("pilot" if args.pilot_n is not None else ("full" if args.full else "subset")),
+        "pilot": None if args.pilot_n is None else {
+            "requested_n": args.pilot_n,
+            "seed": args.pilot_seed,
+            "stratify_by": "source",
+            "questions_completed": questions_completed,
+            "budget_hours": args.budget_hours,
+            "budget_stopped_early": budget_stopped,
+        },
+        "wall_clock": {
+            "run_seconds": run_wall_s,
+            "run_hours": round(run_wall_s / 3600.0, 3),
+            "questions_completed": questions_completed,
+            "mean_seconds_per_question_all_configs": (
+                round(sum(per_question_wall) / len(per_question_wall), 1)
+                if per_question_wall else None
+            ),
+        },
     }
     try:
         import torch
         environment["torch_version"] = torch.__version__
         environment["cuda_version"] = torch.version.cuda
         environment["cuda_available"] = torch.cuda.is_available()
+        if torch.cuda.is_available():
+            environment["peak_vram_mb_run"] = round(
+                torch.cuda.max_memory_allocated() / (1024 * 1024), 2
+            )
     except Exception:
         pass
     _atomic_write_json(out_root / "environment_run.json", environment)
@@ -778,7 +874,14 @@ def aggregate_outputs(out_root: Path, environment: Dict[str, Any]) -> None:
     metric_summary["paired_vs_baseline_mcnemar_holm"] = paired
     metric_summary["significance_caveat"] = (
         "No superiority claim is made without a Holm-adjusted significant paired test. "
-        "Small reduced-subset n yields wide CIs; treat deltas as directional only."
+        "Small pilot n yields wide CIs; treat deltas as directional only."
+    )
+    metric_summary["metric_caveat"] = (
+        "Answer-correctness here is token-containment vs gold (threshold 0.6). It scores an "
+        "abstention as incorrect, so configs with high abstention rates (the RAG baselines on "
+        "this BioASQ/PubMedQA mix) are penalised relative to always-answering plain-LLM. This is "
+        "a measurement property, NOT evidence that abstention is wrong — abstention can be the "
+        "safe behaviour. Report abstention_rate alongside accuracy; do not read accuracy alone."
     )
     _atomic_write_json(out_root / "metric_summary.json", metric_summary)
 
@@ -841,9 +944,19 @@ def aggregate_outputs(out_root: Path, environment: Dict[str, Any]) -> None:
                        {"n_failures": len(failures), "cases": failures})
 
     # Summary + report.
+    _mode = environment.get("mode", "subset")
+    _tier = {
+        "full": "FULL",
+        "pilot": "BUDGET_BOUNDED_PILOT",
+        "subset": "REDUCED_VALIDATION_SUBSET",
+    }.get(_mode, "REDUCED_VALIDATION_SUBSET")
     summary = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
-        "tier": "FULL" if environment.get("subset", {}).get("full") else "REDUCED_VALIDATION_SUBSET",
+        "tier": _tier,
+        "mode": _mode,
+        "pilot": environment.get("pilot"),
+        "wall_clock": environment.get("wall_clock"),
+        "peak_vram_mb_run": environment.get("peak_vram_mb_run"),
         "subset": environment.get("subset"),
         "configs": config_names,
         "accuracy": {c: metric_summary["configs"][c]["accuracy"] for c in config_names},
@@ -862,6 +975,20 @@ def _write_report_md(out_root, environment, metric_summary, latency, summary) ->
     lines.append(f"Generated: {summary['generated_at']}")
     lines.append(f"Tier: **{summary['tier']}**  "
                  f"(dev={summary['subset'].get('dev')}, test={summary['subset'].get('test')})")
+    wc = summary.get("wall_clock") or {}
+    if wc:
+        lines.append("")
+        lines.append(f"Wall-clock: {wc.get('run_hours')} h "
+                     f"({wc.get('questions_completed')} questions × "
+                     f"{len(summary.get('configs', []))} configs; "
+                     f"mean {wc.get('mean_seconds_per_question_all_configs')} s/question-all-configs). "
+                     f"Peak VRAM (run): {summary.get('peak_vram_mb_run')} MB.")
+    pilot = summary.get("pilot") or {}
+    if pilot:
+        lines.append(f"Pilot: n={pilot.get('questions_completed')} test questions "
+                     f"(seed={pilot.get('seed')}, stratified by source, "
+                     f"budget={pilot.get('budget_hours')} h, "
+                     f"stopped_early={pilot.get('budget_stopped_early')}).")
     lines.append("")
     lines.append(f"- Resolved eval_split: `{environment.get('resolved_eval_split_path')}`")
     lines.append(f"- LLM: `{environment.get('llm_model')}` mode=`{environment.get('llm_mode')}` "
@@ -906,6 +1033,20 @@ def _write_report_md(out_root, environment, metric_summary, latency, summary) ->
                  "is genuinely absent (e.g. per-stage latency on historical baselines where "
                  "record_node_timing is OFF; PubMedQA retrieval-quality not in the eval index).")
     lines.append(f"- {metric_summary['significance_caveat']}")
+    if metric_summary.get("metric_caveat"):
+        lines.append(f"- {metric_summary['metric_caveat']}")
+    lines.append("")
+    lines.append("## Remaining full 500×8 sweep — NOT RUN (exceeds 4 h GPU budget)")
+    lines.append("")
+    lines.append("The full 500-question × 8-config sweep is estimated at ~40+ hours of GPU "
+                 "wall-clock and was deliberately NOT run (it exceeds the 4-hour budget). "
+                 "To run it later:")
+    lines.append("")
+    lines.append("```")
+    lines.append(r"d:\Ragmed_2\.venv-cu128-pilot\Scripts\python.exe "
+                 r"backend\scripts\run_phase5_experiment.py --full "
+                 r"--output-root " + str(out_root))
+    lines.append("```")
     (out_root / "report.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
@@ -919,8 +1060,16 @@ def main() -> None:
                         help="Smoke mode: --smoke-n dev questions per config (default 1).")
     parser.add_argument("--smoke-n", type=int, default=1,
                         help="Number of dev questions per config in smoke mode (default 1).")
+    parser.add_argument("--pilot-n", type=int, default=None,
+                        help="Budget-bounded pilot: seeded, source-stratified sample of N test "
+                             "questions x all 8 configs. Overrides smoke/max-questions.")
+    parser.add_argument("--pilot-seed", type=int, default=42,
+                        help="Seed for the stratified pilot sample (default 42).")
+    parser.add_argument("--budget-hours", type=float, default=None,
+                        help="Wall-clock GPU budget in hours. The run stops before starting a "
+                             "new question if the projected finish would exceed it.")
     parser.add_argument("--full", action="store_true",
-                        help="Run the full dev+test sweep (LONG).")
+                        help="Run the full dev+test sweep (LONG, ~40h — exceeds the 4h budget).")
     args = parser.parse_args()
     asyncio.run(_amain(args))
 

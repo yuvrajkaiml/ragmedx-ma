@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-10-17T08:35:00.099881+00:00",
+  "generated_at": "2026-10-17T12:24:59.066229+00:00",
   "resolved_eval_split_path": "D:\\Ragmed_2\\backend\\data\\faiss_index\\eval_split",
   "canonical_eval_split": "D:\\Ragmed_2\\backend\\data\\faiss_index\\eval_split",
   "llm_model": "Qwen/Qwen3-8B",
   "llm_mode": "local",
   "generator_temperature": 0.0,
-  "model_load_ms": 38159,
+  "model_load_ms": 37810,
   "configs": [
     "phase5-improved-v2",
     "phase5-improved-no-verification",
@@ -17,21 +17,37 @@
     "phase5-plain-llm-no-rag"
   ],
   "subset": {
-    "dev": 1,
-    "test": 0,
+    "dev": 0,
+    "test": 18,
     "full": false
   },
   "records_per_config": {
-    "phase5-improved-v2": 1,
-    "phase5-improved-no-verification": 1,
-    "phase5-full-pipeline": 1,
-    "phase5-no-critic": 1,
-    "phase5-no-iterative-retrieval": 1,
-    "phase5-no-calibration": 1,
-    "phase5-basic-rag": 1,
-    "phase5-plain-llm-no-rag": 1
+    "phase5-improved-v2": 16,
+    "phase5-improved-no-verification": 16,
+    "phase5-full-pipeline": 16,
+    "phase5-no-critic": 16,
+    "phase5-no-iterative-retrieval": 16,
+    "phase5-no-calibration": 16,
+    "phase5-basic-rag": 16,
+    "phase5-plain-llm-no-rag": 16
+  },
+  "mode": "pilot",
+  "pilot": {
+    "requested_n": 18,
+    "seed": 42,
+    "stratify_by": "source",
+    "questions_completed": 16,
+    "budget_hours": 3.8,
+    "budget_stopped_early": true
+  },
+  "wall_clock": {
+    "run_seconds": 13286.6,
+    "run_hours": 3.691,
+    "questions_completed": 16,
+    "mean_seconds_per_question_all_configs": 830.4
   },
   "torch_version": "2.11.0+cu128",
   "cuda_version": "12.8",
-  "cuda_available": true
+  "cuda_available": true,
+  "peak_vram_mb_run": 10157.1
 }

@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Should serum pancreatic lipase replace serum amylase as a biomarker of acute pancreatitis?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "6c92e7f10ffc4062d6118d0d20b3782c5d44404ba83f4fbe94a8fe5be0dcfe47",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_6278dc0c56bf9aee6f000010_s64729_chunk_0",
+        "document_id": "bioasq_6278dc0c56bf9aee6f000010_s64729",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/27854211",
+        "title": "PubMed 27854211 [abstract]",
+        "cited_text": "a component of the DAG complex as a potential serum biomarker in DMD. Such a serum measure could be further developed as a tool to help reflect overall muscle DAG complex expression or stability.",
+        "cross_encoder_logit": 0.04368249326944351,
+        "relevance_score": 0.5109188871237393,
+        "cross_encoder_score": 0.5109188871237393,
+        "evidence_quality_score": 0.5109188871237393,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/27854211",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_660c3591fdcbea915f000031_s60284_chunk_0",
+        "document_id": "bioasq_660c3591fdcbea915f000031_s60284",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/34920065",
+        "title": "PubMed 34920065 [abstract]",
+        "cited_text": "Biomarkers such as C-reactive protein (CRP), procalcitonin (PCT), and serum amyloid A (SAA) can help in the detection of sepsis at early stages.",
+        "cross_encoder_logit": 0.03847259283065796,
+        "relevance_score": 0.5096169620324242,
+        "cross_encoder_score": 0.5096169620324242,
+        "evidence_quality_score": 0.5096169620324242,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/34920065",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_66088cccfdcbea915f00000b_s12459_chunk_0",
+        "document_id": "bioasq_66088cccfdcbea915f00000b_s12459",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/37933195",
+        "title": "PubMed 37933195 [abstract]",
+        "cited_text": "Acute pancreatitis-induced splanchnic vein thrombosis (APISVT) is an important sequela complication of acute pancreatitis, which may cause poor prognosis, such as severe gastrointestinal hemorrhage, bowel ischemic necrosis and liver failure.",
+        "cross_encoder_logit": 0.014289923943579197,
+        "relevance_score": 0.5035724201948446,
+        "cross_encoder_score": 0.5035724201948446,
+        "evidence_quality_score": 0.5035724201948446,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/37933195",
+        "index_id": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Is pelvic pain associated with defecatory symptoms in women with pelvic organ prolapse?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "75669cf04f6c2f0b39f4f41eb7c311e9dc178a9bddba0a4b532a3331f46cdca3",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_54f08d4a94afd61504000016_s1842_chunk_0",
+        "document_id": "bioasq_54f08d4a94afd61504000016_s1842",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/18478547",
+        "title": "PubMed 18478547 [abstract]",
+        "cited_text": "In women, clinical studies suggest that pain syndromes such as irritable bowel syndrome and interstitial cystitis, which are associated with visceral hyperalgesia, are often comorbid with endometriosis and chronic pelvic pain.",
+        "cross_encoder_logit": 0.18800389766693115,
+        "relevance_score": 0.5468630227161403,
+        "cross_encoder_score": 0.5468630227161403,
+        "evidence_quality_score": 0.5468630227161403,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/18478547",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_54f08d4a94afd61504000016_s1841_chunk_0",
+        "document_id": "bioasq_54f08d4a94afd61504000016_s1841",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/18646315",
+        "title": "PubMed 18646315 [abstract]",
+        "cited_text": "In women, clinical studies suggest that functional pain syndromes such as irritable bowel syndrome, interstitial cystitis, and fibromyalgia, are co-morbid with endometriosis, chronic pelvic pain, and others diseases.",
+        "cross_encoder_logit": 0.12359735369682312,
+        "relevance_score": 0.5308600627764581,
+        "cross_encoder_score": 0.5308600627764581,
+        "evidence_quality_score": 0.5308600627764581,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/18646315",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_660bbc09fdcbea915f00002a_s31008_chunk_0",
+        "document_id": "bioasq_660bbc09fdcbea915f00002a_s31008",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/37944153",
+        "title": "PubMed 37944153 [abstract]",
+        "cited_text": "Endometriosis is a chronic condition, with debilitating symptoms affecting all ages. Dysmenorrhea and pelvic pain",
+        "cross_encoder_logit": 0.11072549968957901,
+        "relevance_score": 0.5276531281004607,
+        "cross_encoder_score": 0.5276531281004607,
+        "evidence_quality_score": 0.5276531281004607,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/37944153",
+        "index_id": null
+      }
+    ]
+  }
+}

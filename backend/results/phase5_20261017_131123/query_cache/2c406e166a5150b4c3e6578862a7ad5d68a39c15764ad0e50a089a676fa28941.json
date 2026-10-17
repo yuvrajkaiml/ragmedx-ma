@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What studies link unintended pregnancy history to desire for sterilization reversal?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "2c406e166a5150b4c3e6578862a7ad5d68a39c15764ad0e50a089a676fa28941",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_54f088ee94afd61504000015_s17365_chunk_0",
+        "document_id": "bioasq_54f088ee94afd61504000015_s17365",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/21764126",
+        "title": "PubMed 21764126 [abstract]",
+        "cited_text": "Randomized controlled trials showed that the excision technique is associated with a higher pregnancy rate and a lower rate of recurrence although it may determine severe injury to the ovarian reserve.",
+        "cross_encoder_logit": 0.0036101508885622025,
+        "relevance_score": 0.5009025367418964,
+        "cross_encoder_score": 0.5009025367418964,
+        "evidence_quality_score": 0.5009025367418964,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/21764126",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_54f088ee94afd61504000015_s17371_chunk_0",
+        "document_id": "bioasq_54f088ee94afd61504000015_s17371",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/16034960",
+        "title": "PubMed 16034960 [abstract]",
+        "cited_text": "It was also associated with a subsequent increased rate of spontaneous pregnancy women who had documented prior sub-fertility (OR 5.21 CI 2.04-13.29). AUTHORS' CONCLUSIONS: There is some evidence that excisional surgery for endometriomata provides for a more favourable outcome than drainage and ablation, with regard to the recurrence of the endometrioma, recurrence of symptoms and subsequent spontaneous pregnancy in women who were previously subfertile.",
+        "cross_encoder_logit": 0.0011215695412829518,
+        "relevance_score": 0.5002803923559281,
+        "cross_encoder_score": 0.5002803923559281,
+        "evidence_quality_score": 0.5002803923559281,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/16034960",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5e48f90bf8b2df0d49000006_s54155_chunk_0",
+        "document_id": "bioasq_5e48f90bf8b2df0d49000006_s54155",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/19610053",
+        "title": "PubMed 19610053 [abstract]",
+        "cited_text": "It was determined that gamma sterilization was the preferred sterilization method of choice for this device.",
+        "cross_encoder_logit": 0.0008150452049449086,
+        "relevance_score": 0.5002037612899564,
+        "cross_encoder_score": 0.5002037612899564,
+        "evidence_quality_score": 0.5002037612899564,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/19610053",
+        "index_id": null
+      }
+    ]
+  }
+}

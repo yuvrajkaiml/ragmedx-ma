@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What is the role of laparoscopy in treating acute cholecystitis?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "5212a90e67235c698adc191daf09b78fbc1f156f0ce5396d9b93d749638d8a50",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_6020a9f11cb411341a000080_s21352_chunk_0",
+        "document_id": "bioasq_6020a9f11cb411341a000080_s21352",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/30776586",
+        "title": "PubMed 30776586 [abstract]",
+        "cited_text": "PRESENTATION OF CASE: Here we describe the second ever published case of C. canimorsus bacteremia presenting with acute cholecystitis. The patient presented with epigastric pain and sepsis three weeks post domestic dog bite.",
+        "cross_encoder_logit": 0.01541951298713684,
+        "relevance_score": 0.503854801870169,
+        "cross_encoder_score": 0.503854801870169,
+        "evidence_quality_score": 0.503854801870169,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/30776586",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_6020a9f11cb411341a000080_s21361_chunk_0",
+        "document_id": "bioasq_6020a9f11cb411341a000080_s21361",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/25445385",
+        "title": "PubMed 25445385 [title]",
+        "cited_text": "Capnocytophaga canimorsus bacteremia presenting with acute cholecystitis after a dog bite.",
+        "cross_encoder_logit": 0.009348137304186821,
+        "relevance_score": 0.5023370173071965,
+        "cross_encoder_score": 0.5023370173071965,
+        "evidence_quality_score": 0.5023370173071965,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/25445385",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_65f86e06c4010b4d7800005a_s55885_chunk_0",
+        "document_id": "bioasq_65f86e06c4010b4d7800005a_s55885",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/11998382",
+        "title": "PubMed 11998382 [abstract]",
+        "cited_text": "The authors demonstrate that peritoneal dialysis is an effective, safe, and available method for treating acute renal failure in infants.",
+        "cross_encoder_logit": 0.0010496665490791202,
+        "relevance_score": 0.5002624166131756,
+        "cross_encoder_score": 0.5002624166131756,
+        "evidence_quality_score": 0.5002624166131756,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/11998382",
+        "index_id": null
+      }
+    ]
+  }
+}

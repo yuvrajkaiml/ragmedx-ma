@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What studies link paraoxonase levels to epicardial fat tissue measurements?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "d3705c91001efbb629131cd61795c6aa4886f808a86b5b5d15df60b348441d47",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_661c03c848a2c27714000004_s21693_chunk_0",
+        "document_id": "bioasq_661c03c848a2c27714000004_s21693",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/29308836",
+        "title": "PubMed 29308836 [abstract]",
+        "cited_text": "Paraoxonase 2 (PON2) possesses antiatherogenic properties and is associated with lower ROS levels.",
+        "cross_encoder_logit": 0.08238920569419861,
+        "relevance_score": 0.5205856581523213,
+        "cross_encoder_score": 0.5205856581523213,
+        "evidence_quality_score": 0.5205856581523213,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/29308836",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5fe31310a43ad31278000041_s49781_chunk_0",
+        "document_id": "bioasq_5fe31310a43ad31278000041_s49781",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/7738205",
+        "title": "PubMed 7738205 [abstract]",
+        "cited_text": "Recent studies in animal models have indicated that TNF-alpha plays an important role in mediating the insulin resistance of obesity through its overexpression in fat tissue.",
+        "cross_encoder_logit": 0.0021790917962789536,
+        "relevance_score": 0.5005447727335013,
+        "cross_encoder_score": 0.5005447727335013,
+        "evidence_quality_score": 0.5005447727335013,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/7738205",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_58ca906a02b8c6095300002e_s1955_chunk_0",
+        "document_id": "bioasq_58ca906a02b8c6095300002e_s1955",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/21196229",
+        "title": "PubMed 21196229 [abstract]",
+        "cited_text": "Brown fat (brown adipose tissue, BAT) primary function is to produce heat.",
+        "cross_encoder_logit": 0.001623911433853209,
+        "relevance_score": 0.5004059777692467,
+        "cross_encoder_score": 0.5004059777692467,
+        "evidence_quality_score": 0.5004059777692467,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/21196229",
+        "index_id": null
+      }
+    ]
+  }
+}

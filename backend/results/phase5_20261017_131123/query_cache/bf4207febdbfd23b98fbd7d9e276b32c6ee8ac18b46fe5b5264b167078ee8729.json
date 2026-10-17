@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What studies link selection performance to dental student success?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "bf4207febdbfd23b98fbd7d9e276b32c6ee8ac18b46fe5b5264b167078ee8729",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_621e9e7b3a8413c653000054_s35282_chunk_0",
+        "document_id": "bioasq_621e9e7b3a8413c653000054_s35282",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/32156276",
+        "title": "PubMed 32156276 [abstract]",
+        "cited_text": "BACKGROUND: There is a lack of cohort studies on the influence factors of oral health-related quality of life (OHRQoL).",
+        "cross_encoder_logit": 0.0006238652858883142,
+        "relevance_score": 0.5001559663164135,
+        "cross_encoder_score": 0.5001559663164135,
+        "evidence_quality_score": 0.5001559663164135,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/32156276",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5e323a37fbd6abf43b000057_s25942_chunk_0",
+        "document_id": "bioasq_5e323a37fbd6abf43b000057_s25942",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/30661338",
+        "title": "PubMed 30661338 [abstract]",
+        "cited_text": "In brain tumor studies , the association between dental X-ray exposure and meningioma was statistically significant in 5 of the 7 studies",
+        "cross_encoder_logit": 0.00048513361252844334,
+        "relevance_score": 0.5001212834007533,
+        "cross_encoder_score": 0.5001212834007533,
+        "evidence_quality_score": 0.5001212834007533,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/30661338",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5e323a37fbd6abf43b000057_s25935_chunk_0",
+        "document_id": "bioasq_5e323a37fbd6abf43b000057_s25935",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/30661338",
+        "title": "PubMed 30661338 [abstract]",
+        "cited_text": "In brain tumor studies, the association between dental X-ray exposure and meningioma was statistically significant in 5 of the 7 studies.",
+        "cross_encoder_logit": 0.0004441190685611218,
+        "relevance_score": 0.5001110297653153,
+        "cross_encoder_score": 0.5001110297653153,
+        "evidence_quality_score": 0.5001110297653153,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/30661338",
+        "index_id": null
+      }
+    ]
+  }
+}

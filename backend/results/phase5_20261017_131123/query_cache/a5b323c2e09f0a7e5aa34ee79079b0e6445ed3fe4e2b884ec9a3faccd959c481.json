@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What studies link reimbursement models to process-oriented care delivery?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "a5b323c2e09f0a7e5aa34ee79079b0e6445ed3fe4e2b884ec9a3faccd959c481",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_5150b45ad24251bc0500006f_s17750_chunk_0",
+        "document_id": "bioasq_5150b45ad24251bc0500006f_s17750",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/12442853",
+        "title": "PubMed 12442853 [sections.0]",
+        "cited_text": "The case of Viagra, it concludes, holds out two general lessons: first, allow exceptions to total bans on reimbursement; second, involve the medical profession in the decision-making process.",
+        "cross_encoder_logit": 0.0021506226621568203,
+        "relevance_score": 0.5005376554583099,
+        "cross_encoder_score": 0.5005376554583099,
+        "evidence_quality_score": 0.5005376554583099,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/12442853",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_531a3fe3b166e2b806000038_s30749_chunk_0",
+        "document_id": "bioasq_531a3fe3b166e2b806000038_s30749",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/23116790",
+        "title": "PubMed 23116790 [abstract]",
+        "cited_text": "In terms of pregnancy, the studies have shown contradictory results due to variations in methodology and medical care.",
+        "cross_encoder_logit": 0.0003592660650610924,
+        "relevance_score": 0.5000898165152992,
+        "cross_encoder_score": 0.5000898165152992,
+        "evidence_quality_score": 0.5000898165152992,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/23116790",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5319ac36b166e2b806000031_s57078_chunk_0",
+        "document_id": "bioasq_5319ac36b166e2b806000031_s57078",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/9301423",
+        "title": "PubMed 9301423 [abstract]",
+        "cited_text": "Evidence from these models indicates that migration is a highly complex process, which is likely to involve the tightly controlled spatial and temporal interaction of multiple factors:",
+        "cross_encoder_logit": 0.0002780092181637883,
+        "relevance_score": 0.5000695023040933,
+        "cross_encoder_score": 0.5000695023040933,
+        "evidence_quality_score": 0.5000695023040933,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/9301423",
+        "index_id": null
+      }
+    ]
+  }
+}

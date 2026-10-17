@@ -35,10 +35,16 @@
     "hard_assert_llm_mode_local": true
   },
   "run_tier": {
-    "tier": "REDUCED_VALIDATION_SUBSET",
-    "executed": "1 dev question x 8 configs (smoke validation to prove rich records + latency + output layout)",
-    "reason": "The full 500 x 8 GPU sweep is ~40+ hours and cannot complete inside a single step window. Per P5-6, a reduced validation subset was executed; the full sweep awaits user approval.",
-    "wall_clock_observed": "~13 minutes for 1 question x 8 configs (heavy configs ~80-130 s/question)",
-    "full_run_estimate": "500 questions x ~ (sum of per-config seconds). Heavy configs ~130 s/Q; 8 configs; ~40+ hours total."
+    "tier": "BUDGET_BOUNDED_PILOT",
+    "executed": "16 test questions x 8 configs = 128 runs (requested 18; wall-clock budget guard stopped before Q17)",
+    "sample": "stratified by source, seed 42, from the test split (12 PubMedQA + 4 BioASQ)",
+    "wall_clock_hours": 3.691,
+    "mean_seconds_per_question_all_configs": 830.4,
+    "peak_vram_mb_run": 10157.1,
+    "budget_hours": 3.8,
+    "budget_stopped_early": true,
+    "failures": 0,
+    "full_run_estimate": "~40+ hours (500 x 8); NOT RUN — exceeds the 4 h GPU budget.",
+    "full_run_command": "d:\\Ragmed_2\\.venv-cu128-pilot\\Scripts\\python.exe backend\\scripts\\run_phase5_experiment.py --full --output-root D:\\Ragmed_2\\backend\\results\\phase5_20261017_131123"
   }
 }

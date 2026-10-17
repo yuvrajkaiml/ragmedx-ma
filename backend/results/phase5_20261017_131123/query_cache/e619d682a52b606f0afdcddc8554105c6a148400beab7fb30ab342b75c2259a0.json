@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What is the subcellular localization of angiogenin?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "e619d682a52b606f0afdcddc8554105c6a148400beab7fb30ab342b75c2259a0",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_54d7ae1fe19bba8909000001_s10023_chunk_0",
+        "document_id": "bioasq_54d7ae1fe19bba8909000001_s10023",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/1723310",
+        "title": "PubMed 1723310 [abstract]",
+        "cited_text": "Angiogenin is a potent blood-vessel-inducing polypeptide with a molecular weight of 14,000 that has a unique ribonucleolytic activity.",
+        "cross_encoder_logit": 0.19686195254325867,
+        "relevance_score": 0.5490571577151603,
+        "cross_encoder_score": 0.5490571577151603,
+        "evidence_quality_score": 0.5490571577151603,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/1723310",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_53124e84e3eabad02100000c_s16994_chunk_0",
+        "document_id": "bioasq_53124e84e3eabad02100000c_s16994",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/15831230",
+        "title": "PubMed 15831230 [abstract]",
+        "cited_text": "A number of endogenous inhibitors of angiogenesis are found in the body. Some of these are synthesized by specific cells in different organs, and others are created by extracellular proteolytic cleavage of plasma-derived or extracellular matrix-localized proteins. In this review, we focus on angiostatin, endostatin,",
+        "cross_encoder_logit": 0.15401040017604828,
+        "relevance_score": 0.5384266758749735,
+        "cross_encoder_score": 0.5384266758749735,
+        "evidence_quality_score": 0.5384266758749735,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/15831230",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_551d8b3a6b348bb82c000011_s11258_chunk_0",
+        "document_id": "bioasq_551d8b3a6b348bb82c000011_s11258",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/12515546",
+        "title": "PubMed 12515546 [abstract]",
+        "cited_text": "Here we report that angiogenin binds to CT repeats that are abundant in the nontranscribed region of the ribosomal RNA gene. An angiogenin-binding DNA sequence (CTCTCTCTCTCTCTCTCCCTC) has been identified and designated angiogenin-binding element (ABE).",
+        "cross_encoder_logit": 0.05824737623333931,
+        "relevance_score": 0.5145577283883422,
+        "cross_encoder_score": 0.5145577283883422,
+        "evidence_quality_score": 0.5145577283883422,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/12515546",
+        "index_id": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Where is the klotho protein primarily expressed in the body",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "96add8d3ab22c4476ad5ac3c1c056ed42452459c783546c5b93e5070321b67b3",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_515dbb3b298dcd4e51000018_s61960_chunk_0",
+        "document_id": "bioasq_515dbb3b298dcd4e51000018_s61960",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/22042362",
+        "title": "PubMed 22042362 [sections.0]",
+        "cited_text": "Taken together, these data indicate loss of klotho expression as an early event in breast cancer development, and suggest a role for DNA methylation and histone deacetylation in klotho silencing.",
+        "cross_encoder_logit": 0.2369079440832138,
+        "relevance_score": 0.5589515205826796,
+        "cross_encoder_score": 0.5589515205826796,
+        "evidence_quality_score": 0.5589515205826796,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/22042362",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_515b30d8d24251bc050000b0_s39213_chunk_0",
+        "document_id": "bioasq_515b30d8d24251bc050000b0_s39213",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/11419941",
+        "title": "PubMed 11419941 [sections.0]",
+        "cited_text": "Lacritin mRNA and protein are highly expressed in human lacrimal gland, moderately in major and minor salivary glands and slightly in thyroid. No lacritin message or protein is detected elsewhere among more than 50 human tissues examined.",
+        "cross_encoder_logit": 0.02836921252310276,
+        "relevance_score": 0.5070918275047028,
+        "cross_encoder_score": 0.5070918275047028,
+        "evidence_quality_score": 0.5070918275047028,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/11419941",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5c9d170cecadf2e73f000032_s42254_chunk_0",
+        "document_id": "bioasq_5c9d170cecadf2e73f000032_s42254",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/22442717",
+        "title": "PubMed 22442717 [abstract]",
+        "cited_text": "FAAH (fatty acid amide hydrolase), primarily expressed in the liver, hydrolyzes the endocannabinoids fatty acid ethanolamides (FAA). Human FAAH gene mutations are associated with increased body weight and obesity.",
+        "cross_encoder_logit": 0.02550334297120571,
+        "relevance_score": 0.5063754901840866,
+        "cross_encoder_score": 0.5063754901840866,
+        "evidence_quality_score": 0.5063754901840866,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/22442717",
+        "index_id": null
+      }
+    ]
+  }
+}

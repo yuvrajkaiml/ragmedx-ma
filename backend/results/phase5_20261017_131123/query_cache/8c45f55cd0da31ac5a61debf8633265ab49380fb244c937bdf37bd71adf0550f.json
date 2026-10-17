@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What tissues express klotho protein?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "8c45f55cd0da31ac5a61debf8633265ab49380fb244c937bdf37bd71adf0550f",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_515dbb3b298dcd4e51000018_s61960_chunk_0",
+        "document_id": "bioasq_515dbb3b298dcd4e51000018_s61960",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/22042362",
+        "title": "PubMed 22042362 [sections.0]",
+        "cited_text": "Taken together, these data indicate loss of klotho expression as an early event in breast cancer development, and suggest a role for DNA methylation and histone deacetylation in klotho silencing.",
+        "cross_encoder_logit": 0.24305179715156555,
+        "relevance_score": 0.5604655790904962,
+        "cross_encoder_score": 0.5604655790904962,
+        "evidence_quality_score": 0.5604655790904962,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/22042362",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_515dbb3b298dcd4e51000018_s61959_chunk_0",
+        "document_id": "bioasq_515dbb3b298dcd4e51000018_s61959",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/22042362",
+        "title": "PubMed 22042362 [sections.0]",
+        "cited_text": "Promoter methylation and histone deacetylation were studied as possible mechanisms for klotho silencing.",
+        "cross_encoder_logit": 0.023101823404431343,
+        "relevance_score": 0.5057751990041867,
+        "cross_encoder_score": 0.5057751990041867,
+        "evidence_quality_score": 0.5057751990041867,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/22042362",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_570a5c27cf1c325851000023_s50584_chunk_0",
+        "document_id": "bioasq_570a5c27cf1c325851000023_s50584",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/24991914",
+        "title": "PubMed 24991914 [abstract]",
+        "cited_text": "the phosphaturic hormone fibroblast growth factor 23 (FGF23) and soluble Klotho with all-cause mortality.",
+        "cross_encoder_logit": 0.010115656070411205,
+        "relevance_score": 0.5025288924532473,
+        "cross_encoder_score": 0.5025288924532473,
+        "evidence_quality_score": 0.5025288924532473,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/24991914",
+        "index_id": null
+      }
+    ]
+  }
+}

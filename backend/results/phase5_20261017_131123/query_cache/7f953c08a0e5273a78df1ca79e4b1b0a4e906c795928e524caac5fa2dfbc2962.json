@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What studies show NIH Stroke Scale bias toward left hemisphere strokes?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "7f953c08a0e5273a78df1ca79e4b1b0a4e906c795928e524caac5fa2dfbc2962",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_58861f8b3b87a8a738000003_s29228_chunk_0",
+        "document_id": "bioasq_58861f8b3b87a8a738000003_s29228",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/9731605",
+        "title": "PubMed 9731605 [abstract]",
+        "cited_text": "BACKGROUND AND PURPOSE: This study compared the ability of 2 stroke impairment scales, Orpington Prognostic Scale and National Institutes of Health (NIH) Stroke Scale, to predict disability as measured by the Barthel activities of daily living (ADL) Index and higher level of self-reported physical functioning as measured by the SF-36 physical functioning index (PFI) at 1, 3, and 6 months after stroke.",
+        "cross_encoder_logit": 0.1989263892173767,
+        "relevance_score": 0.549568246658387,
+        "cross_encoder_score": 0.549568246658387,
+        "evidence_quality_score": 0.549568246658387,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/9731605",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_58861f8b3b87a8a738000003_s29219_chunk_0",
+        "document_id": "bioasq_58861f8b3b87a8a738000003_s29219",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/9731605",
+        "title": "PubMed 9731605 [abstract]",
+        "cited_text": "This study compared the ability of 2 stroke impairment scales, Orpington Prognostic Scale and National Institutes of Health (NIH) Stroke Scale, to predict disability as measured by the Barthel activities of daily living (ADL) Index and higher level of self-reported physical functioning as measured by the SF-36 physical functioning index (PFI) at 1, 3, and 6 months after stroke.",
+        "cross_encoder_logit": 0.17319126427173615,
+        "relevance_score": 0.54318991244398,
+        "cross_encoder_score": 0.54318991244398,
+        "evidence_quality_score": 0.54318991244398,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/9731605",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_58861f8b3b87a8a738000003_s29213_chunk_0",
+        "document_id": "bioasq_58861f8b3b87a8a738000003_s29213",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/9731605",
+        "title": "PubMed 9731605 [abstract]",
+        "cited_text": "CONCLUSIONS: Our results demonstrate that in a sample of mostly mild and moderate strokes, the Orpington Prognostic Scale compared with the NIH Stroke Scale is simpler to use and is a slightly better predictor of ADL and higher levels of physical function.",
+        "cross_encoder_logit": 0.06820192188024521,
+        "relevance_score": 0.5170438743473392,
+        "cross_encoder_score": 0.5170438743473392,
+        "evidence_quality_score": 0.5170438743473392,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/9731605",
+        "index_id": null
+      }
+    ]
+  }
+}

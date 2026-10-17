@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Do overweight children necessarily make overweight adults?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "606057dc609f3ede36662f64c5e300cb926d0fbd3e580222e489c25e9a8d3371",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_5c0e838b133db5eb7800002e_s41414_chunk_0",
+        "document_id": "bioasq_5c0e838b133db5eb7800002e_s41414",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/23922324",
+        "title": "PubMed 23922324 [abstract]",
+        "cited_text": "Overweight and obesity are associated with an increased risk of subnormal intellectual performance in young adult males. Subjects with low birth weight and adolescent overweight/obesity are at particular risk of subnormal performance.",
+        "cross_encoder_logit": 0.24098210036754608,
+        "relevance_score": 0.5599556582522268,
+        "cross_encoder_score": 0.5599556582522268,
+        "evidence_quality_score": 0.5599556582522268,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/23922324",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5c0e838b133db5eb7800002e_s41407_chunk_0",
+        "document_id": "bioasq_5c0e838b133db5eb7800002e_s41407",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/28284174",
+        "title": "PubMed 28284174 [abstract]",
+        "cited_text": "The initial results suggests that obese children have higher cognitive scores and that this result is driven by those who are female, non-indigenous and live in an urban region.",
+        "cross_encoder_logit": 0.0782315582036972,
+        "relevance_score": 0.5195479208402477,
+        "cross_encoder_score": 0.5195479208402477,
+        "evidence_quality_score": 0.5195479208402477,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/28284174",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5c0e838b133db5eb7800002e_s41410_chunk_0",
+        "document_id": "bioasq_5c0e838b133db5eb7800002e_s41410",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/26107577",
+        "title": "PubMed 26107577 [abstract]",
+        "cited_text": "The data suggest that being overweight or obese in midlife may be more detrimental to subsequent age-related cognitive decline than being overweight or obese at later stages of the life span",
+        "cross_encoder_logit": 0.015342560596764088,
+        "relevance_score": 0.5038355649103526,
+        "cross_encoder_score": 0.5038355649103526,
+        "evidence_quality_score": 0.5038355649103526,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/26107577",
+        "index_id": null
+      }
+    ]
+  }
+}

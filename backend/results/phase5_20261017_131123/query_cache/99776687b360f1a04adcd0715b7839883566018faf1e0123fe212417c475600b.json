@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Which tissues express klotho protein?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "99776687b360f1a04adcd0715b7839883566018faf1e0123fe212417c475600b",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_515dbb3b298dcd4e51000018_s61960_chunk_0",
+        "document_id": "bioasq_515dbb3b298dcd4e51000018_s61960",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/22042362",
+        "title": "PubMed 22042362 [sections.0]",
+        "cited_text": "Taken together, these data indicate loss of klotho expression as an early event in breast cancer development, and suggest a role for DNA methylation and histone deacetylation in klotho silencing.",
+        "cross_encoder_logit": 0.22969745099544525,
+        "relevance_score": 0.5571732076040318,
+        "cross_encoder_score": 0.5571732076040318,
+        "evidence_quality_score": 0.5571732076040318,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/22042362",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_515dbb3b298dcd4e51000018_s61959_chunk_0",
+        "document_id": "bioasq_515dbb3b298dcd4e51000018_s61959",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/22042362",
+        "title": "PubMed 22042362 [sections.0]",
+        "cited_text": "Promoter methylation and histone deacetylation were studied as possible mechanisms for klotho silencing.",
+        "cross_encoder_logit": 0.022921470925211906,
+        "relevance_score": 0.5057301168528301,
+        "cross_encoder_score": 0.5057301168528301,
+        "evidence_quality_score": 0.5057301168528301,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/22042362",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_54f704b630767eb92e000001_s33247_chunk_0",
+        "document_id": "bioasq_54f704b630767eb92e000001_s33247",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/12397030",
+        "title": "PubMed 12397030 [abstract]",
+        "cited_text": "The skeletal muscle LIM protein 1 (SLIM1) is highly expressed in skeletal and cardiac muscle, and its expression is downregulated significantly in dilated human cardiomyopathy.",
+        "cross_encoder_logit": 0.0034594214521348476,
+        "relevance_score": 0.5008648545005148,
+        "cross_encoder_score": 0.5008648545005148,
+        "evidence_quality_score": 0.5008648545005148,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/12397030",
+        "index_id": null
+      }
+    ]
+  }
+}

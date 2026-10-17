@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What longitudinal studies show about childhood overweight and adult weight status?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "9f070fbaf26c9af3d1d1415b36cba986cdac55df905e2f210561476ae5efc526",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_5c0e838b133db5eb7800002e_s41414_chunk_0",
+        "document_id": "bioasq_5c0e838b133db5eb7800002e_s41414",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/23922324",
+        "title": "PubMed 23922324 [abstract]",
+        "cited_text": "Overweight and obesity are associated with an increased risk of subnormal intellectual performance in young adult males. Subjects with low birth weight and adolescent overweight/obesity are at particular risk of subnormal performance.",
+        "cross_encoder_logit": 0.26832789182662964,
+        "relevance_score": 0.5666823588845414,
+        "cross_encoder_score": 0.5666823588845414,
+        "evidence_quality_score": 0.5666823588845414,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/23922324",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5c0e838b133db5eb7800002e_s41410_chunk_0",
+        "document_id": "bioasq_5c0e838b133db5eb7800002e_s41410",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/26107577",
+        "title": "PubMed 26107577 [abstract]",
+        "cited_text": "The data suggest that being overweight or obese in midlife may be more detrimental to subsequent age-related cognitive decline than being overweight or obese at later stages of the life span",
+        "cross_encoder_logit": 0.04470477253198624,
+        "relevance_score": 0.5111743321875358,
+        "cross_encoder_score": 0.5111743321875358,
+        "evidence_quality_score": 0.5111743321875358,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/26107577",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5c0e838b133db5eb7800002e_s41416_chunk_0",
+        "document_id": "bioasq_5c0e838b133db5eb7800002e_s41416",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/26638123",
+        "title": "PubMed 26638123 [abstract]",
+        "cited_text": "Obesity in the pre-school years was associated with poorer outcomes for some cognitive measures in this study. Stronger relationships between obesity and cognition or educational attainment may emerge later in childhood.",
+        "cross_encoder_logit": 0.030583083629608154,
+        "relevance_score": 0.5076451750230776,
+        "cross_encoder_score": 0.5076451750230776,
+        "evidence_quality_score": 0.5076451750230776,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/26638123",
+        "index_id": null
+      }
+    ]
+  }
+}

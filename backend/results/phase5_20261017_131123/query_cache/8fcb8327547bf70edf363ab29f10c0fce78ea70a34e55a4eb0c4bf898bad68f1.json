@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What studies link unintended pregnancy to desire for sterilization reversal?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "8fcb8327547bf70edf363ab29f10c0fce78ea70a34e55a4eb0c4bf898bad68f1",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_531a3fe3b166e2b806000038_s30749_chunk_0",
+        "document_id": "bioasq_531a3fe3b166e2b806000038_s30749",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/23116790",
+        "title": "PubMed 23116790 [abstract]",
+        "cited_text": "In terms of pregnancy, the studies have shown contradictory results due to variations in methodology and medical care.",
+        "cross_encoder_logit": 0.012162142433226109,
+        "relevance_score": 0.5030404981297726,
+        "cross_encoder_score": 0.5030404981297726,
+        "evidence_quality_score": 0.5030404981297726,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/23116790",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_54f088ee94afd61504000015_s17365_chunk_0",
+        "document_id": "bioasq_54f088ee94afd61504000015_s17365",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/21764126",
+        "title": "PubMed 21764126 [abstract]",
+        "cited_text": "Randomized controlled trials showed that the excision technique is associated with a higher pregnancy rate and a lower rate of recurrence although it may determine severe injury to the ovarian reserve.",
+        "cross_encoder_logit": 0.0037157584447413683,
+        "relevance_score": 0.5009289385423752,
+        "cross_encoder_score": 0.5009289385423752,
+        "evidence_quality_score": 0.5009289385423752,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/21764126",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_54f088ee94afd61504000015_s17371_chunk_0",
+        "document_id": "bioasq_54f088ee94afd61504000015_s17371",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/16034960",
+        "title": "PubMed 16034960 [abstract]",
+        "cited_text": "It was also associated with a subsequent increased rate of spontaneous pregnancy women who had documented prior sub-fertility (OR 5.21 CI 2.04-13.29). AUTHORS' CONCLUSIONS: There is some evidence that excisional surgery for endometriomata provides for a more favourable outcome than drainage and ablation, with regard to the recurrence of the endometrioma, recurrence of symptoms and subsequent spontaneous pregnancy in women who were previously subfertile.",
+        "cross_encoder_logit": 0.001200308557599783,
+        "relevance_score": 0.5003000771033722,
+        "cross_encoder_score": 0.5003000771033722,
+        "evidence_quality_score": 0.5003000771033722,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/16034960",
+        "index_id": null
+      }
+    ]
+  }
+}

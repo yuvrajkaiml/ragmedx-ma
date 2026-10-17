@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Does a history of unintended pregnancy lessen the likelihood of desire for sterilization reversal?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "ed4b8271389e380292cb5bc188ffe044d8842fc37b4e916b45d839b0f3261274",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_54f088ee94afd61504000015_s17365_chunk_0",
+        "document_id": "bioasq_54f088ee94afd61504000015_s17365",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/21764126",
+        "title": "PubMed 21764126 [abstract]",
+        "cited_text": "Randomized controlled trials showed that the excision technique is associated with a higher pregnancy rate and a lower rate of recurrence although it may determine severe injury to the ovarian reserve.",
+        "cross_encoder_logit": 0.00188839144539088,
+        "relevance_score": 0.5004720977210552,
+        "cross_encoder_score": 0.5004720977210552,
+        "evidence_quality_score": 0.5004720977210552,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/21764126",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_54f088ee94afd61504000015_s17368_chunk_0",
+        "document_id": "bioasq_54f088ee94afd61504000015_s17368",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/18425908",
+        "title": "PubMed 18425908 [abstract]",
+        "cited_text": "For those women subsequently attempting to conceive it was also associated with a subsequent increased spontaneous pregnancy rate in women who had documented prior sub-fertility (OR 5.21 CI 2.04-13.29).",
+        "cross_encoder_logit": 0.0014352976577356458,
+        "relevance_score": 0.5003588243528334,
+        "cross_encoder_score": 0.5003588243528334,
+        "evidence_quality_score": 0.5003588243528334,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/18425908",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5e48f90bf8b2df0d49000006_s54152_chunk_0",
+        "document_id": "bioasq_5e48f90bf8b2df0d49000006_s54152",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/26498171",
+        "title": "PubMed 26498171 [abstract]",
+        "cited_text": "Gamma (γ)-sterilization has been commonly employed for wide range of products as indicated by the pharmacopoeias.",
+        "cross_encoder_logit": 0.0006776057998649776,
+        "relevance_score": 0.5001694014434845,
+        "cross_encoder_score": 0.5001694014434845,
+        "evidence_quality_score": 0.5001694014434845,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/26498171",
+        "index_id": null
+      }
+    ]
+  }
+}

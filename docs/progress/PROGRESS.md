@@ -468,7 +468,7 @@ d:\Ragmed_2\.venv\Scripts\python.exe -m pytest backend\tests\test_workstream_c_c
 
 ## Phase 5 — 500-Question GPU Experiment (8 configs) with Latency & Statistics
 
-**Status:** IMPLEMENTED AND TESTED (reduced-validation tier executed; full 500×8 sweep PAUSED for user approval per P5-6)
+**Status:** IMPLEMENTED AND TESTED (budget-bounded pilot of 16 questions × 8 configs executed within the 4 h GPU budget; full 500×8 sweep NOT RUN — exceeds budget, command recorded)
 **Target env:** CPU (`.venv\Scripts\python.exe`) for pre-check/split/flags/tests; GPU (`.venv-cu128-pilot\Scripts\python.exe`) for the canary + experiment run.
 **Phase 5 output root:** `backend/results/phase5_20261017_131123/`
 **Completed:** 2026-10-17
@@ -528,15 +528,30 @@ Verified on GPU (reduced subset): records are rich and honest — e.g. `improved
 Command: `.venv-cu128-pilot\Scripts\python.exe -m scripts.run_step4_benchmark --smoke-test`
 Result: **CANARY RESULT : PASS** — first retrieved PMID `17128671` is NOT in the eval-question PMID set `{18039527, 31709696, 31722348}`. Recorded in `environment.json`.
 
-### P5-6 — Execute + output layout — REDUCED TIER DONE; FULL SWEEP PAUSED
+### P5-6 — Execute + output layout — BUDGET-BOUNDED PILOT DONE; FULL SWEEP NOT RUN (exceeds 4 h budget)
 
-Tiering decision (honest, per plan): the full 500×8 GPU sweep is ~40+ hours (heavy configs ~130 s/question × 8 configs × 500 ≈ far beyond a single step). A **reduced validation subset** (1 dev question × 8 configs) was executed to completion on GPU to produce real rich per-sample records + latency + the full output layout, exit 0. The full sweep is **PAUSED for user approval**.
+Tiering decision (honest): the full 500×8 GPU sweep is ~40+ hours and exceeds the 4-hour GPU budget, so it was **deliberately not run**. Instead a **budget-bounded pilot** was executed per the budget guidance:
 
-Output layout under `backend/results/phase5_20261017_131123/`: `configs/<8 configs>.json`, `dataset_manifest.json`, `splits/{dev,calibration,test}.json`, `environment.json` (canary + index hash/mtime + versions), `environment_run.json`, `per_question/<config>.jsonl` (8 files, rich records), `metric_summary.json` (per-config accuracy + Wilson CIs; paired McNemar vs `phase5-full-pipeline` + Holm), `latency_breakdown.json` (cold vs warm, per-stage, PRD targets), `failure_cases.json`, `summary.json`, `report.md`.
+- **Pilot:** 16 test questions × all 8 configs = **128 question-config runs** (requested n=18; the in-runner wall-clock guard stopped before question 17 at the 3.8 h budget, leaving every config with an identical, comparable 16-question set — question-outer loop).
+- **Wall-clock:** 3.691 h (13,287 s); mean 830 s/question-across-all-8-configs; **peak VRAM 10,157 MB**. Within the 4 h budget.
+- **Sample:** stratified by `source`, seed 42, drawn from the test split → 12 PubMedQA + 4 BioASQ (proportional).
+- **Safety:** `llm_mode == LOCAL` hard-assert held; CPU NLI verifier (no VRAM sharing); 0 failures across 128 runs; errors would have been recorded as failures, none occurred.
 
-Honesty: every metric carries an evidence tier; `NOT MEASURED` used where data is absent (PubMedQA retrieval-quality; per-stage latency on `record_node_timing`-OFF baselines). No superiority claim is made without a Holm-significant paired test; the reduced-subset n=1 yields wide CIs and all paired p-values are 1.0 — explicitly directional only.
+Commands:
+```
+# executed pilot
+d:\Ragmed_2\.venv-cu128-pilot\Scripts\python.exe backend\scripts\run_phase5_experiment.py --pilot-n 18 --pilot-seed 42 --budget-hours 3.8 --output-root D:\Ragmed_2\backend\results\phase5_20261017_131123
+# NOT RUN — exceeds 4 h budget (~40+ h):
+d:\Ragmed_2\.venv-cu128-pilot\Scripts\python.exe backend\scripts\run_phase5_experiment.py --full --output-root D:\Ragmed_2\backend\results\phase5_20261017_131123
+```
 
-**Remaining full-run estimate:** 500 questions × 8 configs; heavy configs ~130 s/Q (full-pipeline, improved-v2, no-calibration), lighter ~80 s/Q (no-critic, basic-rag), plain-llm ~6 s/Q → **~40+ hours wall-clock**. Awaiting user approval before launching the long sweep.
+Output layout under `backend/results/phase5_20261017_131123/`: `configs/<8 configs>.json`, `dataset_manifest.json`, `splits/{dev,calibration,test}.json`, `environment.json` (canary + index hash/mtime + versions), `environment_run.json` (pilot wall-clock + VRAM + budget-stop), `per_question/<config>.jsonl` (8 files, 16 rich records each), `metric_summary.json` (per-config accuracy + Wilson CIs; paired McNemar vs `phase5-full-pipeline` + Holm; metric caveat), `latency_breakdown.json` (cold vs warm, per-stage, PRD targets), `failure_cases.json` (0), `summary.json`, `report.md`, `pilot_run.log`.
+
+Pilot findings (DIRECTIONAL ONLY, evidence tier BENCHMARK GROUND TRUTH for correctness / SOFTWARE TEST for latency; n=16):
+- Token-containment accuracy (≥0.6 vs gold): plain-llm-no-rag 0.375 [0.185, 0.614]; RAG configs 0.0–0.0625 with high abstention (0.75–0.94). full-pipeline/improved-v2/no-iterative abstained on 15/16.
+- Paired McNemar vs `phase5-full-pipeline`: plain-llm raw p=0.03125 but **Holm-adjusted p=0.219 → NOT significant**; all other configs p=1.0. **No superiority claim.**
+- Latency (SOFTWARE TEST): cold means ~64–141 s/question (far above the PRD single-pass <5 s target on this hardware); warm (cache-hit) means for improved configs 0.12–19.6 ms — the query cache delivers the expected warm-path speedup. plain-llm cold ~9.6 s.
+- **Metric caveat (honest):** token-containment scores an abstention as incorrect, so high-abstention RAG baselines are penalised vs always-answering plain-LLM. This is a measurement property, not evidence that abstention is wrong. Read accuracy alongside abstention_rate, never alone. PubMedQA retrieval-quality remains NOT MEASURED.
 
 ### Phase 5 commit
 

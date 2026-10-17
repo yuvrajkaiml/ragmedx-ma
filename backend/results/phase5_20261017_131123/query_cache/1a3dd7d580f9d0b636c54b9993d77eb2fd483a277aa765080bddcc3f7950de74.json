@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Does case-mix based reimbursement stimulate the development of process-oriented care delivery?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "1a3dd7d580f9d0b636c54b9993d77eb2fd483a277aa765080bddcc3f7950de74",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_589a245678275d0c4a000023_s56075_chunk_0",
+        "document_id": "bioasq_589a245678275d0c4a000023_s56075",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/25396011",
+        "title": "PubMed 25396011 [abstract]",
+        "cited_text": "CONCLUSION: PIM2 scoring system show adequate discriminatory function and well calibrated for the case mix of patients in PICU of Fayoum, Egypt. It can be used as beneficial tool for evaluation of risk adjusted mortality.",
+        "cross_encoder_logit": 0.0031826423946768045,
+        "relevance_score": 0.5007956599270519,
+        "cross_encoder_score": 0.5007956599270519,
+        "evidence_quality_score": 0.5007956599270519,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/25396011",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5150b45ad24251bc0500006f_s17750_chunk_0",
+        "document_id": "bioasq_5150b45ad24251bc0500006f_s17750",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/12442853",
+        "title": "PubMed 12442853 [sections.0]",
+        "cited_text": "The case of Viagra, it concludes, holds out two general lessons: first, allow exceptions to total bans on reimbursement; second, involve the medical profession in the decision-making process.",
+        "cross_encoder_logit": 0.0014733970165252686,
+        "relevance_score": 0.500368349187494,
+        "cross_encoder_score": 0.500368349187494,
+        "evidence_quality_score": 0.500368349187494,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/12442853",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_530cf54dab4de4de0c000009_s14814_chunk_0",
+        "document_id": "bioasq_530cf54dab4de4de0c000009_s14814",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/21963829",
+        "title": "PubMed 21963829 [abstract]",
+        "cited_text": "pointing towards processes such as molecular mimicry or bystander activation as crucial for disease development.",
+        "cross_encoder_logit": 0.00019685158622451127,
+        "relevance_score": 0.5000492128963973,
+        "cross_encoder_score": 0.5000492128963973,
+        "evidence_quality_score": 0.5000492128963973,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/21963829",
+        "index_id": null
+      }
+    ]
+  }
+}

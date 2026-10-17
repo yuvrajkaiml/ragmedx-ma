@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What studies compare serum pancreatic lipase and amylase in acute pancreatitis?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "d97a0770f56cfda68b12e8329518218ca27155a33924a2528e28e2a932d347d6",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_66088cccfdcbea915f00000b_s12459_chunk_0",
+        "document_id": "bioasq_66088cccfdcbea915f00000b_s12459",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/37933195",
+        "title": "PubMed 37933195 [abstract]",
+        "cited_text": "Acute pancreatitis-induced splanchnic vein thrombosis (APISVT) is an important sequela complication of acute pancreatitis, which may cause poor prognosis, such as severe gastrointestinal hemorrhage, bowel ischemic necrosis and liver failure.",
+        "cross_encoder_logit": 0.010266746394336224,
+        "relevance_score": 0.502566664053457,
+        "cross_encoder_score": 0.502566664053457,
+        "evidence_quality_score": 0.502566664053457,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/37933195",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_66088cccfdcbea915f00000b_s12470_chunk_0",
+        "document_id": "bioasq_66088cccfdcbea915f00000b_s12470",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/37933195",
+        "title": "PubMed 37933195 [abstract]",
+        "cited_text": "Acute pancreatitis-induced splanchnic vein thrombosis (APISVT) is an important sequela complication of acute pancreatitis, which may cause poor prognosis, such as severe gastrointestinal hemorrhage, bowel ischemic necrosis and liver failure. However, its mechanism remains uncertain, and there is not a general consensus on the management.",
+        "cross_encoder_logit": 0.008173300884664059,
+        "relevance_score": 0.5020433138462468,
+        "cross_encoder_score": 0.5020433138462468,
+        "evidence_quality_score": 0.5020433138462468,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/37933195",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_660c3591fdcbea915f000031_s60281_chunk_0",
+        "document_id": "bioasq_660c3591fdcbea915f000031_s60281",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/31974673",
+        "title": "PubMed 31974673 [abstract]",
+        "cited_text": "The present results need to be assessed with larger sample size studies.What is Known:•CRP and PCT are already included in clinical practice to assess sepsis and estimate disease severity, although their sensitivity and specificity are lower than desired.•ADM is a protein that has immune and vascular modulation actions, and its blood levels are increased in adult and paediatric sepsis.•ADM is a promising tool for early diagnosis and prognostic assessment in adult sepsis.What is New:•PCT appeared to be superior to MR-proADM in diagnosing paediatric sepsis.•MR-proADM plasma levels could be a useful tool for paediatric sepsis stratification and morbidity prediction.",
+        "cross_encoder_logit": 0.0073751406744122505,
+        "relevance_score": 0.5018437768112773,
+        "cross_encoder_score": 0.5018437768112773,
+        "evidence_quality_score": 0.5018437768112773,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/31974673",
+        "index_id": null
+      }
+    ]
+  }
+}

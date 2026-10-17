@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Does the clinical presentation of a prior preterm birth predict risk in a subsequent pregnancy?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "e5e23c0c38ad60c0550db39fd52c282e848943a8ac8d652481286260a1c8b22b",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_622a5a483a8413c65300008f_s28941_chunk_0",
+        "document_id": "bioasq_622a5a483a8413c65300008f_s28941",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/11293640",
+        "title": "PubMed 11293640 [abstract]",
+        "cited_text": "BACKGROUND: Preterm, prelabour rupture of the fetal membranes (pPROM) is the commonest antecedent of preterm birth, and can lead to death, neonatal disease, and long-term",
+        "cross_encoder_logit": 0.04808490723371506,
+        "relevance_score": 0.5120189110955746,
+        "cross_encoder_score": 0.5120189110955746,
+        "evidence_quality_score": 0.5120189110955746,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/11293640",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_52f892782059c6d71c000039_s25578_chunk_0",
+        "document_id": "bioasq_52f892782059c6d71c000039_s25578",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/23070994",
+        "title": "PubMed 23070994 [abstract]",
+        "cited_text": "an early age at first birth increased the odds, and the postpartum period was confirmed as high risk for RA onset. The protective effect of repeated exposure to the ameliorating hormonal and immunological changes of pregnancy may counterbalance the effect of early exposure to the postpartum reversal of these changes.",
+        "cross_encoder_logit": 0.025236429646611214,
+        "relevance_score": 0.506308772588993,
+        "cross_encoder_score": 0.506308772588993,
+        "evidence_quality_score": 0.506308772588993,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/23070994",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_622632483a8413c653000081_s12907_chunk_0",
+        "document_id": "bioasq_622632483a8413c653000081_s12907",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/30058156",
+        "title": "PubMed 30058156 [abstract]",
+        "cited_text": "Therefore, a delicate immune balance is critical for the maintenance of a successful pregnancy, while disruption of this balance can induce complications such as implantation failure, miscarriage, preterm birth/labor, preeclampsia and fetal growth restriction.",
+        "cross_encoder_logit": 0.018509062007069588,
+        "relevance_score": 0.5046271334035017,
+        "cross_encoder_score": 0.5046271334035017,
+        "evidence_quality_score": 0.5046271334035017,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/30058156",
+        "index_id": null
+      }
+    ]
+  }
+}
