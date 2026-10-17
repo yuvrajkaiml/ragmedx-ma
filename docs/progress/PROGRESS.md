@@ -1,6 +1,6 @@
 # RAGMedX-MA — Progress Tracker
 
-**Last updated:** 2026-10-17 (Phase 3 complete)  
+**Last updated:** 2026-10-17 (Phase 4 complete — IMPLEMENTED AND TESTED)  
 **Branch:** `yuvraj/llm`  
 **Protocol:** Re-read this file + handoff.md at the start of every phase.
 
@@ -322,18 +322,147 @@ Regression log files:
 
 ## Phase 4 — Workstream C: Agent-Contribution Analysis, Caching, Latency
 
-**Status:** NOT IMPLEMENTED  
+**Status:** IMPLEMENTED AND TESTED  
 **Target env:** CPU (`.venv\Scripts\python.exe`)  
-**Files to create/modify:**
+
+Phase 4 decomposes into three separable sub-parts (4a/4b/4c), implemented as FEAT-001/002/003 and gated by one convergence review + a single Phase 4 commit.
+
+### 4a (FEAT-001) — Critic analysis module + tests + output
+
+**Status:** IMPLEMENTED AND TESTED  
+**Completed:** 2026-10-17
+
+Refactored the inline analysis logic from `backend/scripts/generate_critic_analysis.py` into an importable, testable module `backend/evaluation/agent_contribution.py`, made the script a thin CLI wrapper, added unit tests, and emitted a **new** timestamped report (existing `critic_analysis_20261016_202627.*` left untouched).
+
+**Files changed**
 
 | File | Action | Description |
 |------|--------|-------------|
-| `backend/evaluation/agent_contribution.py` | CREATE | Parse n30 result JSONs; per-agent latency breakdown; delta analysis |
-| `backend/tests/test_agent_contribution.py` | CREATE | Tests for contribution analysis |
-| `backend/app/agents/orchestrator.py` | MODIFY | Verify per-node duration_ms is non-zero |
-| `backend/evaluation/cache_analysis.py` | CREATE | Cache hit/miss analysis (if cache exists) |
+| `backend/evaluation/agent_contribution.py` | CREATED | Importable module: `load_result_file`, `analyse_single_config`, `cross_config_critic_effect`, `build_concrete_examples`, `generate_caveats`, `build_report`, `render_markdown`, `run_analysis`/`main`. Pure analysis helpers + one I/O entry point (atomic `.tmp` + `os.replace` writes). Honest `NOT MEASURED` labels for `critic_accept`/`critic_reject`/`critic_rewrite`/`rouge_l_*`; `evidence_tier = SOFTWARE TEST`; no AUTOMATED MODEL JUDGE tier fabricated. |
+| `backend/scripts/generate_critic_analysis.py` | MODIFIED | Now a thin CLI wrapper that imports `evaluation.agent_contribution.run_analysis` and calls it (logic not duplicated; script not deleted). |
+| `backend/tests/test_agent_contribution.py` | CREATED | 25 unit tests on synthetic fixtures (per-config abstention counts, cross-config delta arithmetic, concrete-example matching by question text, NOT-MEASURED label presence, evidence tier SOFTWARE TEST, no AUTOMATED MODEL JUDGE tier fabricated, `run_analysis` write path with tmp dirs) + one read-only test loading the 6 real n30 files asserting all 6 load and `total_questions == 180`. |
+| `backend/results/critic_analysis_20261017_063736.json` | CREATED | New timestamped machine-readable report (SOFTWARE TEST tier; critic_accept contains "NOT MEASURED"). |
+| `backend/results/critic_analysis_20261017_063736.md` | CREATED | New timestamped human-readable report. |
+| `docs/progress/PROGRESS.md` | UPDATED | This 4a sub-item. |
 
-**Gate:** Agent contribution tests pass; latency breakdown matches raw elapsed_ms within tolerance.
+**Commands run**
+
+```
+d:\Ragmed_2\.venv\Scripts\python.exe -m pytest backend\tests\test_agent_contribution.py -q
+  → 25 passed, 0 failed
+
+d:\Ragmed_2\.venv\Scripts\python.exe backend\scripts\generate_critic_analysis.py
+  → exit 0; Loaded 6/6 result files; wrote critic_analysis_20261017_063736.json + .md
+  → summary: full-pipeline 17/30 abst (56.7%), no-critic 10/30 (33.3%),
+    no-calibration 10/30 (33.3%), basic-rag 14/30 (46.7%),
+    no-iterative-retrieval 18/30 (60.0%), plain-llm-no-rag 0/30 (0.0%)
+
+# Importability acceptance check:
+d:\Ragmed_2\.venv\Scripts\python.exe -c "import sys; sys.path.insert(0,'backend'); from evaluation.agent_contribution import analyse_single_config"
+  → import ok (exit 0)
+```
+
+**Test counts**
+
+| Test file | Passed | Failed | Skipped |
+|-----------|--------|--------|---------|
+| test_agent_contribution.py | **25** | **0** | 0 |
+
+**Honesty notes (evidence tier: SOFTWARE TEST)**
+
+- The 6 n30 files record ONLY `{question, true_answer, predicted_answer, response_type, evidence_count, evidence_titles, elapsed_ms}` per sample — NO `draft_answer`, NO `critic_verdict`, NO `agent_trace`. Per-question critic accept/reject/rewrite and ROUGE-L draft-vs-final are therefore **NOT MEASURED** (labelled as such in both per-config and top-level report fields). No AUTOMATED MODEL JUDGE tier is produced.
+- What IS measured: population-level cross-config abstention deltas (full-pipeline vs no-critic vs no-calibration) and per-config abstention counts — `evidence_tier = SOFTWARE TEST` (direct file parsing + arithmetic). Net critic abstention delta = 0.2334 (full 0.5667 − no-critic 0.3333); calibration delta = 0.0; no significance claim (n=30, no per-question critic data for McNemar).
+- Existing `backend/results/critic_analysis_20261016_202627.*` untouched (verified via unchanged mtime + hash).
+
+### 4b (FEAT-002) — Query cache default-OFF verification + test
+
+**Status:** IMPLEMENTED AND TESTED  
+**Completed:** 2026-10-17
+
+`backend/caching/query_cache.py` and `backend/caching/__init__.py` already existed and passed 41 tests; this sub-item verifies the package imports cleanly, confirms the 41 tests still pass, and adds one default-OFF compatibility test proving the cache is a standalone module NOT wired into the default pipeline (versioning rule: new behaviour default OFF, default config behaves identically to before).
+
+**Files changed**
+
+| File | Action | Description |
+|------|--------|-------------|
+| `backend/tests/test_workstream_c_cache.py` | MODIFIED | Added `TestCacheDefaultOffWiring::test_default_pipeline_does_not_import_or_construct_query_cache` (1 test). Asserts (1) static: `backend/app/rag/pipeline.py` and `backend/app/agents/orchestrator.py` source contains no `QueryCache` reference and no `caching` import; (2) runtime: importing both modules in a fresh subprocess pulls no `caching` / `caching.query_cache` into `sys.modules`. |
+| `docs/progress/PROGRESS.md` | UPDATED | This 4b sub-item. |
+
+(`backend/caching/query_cache.py`, `backend/caching/__init__.py` unchanged from their working-tree state.)
+
+**Commands run**
+
+```
+d:\Ragmed_2\.venv\Scripts\python.exe -c "import sys; sys.path.insert(0,'backend'); from caching.query_cache import QueryCache; print('ok')"
+  → ok (exit 0)  [package imports cleanly]
+
+d:\Ragmed_2\.venv\Scripts\python.exe -m pytest backend\tests\test_workstream_c_cache.py -q
+  → 42 passed in 32.97s  (41 existing + 1 new default-OFF)
+```
+
+**Test counts**
+
+| Test file | Passed | Failed | Skipped |
+|-----------|--------|--------|---------|
+| test_workstream_c_cache.py | **42** | **0** | 0 |
+
+**Versioning compliance (evidence tier: SOFTWARE TEST)**
+
+- `grep` for `caching|QueryCache|query_cache` over `backend/app/**/*.py` → no matches; the default retrieval + agent pipeline contains zero references to the cache package.
+- Default-pipeline import-time check (fresh subprocess): importing `app.rag.pipeline` and `app.agents.orchestrator` does not import `caching` or `caching.query_cache` (only the unrelated `fsspec.caching` is present). No `QueryCache` is constructed or imported by default; default behaviour is unchanged.
+
+### 4c (FEAT-003) — Fix profiling script + generate profile report
+
+**Status:** IMPLEMENTED AND TESTED  
+**Completed:** 2026-10-17
+
+Fixed the double `profiler.enable()` bug in `backend/scripts/generate_profile.py` (`_profile_pipeline()` called `profiler.enable()` once before the `async def _run_all()` block and again inside the `try` block → `ValueError: Another profiling tool is already active`). Removed the first `enable()` so exactly one `enable()`/`disable()` pair wraps the profiled `loop.run_until_complete(_run_all())` run. Also removed a second latent bug in `main()` — a dead `pstats.Stats(stats, ...)` construction (`pstats.Stats` cannot be built from another `Stats` object) that crashed after profiling succeeded and prevented exit 0. Then ran the fixed script (CPU, mock/fixture data — no GPU/LLM) to emit a **new** timestamped profile report, and deleted the stale failure artifacts.
+
+**Files changed**
+
+| File | Action | Description |
+|------|--------|-------------|
+| `backend/scripts/generate_profile.py` | MODIFIED | (1) Removed the duplicate `profiler.enable()` before the asyncio block in `_profile_pipeline()` — one `enable()`/`disable()` pair remains, wrapping the profiled run. (2) Removed the dead `stats2 = pstats.Stats(...)` construction in `main()` that crashed on `pstats.Stats(stats, ...)`; report text is now produced by redirecting the existing `stats.stream` and calling `stats.print_stats(30)`. |
+| `backend/results/profile_20261017_071311.md` | CREATED | New timestamped profile report: contains "Pipeline Profile Report", per-stage cumulative-time table, top-10 functions by cumulative time, identified bottlenecks, recommended optimisations, full cProfile output, and "Evidence Tier" section. |
+| `backend/results/profile_20261017_060525.md` | DELETED | Stale failure artifact (`Status: FAILED`; `Another profiling tool is already active`). |
+| `backend/results/profile_20261017_071205.md` | DELETED | Stale failure artifact left by an intermediate verification run (same failure content); removed so only the real report remains. |
+| `docs/progress/PROGRESS.md` | UPDATED | This 4c sub-item + Phase 4 gate status. |
+
+**Commands run**
+
+```
+d:\Ragmed_2\.venv\Scripts\python.exe backend\scripts\generate_profile.py
+  → Profiling pipeline with 5 mock questions...
+  → Profile complete. Wall time: 25.231s
+  → Report written: D:\Ragmed_2\backend\results\profile_20261017_071311.md
+  → exit 0, no ValueError
+
+# Phase 4 gate + non-regression (CPU):
+d:\Ragmed_2\.venv\Scripts\python.exe -m pytest backend\tests\test_workstream_c_cache.py backend\tests\test_agent_contribution.py backend\tests\test_workstream_d_checkpoint.py backend\tests\test_workstream_b_metrics.py backend\tests\test_workstream_b_leakage.py backend\tests\test_workstream_a_verification.py -q
+  → 262 passed, 1 skipped, 0 failed (55.19s)
+  → 1 skipped: test_workstream_b_leakage.py symlink test (Windows symlink creation requires elevation; guard logic verified by code inspection)
+```
+
+**Test counts (Phase 4 gate + non-regression)**
+
+| Test file | Passed | Failed | Skipped |
+|-----------|--------|--------|---------|
+| test_workstream_c_cache.py (4b) | 42 | 0 | 0 |
+| test_agent_contribution.py (4a) | 25 | 0 | 0 |
+| test_workstream_d_checkpoint.py (P1) | 45 | 0 | 0 |
+| test_workstream_b_metrics.py (P2) | 95 | 0 | 0 |
+| test_workstream_b_leakage.py (P2) | 35 | 0 | 1 |
+| test_workstream_a_verification.py (P3) | 20 | 0 | 0 |
+| **Total** | **262** | **0** | **1** |
+
+**Honesty notes (evidence tier: SOFTWARE TEST for profile data; NOT MEASURED for recommendations)**
+
+- Profile data = SOFTWARE TEST (cProfile on a mock/fixture pipeline run; the mock LLM returns instantly, no GPU/LLM). Wall time 25.231s for 5 mock questions; the dominant measured cost is async-loop / LangGraph overhead, not LLM inference.
+- The per-stage cumulative-time table reports `—` for stages whose node functions (e.g. `_node_query_understanding`) fall outside the top-10 by cumulative time — this is the script's honest "no matching function found" output. The actual per-stage node times ARE present in the included "Full cProfile Output" section (query_understanding ~0.036s, generator ~0.025s, evidence_reranking ~0.025s, gap_analysis ~0.023s).
+- Recommended optimisations = NOT MEASURED (proposed but not benchmarked); no superiority claim.
+- Real GPU latency data is NOT in this profile — see `backend/data/results/step4_full-pipeline_n30_*.json` (`latency_stats.avg_ms ≈ 140686 ms/question` for full-pipeline).
+
+**Phase 4 gate:** critic_analysis JSON+MD written (✓ 4a); cache tests pass (✓ 4b, 42 passed); profile MD written (✓ 4c, `profile_20261017_071311.md`); Phase 4 gate + non-regression tests pass (✓ 262 passed, 1 skipped). Phase 4 status → IMPLEMENTED AND TESTED. The single Phase 4 commit on `yuvraj/llm` is made by the dedicated phase4-commit step after the convergence review approves (NOT done in this step — all Phase 4 changes 4a+4b+4c left in the working tree).
 
 ---
 
