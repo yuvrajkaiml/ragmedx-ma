@@ -1,6 +1,6 @@
 # RAGMedX-MA — Progress Tracker
 
-**Last updated:** 2026-10-17 (Phase 4 complete — IMPLEMENTED AND TESTED)  
+**Last updated:** 2026-10-17 (Phase 6 complete — IMPLEMENTED; Phases 0–5 done)  
 **Branch:** `yuvraj/llm`  
 **Protocol:** Re-read this file + handoff.md at the start of every phase.
 
@@ -557,6 +557,126 @@ Pilot findings (DIRECTIONAL ONLY, evidence tier BENCHMARK GROUND TRUTH for corre
 
 Single commit on `yuvraj/llm` (no push): `feat: Phase 5 500-question 8-config GPU experiment`.
 
+Note: committed in two parts on `yuvraj/llm` — `a3bc7457` (Phase 5 experiment scaffolding) and `694e7168` (budget-bounded pilot, 16 Q × 8 configs, 3.7 h GPU).
+
+---
+
+## Phase 6 — Documentation, Component Table, Re-checks, Final Report, Final Test
+
+**Status:** IMPLEMENTED
+**Target env:** CPU (`.venv\Scripts\python.exe`) for the re-checks and final test suite.
+**Completed:** 2026-10-17
+
+### P6-1 — Docs updated + BLOCKED reconciled — DONE
+
+- Phase 4 → IMPLEMENTED AND TESTED; Phase 5 → IMPLEMENTED AND TESTED (budget-bounded pilot; full 500×8 NOT RUN); Phase 6 → IMPLEMENTED (this section).
+- `docs/progress/BLOCKED.md` and root `BLOCKED.md` reconciled and kept consistent:
+  BLOCKED-001 MedRGB NOT MEASURABLE (carry-forward); BLOCKED-002 canary RESOLVED;
+  BLOCKED-003 split RESOLVED, full sweep CARRY-FORWARD; BLOCKED-004 NLI CARRY-FORWARD;
+  BLOCKED-005 human annotation CARRY-FORWARD.
+- Phase 5 `report.md` + `summary.json` linked from `docs/FINAL_REPORT.md` section E and
+  `docs/component_results.md`.
+
+### P6-2 — Component table — DONE
+
+`docs/component_results.md` created with all 10 columns (component | correctness |
+retrieval | claim support | hallucination | abstention | latency | memory |
+uncertainty | recommendation). Populated from Phase 5 `metric_summary.json` +
+`latency_breakdown.json`, the Phase 4 profile, and the n30 audit. Every numeric cell
+carries an evidence tier (BGT / ST / SI); NOT MEASURED used where no data exists
+(retrieval R@K/MRR/nDCG, per-claim support, hallucination, calibration ECE at n=16).
+Mirrored summary in FINAL_REPORT section H.
+
+### P6-3 — Protected-asset re-checks — ALL PASS
+
+Evidence tier: SOFTWARE TEST (hash + metadata capture)
+
+```
+git -C d:\Ragmed_2 branch --show-current
+  → yuvraj/llm
+
+git -C d:\Ragmed_2 log --oneline -5
+  → 694e7168 feat: Phase 5 budget-bounded pilot (16 questions x 8 configs, 3.7h GPU)
+    a3bc7457 feat: Phase 5 500-question 8-config GPU experiment
+    5f080c57 feat: Phase 4 Workstream C critic analysis, query cache, profiling
+    bb12f82d docs: update PROGRESS.md with Phase 3 complete status
+    7b70239b feat: Phase 3: Workstream A evidence verification, ...
+  (Phase 4 + Phase 5 commits present on yuvraj/llm)
+
+git -C d:\Ragmed_2 status --short
+  → only pre-existing unrelated working-tree changes:
+    M backend/app/agents/generator.py
+    M frontend/src/main.tsx, api.ts, authService.ts, documentService.ts, websocket.ts
+    M logs/retrieval.log
+    ?? backend/results/critic_analysis_20261016_202627.json/.md (pre-existing Phase-4 artifacts)
+
+Production FAISS index (unchanged vs base):
+  Get-FileHash backend\data\faiss_index\index.faiss (SHA256)
+    → 44799D53B0EA05835B0DAE40E5247876F78354AF2AA735255DB790889A8CFF1A
+  LastWriteTime → 2026-09-27 16:58:41  (unchanged; never touched)
+
+v1 prompts (unchanged — 7 files, SHA256):
+  A6C7D85D...6BD5, 2A9F43BB...CAD8, 548C2049...975D, BE136C70...C938,
+  D39DBFF1...0613, 8375178A...0406, 1E7B9430...868B
+
+6 n30 result JSONs (unchanged vs base — SHA256):
+  B2714A1C..., 6EC33740..., D5D98C08..., 7F96E510..., 26DA8BDF..., 8B7AE5F8...
+  (step4_{basic-rag,full-pipeline,no-calibration,no-critic,no-iterative-retrieval,plain-llm-no-rag}_n30_20261008_010119.json)
+
+GPU torch/CUDA (unchanged vs P5-1):
+  .venv-cu128-pilot\Scripts\python.exe -c "import torch; print(torch.__version__, torch.version.cuda)"
+    → 2.11.0+cu128 12.8
+```
+
+Result: production index + v1 prompts + 6 n30 JSONs unchanged; branch `yuvraj/llm`;
+torch/CUDA unchanged. All protected assets intact.
+
+### P6-4 — FINAL_REPORT.md (sections A–K) — DONE
+
+`docs/FINAL_REPORT.md` created with all sections A–K: A executive summary;
+B architecture; C phase-by-phase status 0–6; D metrics methodology + denominators +
+tiers; E Phase 5 8-config results (CIs, Holm-corrected paired tests, latency vs PRD,
+cold/warm); F agent-contribution/critic analysis (NOT MEASURED caveats);
+G caching + profiling; H component table; I honest limitations; J reproducibility;
+K recommendations. No fabricated numbers; every claim traces to a result file or
+NOT MEASURED.
+
+### P6-5 — Final test suite + commit — DONE
+
+```
+d:\Ragmed_2\.venv\Scripts\python.exe -m pytest backend\tests\ -q
+  → 463 passed, 4 failed, 1 skipped (265.67s)
+```
+
+Phase 1–4 + Phase 5-flag scope (the suite the plan gates on) — **all green**:
+
+| Test file | Passed | Failed | Skipped |
+|-----------|--------|--------|---------|
+| test_workstream_c_cache.py | 42 | 0 | 0 |
+| test_agent_contribution.py | 25 | 0 | 0 |
+| test_workstream_d_checkpoint.py | 45 | 0 | 0 |
+| test_workstream_b_metrics.py | 95 | 0 | 0 |
+| test_workstream_b_leakage.py | 35 | 0 | 1 (symlink, Windows elevation) |
+| test_workstream_a_verification.py | 20 | 0 | 0 |
+| test_phase5_flags_default_off.py | 10 | 0 | 0 |
+| **Total (scoped)** | **272** | **0** | **1** |
+
+The 4 full-suite failures are **pre-existing integration tests outside the Phase 1–4
+scope** and are **not a regression from Phases 0–6** (Phase 6 only edits `docs/`):
+
+| Failing test | Why it fails (honest) |
+|---|---|
+| `test_local_llm.py::test_llm_generation` | Requires a real local LLM; CPU venv has no model loaded (`app.llm.parser.Mode...`). |
+| `test_local_llm.py::test_base_agent` | Same — real LLM not available in CPU test env. |
+| `test_langgraph_real_seed_integration.py::test_langgraph_runs_against_real_pubmed_seed_faiss_corpus` | Requires a real seed PubMed FAISS corpus not present in the CPU env. |
+| `test_native_retrieval_integration.py::test_retrieval_service_runs_three_mga_controlled_passes_without_stub` | End-to-end real-retrieval integration; pipeline abstains without the real model (`abstained != verified`). |
+
+These files are committed well before this work (`f666f7cb Add CPU fallback for local LLM`)
+and require GPU/LLM/seed-corpus resources that the CPU-only verification environment does
+not provide. They are documented, not hidden. Evidence tier: SOFTWARE TEST (observed run).
+
+**Phase 6 commit (no push):** `git -C d:\Ragmed_2 add docs/ BLOCKED.md && git commit -m "docs: Phase 6 final report, component table, re-checks"`.
+
 ---
 
 ## All Files to Change — Master List
@@ -599,12 +719,12 @@ NEVER MODIFY:
 
 ---
 
-## BLOCKED Items (also in BLOCKED.md)
+## BLOCKED Items (also in docs/progress/BLOCKED.md and root BLOCKED.md — kept consistent)
 
-| Item | Reason | What is needed |
-|------|--------|----------------|
-| MedRGB metrics | Dataset absent from repo | Obtain MedRGB dataset with licence verification |
-| Eval index leakage smoke test | Read-only audit; smoke test not run | Run `python -m scripts.run_step4_benchmark --smoke-test` with GPU venv |
-| 500-question eval split | Split not built; requires BioASQ + MedQA data + seeded split builder | Phase 2 split builder + dataset access |
-| NLI model download | CPU NLI model not present | Download `cross-encoder/nli-MiniLM-L2-v2` before Phase 3 (not during benchmark) |
-| Human annotation labels | Require human review | Phase 2 creates schema; labels = "pending annotation" until human review done |
+| ID | Item | Status (Phase 6) | What is needed |
+|----|------|------------------|----------------|
+| BLOCKED-001 | MedRGB metrics | NOT MEASURABLE (carry-forward) | Obtain MedRGB dataset with licence verification; absent from repo + MIRAGE |
+| BLOCKED-002 | Eval-index leakage smoke test | RESOLVED (Phase 5) | Canary PASS; first retrieved PMID 17128671 not in eval-question set |
+| BLOCKED-003 | 500-question eval split | RESOLVED (built); full 500×8 sweep CARRY-FORWARD | Split built + leakage-checked; full GPU sweep (~40+ h) exceeds budget, pilot run instead |
+| BLOCKED-004 | NLI model download | CARRY-FORWARD | Download `cross-encoder/nli-MiniLM-L2-v2` (not during a benchmark run); claim support NOT MEASURED until then |
+| BLOCKED-005 | Human annotation labels | CARRY-FORWARD | Human review using Phase 2 schema; abstention/faithfulness metrics NOT MEASURED until then |
