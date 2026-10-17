@@ -54,9 +54,7 @@ class TestEvidenceQualityScorer(unittest.TestCase):
         )
 
     def test_missing_study_type_is_not_invented(self):
-        result = self.scorer.score(
-            self.make_chunk(metadata={})
-        )
+        result = self.scorer.score(self.make_chunk(metadata={}))
         self.assertIsNone(result["study_type"])
         self.assertIsNone(result["study_type_score"])
 
@@ -76,6 +74,51 @@ class TestEvidenceQualityScorer(unittest.TestCase):
             [item["chunk_id"] for item in results],
             ["chunk_a", "chunk_b"],
         )
+
+    def test_required_study_hierarchy(self):
+        study_types = [
+            ("systematic_review", 1.00),
+            ("randomized_controlled_trial", 0.90),
+            ("cohort_study", 0.75),
+            ("case_report", 0.40),
+        ]
+
+        scores = []
+        for study_type, _ in study_types:
+            result = self.scorer.score(
+                self.make_chunk(
+                    metadata={"study_type": study_type},
+                    publication_year=2024,
+                )
+            )
+            scores.append(result["study_type_score"])
+
+        self.assertEqual(
+            scores,
+            [1.00, 0.90, 0.75, 0.40],
+        )
+        self.assertEqual(scores, sorted(scores, reverse=True))
+
+    def test_meta_analysis_alias(self):
+        result = self.scorer.score(
+            self.make_chunk(metadata={"study_type": "meta-analysis"})
+        )
+        self.assertEqual(result["study_type"], "meta_analysis")
+        self.assertEqual(result["study_type_score"], 1.00)
+
+    def test_rct_alias(self):
+        result = self.scorer.score(
+            self.make_chunk(metadata={"study_type": "RCT"})
+        )
+        self.assertEqual(result["study_type"], "rct")
+        self.assertEqual(result["study_type_score"], 0.90)
+
+    def test_missing_publication_year_has_no_recency_score(self):
+        result = self.scorer.score(
+            self.make_chunk(publication_year=None)
+        )
+        self.assertIsNone(result["recency_score"])
+        self.assertGreaterEqual(result["quality_score"], 0.0)
 
 
 if __name__ == "__main__":
