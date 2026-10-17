@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What is the standard surgical technique for caesarean section?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "db443e86b80fe53f5292ae6c358e39b5e92b32f1c91233a9b9a8e868d7d1748f",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_54df6ed91388e8454a000007_s25874_chunk_0",
+        "document_id": "bioasq_54df6ed91388e8454a000007_s25874",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/23453151",
+        "title": "PubMed 23453151 [abstract]",
+        "cited_text": "The standard treatment today is maximal surgical resection followed by concomitant chemo-radiation therapy followed by adjuvant TMZ according to Stupp protocol",
+        "cross_encoder_logit": 0.10578732192516327,
+        "relevance_score": 0.5264221942715844,
+        "cross_encoder_score": 0.5264221942715844,
+        "evidence_quality_score": 0.5264221942715844,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/23453151",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_660810a0fdcbea915f000005_s11105_chunk_0",
+        "document_id": "bioasq_660810a0fdcbea915f000005_s11105",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/26982189",
+        "title": "PubMed 26982189 [abstract]",
+        "cited_text": "und abscess (1) and seroma (3).CONCLUSION: Minimally invasive pectus excavatum repair is an effective surgical technique for the treat",
+        "cross_encoder_logit": 0.03581264987587929,
+        "relevance_score": 0.5089522056882031,
+        "cross_encoder_score": 0.5089522056882031,
+        "evidence_quality_score": 0.5089522056882031,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/26982189",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_66080f4cfdcbea915f000004_s49082_chunk_0",
+        "document_id": "bioasq_66080f4cfdcbea915f000004_s49082",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/24413644",
+        "title": "PubMed 24413644 [abstract]",
+        "cited_text": "The standard operative treatment of pectus excavatum has been the Ravitch's technique that requires the exposition of the thorax's anterior region with resection of the costal cartilages affected bilaterally, the performance of a cross sternal osteotomy with the placing of a stabiliser, and the development of muscular flaps.",
+        "cross_encoder_logit": 0.032189659774303436,
+        "relevance_score": 0.5080467201385938,
+        "cross_encoder_score": 0.5080467201385938,
+        "evidence_quality_score": 0.5080467201385938,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/24413644",
+        "index_id": null
+      }
+    ]
+  }
+}

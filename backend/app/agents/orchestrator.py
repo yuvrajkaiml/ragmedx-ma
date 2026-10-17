@@ -55,6 +55,8 @@ class MultiAgentOrchestrator:
         disable_critic: bool = False,
         disable_calibration: bool = False,
         enable_claim_verification: bool = False,  # Phase 3: default OFF per versioning rule
+        record_node_timing: bool = False,  # Phase 5: default OFF per versioning rule
+        pipeline_version: Optional[str] = None,  # Phase 5: new variants only (e.g. "v2")
     ):
         if llm_wrapper is not None:
             self.llm_wrapper = llm_wrapper
@@ -92,6 +94,9 @@ class MultiAgentOrchestrator:
         self.disable_critic = disable_critic
         self.disable_calibration = disable_calibration
         self.enable_claim_verification = enable_claim_verification
+        # Phase 5 versioning-compliant flags (both default OFF → identical behaviour).
+        self.record_node_timing = record_node_timing
+        self.pipeline_version = pipeline_version
 
         # Initialize domain agents
         self.query_agent = QueryUnderstandingAgent(llm_wrapper=self.llm_wrapper)
@@ -125,6 +130,10 @@ class MultiAgentOrchestrator:
         agent_state = self._init_state_from_dict(state) if isinstance(state, dict) else state
         if not agent_state.query_id:
             agent_state.query_id = create_deterministic_uuid(agent_state.original_question or "query")
+        # Phase 5: stamp the orchestrator's pipeline_version onto the state for the
+        # new variants only.  Default None leaves the state field untouched.
+        if self.pipeline_version is not None and agent_state.pipeline_version is None:
+            agent_state.pipeline_version = self.pipeline_version
 
         graph_result = await self.graph.ainvoke(agent_state.model_dump())
         final_state = AgentState.model_validate(graph_result)
@@ -176,25 +185,36 @@ class MultiAgentOrchestrator:
     def _state_update(state: AgentState) -> Dict[str, Any]:
         return state.model_dump()
 
-    @staticmethod
-    def _record_graph_node(state: AgentState, node: str) -> None:
+    def _record_graph_node(
+        self, state: AgentState, node: str, started_perf: Optional[float] = None
+    ) -> None:
         now = datetime.now(timezone.utc)
+        # Phase 5 (default OFF): when record_node_timing is True and a start
+        # perf-counter was captured at node entry, write the real per-node
+        # wall-clock duration into the langgraph trace step.  When OFF (default)
+        # the duration stays hardcoded 0 — byte-for-byte identical to before.
+        if self.record_node_timing and started_perf is not None:
+            duration_ms = int((time.perf_counter() - started_perf) * 1000)
+        else:
+            duration_ms = 0
         state.agent_trace.append({
             "agent_type": "langgraph",
             "status": "completed",
             "started_at": now.isoformat(),
             "completed_at": now.isoformat(),
-            "duration_ms": 0,
+            "duration_ms": duration_ms,
             "details": {"node": node},
         })
 
     async def _node_query_understanding(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        _t0 = time.perf_counter()
         state = self._as_agent_state(payload)
         await self._step_query_understanding(state)
-        self._record_graph_node(state, "query_understanding")
+        self._record_graph_node(state, "query_understanding", _t0)
         return self._state_update(state)
 
     async def _node_retrieval(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        _t0 = time.perf_counter()
         state = self._as_agent_state(payload)
         if state.evidence and state.retrieval_iteration_count == 0:
             state.retrieval_iteration_count = 1
@@ -211,10 +231,11 @@ class MultiAgentOrchestrator:
             await self._retrieve_evidence_pass(state, state.pending_retrieval_sub_query)
         state.pending_retrieval_sub_query = None
         self._normalize_and_validate_evidence(state)
-        self._record_graph_node(state, "retrieval")
+        self._record_graph_node(state, "retrieval", _t0)
         return self._state_update(state)
 
     async def _node_gap_analysis(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        _t0 = time.perf_counter()
         state = self._as_agent_state(payload)
         gap = None if state.retrieval_failure else await self._run_gap_analysis(state)
         if gap is None:
@@ -229,7 +250,7 @@ class MultiAgentOrchestrator:
         else:
             state.retrieval_failure = True
             state.error_code = "GAP_ANALYSIS_ERROR"
-        self._record_graph_node(state, "gap_analysis")
+        self._record_graph_node(state, "gap_analysis", _t0)
         return self._state_update(state)
 
     @staticmethod
@@ -242,6 +263,7 @@ class MultiAgentOrchestrator:
         return "retrieval"
 
     async def _node_evidence_reranking(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        _t0 = time.perf_counter()
         state = self._as_agent_state(payload)
         try:
             result = await self.reranking_agent.run(state.model_dump())
@@ -253,7 +275,7 @@ class MultiAgentOrchestrator:
             state.retrieval_failure = True
             state.error = str(exc)
             state.error_code = "EVIDENCE_RERANKING_ERROR"
-        self._record_graph_node(state, "evidence_reranking")
+        self._record_graph_node(state, "evidence_reranking", _t0)
         return self._state_update(state)
 
     @staticmethod
@@ -262,6 +284,7 @@ class MultiAgentOrchestrator:
         return "confidence" if state.retrieval_failure or state.contradictory_evidence else "generator"
 
     async def _node_generator(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        _t0 = time.perf_counter()
         state = self._as_agent_state(payload)
         state.critic_round_count += 1
         try:
@@ -279,14 +302,15 @@ class MultiAgentOrchestrator:
         except Exception as exc:
             state.model_failure = True
             state.error, state.error_code = str(exc), "GENERATOR_ERROR"
-        self._record_graph_node(state, "generator")
+        self._record_graph_node(state, "generator", _t0)
         return self._state_update(state)
 
     async def _node_critic(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        _t0 = time.perf_counter()
         state = self._as_agent_state(payload)
         if not self.disable_critic:
             if state.model_failure:
-                self._record_graph_node(state, "critic")
+                self._record_graph_node(state, "critic", _t0)
                 return self._state_update(state)
             try:
                 result = await self.critic_agent.run({
@@ -312,7 +336,7 @@ class MultiAgentOrchestrator:
             except Exception as exc:
                 state.model_failure = True
                 state.error, state.error_code = str(exc), "CRITIC_ERROR"
-        self._record_graph_node(state, "critic")
+        self._record_graph_node(state, "critic", _t0)
         return self._state_update(state)
 
     def _route_after_critic(self, payload: Dict[str, Any]) -> str:
@@ -327,6 +351,7 @@ class MultiAgentOrchestrator:
         return "confidence"
 
     async def _node_confidence(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        _t0 = time.perf_counter()
         state = self._as_agent_state(payload)
         # Phase 3: run claim verification before calibration if enabled (default OFF)
         # Verification must always precede calibration when enabled — no bypass.
@@ -352,7 +377,7 @@ class MultiAgentOrchestrator:
                 }
         else:
             await self._step_confidence_calibration(state)
-        self._record_graph_node(state, "confidence")
+        self._record_graph_node(state, "confidence", _t0)
         return self._state_update(state)
 
     def _run_claim_verification(self, state: "AgentState") -> None:
@@ -441,6 +466,7 @@ class MultiAgentOrchestrator:
             )
 
     async def _node_abstention(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        _t0 = time.perf_counter()
         state = self._as_agent_state(payload)
         if self.disable_calibration:
             # Guard: if no valid answer, still abstain
@@ -452,7 +478,7 @@ class MultiAgentOrchestrator:
                 state.status = "verified"
         else:
             await self._step_abstention_decision(state)
-        self._record_graph_node(state, "abstention")
+        self._record_graph_node(state, "abstention", _t0)
         return self._state_update(state)
 
     async def _step_query_understanding(self, state: AgentState) -> None:

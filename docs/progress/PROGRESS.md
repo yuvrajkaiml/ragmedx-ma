@@ -466,6 +466,84 @@ d:\Ragmed_2\.venv\Scripts\python.exe -m pytest backend\tests\test_workstream_c_c
 
 ---
 
+## Phase 5 — 500-Question GPU Experiment (8 configs) with Latency & Statistics
+
+**Status:** IMPLEMENTED AND TESTED (reduced-validation tier executed; full 500×8 sweep PAUSED for user approval per P5-6)
+**Target env:** CPU (`.venv\Scripts\python.exe`) for pre-check/split/flags/tests; GPU (`.venv-cu128-pilot\Scripts\python.exe`) for the canary + experiment run.
+**Phase 5 output root:** `backend/results/phase5_20261017_131123/`
+**Completed:** 2026-10-17
+
+### P5-1 — Pre-check (conditional gate) — PASS
+
+Evidence tier: SOFTWARE TEST (environment capture)
+
+- Phase 4 gate confirmed IMPLEMENTED AND TESTED from this file (critic analysis written, 42 cache tests pass, profile written).
+- eval_split index: resolved `D:\Ragmed_2\backend\data\faiss_index\eval_split`, mtime `2026-09-29T20:26:17`, `index.faiss` (238 MB) + `chunks.pkl` (33 MB, 58,173 chunks) present. IndexLeakageGuard PASS.
+- GPU check: `.venv-cu128-pilot\Scripts\python.exe -c "import torch; ..."` → `cuda_available True torch 2.11.0+cu128 cuda 12.8`.
+- Question pool ≥ 500: BioASQ-eval 250 + MIRAGE PubMedQA 500 = 750.
+- torch/CUDA versions recorded for the Phase 6 re-check: torch 2.11.0+cu128, CUDA 12.8.
+
+### P5-2 — 500-question split (stratified, seeded) — DONE
+
+Evidence tier: SOFTWARE TEST
+
+| File | Action |
+|------|--------|
+| `backend/scripts/build_phase5_split.py` | CREATED — builds pool, calls `split_builder.build_splits(dev_n=100, cal_n=150, test_n=250, seed=42, stratify_by='source')`, runs leakage checks, writes manifest + splits (atomic writes). |
+| `backend/results/phase5_20261017_131123/dataset_manifest.json` | CREATED |
+| `backend/results/phase5_20261017_131123/splits/{dev,calibration,test}.json` | CREATED (100 / 150 / 250) |
+
+Command: `d:\Ragmed_2\.venv\Scripts\python.exe backend\scripts\build_phase5_split.py`
+Result: pool=750 (BioASQ 250 + PubMedQA 500); split dev=100 cal=150 test=250; near-duplicate counts (threshold 0.9) all 0; corpus leakage (question + answer vs 58,173 eval_split chunk texts, threshold 0.95) = 0 / 0; IndexLeakageGuard PASS. Manifest records per-split SHA-256 hashes + source counts.
+
+Measurability (honest, recorded in manifest): BioASQ retrieval-quality MEASURABLE (gold PMIDs, eval_split built from BioASQ corpus); PubMedQA retrieval-quality = **NOT MEASURED** (PubMed abstracts not in the BioASQ-built eval index) → answer-quality only.
+
+### P5-3 — New flags (default OFF) + versioning tests — IMPLEMENTED AND TESTED
+
+Evidence tier: SOFTWARE TEST
+
+| File | Action | Description |
+|------|--------|-------------|
+| `backend/app/agents/orchestrator.py` | MODIFIED | Added `record_node_timing: bool = False` and `pipeline_version: Optional[str] = None` (both default OFF). When `record_node_timing` is True the langgraph node wrappers write real `duration_ms` via a per-node `perf_counter`; when False (default) duration stays hardcoded 0 — identical to before. `pipeline_version` is stamped onto `AgentState` only when set. |
+| `backend/app/rag/pipeline.py` | MODIFIED | Added `RAGPipeline.build(..., cache_enabled=False, cache_dir=None)` and constructor wiring. When enabled, `retrieve_evidence` consults `caching.query_cache.QueryCache` (key = query + index_identity + retrieval_config + model/embedder/prompt version + preprocessing) and short-circuits on hit; `cache_hits`/`cache_misses` exposed. When False (default) no cache is constructed and the caching package is imported LAZILY only inside the enabled branch (default path imports nothing). |
+| `backend/tests/test_phase5_flags_default_off.py` | CREATED | 12 tests: default langgraph durations all 0; explicit-OFF == implicit default; flag-ON changes only duration value not trace structure; `pipeline_version` default None / stamped when set; cache default OFF (no files, no construction); `cache_enabled=True` requires `cache_dir`; default `retrieve_evidence` writes no cache files. |
+| `backend/tests/test_workstream_c_cache.py` | MODIFIED | Updated the Phase 4b default-OFF wiring test: pipeline.py now contains an OPTIONAL cache behind `cache_enabled` (default OFF), so the static assertion was relaxed to require that any `caching` import in pipeline.py is lazy (indented, inside the branch) and that orchestrator.py has no cache reference. The authoritative default-OFF proof remains the runtime subprocess check (importing the default modules pulls no `caching` into `sys.modules`). |
+
+Command: `d:\Ragmed_2\.venv\Scripts\python.exe -m pytest backend\tests\test_phase5_flags_default_off.py backend\tests\test_workstream_c_cache.py backend\tests\test_workstream_a_verification.py -q` → **72 passed**. Non-regression: `test_workstream_d_checkpoint.py test_workstream_b_metrics.py test_workstream_b_leakage.py` → **175 passed, 1 skipped**.
+
+### P5-4 — Experiment runner (rich per-sample records) — IMPLEMENTED AND TESTED
+
+| File | Action |
+|------|--------|
+| `backend/scripts/run_phase5_experiment.py` | CREATED — 8 configs; runs the orchestrator directly (full AgentState) with `include_trace` semantics; hard-asserts `llm_mode == LOCAL` (no mock fallback); IndexLeakageGuard + `_resolve_and_guard_index_dir` before every RAG run; per-question `peak_vram_mb` via `torch.cuda.reset_peak_memory_stats`/`max_memory_allocated`; cold vs warm latency separate; P5-6 aggregation (`metric_summary.json` with Wilson CIs + paired McNemar vs `phase5-full-pipeline` + Holm; `latency_breakdown.json`; `failure_cases.json`; `summary.json`; `report.md`). |
+
+8 configs: `phase5-improved-v2` (claim verification + cache + iterative + critic + calibration ON, `record_node_timing` ON, `pipeline_version=v2`); `phase5-improved-no-verification` (improved minus claim verification); the six reproducible historical baselines `phase5-full-pipeline` / `-no-critic` / `-no-iterative-retrieval` / `-no-calibration` / `-basic-rag` / `-plain-llm-no-rag` (all new flags OFF).
+
+Per-sample fields (absent = `NOT MEASURED` + reason): `question_id`, `resolved_index_path`, `split`, `answer`, `citations`, `claim_verdicts`, `confidence` (+ `confidence_note`), `abstain_flag`, `errors`, `per_stage_latency_ms`, `model_call_count`, `retrieval_call_count`, `cache_hits`, `peak_vram_mb`, `cold_latency_ms`, `warm_latency_ms`.
+
+Verified on GPU (reduced subset): records are rich and honest — e.g. `improved-v2` had calibrated confidence 0.8425, a cache hit (warm 25 ms vs cold ~131 s), peak VRAM 10,367 MB, and populated per-stage timings; historical baselines correctly carry `NOT MEASURED` per-stage latency with reason (`record_node_timing` OFF) and `NOT MEASURED` warm latency (cache OFF).
+
+### P5-5 — Leakage canary (GPU) — PASS
+
+Command: `.venv-cu128-pilot\Scripts\python.exe -m scripts.run_step4_benchmark --smoke-test`
+Result: **CANARY RESULT : PASS** — first retrieved PMID `17128671` is NOT in the eval-question PMID set `{18039527, 31709696, 31722348}`. Recorded in `environment.json`.
+
+### P5-6 — Execute + output layout — REDUCED TIER DONE; FULL SWEEP PAUSED
+
+Tiering decision (honest, per plan): the full 500×8 GPU sweep is ~40+ hours (heavy configs ~130 s/question × 8 configs × 500 ≈ far beyond a single step). A **reduced validation subset** (1 dev question × 8 configs) was executed to completion on GPU to produce real rich per-sample records + latency + the full output layout, exit 0. The full sweep is **PAUSED for user approval**.
+
+Output layout under `backend/results/phase5_20261017_131123/`: `configs/<8 configs>.json`, `dataset_manifest.json`, `splits/{dev,calibration,test}.json`, `environment.json` (canary + index hash/mtime + versions), `environment_run.json`, `per_question/<config>.jsonl` (8 files, rich records), `metric_summary.json` (per-config accuracy + Wilson CIs; paired McNemar vs `phase5-full-pipeline` + Holm), `latency_breakdown.json` (cold vs warm, per-stage, PRD targets), `failure_cases.json`, `summary.json`, `report.md`.
+
+Honesty: every metric carries an evidence tier; `NOT MEASURED` used where data is absent (PubMedQA retrieval-quality; per-stage latency on `record_node_timing`-OFF baselines). No superiority claim is made without a Holm-significant paired test; the reduced-subset n=1 yields wide CIs and all paired p-values are 1.0 — explicitly directional only.
+
+**Remaining full-run estimate:** 500 questions × 8 configs; heavy configs ~130 s/Q (full-pipeline, improved-v2, no-calibration), lighter ~80 s/Q (no-critic, basic-rag), plain-llm ~6 s/Q → **~40+ hours wall-clock**. Awaiting user approval before launching the long sweep.
+
+### Phase 5 commit
+
+Single commit on `yuvraj/llm` (no push): `feat: Phase 5 500-question 8-config GPU experiment`.
+
+---
+
 ## All Files to Change — Master List
 
 ```

@@ -289,9 +289,27 @@ class RAGPipeline:
         self,
         retrieval_pipeline: RAGRetrievalPipeline | None = None,
         top_k_final: int = 5,
+        cache_enabled: bool = False,
+        cache_dir: str | Path | None = None,
     ) -> None:
         self._retrieval_pipeline = retrieval_pipeline
         self._top_k_final = top_k_final
+        # Phase 5 (default OFF per versioning rule): when cache_enabled is False
+        # no QueryCache is constructed and retrieve_evidence behaves identically
+        # to before (no cache lookups, no cache files written).
+        self._cache_enabled = bool(cache_enabled)
+        self._query_cache = None
+        self._cache_hits = 0
+        self._cache_misses = 0
+        if self._cache_enabled:
+            if cache_dir is None:
+                raise ValueError(
+                    "RAGPipeline: cache_enabled=True requires a cache_dir."
+                )
+            # Imported lazily so the default (cache OFF) path never imports the
+            # caching package — preserves the Phase 4b default-OFF wiring test.
+            from caching.query_cache import QueryCache
+            self._query_cache = QueryCache(cache_dir=str(cache_dir), enabled=True)
 
     @classmethod
     def build(
@@ -300,6 +318,8 @@ class RAGPipeline:
         model_name: str | None = None,
         top_k_retrieval: int = 20,
         top_k_final: int = 5,
+        cache_enabled: bool = False,
+        cache_dir: str | Path | None = None,
     ) -> "RAGPipeline":
         """Load a native persisted index or return a safe empty facade."""
         from app.config import get_settings
@@ -340,7 +360,12 @@ class RAGPipeline:
                 retrieval_top_k=top_k_retrieval,
                 final_top_k=top_k_final,
             )
-            return cls(native_pipeline, top_k_final=top_k_final)
+            return cls(
+                native_pipeline,
+                top_k_final=top_k_final,
+                cache_enabled=cache_enabled,
+                cache_dir=cache_dir,
+            )
         except Exception as exc:
             if settings.llm_mode == "real":
                 # In real mode a load failure must be loud: don't serve requests
@@ -360,6 +385,48 @@ class RAGPipeline:
     @property
     def is_ready(self) -> bool:
         return self._retrieval_pipeline is not None
+
+    @property
+    def cache_enabled(self) -> bool:
+        return self._cache_enabled
+
+    @property
+    def cache_hits(self) -> int:
+        """Number of cache hits served since construction (0 when cache OFF)."""
+        return self._cache_hits
+
+    @property
+    def cache_misses(self) -> int:
+        """Number of cache misses observed since construction (0 when cache OFF)."""
+        return self._cache_misses
+
+    def _index_identity(self) -> str:
+        """Return a stable identity string for the loaded index (for cache keys)."""
+        try:
+            return str(
+                self._retrieval_pipeline.hybrid_retriever.dense_retriever.vector_store.index_dir
+            )
+        except Exception:
+            return "unknown_index"
+
+    def _cache_key(self, search_query: str, top_k_final: int) -> dict[str, Any]:
+        """Build the full QueryCache key for a retrieval request.
+
+        The key includes every field QueryCache requires so that a change to the
+        index, retrieval config, or any version component yields a distinct entry.
+        """
+        return {
+            "query": search_query,
+            "index_identity": self._index_identity(),
+            "retrieval_config": {
+                "top_k_final": top_k_final,
+                "component": "RAGPipeline.retrieve_evidence",
+            },
+            "model_version": "qwen3-8b-4bit",
+            "embedder_version": "bge-m3",
+            "prompt_version": "v1",
+            "preprocessing_config": "default",
+        }
 
     @staticmethod
     def _normalize_cross_encoder_logit(score: Any) -> float:
@@ -397,10 +464,29 @@ class RAGPipeline:
             return [], [{"iteration": 1, "query_used": search_query, "count": 0, "status": "no_retriever"}]
 
         started = time.perf_counter()
+        resolved_top_k = top_k_final or self._top_k_final
+
+        # Phase 5 cache lookup (only when cache_enabled=True; default OFF is a no-op).
+        if self._cache_enabled and self._query_cache is not None:
+            cache_key = self._cache_key(search_query, resolved_top_k)
+            cached = self._query_cache.get(cache_key)
+            if cached is not None:
+                self._cache_hits += 1
+                evidence = cached.get("evidence", [])
+                return evidence, [{
+                    "iteration": 1,
+                    "query_used": search_query,
+                    "count": len(evidence),
+                    "status": "cache_hit",
+                    "cache_hit": True,
+                    "elapsed_ms": int((time.perf_counter() - started) * 1000),
+                }]
+            self._cache_misses += 1
+
         try:
             results = self._retrieval_pipeline.retrieve(
                 search_query,
-                final_top_k=top_k_final or self._top_k_final,
+                final_top_k=resolved_top_k,
             )
             citations_by_chunk = {
                 citation.chunk_id: citation.citation_id
@@ -434,11 +520,21 @@ class RAGPipeline:
                 }
                 for index, (chunk, score) in enumerate(results, start=1)
             ]
+            # Phase 5: store the fresh result on a cache miss (cache OFF → skip).
+            if self._cache_enabled and self._query_cache is not None:
+                try:
+                    self._query_cache.put(
+                        self._cache_key(search_query, resolved_top_k),
+                        {"evidence": evidence},
+                    )
+                except Exception as cache_exc:  # cache write must never break retrieval
+                    logger.warning("QueryCache.put failed (non-fatal): %s", cache_exc)
             return evidence, [{
                 "iteration": 1,
                 "query_used": search_query,
                 "count": len(evidence),
                 "status": "completed",
+                "cache_hit": False,
                 "elapsed_ms": int((time.perf_counter() - started) * 1000),
             }]
         except Exception as exc:

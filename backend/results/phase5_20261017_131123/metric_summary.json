@@ -1,0 +1,206 @@
+{
+  "evidence_tier": {
+    "answer_correctness": "BENCHMARK GROUND TRUTH (token-containment vs gold, threshold 0.6)",
+    "latency": "SOFTWARE TEST (wall-clock on this GPU run)",
+    "abstention_rate": "SOFTWARE TEST"
+  },
+  "baseline_for_paired_tests": "phase5-full-pipeline",
+  "configs": {
+    "phase5-basic-rag": {
+      "n_measured": 1,
+      "n_total": 1,
+      "accuracy_correct": 1,
+      "accuracy": 1.0,
+      "accuracy_wilson_ci_95": [
+        0.206549,
+        1.0
+      ],
+      "abstention_rate": 0.0
+    },
+    "phase5-full-pipeline": {
+      "n_measured": 1,
+      "n_total": 1,
+      "accuracy_correct": 1,
+      "accuracy": 1.0,
+      "accuracy_wilson_ci_95": [
+        0.206549,
+        1.0
+      ],
+      "abstention_rate": 0.0
+    },
+    "phase5-improved-no-verification": {
+      "n_measured": 1,
+      "n_total": 1,
+      "accuracy_correct": 1,
+      "accuracy": 1.0,
+      "accuracy_wilson_ci_95": [
+        0.206549,
+        1.0
+      ],
+      "abstention_rate": 0.0
+    },
+    "phase5-improved-v2": {
+      "n_measured": 1,
+      "n_total": 1,
+      "accuracy_correct": 1,
+      "accuracy": 1.0,
+      "accuracy_wilson_ci_95": [
+        0.206549,
+        1.0
+      ],
+      "abstention_rate": 0.0
+    },
+    "phase5-no-calibration": {
+      "n_measured": 1,
+      "n_total": 1,
+      "accuracy_correct": 1,
+      "accuracy": 1.0,
+      "accuracy_wilson_ci_95": [
+        0.206549,
+        1.0
+      ],
+      "abstention_rate": 0.0
+    },
+    "phase5-no-critic": {
+      "n_measured": 1,
+      "n_total": 1,
+      "accuracy_correct": 1,
+      "accuracy": 1.0,
+      "accuracy_wilson_ci_95": [
+        0.206549,
+        1.0
+      ],
+      "abstention_rate": 0.0
+    },
+    "phase5-no-iterative-retrieval": {
+      "n_measured": 1,
+      "n_total": 1,
+      "accuracy_correct": 1,
+      "accuracy": 1.0,
+      "accuracy_wilson_ci_95": [
+        0.206549,
+        1.0
+      ],
+      "abstention_rate": 0.0
+    },
+    "phase5-plain-llm-no-rag": {
+      "n_measured": 1,
+      "n_total": 1,
+      "accuracy_correct": 1,
+      "accuracy": 1.0,
+      "accuracy_wilson_ci_95": [
+        0.206549,
+        1.0
+      ],
+      "abstention_rate": 0.0
+    }
+  },
+  "paired_vs_baseline_mcnemar_holm": {
+    "phase5-basic-rag": {
+      "vs": "phase5-full-pipeline",
+      "table": {
+        "n00": 0,
+        "n01": 0,
+        "n10": 0,
+        "n11": 1
+      },
+      "shared_measured": 1,
+      "mcnemar_statistic": 0.0,
+      "p_value_raw": 1.0,
+      "method": "exact_binomial",
+      "p_value_holm_adjusted": 1.0,
+      "significant_holm_0.05": false
+    },
+    "phase5-improved-no-verification": {
+      "vs": "phase5-full-pipeline",
+      "table": {
+        "n00": 0,
+        "n01": 0,
+        "n10": 0,
+        "n11": 1
+      },
+      "shared_measured": 1,
+      "mcnemar_statistic": 0.0,
+      "p_value_raw": 1.0,
+      "method": "exact_binomial",
+      "p_value_holm_adjusted": 1.0,
+      "significant_holm_0.05": false
+    },
+    "phase5-improved-v2": {
+      "vs": "phase5-full-pipeline",
+      "table": {
+        "n00": 0,
+        "n01": 0,
+        "n10": 0,
+        "n11": 1
+      },
+      "shared_measured": 1,
+      "mcnemar_statistic": 0.0,
+      "p_value_raw": 1.0,
+      "method": "exact_binomial",
+      "p_value_holm_adjusted": 1.0,
+      "significant_holm_0.05": false
+    },
+    "phase5-no-calibration": {
+      "vs": "phase5-full-pipeline",
+      "table": {
+        "n00": 0,
+        "n01": 0,
+        "n10": 0,
+        "n11": 1
+      },
+      "shared_measured": 1,
+      "mcnemar_statistic": 0.0,
+      "p_value_raw": 1.0,
+      "method": "exact_binomial",
+      "p_value_holm_adjusted": 1.0,
+      "significant_holm_0.05": false
+    },
+    "phase5-no-critic": {
+      "vs": "phase5-full-pipeline",
+      "table": {
+        "n00": 0,
+        "n01": 0,
+        "n10": 0,
+        "n11": 1
+      },
+      "shared_measured": 1,
+      "mcnemar_statistic": 0.0,
+      "p_value_raw": 1.0,
+      "method": "exact_binomial",
+      "p_value_holm_adjusted": 1.0,
+      "significant_holm_0.05": false
+    },
+    "phase5-no-iterative-retrieval": {
+      "vs": "phase5-full-pipeline",
+      "table": {
+        "n00": 0,
+        "n01": 0,
+        "n10": 0,
+        "n11": 1
+      },
+      "shared_measured": 1,
+      "mcnemar_statistic": 0.0,
+      "p_value_raw": 1.0,
+      "method": "exact_binomial",
+      "p_value_holm_adjusted": 1.0,
+      "significant_holm_0.05": false
+    },
+    "phase5-plain-llm-no-rag": {
+      "vs": "phase5-full-pipeline",
+      "table": {
+        "n00": 0,
+        "n01": 0,
+        "n10": 0,
+        "n11": 1
+      },
+      "shared_measured": 1,
+      "mcnemar_statistic": 0.0,
+      "p_value_raw": 1.0,
+      "method": "exact_binomial",
+      "p_value_holm_adjusted": 1.0,
+      "significant_holm_0.05": false
+    }
+  },
+  "significance_caveat": "No superiority claim is made without a Holm-adjusted significant paired test. Small reduced-subset n yields wide CIs; treat deltas as directional only."
+}

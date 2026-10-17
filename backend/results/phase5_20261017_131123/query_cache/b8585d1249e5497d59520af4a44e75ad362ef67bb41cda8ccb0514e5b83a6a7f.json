@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What is the technique of choice to perform a caesarean section?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "b8585d1249e5497d59520af4a44e75ad362ef67bb41cda8ccb0514e5b83a6a7f",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_5326300fd6d3ac6a34000005_s47444_chunk_0",
+        "document_id": "bioasq_5326300fd6d3ac6a34000005_s47444",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/19723768",
+        "title": "PubMed 19723768 [abstract]",
+        "cited_text": "In conclusion, 3D-CISS is a non-invasive and reliable technique, and should be the first-choice method to localise CSF leak.",
+        "cross_encoder_logit": 0.0554964542388916,
+        "relevance_score": 0.5138705537995821,
+        "cross_encoder_score": 0.5138705537995821,
+        "evidence_quality_score": 0.5138705537995821,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/19723768",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5509ba931180f13250000001_s36948_chunk_0",
+        "document_id": "bioasq_5509ba931180f13250000001_s36948",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/22368024",
+        "title": "PubMed 22368024 [abstract]",
+        "cited_text": "The treatment of choice should be comprehensive therapy based on surgery.",
+        "cross_encoder_logit": 0.02252008765935898,
+        "relevance_score": 0.5056297839860652,
+        "cross_encoder_score": 0.5056297839860652,
+        "evidence_quality_score": 0.5056297839860652,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/22368024",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_660810a0fdcbea915f000005_s11127_chunk_0",
+        "document_id": "bioasq_660810a0fdcbea915f000005_s11127",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/35817669",
+        "title": "PubMed 35817669 [abstract]",
+        "cited_text": "OBJECTIVE(S): Compared to the open surgical technique, the minimally invasive repair of pectus excavatum (MIRPE; Nuss procedure) is a thoracoscopic technique designed to minimize intraoperative",
+        "cross_encoder_logit": 0.009844156913459301,
+        "relevance_score": 0.5024610193541428,
+        "cross_encoder_score": 0.5024610193541428,
+        "evidence_quality_score": 0.5024610193541428,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/35817669",
+        "index_id": null
+      }
+    ]
+  }
+}

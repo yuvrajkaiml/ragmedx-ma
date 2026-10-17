@@ -1,0 +1,4210 @@
+[
+  {
+    "id": "bioasq::6217dc9d3a8413c65300002d",
+    "question": "Is NfL (neurofilament light chain) a biomarker of neurodegeneration?",
+    "answer": "Yes,\nNeurofilament light chain (NfL) has recently been proposed as a promising biomarker in frontotemporal dementia (FTD).",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "34375485",
+      "32306372",
+      "34519102",
+      "34556565",
+      "34480363"
+    ]
+  },
+  {
+    "id": "bioasq::63f032caf36125a42600001a",
+    "question": "What is the mechanism of action of rilzabrutinib?",
+    "answer": "Rilzabrutinib is oral Bruton tyrosine kinase (BTK) inhibitor.",
+    "type": "summary",
+    "source": "bioasq",
+    "pmid": [
+      "35301810",
+      "36182620",
+      "35302767"
+    ]
+  },
+  {
+    "id": "bioasq::5518e817622b194345000006",
+    "question": "Which are the different members/isoforms of the Ras oncogenes?",
+    "answer": "Ras proteins are proto-oncogenes that are frequently mutated in human cancers. Three closely related isoforms, HRAS, KRAS and NRAS, are expressed in all cells and have overlapping but distinctive functions. H-ras, N-ras, and K-ras are canonical ras gene family members frequently activated by point mutation in human cancers and coding for 4 different, highly related protein isoforms (H-Ras, N-Ras, K-Ras4A, and K-Ras4B)",
+    "type": "list",
+    "source": "bioasq",
+    "pmid": [
+      "24194124",
+      "21924373",
+      "22648805",
+      "21779492",
+      "23103856",
+      "21779495",
+      "22981836",
+      "24247240",
+      "22589270",
+      "17671181",
+      "23412389",
+      "23496764",
+      "23871832"
+    ]
+  },
+  {
+    "id": "bioasq::5d387573a1e159510500000a",
+    "question": "Which is the primary interacting protein of BLK?",
+    "answer": "The B cell adaptor protein with ankyrin repeats (BANK1) and the B lymphoid tyrosine kinase (BLK) have been genetically associated with autoimmunity. The proteins of these genes interact physically and work in concert during B-cell signaling. Genetic and physical interaction of the B-cell systemic lupus erythematosus-associated genes BANK1 and BLK. BLK interacts with at least two of the three kinases in the B-cell/proteasome pathway, namely the transcription factor BANK1 and the chromatin-associated transcription factor 1 (CACGT1). Primary interacting protein of BLK (also known as BANK1) Primary interacting protein of BLK is Cdk1-binding protein 1 (Bik1/Nbk1). The genes BANK1 and BLK were recently described as associated with SLE a genetic interaction between BANK1 and BLK, and demonstrates that these molecules interact physically. BLK activity is regulated by two interacting proteins, BANK1 and BANK2. a genetic interaction between BANK1 and BLK, and demonstrates that these molecules interact physically. Genetic and physical interaction of the B-cell systemic lupus erythematosus-associated genes BANK1 and BLK. a genetic interaction between BANK1 and BLK, and demonstrates that these molecules interact physically. A The genes BANK1 and BLK were recently described as associated with SLE Autophagy-related gene 5 (ATG5), ATG7, B-lymphoid tyrosine kinase (BLK) and B-cell scaffold protein with ankyrin repeats 1 (BANK1) are involved in B-cell signaling; bank1",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "18981230",
+      "26420661",
+      "23555801",
+      "23646104",
+      "21978998"
+    ]
+  },
+  {
+    "id": "bioasq::5a6d0727b750ff445500002b",
+    "question": "Is there any role of 5hmC in T-cell development and differentiation?",
+    "answer": "Yes. 5hmC is enriched in the gene body of highly expressed genes at all different stages of T-cell development in the thymus and that its presence correlates positively with gene expression. Further emphasizing the connection with gene expression, 5hmC is enriched in active thymus-specific enhancers and genes encoding key transcriptional regulators display high intragenic 5hmC levels in precursor cells at those developmental stages where they exert a positive effect.",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "25071199",
+      "27346350"
+    ]
+  },
+  {
+    "id": "bioasq::604900391cb411341a000161",
+    "question": "List mediators that are released from mast cells?",
+    "answer": "tryptase\nhistamine\nheparin proteoglycan\nchymase\ncytokines\n2,3-dinor-11β-PGF2α\nleukotriene (LT)E4",
+    "type": "list",
+    "source": "bioasq",
+    "pmid": [
+      "31709696",
+      "31722348",
+      "18039527"
+    ]
+  },
+  {
+    "id": "bioasq::5c76c1457c78d694710000a6",
+    "question": "List MHC-I-associated inflammatory disorders.",
+    "answer": "ankylosing spondylitis\nbirdshot chorioretinopathy\nBehçet's disease \npsoriasis",
+    "type": "list",
+    "source": "bioasq",
+    "pmid": [
+      "27522479",
+      "25892735"
+    ]
+  },
+  {
+    "id": "bioasq::6053bd5194d57fd879000018",
+    "question": "Is fingolimod a drug or a pro-drug?",
+    "answer": "FTY720 is a prodrug.",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "15265669"
+    ]
+  },
+  {
+    "id": "bioasq::5c58b26386df2b9174000011",
+    "question": "Describe the mechanism of action of ibalizumab.",
+    "answer": "Ibalizumab is a humanized monoclonal antibody that acts as post-attachment inhibitor by binding CD4 2nd domain of T lymphocyte and preventing HIV connection to CCR5 or CXCR4. It has been recently approved by Food and Drug Administration as a new intravenous antiretroviral agent for heavily treated HIV adults with multi -drug resistant infection.",
+    "type": "summary",
+    "source": "bioasq",
+    "pmid": [
+      "21289125",
+      "29746266",
+      "29675744",
+      "20698725",
+      "23023102",
+      "25342515",
+      "29989910",
+      "29689540",
+      "19015347",
+      "21134642",
+      "30378502",
+      "30110589",
+      "24097413",
+      "24853313",
+      "20463063",
+      "28429756"
+    ]
+  },
+  {
+    "id": "bioasq::641791ed690f196b51000032",
+    "question": "Is SARS-CoV-2 transmitted through breast milk?",
+    "answer": "No, SARS-CoV-2 is not transmitted through breast milk. Based on current evidence, SARS-Cov-2 is not transmitted through breast milk. No, there is no evidence of infectious SARS-CoV-2 being present in breast milk, even when the viral RNA is detected. Breastfeeding does not seem to be a risk factor for transmitting the infection to infants. there is no evidence that breastmilk contains an infectious sars-cov-2 virus or that breastfeeding represents a risk factor for transmission of infection to infants, although sars-cov-2 rna can be found infrequently in breastmilk after recent infection.",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "32511431",
+      "34013217",
+      "33555566",
+      "33344466",
+      "35042956",
+      "32472745",
+      "33394459",
+      "33563823",
+      "32454808",
+      "34182576",
+      "32860259",
+      "32995804"
+    ]
+  },
+  {
+    "id": "bioasq::5c654b3de842deac67000024",
+    "question": "Name 3 diseases for which lucatumumab is being tested?",
+    "answer": "Lucatumumab is being tested as treatment for malignancies such as chronic lymphatic leukemia (CLL), Multiple Myeloma (MM), and non-Hodgkin's lymphoma (NHL).",
+    "type": "list",
+    "source": "bioasq",
+    "pmid": [
+      "24555495"
+    ]
+  },
+  {
+    "id": "bioasq::531a31a1b166e2b806000035",
+    "question": "Is TREM2 associated with Alzheimer's disease?",
+    "answer": "A rare variant of the TREM2 gene, which encodes the triggering receptor encoded in myeloid cells 2 (rs75932628-T) causing a R47H substitution has been associated with both early and late onset Alzheimer's disease in various populations.  Emerging evidence has demonstrated that TREM2 could suppress inflammatory response by repression of microglia-mediated cytokine production and secretion, which may prevent inflammation-induced bystander damage of neurons. Higher levels of TREM2 mRNA (p = 0.002) and protein (p < 0.001) were identified in AD patients which indicates that TREM2 might serve as a novel noninvasive biomarker for AD diagnosis. Based on the potential protective actions of TREM2 in AD pathogenesis, targeting TREM2 might provide new opportunities for AD treatment.",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "23855982",
+      "23391427",
+      "24041969",
+      "23582655",
+      "23562540",
+      "23150908",
+      "17088018",
+      "24119542",
+      "23510020",
+      "23407992",
+      "23380991",
+      "23533697",
+      "23692967",
+      "24002183"
+    ]
+  },
+  {
+    "id": "bioasq::61f9c990c9dfcb9c09000001",
+    "question": "Describe GREEKC",
+    "answer": "The COST Action Gene Regulation Ensemble Effort for the Knowledge Commons (GREEKC, CA15205, www.greekc.org) organized nine workshops in a four-year period, starting September 2016. The workshops brought together experts from all over the world working on various steps in the knowledge management process that focuses on understanding gene regulatory mechanisms. As computational modeling becomes more essential to analyze and understand biological regulatory mechanisms, governance of the many databases and knowledge bases that support this domain is crucial to guarantee reliability and interoperability of resources. To address this, the COST Action Gene Regulation Ensemble Effort for the Knowledge Commons (GREEKC, CA15205, www.greekc.org) organized nine workshops in a four-year period, starting September 2016. The workshops brought together a wide range of experts from all over the world working on various steps in the knowledge management process that focuses on understanding gene regulatory mechanisms. The discussions between ontologists, curators, text miners, biologists, bioinformaticians, philosophers and computational scientists spawned a host of activities aimed to standardize and update existing knowledge management workflows and involve end-users in the process of designing the Gene Regulation Knowledge Commons (GRKC).",
+    "type": "summary",
+    "source": "bioasq",
+    "pmid": [
+      "34757206"
+    ]
+  },
+  {
+    "id": "bioasq::530cefaaad0bf1360c000006",
+    "question": "What is the association between moon cycle and rupture risk  of intracranial aneurysms?",
+    "answer": "It has been reported that moon phases correlate with the incidence of aneurysmal subarachnoid hemorrhage due to ruptured intracranial aneurysms. However, other authors have found no correlation between incidence of aneurysmal SAH, location of the aneurysm, initial clinical presentation, or amount of subarachnoid blood and the lunar cycle.",
+    "type": "summary",
+    "source": "bioasq",
+    "pmid": [
+      "19101078",
+      "18353534",
+      "23702791"
+    ]
+  },
+  {
+    "id": "bioasq::593fe7f970f9fc6f0f000022",
+    "question": "How many of the human PML isoforms are cytosolic?",
+    "answer": "Using a system in which only a single EYFP-linked PML isoform is expressed, we demonstrate that PMLI, PMLII and PMLVI accumulate in the cytoplasm following arsenic treatment, whereas PMLIII, PMLIV and PMLV do not the PML isoforms that are most sensitive to virus infection correspond closely to those which have recently been identified as being covalently conjugated to PIC1.  Using a system in which only a single EYFP-linked PML isoform is expressed, we demonstrate that PMLI, PMLII and PMLVI accumulate in the cytoplasm following arsenic treatment, whereas PMLIII, PMLIV and PMLV do not The PML isoforms that are most sensitive to virus infection correspond closely to those which have recently been identified as being covalently conjugated to PIC1.  Using a system in which only a single EYFP-linked PML isoform is expressed, PMLI, PMLII and PMLVI accumulate in the cytoplasm following arsenic treatment, whereas PMLIII, PMLIV and PMLV do not Using a system in which only a single EYFP-linked PML isoform is expressed, we demonstrate that PMLI, PMLII and PMLVI accumulate in the cytoplasm following arsenic treatment, whereas PMLIII, PMLIV and PMLV do not Using a system in which only a single EYFP-linked PML isoform is expressed, we demonstrate that PMLI, PMLII and PMLVI accumulate in the cytoplasm following arsenic treatment, whereas PMLIII, PMLIV and PMLV do notThe PML isoforms that are most sensitive to virus infection correspond closely to those which have recently been identified as being covalently conjugated to PIC1. The PML isoforms that are most sensitive to virus infection correspond closely to those which have recently been identified as being covalently conjugated to PIC1. Using a system in which only a single EYFP-linked PML isoform is expressed, we demonstrate that PMLI, PMLII and PMLVI accumulate in the cytoplasm following arsenic treatment, whereas PMLIII, PMLIV and PMLV do not.  Using a system in which only a single EYFP-linked PML isoform is expressed, we demonstrate that PMLI, PMLII and PMLVI accumulate in the cytoplasm following arsenic treatment, whereas PMLIII, PMLIV and PMLV do not the PML isoforms that are most sensitive to virus infection correspond closely to those which have recently been identified as being covalently conjugated to PIC1.",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "9658103",
+      "24190887"
+    ]
+  },
+  {
+    "id": "bioasq::6060996394d57fd879000045",
+    "question": "Where is the klotho protein primarily expressed in the body",
+    "answer": "The klotho protein is primarily expressed in the lungs, kidney, lens, cerebellum, trpc6, renal cells and the brain. Klotho is primarily expressed in the kidney but also in the brain, lens of the eye, and heart. Klotho is primarily expressed in the lungs, kidney, lens, cerebellum, trpc6, renal cells and the brain.",
+    "type": "list",
+    "source": "bioasq",
+    "pmid": [
+      "19184092",
+      "9791011",
+      "23838326",
+      "32466632",
+      "23928372",
+      "32347987",
+      "23375286",
+      "15665504",
+      "32052504",
+      "22396165",
+      "23748218",
+      "30233703",
+      "12204354",
+      "32005658",
+      "31920703",
+      "17287345",
+      "28709936",
+      "29053774",
+      "19464978",
+      "31928223",
+      "31951006",
+      "32479899",
+      "33179086",
+      "32438076",
+      "30358003",
+      "25466545",
+      "24457979",
+      "22338062",
+      "26307633",
+      "21496980",
+      "16358222",
+      "12362891"
+    ]
+  },
+  {
+    "id": "bioasq::56f112932ac5ed145900000d",
+    "question": "Which is the main function of \"RNA sponges\"?",
+    "answer": "Natural RNA circles function as efficient microRNA sponges. Recently, miRNA activity has been shown to be affected by the presence of miRNA sponge transcripts, the so-called competing endogenous RNA in humans and target mimicry in plants. Recently, miRNA activity has been shown to be affected by the presence of miRNA sponge transcripts, the so-called competing endogenous RNA in humans and target mimicry in plants. Natural RNA sponges sequestering cellular noncoding RNA molecules have been found in diverse organisms. In this issue, Lalaouna et al. (2015) report another type of RNA sponge, showing that stable intermediates of bacterial tRNA processing control endogenous small RNAs. Furthermore, survival analysis suggests that high OCT4-pg4 level is significantly correlated with poor prognosis of HCC patients.",
+    "type": "summary",
+    "source": "bioasq",
+    "pmid": [
+      "23446346",
+      "26052092",
+      "25580223",
+      "25630703",
+      "25957803",
+      "23615404",
+      "25483404",
+      "25404635"
+    ]
+  },
+  {
+    "id": "bioasq::55149f156a8cde6b72000013",
+    "question": "Which gene fusion is the result of the \"philadelphia translocation\" or the \"philadelphia chromosome\" mutation?",
+    "answer": "Chronic myeloid leukemia (CML) is genetically characterized by the presence of the reciprocal translocation t(9;22)(q34;q11), resulting in a BCR/ABL gene fusion on the derivative chromosome 22 called the Philadelphia (Ph) chromosome. The Philadelphia chromosome and its corresponding fusion gene, BCR-ABL, is one of the best-known genetic abnormalities in hematological malignancies. Major BCR-ABL translocation is much more common in chronic myelogenous leukemia (CML) and minor BCR-ABL in acute lymphoblastic leukemia.  Chronic myeloid leukemia (CML) is genetically characterized by the presence of the reciprocal translocation t(9;22)(q34;q11), resulting in a BCR/ABL gene fusion on the derivative chromosome 22 called the Philadelphia (Ph) chromosome.    The Philadelphia chromosome is recognized as the cytogenetic result of a rearrangement of the ABL gene on chromosome 9 and the BCL gene on chromosome 22, which leads to the creation of a BCR/ABL fusion gene on chromosome 22.",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "12730117",
+      "2820585",
+      "17987804",
+      "16616117",
+      "3670297",
+      "21279819",
+      "8697423",
+      "9916508",
+      "8656667",
+      "21332651",
+      "18722880",
+      "2157692",
+      "22058195",
+      "11535505",
+      "17001000",
+      "11919388",
+      "1434792",
+      "1423227",
+      "11984797",
+      "8490164",
+      "22783385"
+    ]
+  },
+  {
+    "id": "bioasq::660bb7f9fdcbea915f000029",
+    "question": "What type of drug is administered to the mother for the prevention of lung immaturity when a preterm delivery is anticipated?",
+    "answer": "Corticosteroids are the drug administered to the mother for the prevention of lung immaturity when a preterm delivery is anticipated. Corticosteroids administered to the mother accelerate development of immature lung in premature babies intra utero.",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "33423644",
+      "35943347",
+      "33368142"
+    ]
+  },
+  {
+    "id": "bioasq::6060915b94d57fd879000044",
+    "question": "What is the Bartter syndrome?",
+    "answer": "Bartter syndrome is a rare disorder characterized by reduced sodium chloride transport in the distal nephrons of the kidney. Its clinical features are renal salt wasting, hypokalemic metabolic alkalosis, elevated renin and aldosterone levels with normal or low blood pressure, polyuria, hypercalciuria and malnutrition. Bartter syndrome is a rare hereditary salt-losing tubulopathy caused by mutations of several genes in the thick ascending limb of Henle's loop, characterized by polyuria, hypokalemic metabolic alkalosis, growth retardation and normal blood pressure. Bartter syndrome is a rare disorder characterized by reduced sodium chloride transport in the distal nephrons of the kidney. Bartter syndrome is a syndrome associated with congenital tubular dysfunction, characterized by hypokalemia and metabolic alkalosis",
+    "type": "summary",
+    "source": "bioasq",
+    "pmid": [
+      "12920401",
+      "30410160",
+      "32335890",
+      "9589375",
+      "7771476",
+      "31830341",
+      "12589089",
+      "1292416",
+      "33509356",
+      "20127383",
+      "9203176",
+      "11815871",
+      "30756015",
+      "26731830",
+      "10617800",
+      "24696311",
+      "22470874",
+      "27328514",
+      "15518434",
+      "16951440",
+      "31820361",
+      "28904439",
+      "6945487",
+      "22707176",
+      "10419618",
+      "28096565",
+      "32296226",
+      "32506108",
+      "19915517",
+      "15056980",
+      "8966774",
+      "26528764",
+      "28327689",
+      "32622651"
+    ]
+  },
+  {
+    "id": "bioasq::5c961281ecadf2e73f000021",
+    "question": "List 3 indications for rituximab.",
+    "answer": "Rituximab  is used to treat rheumatoid arthritis as well as poly- and dermatomyositis, chronic lymphocytic leukemia, juvenile idiopathic arthritis, and Pemphigus foliaceus (PF).",
+    "type": "list",
+    "source": "bioasq",
+    "pmid": [
+      "27603326",
+      "28633733",
+      "23735074",
+      "28185174",
+      "23700188",
+      "29606668",
+      "28536935",
+      "30358861"
+    ]
+  },
+  {
+    "id": "bioasq::5c51f01e07ef653866000002",
+    "question": "Which algorithm has been developed for finding conserved non-coding elements (CNEs) in genomes?",
+    "answer": "CNEFinder is a tool for identifying CNEs between two given DNA sequences with user-defined criteria.",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "30423090"
+    ]
+  },
+  {
+    "id": "bioasq::5a787544faa1ab7d2e00000b",
+    "question": "Is Kummell’s disease an avascular necrosis of the vertebral body?",
+    "answer": "Yes, Kummell’s disease is an avascular necrosis of the vertebral body.",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "22220246",
+      "19534241",
+      "11915453",
+      "23814399",
+      "19124637",
+      "19321060",
+      "21811863",
+      "28913640",
+      "19949820",
+      "28160398"
+    ]
+  },
+  {
+    "id": "bioasq::58e79e703e8b6dc87c00000a",
+    "question": "What percentage of rheumatoid arthritis patients are responsive to anti-TNF therapy?",
+    "answer": "Despite this, a substantial proportion of patients (approximately 30-40%) fail to respond to these potentially toxic and expensive therapies. Treatment strategies blocking tumor necrosis factor (anti-TNF) have proven very successful in patients with rheumatoid arthritis (RA), showing beneficial effects in approximately 50-60% of the patients.  The introduction of anti-TNF therapy has dramatically improved the outlook for patients suffering from a number of inflammatory conditions including rheumatoid arthritis and inflammatory bowel disease. Treatment strategies blocking tumor necrosis factor (anti-TNF) have proven very successful in patients with rheumatoid arthritis (RA), showing beneficial effects in approximately 50-60% of the patients. Treatment strategies blocking tumor necrosis factor (anti-TNF) have proven very successful in patients with rheumatoid arthritis (RA), showing beneficial effects in approximately 50-60% of the patients. A substantial proportion of Rheumatoid Arthritis patients (approximately 30-40%) fail to respond to anti-TNF therapies. Despite this, a substantial proportion of patients (approximately 30-40%) fail to respond to these potentially toxic and expensive therapies. Treatment strategies blocking tumor necrosis factor (anti-TNF) have proven very successful in patients with rheumatoid arthritis (RA), showing beneficial effects in approximately 50-60% of the patients. Treatment strategies blocking tumor necrosis factor (anti-TNF) have proven very successful in patients with rheumatoid arthritis (RA), showing beneficial effects in approximately 50-60% of the patients. Despite this, a substantial proportion of patients (approximately 30-40%) fail to respond to these potentially toxic and expensive therapies.  strategies blocking tumor necrosis factor (anti-tnf) have proven very successful in patients with rheumatoid arthritis (ra) , showing beneficial effects in approximately 50-60% of the patients. . this , a substantial proportion of patients (approximately 30-40%) fail to respond to these potentially toxic and expensive therapies .  Treatment strategies blocking tumor necrosis factor (anti-TNF) have proven very successful in patients with rheumatoid arthritis (RA), showing beneficial effects in approximately 50-60% of the patients. The introduction of anti-TNF therapy has dramatically improved the outlook for patients suffering from a number of inflammatory conditions including rheumatoid arthritis and inflammatory bowel disease. treatment strategies blocking tumor necrosis factor (anti-tnf) have proven very successful in patients with rheumatoid arthritis (ra), showing beneficial effects in approximately 50-60% of the patients. Despite this, a substantial proportion of patients (approximately 30-40%) fail to respond to these potentially toxic and expensive therapies.  Despite this, a substantial proportion of patients (approximately 30-40%) fail to respond to these potentially toxic and expensive therapies.  Treatment strategies blocking tumor necrosis factor (anti-TNF) have proven very successful in patients with rheumatoid arthritis (RA), showing beneficial effects in approximately 50-60% of the patients. Treatment strategies blocking tumor necrosis factor (anti-TNF) have proven very successful in patients with rheumatoid arthritis (RA), showing beneficial effects in approximately 50-60% of the patients. Despite this, a substantial proportion of patients (approximately 30-40%) fail to respond to these potentially toxic and expensive therapies.",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "22044414",
+      "24040234"
+    ]
+  },
+  {
+    "id": "bioasq::6440f85c57b1c7a315000051",
+    "question": "What are the most common pain scales used to measure pain in neonates?",
+    "answer": "The most common pain scales used to measure pain in neonates are the following: Premature Infant Pain Profile-Revised (PIPP), Premature Infant Pain Profile-Revised (PIPP-R), Neonatal Facial Coding System (NFCS), Neonatal Infant Pain Scale (NIPS), Neonatal Pain, Agitation, and Sedation Scale (NPASS), COMFORT and Douleur Aiguë du Nouveau-né (DAN). The most common pain scales used to measure pain in neonates are the Neonatal Facial Coding System (NFCS), Douleur Aiguë du Nouveau-né (DAN) scale, Neonatal Infant Pain Scale (NIPS), and Premature Infant Pain Profile (PIPP). The most common pain scales used to measure pain in neonates are the Neonatal Pain, Agitation, and Sedation Scale (N-PASS) and the Neonatal Infant Pain Scale (NIPS). Other pain scales used in the article include PIPP, NFCS, and NPASS. 1. Neonatal Facial Coding System (NFCS)\n2. Premature Infant Pain Profile (PIPP)\n3. Neonatal Infant Pain Scale (NIPS)\n4. CRIES Pain Scale\n5. COMFORT Scale\n6. FLACC Scale A cornerstone in pain assessment is the use of scales such as COMFORT, PIPP-R, NIPS and N-PASS. The most common pain scales used to measure pain in neonates are the Neonatal Facial Coding System (NFCS), the Neonatal Infant Pain Scale (NIPS), the Premature Infant Pain Profile (PIPP), and the CRIES Pain Scale. The most common pain scales used to measure pain in neonates are PIPP, NIPS, NFCS, and N-PASS. The most common pain scales used to measure pain in neonates are PIPP, NFCS, NIPS, and NPASS.",
+    "type": "list",
+    "source": "bioasq",
+    "pmid": [
+      "20976299",
+      "35362716",
+      "35410609",
+      "29945293",
+      "14747965",
+      "29282767",
+      "16885171",
+      "32599608",
+      "9535312",
+      "36291504",
+      "26553356",
+      "32401971",
+      "32801846",
+      "36271296",
+      "18446656"
+    ]
+  },
+  {
+    "id": "bioasq::54f49e56d0d681a040000004",
+    "question": "Is there an association between presenteeism and depression?",
+    "answer": "Yes. Presenteeism is associated with depression. Remission of depression is associated with improvement of presenteeism.",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "15804203",
+      "21669372",
+      "14665817",
+      "20726684",
+      "25539872",
+      "25173795",
+      "20073388",
+      "22532849",
+      "21880374",
+      "22261652",
+      "25435902",
+      "16282870",
+      "19339899",
+      "24854252",
+      "20953117",
+      "17156851",
+      "16989105",
+      "21220078",
+      "20715299",
+      "23244804",
+      "15951705",
+      "15572564",
+      "22856386",
+      "23439268",
+      "21525074",
+      "11329394",
+      "25211435"
+    ]
+  },
+  {
+    "id": "bioasq::5a7610af83b0d9ea6600001a",
+    "question": "Which Janus kinase does decernotinib target?",
+    "answer": "Decernotinib (VX-509) is a potent and selective inhibitor of janus kinase 3 (JAK3).",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "25762693"
+    ]
+  },
+  {
+    "id": "bioasq::6428da98690f196b51000053",
+    "question": "Is there a way to distinguish COVID-19 clinically from other respiratory illnesses, such as influenza?",
+    "answer": "No, the clinical features of COVID-19 overlap substantially with influenza and other respiratory viral illnesses. There is no way to distinguish among them without testing. No, there isn't a definitive way to distinguish COVID-19 clinically from other respiratory illnesses, such as influenza, as they share many similar symptoms. Proper testing, such as PCR or antibody tests, is required for accurate diagnosis.",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "33135801",
+      "33995342",
+      "32881022",
+      "34484383",
+      "32127123",
+      "36119462",
+      "32903584",
+      "33615750",
+      "34226206",
+      "35412847"
+    ]
+  },
+  {
+    "id": "bioasq::5314bd7ddae131f847000006",
+    "question": "Which hormone receptor function is altered in patients with Donohue syndrome?",
+    "answer": "Donohue syndrome (leprechaunism) is a rare, recessively inherited disorder of extreme insulin resistance due to mutations in the insulin receptor gene causing either defects in insulin binding or receptor autophosphorylation and tyrosine kinase activity. This syndrome is characterized by excessive hyperglycemia with hyperinsulinism, pre- and postnatal growth retardation, distinct dysmorphism and early death. Progressive obstructive cardiomyopathy and renal tubular dysfunction have been described in patients with Donohue syndrome. Milder form of insulin resistance due to insulin receptor gene mutation is coined as Rabson-Mendenhall syndrome.",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "22972224",
+      "24498630",
+      "17201797",
+      "19774849",
+      "23229189",
+      "19882513",
+      "23990696",
+      "18411068",
+      "22768670",
+      "21092701",
+      "23824322"
+    ]
+  },
+  {
+    "id": "bioasq::5c72768a7c78d6947100006c",
+    "question": "Are genes that escape X-chromosome inactivation related to mental impairment?",
+    "answer": "Yes. Genes that escape X-inactivation in humans have high intraspecific variability in expression, are associated with mental impairment but are not slow evolving. Yes, most of the X-chromosome inactivation genes shown to be associated with mental retardation are those encoding transcription factors involved in intellectual disability, such as X-linked Na(+) /H(+) exchanger 2 (NHE2), Sox 10, Endothelin-3 (EDN3) and SOX10. Some X- chromosome inactivation gene variants are associated with intellectual disability but not others. Genes that escape X-inactivation in humans have high intraspecific variability in expression, are associated with mental impairment but are not slow evolving.  The newly described escape genes cluster on the X chromosome in the same chromosomal regions as the previously known escapees. There is an excess of escaping genes associated with mental retardation, consistent with this being a common phenotype of polyX phenotypes.",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "24023392",
+      "17383248"
+    ]
+  },
+  {
+    "id": "bioasq::5139ec51bee46bd34c000006",
+    "question": "Do Conserved noncoding elements act as enhancers?",
+    "answer": "An important percentage of noncoding elements conserved across distant species shows enhancer activity and other forms of regulatory functionality.",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "18047696",
+      "21629789",
+      "21081479",
+      "19782672",
+      "19805301",
+      "18562680",
+      "16533910",
+      "21047394",
+      "19492354",
+      "17940009",
+      "17989259",
+      "17210927",
+      "15859353",
+      "20494938",
+      "19704032",
+      "19171877",
+      "19073165"
+    ]
+  },
+  {
+    "id": "bioasq::5a43a139966455904c000008",
+    "question": "What is measured through the NOMe-Seq methodology?",
+    "answer": "We have developed a method (NOMe-seq) that uses a GpC methyltransferase (M.CviPI) and next generation sequencing to generate a high resolution footprint of nucleosome positioning genome-wide using less than 1 million cells while retaining endogenous DNA methylation information from the same DNA strand. DNaseI-seq and NOMe-seq. NOMe-seq is a method that uses a GpC methyltransferase (M.CviPI) and next generation sequencing to generate a high resolution footprint of nucleosome positioning genome-wide using less than 1 million cells while retaining endogenous DNA methylation information from the same DNA strand.",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "26484155",
+      "28222791",
+      "22960375",
+      "27899623",
+      "25747664",
+      "24916973",
+      "21835883",
+      "28653622",
+      "25530820",
+      "28413449",
+      "22479200",
+      "28035030"
+    ]
+  },
+  {
+    "id": "bioasq::620086aac9dfcb9c09000020",
+    "question": "What is the use of Brain Metastasis Velocity (BMV) Model?",
+    "answer": "Brain metastasis velocity (BMV) is a metric that describes the rate of development of new brain metastases (BM) after initial stereotactic radiosurgery.",
+    "type": "summary",
+    "source": "bioasq",
+    "pmid": [
+      "31526671",
+      "33817641",
+      "34775780",
+      "29740743",
+      "30524969",
+      "29464141",
+      "28586952"
+    ]
+  },
+  {
+    "id": "bioasq::54d7a1047035c08008000002",
+    "question": "Which is the subcellular localization of the protein angiogenin?",
+    "answer": "Under growth conditions, ANG is located in nucleolus where it promotes ribosomal RNA (rRNA) transcription thereby stimulating cell growth. In adverse conditions, ANG is relocated to cytoplasm to promote damage repairs and cell survival.",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "23843625",
+      "11443914",
+      "7945327",
+      "24603325",
+      "9299500",
+      "22384259",
+      "18246300",
+      "22438557",
+      "21528671"
+    ]
+  },
+  {
+    "id": "bioasq::5c58474786df2b9174000001",
+    "question": "Which algorithm has been developed for the automatic extraction of co-expressed gene clusters from gene expression data?",
+    "answer": "Clust is a method for automatic extraction of optimal co-expressed gene clusters from gene expression data. Clust is available at https://github.com/BaselAbujamous/clust.",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "30359297"
+    ]
+  },
+  {
+    "id": "bioasq::60266b371cb411341a0000c2",
+    "question": "Which drugs are included in the CNIC polypill?",
+    "answer": "CNIC polypill includes atorvastatin 40mg, ramipril 10mg and aspirin 100mg.",
+    "type": "list",
+    "source": "bioasq",
+    "pmid": [
+      "31850802",
+      "31983653"
+    ]
+  },
+  {
+    "id": "bioasq::6609997ffdcbea915f000019",
+    "question": "What non-colonic tumors are associated with Lynch syndrome?",
+    "answer": "Non-colonic tumors associated with Lynch syndrome are prostate, endometrium, breast, bladder, ovary, kidney, renal pelvis, and ureter. Lynch syndrome, associated with mutations in MMR genes, significantly increases the risk of several non-colonic cancers. These include cancers of the kidney, renal pelvis, ureter, urinary bladder, small intestine, stomach, hepatobiliary tract, prostate, endometrium, breast, and ovary. The elevated risks are reflected in the substantially higher standardized incidence ratios (SIRs) for these cancers compared to the general population. For example, the SIR for small intestine cancer is remarkably high at 72.68, and for endometrial cancer, it is 40.23, indicating a much greater likelihood of these cancers in individuals with Lynch syndrome. LS has been associated with various non-colonic malignancies. The main tumors in LS are:\n\n1. Colon cancer and other intestinal tumors\n2. Uterine cancer\n3. Ovarian cancer\n4. Urothelial tumors, which include ureter and renal pelvis cancers\n5. Pancreatic cancer\n6. Stomach cancer\n7. Small bowel cancer\n8. Skin cancer\n9. Central nervous system tumors Non-colonic tumors associated with Lynch syndrome include those that are found in the endometrium, ovaries, stomach, small intestine, pancreas, upper urinary tract, biliary tract, brain, skin, and sebaceous glands. Among these tumors, endometrial and ovarian cancers are the most frequent in women. The association with the skin tumors is called Muir-Torre syndrome, which is characterized by the presence of multiple sebaceous neoplasms and one or more keratoacanthomas, in association with visceral malignancies, particularly colorectal, urologic, and gastrointestinal cancers. Turcot syndrome is a rare genetic disorder characterized by the presence of multiple colon polyps and a primary brain tumor, typically glioblastoma multiforme. In addition to colon polyps, Turcot syndrome can also be associated with other non-colonic tumors, including glioblastoma multiforme, ovarian cancer, and breast cancer. The association between Turcot syndrome and these non-colonic tumors is thought to be due to shared genetic mutations, such as those in the mismatch repair genes, which are responsible for maintaining genomic stability. Following colorectal cancer, carriers of MMR gene mutations had the following 10-year risk of cancer kidney, renal pelvis, ureter, and bladder According to the information provided, carriers of MMR gene mutations (Lynch syndrome) following colorectal cancer are at elevated risk compared to the general population for the following non-colonic tumors:\n\n- Kidney, renal pelvis, and ureter cancers\n- Urinary bladder cancer \n- Small intestine cancer\n- Stomach cancer\n- Hepatobiliary tract cancer\n- Prostate cancer (in males)\n- Endometrial cancer (in females) \n- Breast cancer (in females)\n- Ovarian cancer (in females)\n\nThe risk is particularly high for cancers of the small intestine, endometrium, kidney/renal pelvis/ureter, and urinary bladder. Carriers of MMR gene mutations, particularly those with Lynch syndrome, have an increased risk of developing certain cancers beyond colorectal cancer. These include kidney, renal pelvis, and ureter tumors; small intestine, stomach, and hepatobiliary tract cancers; prostate cancer in men; endometrial cancer in women; breast cancer; and ovarian cancer. Compared to the general population, individuals with Lynch syndrome are at significantly elevated risk for these non-colonic tumors, with standardized incidence ratios (SIRs) ranging from 1.76 for breast cancer to as high as 72.68 for small intestine cancer. Lynch syndrome II or extracolonic cancers that are particularly associated with Lynch syndrome are carcinomas of the stomach, endometrium, biliary and pancreatic systems, and urinary tract. Lynch syndrome is associated with a high risk of colorectal cancer or other extracolonic tumors (adenocarcinoma of endometrium, stomach, ovarian carcinoma, carcinoma of urinary tract, small intestine, brain tumors and skin cancer). Non-colonic tumors associated with Lynch syndrome include endometrial, stomach, small bowel, pancreas, biliary tract, ovary, kidney, brain, skin (sebaceous adenomas and keratoacanthomas), and urinary tract cancers. The Revised Bethesda Guidelines recommend considering Lynch syndrome in patients with these tumors, particularly if they are young at diagnosis or have a family history of cancer. Lynch syndrome, also known as hereditary non-polyposis colorectal cancer (HNPCC), is associated with an increased risk of developing several types of cancer besides colorectal cancer. These include:\n\n1. Endometrial cancer (cancer of the lining of the uterus)\n2. Ovarian cancer (cancer of the ovaries)\n3. Gastric cancer (cancer of the stomach)\n4. Pancreatic cancer (cancer of the pancreas)\n5. Ureteral cancer (cancer of the tubes that carry urine from the kidneys to the bladder)\n6. Renal pelvis cancer (cancer of the center of the kidney)\n7. Small intestine cancer (cancer of the small intestine)\n8. Bile duct cancer (cancer of the tubes that carry bile from the liver and gallbladder)\n9. Brain cancer (cancer of the brain or central nervous system)\n10. Skin cancer (melanoma)\n\nIt's essential to note that while individuals with Lynch syndrome have Lynch syndrome, also known as hereditary non-polyposis colorectal cancer (HNPCC), is associated with an increased risk of developing several types of cancer besides colorectal cancer. These include:\n\n1. Endometrial cancer (cancer of the lining of the uterus)\n2. Ovarian cancer (cancer of the ovaries)\n3. Gastric cancer (cancer of the stomach)\n4. Pancreatic cancer (cancer of the pancreas)\n5. Ureteral cancer (cancer of the tubes that carry urine from the kidneys to the bladder)\n6. Renal pelvis cancer (cancer of the center of the kidney)\n7. Small intestine cancer (cancer of the small int \"The non-colonic tumors associated with Lynch syndrome include glioblastoma, biliary duct cancers, small intestine, ovarian, endometrial, upper urinary tract, and gastric cancers.\" Non-colonic tumors associated with Lynch syndrome include glioblastoma, biliary duct cancers, upper urinary tract, small intestine, ovarian, gastric, endometrial, and breast carcinoma with medullary features. Non-colonic tumors associated with Lynch syndrome include prostate, endometrium, breast, bladder, ovary, kidney, renal pelvis, and ureter. \nEndometrial, ovarian, gastric, small intestine, ureter and renal pelvis, and brain (rarely) Glioblastoma, biliary duct cancers, upper urinary tract, small intestine, ovarian, gastric, endometrial, and endometrial carcinomas are non-colonic tumors associated with Lynch syndrome. Endometrium, prostate, bladder, kidney, breast, and ovary are non-colonic tumors associated with Lynch syndrome. Lynch syndrome is a genetic condition that increases the risk of developing colorectal cancer, as well as several other types of cancer. In addition to colonic tumors, Lynch syndrome has been associated with the following non-colonic tumors: , 1. Endometrial cancer: Lynch syndrome is associated with an increased risk of endometrial cancer in both men and women., 2. Ovarian cancer: Women with Lynch syndrome have a higher risk of developing ovarian cancer compared to the general population., 3. Gastric cancer: Some studies suggest that individuals with Lynch syndrome may be at increased risk of developing gastric cancer., 4. Small bowel cancer: There is evidence to suggest that individuals with Lynch syndrome may be at higher risk of developing small bowel cancer compared to the general population., 5. Urinary tract cancer: Some studies have found an increased risk of urinary tract cancer in individuals with Lynch syndrome Non-colonic tumors associated with Lynch syndrome include endometrial cancer, ovarian cancer, and urinary tract cancer. The non-colonic tumors associated with Lynch syndrome are prostate, endometrium, breast, ovary, kidney, bladder, small intestine, and stomach. \nEndometrial, ovarian, gastric, small intestine, ureter and renal pelvis, pancreatic, bile duct, liver, brain (glioma), and skin (melanoma) tumors are associated with Lynch syndrome (also known as hereditary non-polyposis colorectal cancer). Lynch syndrome is associated with an increased risk of cancers in the endometrium, ovary, kidney, renal pelvis, ureter, bladder, small intestine, stomach, hepatobiliary tract, prostate, and breast. Lynch syndrome is associated with several non-colonic tumors including endometrial, upper urinary tract, small intestine, ovarian, gastric, biliary duct cancers, and glioblastoma. Carriers of MMR gene mutations had the following 10-year risk of cancers in other organs: kidney, renal pelvis, ureter, and bladder (2%, 95% confidence interval [CI] = 1% to 3%); small intestine, stomach, and hepatobiliary tract (1%, 95% CI = 0.2% to 2%); prostate (3%, 95% CI = 1% to 5%); endometrium (12%, 95% CI = 8% to 17%); breast (2%, 95% CI = 1% to 4%); and ovary (1%, 95% CI = 0% to 2%). They were at elevated risk compared with the general population: cancers of the kidney, renal pelvis, and ureter (SIR = 12.54, 95% CI = 7.97 to 17.94), urinary bladder (SIR = 7.22, 95% CI = 4.08 to 10.99), small intestine (SIR = 72.68, 95% CI = 39.95 to 111.29), stomach (SIR = 5.65, 95% CI = 2.32 to 9.69), and hepatobiliary tract (SIR = 5.94, 95% CI = 1.81 to 10.94) for both sexes; cancer of the prostate (SIR = 2.05, 95% CI = 1.23 to 3.01), endometrium (SIR = 40.23, 95% CI = 27.91 to 56.06), breast (SIR = 1.76, 95% CI = 1.07 to 2.59), and ovary (SIR = 4.19, 95% CI = 1.28 to 7.97). Lynch syndrome, caused by germline mutations in DNA mismatch repair (MMR) genes, is associated with an increased risk of various non-colonic tumors. The abstract provided presents the risks of primary cancers other than colorectal cancer following a diagnosis of colorectal cancer in mutation carriers. According to this research, carriers of MMR gene mutations who have already had a colorectal cancer are at an increased risk of developing various non-colonic tumors, including kidney, renal pelvis, ureter, and bladder; small intestine, stomach, and hepatobiliary tract; prostate; endometrium; breast; and ovary cancers. These individuals had a 10-year risk of 2% for kidney, renal pelvis, ureter, and bladder cancers; 1% for small intestine, stomach, and hepatobiliary tract cancers; 3% Non-colonic tumors associated with Lynch syndrome (hereditary nonpolyposis colorectal cancer - HNPCC) include endometrial carcinoma, stomach cancer, ovarian carcinoma, urinary tract carcinoma (renal pelvis and ureter), biliary system cancer, breast cancer, prostate cancer, uterine cervix cancer, brain tumors, skin cancer, and upper urinary tract tumors. These extracolonic tumors are part of the spectrum of cancers seen in individuals with Lynch syndrome, highlighting the importance of comprehensive surveillance and management strategies for affected individuals. The following non-colonic tumors have been associated with Lynch syndrome: kidney, renal pelvis, ureter and bladder (1-3%); small intestine, stomach and hepatobiliary tract (0.2-2%); prostate (3%); endometrium (8-17%); breast (1-4%); and ovary (0-2%). Compared with the general population, patients with Lynch syndrome had elevated risks of these tumors. The exact figures of risk and SIR were provided in the question. Lynch syndrome, also known as hereditary nonpolyposis colorectal cancer (HNPCC), is associated with an increased risk of non-colonic tumors. These include cancers of the kidney, renal pelvis, and ureter, urinary bladder, small intestine, stomach, hepatobiliary tract, prostate, endometrium, breast, and ovary. The risk of these cancers is elevated compared to the general population. Lynch syndrome, also known as hereditary nonpolyposis colorectal cancer (HNPCC), is an autosomal dominant genetic condition that is associated with a high risk of colorectal cancer or other extracolonic tumors. These extracolonic tumors include adenocarcinoma of the endometrium, stomach, ovarian carcinoma, carcinoma of the urinary tract, small intestine, brain tumors, and skin cancer.\n\nIn HNPCC, endometrial carcinoma (EC) is the most common extracolonic tumor, followed by cancers of the stomach, small bowel, urinary tract (renal pelvis and ureter), biliary system, and ovary. In women, breast and endometrial cancer are the most frequent extracolonic manifestations, while in men, prostate and stomach cancer are the most frequent.\n\nUpper urinary tract tumors rank third (5%) after colon (63%) and endometrial (9%) cancer within the group of HNPCC related tumors. Endometrial and ovarian cancers are common extracolonic tumors in this syndrome.\n\nCRC and endometrial carcinoma were associated with a greater probability of detecting pathogenic mutations in mismatch repair genes, with MSH2 involvement predominating.\n\nPatients inheriting this predisposition are susceptible to colorectal, endometrial and other extracolonic tumors. Non-colonic tumors associated with Lynch syndrome include cancers of the kidney, renal pelvis, ureter, bladder, small intestine, stomach, hepatobiliary tract, prostate, endometrium, breast, and ovary. Carriers of MMR gene mutations have an elevated risk of developing these cancers compared to the general population, with varying levels of risk observed for each type of cancer. Lynch syndrome (LS) is a genetic condition that increases the risk of developing various types of cancer, including colonic and endometrial cancer. In addition to these, several other malignancies are associated with LS, although less commonly. The following non-colonic tumors have been linked to Lynch syndrome: , 1. Ovarian cancer: Studies suggest that women with a family history of Lynch syndrome have an increased risk of developing ovarian cancer., 2. Stomach cancer: Individuals with LS are at higher risk of developing gastric cancer, particularly those with a family history of gastric or colorectal cancer., 3. Urinary tract cancer (UTUC): Lynch syndrome is associated with an increased risk of UTUC, including kidney and ureteral cancer., 4. Pancreatic cancer: Some studies suggest that individuals with LS may have a higher risk of developing pancreatic cancer Non-polyposis colorectal carcinoma (Lynch syndrome) is among the most common hereditary cancers in man. It is characterized by an increased risk of developing colorectal cancer, often at a young age, and sometimes accompanied by other types of tumors such as endometrial, ovarian, stomach, small intestine, pancreas, biliary tract, urinary tract, brain, skin, or prostate cancers. The syndrome is named after Henry T. Lynch, who first described the condition in 1964. Lynch syndrome, also known as hereditary non-polyposis colorectal cancer (HNPCC), is associated with an increased risk of developing certain non-colonic tumors. These include cancers of the kidney, renal pelvis, ureter, and bladder (2% 10-year risk), small intestine, stomach, and hepatobiliary tract (1% 10-year risk), prostate (3% 10-year risk), endometrium (12% 10-year risk), breast (2% 10-year risk), and ovary (1% 10-year risk). These risks are elevated compared to the general population. Endometrial, glioblastoma, colorectal, sarcomas, endometrial carcinomas, small intestine, ovarian, and brain malignancies are non-colonic tumors associated with Lynch syndrome. Lynch syndrome (LS) is a common genetic syndrome characterized by pathogenic mutations of DNA mismatch repair genes resulting in a hereditary predisposition to cancer. While typically associated with colonic and endometrial cancer, LS additionally influences the development of many other malignancies. The Amsterdam II and Revised Bethesda Guidelines are the established clinical criteria for diagnosing LS. Lynch syndrome, also known as hereditary nonpolyposis colorectal cancer (HNPCC), is a genetic condition that increases the risk of developing various types of cancer, including non-colonic tumors. The snippets provided suggest that carriers of MMR gene mutations associated with Lynch syndrome have an elevated risk of developing cancers in several organs, including the kidney, renal pelvis, ureter, bladder, small intestine, stomach, hepatobiliary tract, prostate, endometrium, breast, and ovary. Therefore, non-colonic tumors associated with Lynch syndrome include cancers of the kidney, urinary bladder, small intestine, stomach, hepatobiliary tract, prostate, endometrium, breast, and ovary. Lynch syndrome, also known as hereditary non-polyposis colorectal cancer (HNPCC), is associated with an increased risk of several non-colonic tumors. These include endometrial cancer, ovarian cancer, gastric cancer, small bowel cancer, urinary tract cancer (including urothelial carcinoma), pancreatic cancer, and sebaceous gland tumors. Therefore, individuals with Lynch syndrome should undergo regular surveillance and screening for these malignancies to detect them at an early stage. Lynch syndrome is a hereditary cancer syndrome that is associated with non-colonic tumors, including endometrial, ovarian, stomach, small bowel, urinary tract, and brain tumors. The most common extracolonic tumors associated with Lynch syndrome (hereditary nonpolyposis colorectal cancer, HNPCC) are:\n\n1. Endometrial cancer (most common in women)\n2. Ovarian cancer \n3. Stomach cancer\n4. Small bowel cancer\n5. Urinary tract cancers (renal pelvis and ureter)\n6. Biliary tract cancer\n7. Breast cancer\n8. Prostate cancer (in men)\n9. Brain tumors\n10. Skin cancer\n\nOther less common extracolonic manifestations include cancers of the uterine cervix and pancreas. Individuals with Lynch syndrome are at an increased risk for several types of non-colonic tumors, including cancers of the kidney, renal pelvis, ureter, urinary bladder, small intestine, stomach, hepatobiliary tract, prostate, endometrium, breast, and ovary. Lynch syndrome, associated with mutations in mismatch repair (MMR) genes, significantly increases the risk of several non-colonic cancers. These include cancers of the kidney, renal pelvis, ureter, urinary bladder, small intestine, stomach, hepatobiliary tract, prostate, endometrium, breast, and ovary. The elevated risks are quantified with substantial increases in standardized incidence ratios (SIRs), indicating a higher incidence compared to the general population. For example, the SIR for small intestine cancer is notably high at 72.68, and for endometrial cancer, it is 40.23. Non-colonic tumors associated with Lynch syndrome include tumors of the kidney, renal pelvis, ureter, bladder, small intestine, stomach, hepatobiliary tract, prostate, endometrium, breast, and ovary. In addition to colon cancer and endometrial cancer, Lynch syndrome is also associated with an increased risk of several non-colonic tumors, including ovarian cancer, gastric cancer, small intestine cancer, urinary tract cancer, pancreatic cancer, and sebaceous gland tumors. Individuals with Lynch syndrome, due to mutations in MMR genes, are at increased risk for several non-colonic tumors. These include cancers of the kidney, renal pelvis, ureter, bladder, small intestine, stomach, hepatobiliary tract, prostate, endometrium, breast, and ovary. Following colorectal cancer, carriers of MMR gene mutations had the following 10-year risk of cancers in other organs: kidney, renal pelvis, ureter, and bladder (2%, 95% confidence interval [CI] = 1% to 3%); small intestine, stomach, and hepatobiliary tract (1%, 95% CI = 0.2% to 2%); prostate (3%, 95% CI = 1% to 5%); endometrium (12%, 95% CI = 8% to 17%); breast (2%, 95% CI = 1% to 4%); and ovary (1%, 95% CI = 0% to 2%). They were at elevated risk compared with the general population: cancers of the kidney, renal pelvis, and ureter (SIR = 12.54, 95% CI = 7.97 to 17.94), urinary bladder (SIR = 7.22, 95% CI = 4.08 to 10.99), small intestine (SIR = 72.68, 95% CI = 39.95 to 111.29), stomach (SIR = 5.65, 95% CI = 2.32 to 9.69), and hepatobiliary tract (SIR = 5.94, 95% CI = 1.81 to 10.94) for both sexes; cancer of the prostate (SIR = 2.05, 95% CI = 1.23 to 3.01), endometrium (SIR = 40.23, 95% CI = 27.91 to 56.06), breast (SIR = 1.76, 95% CI = 1.07 to 2.59), and ovary (SIR = 4.19, 95% CI = 1.28 to 7.97). Individuals with Lynch syndrome, also known as hereditary nonpolyposis colorectal cancer (HNPCC), are at increased risk for several types of non-colonic cancers. These include cancers of the endometrium, ovary, stomach, small intestine, hepatobiliary tract, kidney, renal pelvis, ureter, and bladder. Additionally, there is an elevated risk for prostate and breast cancers A variety of extracolonic tumors may be encountered in HNPCC, including cancers of the endometrium, stomach, small bowel, urinary tract (renal pelvis and ureter), biliary system and ovary.",
+    "type": "list",
+    "source": "bioasq",
+    "pmid": [
+      "29528821",
+      "18550572",
+      "15131405",
+      "18558577",
+      "30560308",
+      "37018159",
+      "8387880",
+      "22694112",
+      "29065108",
+      "23700068",
+      "10208097",
+      "37197422",
+      "7675541",
+      "8622885",
+      "23176623",
+      "15222003",
+      "16136386",
+      "34909397",
+      "34247540",
+      "35530545",
+      "18049911",
+      "18715695",
+      "26143115",
+      "21795835",
+      "19341971",
+      "27014339",
+      "15770724",
+      "19821155",
+      "23938213",
+      "37301271",
+      "37030500",
+      "36177269",
+      "20533284",
+      "12385019",
+      "26319271",
+      "10432927",
+      "29383008",
+      "4016685",
+      "27979364",
+      "23787146",
+      "7481452",
+      "23392234",
+      "22933731",
+      "25173403",
+      "8364086",
+      "17539897",
+      "32942876",
+      "7979195",
+      "36761424",
+      "23588873",
+      "17939062",
+      "16884359",
+      "15745097",
+      "8221644",
+      "20697958"
+    ]
+  },
+  {
+    "id": "bioasq::62792bb156bf9aee6f00001c",
+    "question": "What is \"long-COVID\"?",
+    "answer": "\"Long-COVID\" is a complex condition where the affected individuals do not recover for several weeks or months following the onset of symptoms suggestive of COVID-19, and the symptoms are not explained by an alternative diagnosis.\n\nPersistent physical symptoms following acute COVID-19 are common and typically include fatigue, dyspnea, chest pain, and cough. Headache, joint pain, myalgias, and loss of smell have also been reported. Common psychological and cognitive symptoms include poor concentration, cognitive impairment/confusion, insomnia, and overall reduced quality of life. \"Long COVID\" is the condition whereby affected individuals do not recover for several weeks or months following the onset of symptoms suggestive of COVID-19, whether tested or not. Emerging aspects of the Covid-19 clinical presentation are its long-term effects, which are characteristic of the so-called \"long COVID\". The main symptoms associated with \"long COVID\" were headache, fatigue, muscle aches/myalgia, articular pains, cognitive impairment, loss of concentration, and loss of smell. Additionally, the subjects showed significant levels of insomnia (p < 0.05) and an overall reduced quality of life (p < 0.05). Long COVID is a complex condition with prolonged heterogeneous symptoms. The nature of studies precludes a precise case definition or risk evaluation. There is an urgent need for prospective, robust, standardised, controlled studies into aetiology, risk factors and biomarkers to characterise long COVID in different at-risk populations and settings.",
+    "type": "summary",
+    "source": "bioasq",
+    "pmid": [
+      "34163217",
+      "34580069",
+      "33172844",
+      "34068009",
+      "34024217",
+      "33532785",
+      "34276671",
+      "33786465",
+      "34533807",
+      "34709019",
+      "33892403",
+      "34485849",
+      "34319569"
+    ]
+  },
+  {
+    "id": "bioasq::51682382298dcd4e51000066",
+    "question": "Does triiodothyronine play a regulatory role in insulin secretion from pancreas?",
+    "answer": "YES",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "17408701",
+      "21099301",
+      "1357067",
+      "619228",
+      "19021014",
+      "20730704",
+      "3310493",
+      "1537314",
+      "21914860",
+      "2242013"
+    ]
+  },
+  {
+    "id": "bioasq::5881e8e8713cbdfd3d000003",
+    "question": "Is Pfh1 a component of the replisome?",
+    "answer": "No. Pfh1 Is an Accessory Replicative Helicase that Interacts with the Replisome to Facilitate Fork Progression and Preserve Genome Integrity. DNA replication through hard-to-replicate sites, including both highly transcribed RNA Pol II and Pol III genes, requires the S. pombe Pfh1 helicase.",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "22426534",
+      "27611590"
+    ]
+  },
+  {
+    "id": "bioasq::5c0119f3133db5eb7800002b",
+    "question": "List bacterial families for which delafloxacin has been shown to be effective.",
+    "answer": "Delafloxacin has been shown to be effective against multiple gram-positive and gram-negative bacteria, including Strepotococcus pneumoniae, Haemophilus influenzae, Moraxella atarrhalis, Staphylococcus aureus, Klebsiella pneumoniae and more.",
+    "type": "list",
+    "source": "bioasq",
+    "pmid": [
+      "27216072",
+      "27458220"
+    ]
+  },
+  {
+    "id": "bioasq::5c5f218a1a4c55d80b00001b",
+    "question": "What is ferroptosis?",
+    "answer": "Ferroptosis is a newly defined iron-dependent, non-apoptotic mode of cell death with necrotic morphology. Ferroptosis is a new mode of regulated cell death, which is completely distinct from other cell death modes based on morphological, biochemical, and genetic criteria. Ferroptosis is a form of oxidative cell death and has become a chemotherapeutic target for cancer treatment",
+    "type": "summary",
+    "source": "bioasq",
+    "pmid": [
+      "29127238",
+      "29274359",
+      "29175614",
+      "28515173",
+      "28494534"
+    ]
+  },
+  {
+    "id": "bioasq::5319a6c9b166e2b806000022",
+    "question": "Which multiple kinase inhibitors are used in cancer therapy?",
+    "answer": "Multiple kinase inhibitors used in cancer therapy include ZD6474, SU11248, AEE 788, sorafenib, vatalanib, and AG-013736.",
+    "type": "list",
+    "source": "bioasq",
+    "pmid": [
+      "16159418"
+    ]
+  },
+  {
+    "id": "bioasq::58bc58c302b8c60953000001",
+    "question": "Is Stat4 a transcription factor?",
+    "answer": "Yes, Stat4 is a transcription factor.\nStat4 is a member of the signal transducer and activator of transcription (STAT) family of molecules that localizes to the cytoplasm. STAT4 regulates various genes expression as a transcription factor after it is phosphorylated, dimerizes and translocates to the nucleus.",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "25178516",
+      "25829541",
+      "25798064",
+      "25852285"
+    ]
+  },
+  {
+    "id": "bioasq::5e6e487151b80c9423000001",
+    "question": "Which is the catalytic activity of the protein encoded by the gene KMT2C? ",
+    "answer": "The lysine methyltransferase KMT2C (also known as MLL3), a subunit of the COMPASS complex, implements monomethylation of Lys4 on histone H3 (H3K4) at gene enhancers.",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "29785026",
+      "29762619",
+      "28675691"
+    ]
+  },
+  {
+    "id": "bioasq::56e0869351531f7e33000011",
+    "question": "What is GRO-seq?",
+    "answer": "Global run-on sequencing (Gro-seq) that maps the position, amount, and orientation of transcriptionally engaged RNA polymerases genome-wide. In this method, nuclear run-on RNA molecules are subjected to large-scale parallel sequencing and mapped to the genome.",
+    "type": "summary",
+    "source": "bioasq",
+    "pmid": [
+      "19056941",
+      "24304890",
+      "21549415"
+    ]
+  },
+  {
+    "id": "bioasq::58ea7248eda5a57672000002",
+    "question": "What is the phenotype of people carrying mutations in the gene PRDM12?",
+    "answer": "New therapeutic options have recently been derived from studies of individuals with congenital insensitivity to pain (CIP). Here we identified 10 different homozygous mutations in PRDM12 (encoding PRDI-BF1 and RIZ homology domain-containing protein 12) in subjects with CIP from 11 families.",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "25891934",
+      "26005867",
+      "26549885"
+    ]
+  },
+  {
+    "id": "bioasq::602825a61cb411341a0000fa",
+    "question": "Which drugs are included in the MAID chemotherapy regimen for sarcoma?",
+    "answer": "MAID chemotherapy regimen for sarcomas include mesna, adriamycin, ifosfamide and dacarbazine.",
+    "type": "list",
+    "source": "bioasq",
+    "pmid": [
+      "7672707",
+      "11300337",
+      "7595717",
+      "2504890",
+      "30032825",
+      "10362334",
+      "9529020",
+      "12478905",
+      "18313854",
+      "31232921",
+      "32881345",
+      "21652583",
+      "2110385",
+      "22179493",
+      "24647783",
+      "2050307",
+      "32427061",
+      "16446334",
+      "12829150",
+      "23092789",
+      "12445253",
+      "8951354"
+    ]
+  },
+  {
+    "id": "bioasq::590af75d70f9fc6f0f00001c",
+    "question": "Which algorithm is used by the UCSC Genome Browser?",
+    "answer": "The UCSC Genome Browser organizes data and annotations (called tracks) around the reference sequences or draft assemblies of many eukaryotic genomes and presents them using a powerful web-based graphical interface. The database is optimized to support fast interactive performance with the web-based UCSC Genome Browser, a tool built on top of the database for rapid visualization and querying of the data at many levels. The annotations for a given genome are displayed in the browser as a series of tracks aligned with the genomic sequence. Sequence data and annotations may also be viewed in a text-based tabular format or downloaded as tab-delimited flat files. The database tables underlying the Genome Browser tracks can be viewed, downloaded, and manipulated using another Web-based application, the UCSC Table Browser. The annotations for a given genome are displayed in the browser as a series of tracks aligned with the genomic sequence. Binary Alignment/Map , where the differences between the data set and the reference assembly may be displayed graphically. The Saved Session feature allows users to store and share customized views, enhancing the utility of the system for organizing multiple trains of thought. The University of California Santa Cruz  is a popular Web-based tool for quickly displaying a requested portion of a genome at any scale, accompanied by a series of aligned annotation \"tracks\". The UCSC Genome Browser organizes data and annotations  around the reference sequences or draft assemblies of many eukaryotic genomes and presents them using a powerful web-based graphical interface. The database is optimized to support fast interactive performance with the web-based UCSC Genome Browser, a tool built on top of the database for rapid visualization and querying of the data at many levels.  The UCSC Genome Browser organizes data and annotations (called tracks) around the reference sequences or draft assemblies of many eukaryotic genomes and presents them using a powerful web-based graphical interface. The database is optimized to support fast interactive performance with the web-based UCSC Genome Browser, a tool built on top of the database for rapid visualization and querying of the data at many levels. The UCSC Genome Browser organizes data and annotations (called tracks) around the reference sequences or draft assemblies of many eukaryotic genomes and presents them using a powerful web-based graphical interface. The database is optimized to support fast interactive performance with the web-based UCSC Genome Browser, a tool built on top of the database for rapid visualization and querying of the data at many levels. The annotations for a given genome are displayed in the browser as a series of tracks aligned with the genomic sequence. Sequence data and annotations may also be viewed in a text-based tabular format or downloaded as tab-delimited flat files.  The database tables underlying the Genome Browser tracks can be viewed, downloaded, and manipulated using another Web-based application, the UCSC Table Browser.",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "22908213",
+      "22080555",
+      "24984850",
+      "23255150",
+      "18428780",
+      "27574198",
+      "17993665",
+      "12519945",
+      "21975940",
+      "24227676",
+      "19957273"
+    ]
+  },
+  {
+    "id": "bioasq::601ffa7a1cb411341a000078",
+    "question": "What is a ciliopathy?",
+    "answer": "A ciliopathy is any genetic disorder that affects the cellular cilia or the cilia anchoring structures, the basal bodies, or ciliary function Ciliopathy is a rare disorder of the central nervous system characterized by defects in ciliary motility, endocytosis, and photoreceptors. ciliopathies are a group of disorders caused by a defect in ciliogenesis, ciliary protein trafficking. Ciliopathies are a group of disorders caused by a defect in ciliogenesis, ciliary protein trafficking.",
+    "type": "summary",
+    "source": "bioasq",
+    "pmid": [
+      "25398052",
+      "27290837",
+      "31147753",
+      "30656919",
+      "29334628",
+      "21943201",
+      "31965514",
+      "28698599",
+      "21816947",
+      "30578505",
+      "29650680",
+      "31698098",
+      "29534263",
+      "21679365",
+      "28625504",
+      "20097287",
+      "29281629",
+      "29303074",
+      "25388584",
+      "22169048",
+      "30867380",
+      "26540106",
+      "25599087"
+    ]
+  },
+  {
+    "id": "bioasq::56d094f33975bb303a000012",
+    "question": "List functional roles of the FtsZ protein.",
+    "answer": "Four major roles of FtsZ have been characterized: cell elongation, GTPase, cell division, and bacterial cytoskeleton.",
+    "type": "list",
+    "source": "bioasq",
+    "pmid": [
+      "23463171",
+      "23384289",
+      "24984796",
+      "25124387",
+      "25213228",
+      "25382739",
+      "24825009",
+      "25002581",
+      "25533961",
+      "24506818",
+      "24778116",
+      "25519150",
+      "24292151",
+      "22932926",
+      "24529242",
+      "24502896"
+    ]
+  },
+  {
+    "id": "bioasq::553fca6054168f6c79000002",
+    "question": "Which proteins compose the error prevention GO (8-oxo-G) system in Pseudomonas putida?",
+    "answer": "In P. putida (Pseudomonas putida) the error prevention GO (8-oxo-G) system is composed of MutY, MutM, and MutT enzymes.",
+    "type": "list",
+    "source": "bioasq",
+    "pmid": [
+      "17545288"
+    ]
+  },
+  {
+    "id": "bioasq::5e2a0eb1aa19d7443100000c",
+    "question": "Can PRL3-zumab inhibit PRL3+ cancer cells in vitro and in vivo?",
+    "answer": "PRL3-zumab specifically inhibits PRL3+ cancer cells in vivo, but not in vitro.",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "31171773"
+    ]
+  },
+  {
+    "id": "bioasq::53124bdae3eabad02100000b",
+    "question": "Which is the molecular target of the immunosuppressant drug Rapamycin?",
+    "answer": "The molecular target of Rapamycin is mTOR",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "14508096",
+      "15901852",
+      "22442756",
+      "18451231",
+      "23994756",
+      "15627018",
+      "23301832",
+      "15163844",
+      "18980246",
+      "17728765",
+      "17041625",
+      "23261661"
+    ]
+  },
+  {
+    "id": "bioasq::5a6d186db750ff4455000031",
+    "question": "Is there any role of Dlx1 and Dlx2 transcription factors in cortical interneurons?",
+    "answer": "Yes. DLX2 directly drives Gad1, Gad2, and Vgat expression, and mutants have reduced mIPSC amplitude. In addition, the mutants formed fewer GABAergic synapses on excitatory neurons and have reduced mIPSC frequency. Furthermore, Dlx1/2 CKO have hypoplastic dendrites, fewer excitatory synapses, and reduced excitatory input.",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "29028947"
+    ]
+  },
+  {
+    "id": "bioasq::5c7a4a31d774d04240000006",
+    "question": "Which are the problems associated with the use of PD-L1 as immunotherapy biomarker?",
+    "answer": "The use of PD-L1 (B7-H1) immunohistochemistry (IHC) as a predictive biomarker is confounded by multiple unresolved issues: variable detection antibodies, differing IHC cutoffs, tissue preparation, processing variability, primary versus metastatic biopsies, oncogenic versus induced PD-L1 expression, and staining of tumor versus immune cells The use of PD-L1 (B7-H1) immunohistochemistry (IHC) as a predictive biomarker is confounded by multiple unresolved issues: variable detection antibodies, differing IHC cutoffs, tissue preparation, processing variability, primary versus metastatic biopsies, oncogenic versus induced PD-L1 expression, and staining of tumor versus immune cells.",
+    "type": "list",
+    "source": "bioasq",
+    "pmid": [
+      "30487198",
+      "28472902",
+      "28837143",
+      "30393621",
+      "25695955",
+      "27532023",
+      "26927720",
+      "26778219",
+      "29387716",
+      "27801734",
+      "30419350",
+      "26516064",
+      "26973128",
+      "26501438",
+      "29567557",
+      "28881780",
+      "27229745"
+    ]
+  },
+  {
+    "id": "bioasq::53372ba3d6d3ac6a34000058",
+    "question": "Which histone modification is primarily linked to elongating transcription?",
+    "answer": "Similarly, H3K36 trimethylation, a mark associated with transcription elongation, was specifically increased at the HD locus in the striatum and not in the cerebellum. Recent studies reviewed here demonstrate that histone deacetylation on the body of a transcribed gene is regulated via Set2-mediated methylation of histone H3-K36.",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "21423663",
+      "17046836",
+      "23209427",
+      "17346757",
+      "17510366",
+      "12667453",
+      "22184065",
+      "16503129"
+    ]
+  },
+  {
+    "id": "bioasq::515da6e2298dcd4e51000010",
+    "question": "What is the treatment of neuropathic pain in children?",
+    "answer": "It is unclear if any treatment is registered for pediatric use. The reported treatments are:\nOxcarbazepine \nOpioids alone, in rotations  or with Analgesics (e.g. Ketamine and Lidocaine infusion)\nOpioids and Benzodiazepines\nPregabalin -  is one of the first drugs registered for the treatment of neuropathic pain. It is unclear if Pregabalin is registered for the treatment of neuropathic pain in children specifically but it is being used in practice.\nTricyclic Antidepressants\nLidocaine 5% patches for chronic localized neuropathic pain",
+    "type": "list",
+    "source": "bioasq",
+    "pmid": [
+      "22401313",
+      "22147611",
+      "18363625",
+      "7561230",
+      "15265351",
+      "22735246",
+      "18820538",
+      "12712053",
+      "21332246",
+      "11902308"
+    ]
+  },
+  {
+    "id": "bioasq::601c2fb51cb411341a000013",
+    "question": "Which interleukin receptors are targeted with rilonacept?",
+    "answer": "Rilonacept inhibits interleukin-1α and interleukin-1β. It has a role for treatment of pericarditis.",
+    "type": "list",
+    "source": "bioasq",
+    "pmid": [
+      "32550671",
+      "32324502",
+      "33200890",
+      "32562029",
+      "33229362",
+      "25549233"
+    ]
+  },
+  {
+    "id": "bioasq::61f58a1a882a024a10000009",
+    "question": "Is Daprodustat effective for anemia?",
+    "answer": "Yes. Daprodustat is a hypoxia-inducible factor-prolyl hydroxylase inhibitor for the treatment of anemia of chronic kidney disease.",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "33744933",
+      "33597868",
+      "31306555",
+      "34739194",
+      "34713596",
+      "27978511",
+      "32250021",
+      "34739196",
+      "33628028",
+      "31640478",
+      "33964183",
+      "33561857"
+    ]
+  },
+  {
+    "id": "bioasq::535d35779a4572de6f000005",
+    "question": "What is the proportion of non canonical splice sites in the human genome?",
+    "answer": "Between 1% and 2% of human splice sites do not contain the canonical GT-AG dinucleotides",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "11125105",
+      "11058137"
+    ]
+  },
+  {
+    "id": "bioasq::65f7728fc4010b4d78000021",
+    "question": "What proportion of risk is attributable to obesity in colorectal cancer women development?",
+    "answer": "In women, obesity is associated with a 16% increased risk of developing colorectal cancer. This means that approximately 16% of the risk of colorectal cancer in women can be attributed to obesity. The hazard ratio for colon cancer risk in obese women is 1.04 [1.01-1.18], indicating a slight increase in risk associated with obesity. The proportion of risk attributable to obesity in the development of colorectal cancer among women is 1.04 (95% CI: 1.01-1.18). The proportion of risk attributable to obesity in colorectal cancer women development is 1.20 for each 0.1-unit increase in waist-hip ratio. 1.04 [1.01-1.18] In women, colon cancer risk increased by 16% per 10-cm increase in waist circumference (RR: 1.16; 95% CI: 1.09, 1.23) and by 20% per 0.1-unit increase in waist-hip ratio (RR: 1.20; 95% CI: 1.08, 1.33). Obese women had a 4% higher risk of colon cancer compared to non-obese women (hazard ratio = 1.04; 95% CI: 1.01-1.18). The population attributable fraction (PAF) for obesity in colorectal cancer in women is 9%. The proportion of risk attributable to obesity in colorectal cancer development in women is approximately 1.13-1.17 times that of men. ”BMI and/or the number of CTCs were significantly associated with the risk of CRC (P values of less than 0.001 for all). The proportion of risk attributable to BIM was 31% (95% confidence interval: 27% to 35%). The proportion of risk attributable to the number of CTCs was 49% (95% confidence interval: 43% to 55%).”}</s> The men in the obese/obese group had a higher risk of colon cancer than women (hazard ratio = 1.13 [1.10-1.17] in men, and hazard ratio = 1.04 [1.01-1.18] in women, P = 0.001). The specific proportion of risk attributable to obesity in colorectal cancer development in women is not explicitly stated in the provided snippets. However, it is indicated that an increase in waist circumference and waist-hip ratio is associated with an increased risk of colon cancer in women. For every 10-cm increase in waist circumference, the relative risk (RR) increases by 1.16. Similarly, for every 0.1-unit increase in waist-hip ratio, the RR increases by 1.20. Furthermore, women in the obese group had a hazard ratio of 1.04 for colon cancer, indicating a slightly increased risk compared to non-obese women. It's important to note that the association between obesity and colon and rectal cancer risk varies by sex and cancer site The exact proportion of risk attributable to obesity in colorectal cancer development in women is not specified in the provided documents. However, they do provide relative risk (RR) values for increases in waist circumference and waist-hip ratio, which are measures often associated with obesity. For every 10-cm increase in waist circumference, the RR is 1.16, and for every 0.1-unit increase in waist-hip ratio, the RR is 1.20. Additionally, the hazard ratio for colon cancer in obese women is 1.04, suggesting that obesity increases the risk of colon cancer in women by 4%. It's important to note that these are not direct measures of the proportion of risk attributable to obesity, but rather indications of the relative risk compared to non-obese individuals. The exact percentage may vary, but providing an approximate range or qualitative description would be helpful.   The study found that approximately 10-25% of colorectal cancer cases in women are attributable to obesity. The risk of colon cancer increased with increasing waist circumference (per 10-cm increase) in both men (RR: 1.33; 95% CI: 1.19, 1.49) and women (RR: 1.16; 95% CI: 1.09, 1.23) and with increasing waist-hip ratio (per 0.1-unit increase) in both men (RR: 1.43; 95% CI: 1.19, 1.71) and women (RR: 1.20; 95% CI: 1.08, 1.33). The men in the obese/obese group had a higher risk of colon cancer than women (hazard ratio\\u2009=\\u20091.13 [1.10-1.17] in men, and hazard ratio\\u2009=\\u20091.04 [1.01-1.18] in women, P\\u2009=\\u20090.001). According to the provided information, the proportion of colorectal cancer risk attributable to obesity in women varies by population:\n\n- In Italian women, a decrease in waist-to-hip ratio below 0.82 might reduce colorectal cancer by 19%.\n\n- In Pacific women, the population attributable fraction (PAF) for obesity was 19%. \n\n- In Maori women, the PAF for obesity was 14%.\n\n- In European/other women, the PAF for obesity was 8%.\n\nOverall, obesity increases the risk of colorectal cancer in women by around 19%, but this varies from 8-19% depending on the specific population. The relative risk is estimated to be about 1.5 times higher in obese women compared to normal-weight women. According to the study, the proportion of risk attributable to obesity in colorectal cancer women development is 1.04 (hazard ratio) [1.01-1.18] in women, which means that obesity increases the risk of colorectal cancer in women by 4% (1.04-1.00) compared to non-obese women. This suggests that obesity plays a role in the development of colorectal cancer in women, but the effect size is relatively small compared to other risk factors. Obesity increases the risk of developing colorectal cancer in women by a factor ranging from 1.04 to 1.18. Obesity contributes to an increased risk of colorectal cancer development in women, with a hazard ratio of 1.04 to 1.18. This indicates that a proportion of the risk of colon cancer in women can be attributed to obesity. The proportion of risk attributable to obesity in colorectal cancer development in women varies depending on the cancer site. For colon cancer, a 5-unit increase in body mass index (BMI) is associated with a 12% increased risk in women. However, for rectal cancer, there is a weak or no association between BMI and risk in women. Therefore, the proportion of risk attributable to obesity in colorectal cancer development in women is higher for colon cancer compared to rectal cancer. According to the provided snippets, the risk of colon cancer in women is associated with increasing waist circumference and waist-hip ratio, with a higher risk observed in men compared to women. Specifically, the hazard ratio for colon cancer in women was found to be 1.04 (95% CI: 1.01-1.18) per 10-cm increase in waist circumference, and 1.20 (95% CI: 1.08-1.33) per 0.1-unit increase in waist-hip ratio. However, the proportion of risk attributable to obesity in colorectal cancer women development is not explicitly stated in the provided snippets. , Therefore, we cannot provide a specific proportion of risk attributable to obesity in colorectal cancer women development based on the given information. However, it is clear that obesity is a significant risk factor for colon cancer in both men and women, and that the association between obesity and colon cancer risk varies by sex and cancer site. The exact proportion of colorectal cancer risk that is attributable to obesity can vary depending on the study and the population being considered. However, research has consistently shown that there is a positive association between excess body weight and an increased risk of developing colorectal cancer, particularly in women. Studies have estimated that approximately 3-5% of all colorectal cancers may be attributable to obesity among women. It's important to note that these estimates are based on observational studies and can fluctuate due to factors such as study design, sample size, and the specific measures used to define obesity. In women, 1.04 times higher risk of colorectal cancer development is attributable to obesity. 16% of risk of colorectal cancer in women development is attributable to obesity. The study found that approximately 15.8% of the total costs in obesity-related cancers among women can be reduced, with a significant portion of this reduction coming from post-menopausal breast, liver, and colorectal cancers. However, the study does not provide a specific proportion of risk attributable to obesity in colorectal cancer women development. The population attributable fractions (PAFs) for excess weight were 24.3% for colon and 18.9% for rectum among women. This means that approximately 24.3% of colon cancer cases and 18.9% of rectum cancer cases in women are attributable to obesity.",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "19207714",
+      "27196525",
+      "30448606",
+      "37264099",
+      "12117878",
+      "20843489",
+      "17696248",
+      "17855691",
+      "28736986",
+      "30326010",
+      "21597097",
+      "32791859",
+      "22312135",
+      "29259258",
+      "28703702",
+      "11169969",
+      "33070559",
+      "23481261",
+      "17823417",
+      "32868317"
+    ]
+  },
+  {
+    "id": "bioasq::601d35111cb411341a00002f",
+    "question": "Describe manifestations of KIF1A-related disorders in children",
+    "answer": "KIF1A-related disorders (KRD) were first described in 2011 and the phenotypic spectrum has subsequently expanded to encompass a range of central and peripheral nervous system involvement. A study identified twelve individuals from 10 families. Eight different mutations were present, including four novel mutations. Two patients displayed a very severe phenotype including congenital contractures, severe spasticity and/or dystonia, dysautonomia, severe sensorimotor polyneuropathy and optic atrophy, significant white matter changes on brain MRI, respiratory insufficiency, and complete lack of neurodevelopmental progress. The remaining 10 patients represented a spectrum of severity with common features including a movement disorder with spasticity and/or dystonia, subtle features of dysautonomia, sensory axonal neuropathy, varying degrees of optic atrophy and of learning and/or behavioural difficulties, and subtle or absent-but sometimes progressive-changes in white matter on MRI. Epilepsy was common among the more severely affected children. KIF1A-related disorders (KRD) were first described in 2011 and the phenotypic spectrum has subsequently expanded to encompass a range of central and peripheral nervous system involvement. Two patients displayed a very severe phenotype including congenital contractures, severe spasticity and/or dystonia, dysautonomia, severe sensorimotor polyneuropathy and optic atrophy, significant white matter changes on brain MRI, respiratory insufficiency, and complete lack of neurodevelopmental progress.",
+    "type": "summary",
+    "source": "bioasq",
+    "pmid": [
+      "32096284"
+    ]
+  },
+  {
+    "id": "bioasq::601d6ec61cb411341a000032",
+    "question": "Which conditions are manifested by TRIM8 mutations?",
+    "answer": "TRIM8 mutations are associated with epilepsy, epileptic encephalopathy, developmental delay and intellectual disability. Mutations in the TRIM8 gene, which encodes the triggering receptor encoded in myeloid cells 8 (TRIM8) are associated with epilepsy, epileptic encephalopathy, developmental delay and intellectual disability. Focal segmental glomerulosclerosis, severe developmental delay, intellectual disability and epilepsy. Mutations in TRIM8 gene have been described in patients with severe developmental delay, epileptic encephalopathy, developmental delay and intellectual disability.",
+    "type": "list",
+    "source": "bioasq",
+    "pmid": [
+      "32531461"
+    ]
+  },
+  {
+    "id": "bioasq::5a68f633b750ff4455000019",
+    "question": "Is creatinine assessment included in the MELD score?",
+    "answer": "Yes, creatinine is included in the Model For End-Stage Liver Disease (MELD) score. Other components of the MELD score are international normalized ratio and serum billirubin. The MELD score is used for evaluation of liver cirrhosis.",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "27480755",
+      "28856226",
+      "27779785",
+      "28510807",
+      "29055930",
+      "23293714",
+      "27842889",
+      "22178107",
+      "15482344",
+      "28198820",
+      "29171941",
+      "23403770"
+    ]
+  },
+  {
+    "id": "bioasq::5e766256835f4e4777000003",
+    "question": "Have the rotavirus vaccines changed the predominant rotavirus genotypes?",
+    "answer": "The increased diversity and differences in genotype dominance observed in states using RotaTeq (G12P[8]), and in states and territories using Rotarix (equine-like G3P[8] and G2P[4]), suggest that these vaccines exert different immunological pressures that influence the diversity of rotavirus strains.",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "29790933"
+    ]
+  },
+  {
+    "id": "bioasq::63f57f7f33942b094c000006",
+    "question": "What is Catamenial pneumothorax?",
+    "answer": "Catamenial pneumothorax is defined as a recurrent, spontaneous pneumothorax occurring within a day before or 72 h after the onset of menstruation. It is a manifestation of a thoracic endometriosis syndrome.",
+    "type": "summary",
+    "source": "bioasq",
+    "pmid": [
+      "34375738",
+      "35286587",
+      "35774053",
+      "35924495",
+      "35268286",
+      "36179536",
+      "35037874"
+    ]
+  },
+  {
+    "id": "bioasq::65cfcd541930410b13000019",
+    "question": "Burrow Ink Test can be used to diagnose which disease?",
+    "answer": "Burrow Ink Test is used to diagnose scabies.",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "8308357",
+      "23205026",
+      "37518420",
+      "21268539",
+      "23904181",
+      "26792847"
+    ]
+  },
+  {
+    "id": "bioasq::644ef46557b1c7a315000083",
+    "question": "What are positive cell-cycle regulators that can cause cancer when mutated called?",
+    "answer": "Proto-oncogenes are normal regulatory genes that can be transformed - by gain-of-function mutations - to oncogenes which are important contributors to human carcinogenesis. Positive cell-cycle regulators that can cause cancer when mutated are called oncogenes. These genes are gain-of-function mutations of normal regulatory genes or proto-oncogenes, which are altered by point mutation, amplification or rearrangement. Oncogenes were originally discovered in retroviruses initiating a variety of animal and avian cancers, and they are believed to be important contributors to human carcinogenesis. When activated, oncogenes promote cell proliferation and inhibit apoptosis, leading to uncontrolled growth and tumor formation. Some examples of well-known oncogenes include HER2/neu, KRAS, BRAF, and MYC. Mutations in these genes have been implicated in various types of cancer such as breast cancer, lung cancer, melanoma, and leukemia. Understanding the role of oncogenes in cancer development is crucial for the development of targeted therapies aimed at inhibiting their activity and preventing tumor growth. Oncogenes are gain-of-function mutations of normal regulatory genes or proto-oncogenes. Originally discovered in retroviruses initiating a variety of animal and avian cancers, oncogenes are believed to be important contributors to human carcinogenesis.",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "12665054",
+      "1546217",
+      "8143345",
+      "10697588"
+    ]
+  },
+  {
+    "id": "bioasq::5d3858a97bc3fee31f000018",
+    "question": "What is the basis of the methidiumpropyl-EDTA sequencing (MPE-seq) method?",
+    "answer": "MPE-seq (methidiumpropyl-EDTA sequencing) is a new method for the genome-wide characterization of chromatin that involves the digestion of nuclei with MPE-Fe(II) followed by massively parallel sequencing of the whole genome. Like micrococcal nuclease (MNase), MNase preferentially cleaves the linker DNA between nucleosomes. However, there are differences in the cleavage of nuclear chromatin by MP e-seq relative to MNase. Moreover, unlike MNase, MPe-seq cleaves nuclear DNA Methidiumpropyl-EDTA sequencing (MPE-seq) is a method for the genome-wide characterization of chromatin that involves the digestion of nuclei withMPE-Fe(II) followed by massively parallel sequencing. MPE-seq unlike MNase-seq cleaves nuclear DNA with little sequence bias and thus provides a unique and straightforward means for the genome-wide analysis of chromatin structure with minimal DNA sequence bias. digestion of nuclei withmpe-fe(ii) methidiumpropyl-EDTA sequencing (MPE-seq), a method for the genome-wide characterization of chromatin that involves the digestion of nuclei withMPE-Fe(II) followed by massively parallel sequencing.  MPE-seq provides a unique and straightforward means for the genome-wide analysis of chromatin structure with minimal DNA sequence bias. Methidiumpropyl-edta sequencing is a method for the genome-wide characterization of chromatin that involves the digestion of nuclei withmpe-fe (ii) followed by massively parallel sequencing. Mpe-seq provides a unique and straightforward means for theome-wide analysis of chromat structure with minimal dna sequence bias. The methidiumpropyl-EDTA sequencing (MPE-seq) method uses a GpC methyltransferase (M. CviPI) and next generation sequencing to generate a high resolution footprint of nucleosome structure using less than 1 million cells while retaining endogenous DNA fragments from the same DNA strand.   methidiumpropyl-EDTA sequencing (MPE-seq), a method for the genome-wide characterization of chromatin that involves the digestion of nuclei withMPE-Fe(II) followed by massively parallel sequencing. MPE-seq provides a unique and straightforward means for the genome-wide analysis of chromatin structure with minimal DNA sequence bias.  methidiumpropyl-EDTA sequencing (MPE-seq), a method for the genome-wide characterization of chromatin that involves the digestion of nuclei withMPE-Fe(II) followed by massively parallel sequencing. MPE-seq provides a unique and straightforward means for the genome-wide analysis of chromatin structure with minimal DNA sequence bias. methidiumpropyl-EDTA sequencing (MPE-seq), a method for the genome-wide characterization of chromatin that involves the digestion of nuclei withMPE-Fe(II) followed by massively parallel sequencing. methidiumpropyl-EDTA sequencing (MPE-seq), a method for the genome-wide characterization of chromatin that involves the digestion of nuclei withMPE-Fe(II) followed by massively parallel sequencing.  methidiumpropyl-EDTA sequencing (MPE-seq), a method for the genome-wide characterization of chromatin that involves the digestion of nuclei withMPE-Fe(II) followed by massively parallel sequencing. MPE-seq provides a unique and straightforward means for the genome-wide analysis of chromatin structure with minimal DNA sequence bias.",
+    "type": "summary",
+    "source": "bioasq",
+    "pmid": [
+      "26080409"
+    ]
+  },
+  {
+    "id": "bioasq::5c897167d558e5f232000005",
+    "question": "What does the strimvelis treatment consist of?",
+    "answer": "Strimvelis consists of autologous CD34+ cells transduced to express adenosine deaminase [ADA].",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "29625577"
+    ]
+  },
+  {
+    "id": "bioasq::643de76757b1c7a315000039",
+    "question": "What is synthetic lethality?",
+    "answer": "Two genes are synthetic lethal if mutation of either alone is compatible with viability but mutation of both leads to death. So, targeting a gene that is synthetic lethal to a cancer-relevant mutation should kill only cancer cells and spare normal cells. Synthetic lethality therefore provides a conceptual framework for the development of cancer-specific cytotoxic agents. Synthetic lethality is a phenomenon in which the simultaneous occurrence of two genetic mutations leads to cell death, while each mutation alone has no effect on cell viability. This concept has been extensively studied in cancer research, as it provides a potential therapeutic strategy for targeting cancer cells with minimal toxicity to normal cells. The idea is to identify pairs of genes that, when mutated together, result in synthetic lethality and then develop drugs that target one of these genes. For example, PARP inhibitors have been developed for the treatment of BRCA-mutated cancers because BRCA-deficient cells are sensitive to PARP inhibition due to synthetic lethality between these two genes. Synthetic lethality has also been explored in other areas such as infectious diseases and neurodegenerative disorders. Overall, understanding synthetic lethality can provide insights into disease mechanisms and lead to the development of novel therapies. Synthetic lethality is a genetic concept that occurs when the simultaneous disruption of two or more genes leads to cell death, while the individual disruption of each gene does not have a lethal effect. This phenomenon has gained significant attention in cancer research as it offers a promising therapeutic strategy for selectively targeting cancer cells with specific genetic alterations. By exploiting the unique vulnerabilities of cancer cells, synthetic lethality can be used to develop targeted therapies that minimize damage to healthy cells and reduce side effects. One well-known example of synthetic lethality in cancer therapy is the use of PARP inhibitors in BRCA1/2-mutated cancers, where the combined deficiency in DNA repair pathways results in cell death specifically in tumor cells. Synthetic lethality is a phenomenon in which two or more genetic mutations interact in a way that causes the death of an organism, even though each mutation alone would not be lethal. It is a form of genetic interaction that can be used to identify potential drug targets for cancer therapy. Synthetic lethality is a phenomenon in which the simultaneous inactivation of two or more genes leads to cell death, while the inactivation of either gene alone has no effect. It is a promising approach for cancer therapy, as it can be used to target cancer cells while leaving normal cells unaffected. Synthetic lethality occurs between two genes when the perturbation of either gene alone is viable but the perturbation of both genes simultaneously results in the loss of viability. So, two genes are synthetic lethal if mutation of either alone is compatible with viability but mutation of both leads to death. Targeting a gene that is synthetic lethal to a cancer-relevant mutation should kill only cancer cells and spare normal cells. Therefore, synthetic lethality provides a conceptual framework for the development of cancer-specific cytotoxic agents.",
+    "type": "summary",
+    "source": "bioasq",
+    "pmid": [
+      "26451775",
+      "19690570",
+      "18789146",
+      "30594981",
+      "30971823",
+      "31811941",
+      "34454516",
+      "23447678",
+      "34050264",
+      "32883316",
+      "33795234",
+      "30125975",
+      "34589394",
+      "21737609",
+      "26516187",
+      "21094158",
+      "26085504",
+      "16309778",
+      "29421999",
+      "25171417",
+      "24893124",
+      "16110319",
+      "26431531",
+      "36446128",
+      "26630128",
+      "29171189",
+      "24864230",
+      "18586941",
+      "26211783",
+      "35170959",
+      "31671773",
+      "20976469",
+      "31627702",
+      "28649135",
+      "17189863",
+      "22107871",
+      "27113746",
+      "34163025",
+      "22864477",
+      "16118434",
+      "26427375",
+      "31675556",
+      "34070674",
+      "30059974",
+      "33992077",
+      "34590269",
+      "30682083",
+      "36069976"
+    ]
+  },
+  {
+    "id": "bioasq::5a76155c83b0d9ea6600001e",
+    "question": "Which phase III clinical trials for rheumatoid arthritis involve baricitinib? (November 2017)",
+    "answer": "The phase 3 clinical trials of baricitinib in rheumatoid arthritis patients are: RA-BEACON, RA-BUILD, RA-BEAM.",
+    "type": "list",
+    "source": "bioasq",
+    "pmid": [
+      "27799159",
+      "27689735",
+      "28798049"
+    ]
+  },
+  {
+    "id": "bioasq::52bf1cb303868f1b0600000b",
+    "question": "What hand deformities do patients with Apert syndrome present with?",
+    "answer": "In patients with Apert syndrome, the hands demonstrate many disturbances of soft tissue and bony structures. These include a short thumb with radial clinodactyly, complex syndactyly with a bony fusion involving the index, long and ring fingers, symphalangism and simple syndactyly of the fourth web space. The soft tissue anomalies involve the intrinsic muscles, the extrinsic tendon insertions and the neurovascular bundles.",
+    "type": "list",
+    "source": "bioasq",
+    "pmid": [
+      "9145139",
+      "1648464",
+      "9719378",
+      "12564817",
+      "15162318",
+      "211577",
+      "9002682",
+      "22196295",
+      "11818821"
+    ]
+  },
+  {
+    "id": "bioasq::621ec0313a8413c65300005e",
+    "question": "What class of drugs is commonly associated with Drug-induced interstitial lung disease (DIILD)?",
+    "answer": "[' Numerous agents including cytotoxic and noncytotoxic drugs have the potential to cause pulmonary toxicity.'] Numerous agents including cytotoxic and noncytotoxic drugs have the potential to cause pulmonary toxicity Cytotoxic drugs are the most common cause of toxic lung disease.",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "2185802",
+      "34177523",
+      "1327232",
+      "29631763",
+      "24231065",
+      "8765915",
+      "10992015",
+      "22189216",
+      "17545850",
+      "31963908",
+      "31584970",
+      "28050004",
+      "30521972",
+      "32598798",
+      "22896776",
+      "32874590",
+      "30326612",
+      "20298401"
+    ]
+  },
+  {
+    "id": "bioasq::5c010e09133db5eb78000024",
+    "question": "Can simvastatin alleviate depressive symptoms?",
+    "answer": "Yes, simvastatin decreases depressive symptoms.",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "25827645"
+    ]
+  },
+  {
+    "id": "bioasq::56bf7d90ef6e394741000015",
+    "question": "Is the circadian clock involved in ribosome biogenesis?",
+    "answer": "Yes. The circadian clock coordinates ribosome biogenesis. It influences the temporal translation of a subset of mRNAs involved in ribosome biogenesis by controlling the transcription of translation initiation factors as well as the clock-dependent rhythmic activation of signaling pathways involved in their regulation.",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "23300384"
+    ]
+  },
+  {
+    "id": "bioasq::601eb3b61cb411341a000057",
+    "question": "Where is the body would the Peyer's patches be found",
+    "answer": "Peyer's patches (PPs) play a major role in intestinal mucosal immunity and are located in the gut.",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "11979138",
+      "8674142",
+      "2342879",
+      "28847272",
+      "3500086",
+      "31970486",
+      "31856298",
+      "848258",
+      "19874224",
+      "3029559",
+      "21439318",
+      "29395860",
+      "12206832",
+      "1905075",
+      "1548786",
+      "30298433",
+      "31734952",
+      "23135279",
+      "33236653",
+      "30021891",
+      "6743144",
+      "21461871"
+    ]
+  },
+  {
+    "id": "bioasq::53386282d6d3ac6a3400005a",
+    "question": "Has the protein TIEG1 been associated with apoptosis?",
+    "answer": "Yes, TIEG1 (also known as KLF10) seems to play a role in regulating apoptosis.",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "20691807",
+      "23815903",
+      "12065093",
+      "12788480",
+      "21524276",
+      "21423731",
+      "14743447",
+      "22563190",
+      "17659279",
+      "10471833",
+      "10573529",
+      "17308981",
+      "22349513",
+      "18930345",
+      "17951258",
+      "22025675",
+      "12771931",
+      "20201061",
+      "20945337",
+      "18798273",
+      "23244828",
+      "17729309"
+    ]
+  },
+  {
+    "id": "bioasq::54d6562c3706e8952800000b",
+    "question": "Which is the enzymatic activity of the myotubularin family of proteins?",
+    "answer": "The myotubularin family of proteins are lipid inositol phosphatases",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "15998640",
+      "23086420",
+      "12646134",
+      "21372139",
+      "22578719",
+      "17346927",
+      "12788949",
+      "20188094",
+      "23818870",
+      "12118066",
+      "11846405",
+      "11275328",
+      "21510942",
+      "23114011",
+      "12925573",
+      "14690594",
+      "23857703",
+      "19325702",
+      "21175430",
+      "12018406",
+      "12045210",
+      "16828287",
+      "20736309",
+      "12554688",
+      "16410353",
+      "11733541",
+      "22647598",
+      "16289848",
+      "16262718",
+      "12829232",
+      "16914545",
+      "16787938"
+    ]
+  },
+  {
+    "id": "bioasq::5321b8579b2d7acc7e000008",
+    "question": "Is there any functional association during viral replication between flaviviridae viral RNA depended RNA polymerase and viral helicase?",
+    "answer": "Several labs have obtained evidence for a protein complex that involves many of the nonstructural (NS) proteins encoded by the virus. NS3, NS4A, NS4B, NS5A, and NS5B appear to interact structurally and functionally. The interaction between the helicase, NS3, and the RNA polymerase, NS5B play a key role in viral replication. Pull-down experiments and surface plasmon resonance data indicate a direct interaction between NS3 and NS5B that is primarily mediated through the protease domain of NS3. This interaction reduces the basal ATPase activity of NS3. However, NS5B stimulates product formation in RNA unwinding experiments under conditions of excess nucleic acid substrate. When the concentrations of NS3 and NS5B are in excess of nucleic acid substrate, NS5B reduces the rate of NS3-catalyzed unwinding. Under pre-steady-state conditions, in which NS3 and substrate concentrations are similar, product formation increased in the presence of NS5B. The increase was consistent with 1:1 complex formed between the two proteins.",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "23463199",
+      "22040846",
+      "17319152",
+      "19951725",
+      "21946389",
+      "15917225",
+      "17660525",
+      "21898331",
+      "23157297",
+      "18179252"
+    ]
+  },
+  {
+    "id": "bioasq::64179aac690f196b51000037",
+    "question": "What is the life expectancy for Duchenne muscular dystrophy patients?",
+    "answer": "The life expectancy for Duchenne muscular dystrophy patients varies depending on the time period they were born in, but patients born after 1990 have a median life expectancy of 28.1 years. The life expectancy for Duchenne muscular dystrophy patients is around 28.1 years. The life expectancy for Duchenne muscular dystrophy patients is typically between the late teens and early 30s. The median life expectancy for Duchenne muscular dystrophy patients born after 1990 is 28.1 years (95% CI 25.1, 30.3).",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "34645707",
+      "10193393",
+      "17939910",
+      "26153505",
+      "34802091",
+      "1450492"
+    ]
+  },
+  {
+    "id": "bioasq::5344194daeec6fbd07000006",
+    "question": "Is there any relationship between histone ubiquitylation and splicing?",
+    "answer": "Yes, in the case of histone H2B",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "23824326",
+      "19561118",
+      "23209445",
+      "22188810"
+    ]
+  },
+  {
+    "id": "pubmedqa::26460153",
+    "question": "Cardiac reoperations in octogenarians: Do they really benefit?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "26460153"
+    ]
+  },
+  {
+    "id": "pubmedqa::20084845",
+    "question": "Biomolecular identification of allergenic pollen: a new perspective for aerobiological monitoring?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "20084845"
+    ]
+  },
+  {
+    "id": "pubmedqa::11567820",
+    "question": "Does increased nerve length within the treatment volume improve trigeminal neuralgia radiosurgery?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "11567820"
+    ]
+  },
+  {
+    "id": "pubmedqa::22012962",
+    "question": "Marital status, living arrangement and mortality: does the association vary by gender?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "22012962"
+    ]
+  },
+  {
+    "id": "pubmedqa::18243752",
+    "question": "Should chest wall irradiation be included after mastectomy and negative node breast cancer?",
+    "answer": "maybe",
+    "answer_letter": "C",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "18243752"
+    ]
+  },
+  {
+    "id": "pubmedqa::22251324",
+    "question": "Does performance in selection processes predict performance as a dental student?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "22251324"
+    ]
+  },
+  {
+    "id": "pubmedqa::12040336",
+    "question": "Cardiogenic shock complicating acute myocardial infarction in elderly patients: does admission to a tertiary center improve survival?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "12040336"
+    ]
+  },
+  {
+    "id": "pubmedqa::24739448",
+    "question": "Have antiepileptic drug prescription claims changed following the FDA suicidality warning?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "24739448"
+    ]
+  },
+  {
+    "id": "pubmedqa::28707539",
+    "question": "Visceral adipose tissue area measurement at a single level: can it represent visceral adipose tissue volume?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "28707539"
+    ]
+  },
+  {
+    "id": "pubmedqa::26215326",
+    "question": "Does the clinical presentation of a prior preterm birth predict risk in a subsequent pregnancy?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "26215326"
+    ]
+  },
+  {
+    "id": "pubmedqa::26820719",
+    "question": "Colorectal cancer in young patients: is it a distinct clinical entity?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "26820719"
+    ]
+  },
+  {
+    "id": "pubmedqa::15943725",
+    "question": "Should serum pancreatic lipase replace serum amylase as a biomarker of acute pancreatitis?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "15943725"
+    ]
+  },
+  {
+    "id": "pubmedqa::18399830",
+    "question": "Is robotically assisted laparoscopic radical prostatectomy less invasive than retropubic radical prostatectomy?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "18399830"
+    ]
+  },
+  {
+    "id": "pubmedqa::19482903",
+    "question": "Treadmill testing of children who have spina bifida and are ambulatory: does peak oxygen uptake reflect maximum oxygen uptake?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "19482903"
+    ]
+  },
+  {
+    "id": "pubmedqa::21431987",
+    "question": "Preoperative staging of patients with liver metastases of colorectal carcinoma. Does PET/CT really add something to multidetector CT?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "21431987"
+    ]
+  },
+  {
+    "id": "pubmedqa::19142546",
+    "question": "Does quantitative left ventricular regional wall motion change after fibrous tissue resection in endomyocardial fibrosis?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "19142546"
+    ]
+  },
+  {
+    "id": "pubmedqa::23359100",
+    "question": "Is etoricoxib effective in preventing heterotopic ossification after primary total hip arthroplasty?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "23359100"
+    ]
+  },
+  {
+    "id": "pubmedqa::20549895",
+    "question": "Health habits and vaccination status of Lebanese residents: are future doctors applying the rules of prevention?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "20549895"
+    ]
+  },
+  {
+    "id": "pubmedqa::24449622",
+    "question": "Is there a relationship between serum paraoxonase level and epicardial fat tissue thickness?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "24449622"
+    ]
+  },
+  {
+    "id": "pubmedqa::23848044",
+    "question": "Does oxybutynin hydrochloride cause arrhythmia in children with bladder dysfunction?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "23848044"
+    ]
+  },
+  {
+    "id": "pubmedqa::25752912",
+    "question": "Is the probability of prenatal diagnosis or termination of pregnancy different for fetuses with congenital anomalies conceived following assisted reproductive techniques?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "25752912"
+    ]
+  },
+  {
+    "id": "pubmedqa::17691856",
+    "question": "Midwives' competence: is it affected by working in a rural location?",
+    "answer": "maybe",
+    "answer_letter": "C",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "17691856"
+    ]
+  },
+  {
+    "id": "pubmedqa::15918864",
+    "question": "Learning needs of postpartum women: does socioeconomic status matter?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "15918864"
+    ]
+  },
+  {
+    "id": "pubmedqa::19481382",
+    "question": "Is the Androgen Deficiency of Aging Men (ADAM) questionnaire useful for the screening of partial androgenic deficiency of aging men?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "19481382"
+    ]
+  },
+  {
+    "id": "pubmedqa::18019905",
+    "question": "The use of audit to identify maternal mortality in different settings: is it just a difference between the rich and the poor?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "18019905"
+    ]
+  },
+  {
+    "id": "pubmedqa::19546588",
+    "question": "Does increasing blood pH stimulate protein synthesis in dialysis patients?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "19546588"
+    ]
+  },
+  {
+    "id": "pubmedqa::12098035",
+    "question": "Does a special interest in laparoscopy affect the treatment of acute cholecystitis?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "12098035"
+    ]
+  },
+  {
+    "id": "pubmedqa::26606599",
+    "question": "Do Surrogates of Injury Severity Influence the Occurrence of Heterotopic Ossification in Fractures of the Acetabulum?",
+    "answer": "maybe",
+    "answer_letter": "C",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "26606599"
+    ]
+  },
+  {
+    "id": "pubmedqa::10798511",
+    "question": "Blunt trauma in intoxicated patients: is computed tomography of the abdomen always necessary?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "10798511"
+    ]
+  },
+  {
+    "id": "pubmedqa::23375036",
+    "question": "An HIV1/2 point of care test on sputum for screening TB/HIV co-infection in Central India - Will it work?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "23375036"
+    ]
+  },
+  {
+    "id": "pubmedqa::24625433",
+    "question": "Are high flow nasal cannulae noisier than bubble CPAP for preterm infants?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "24625433"
+    ]
+  },
+  {
+    "id": "pubmedqa::10548670",
+    "question": "Does the National Institutes of Health Stroke Scale favor left hemisphere strokes?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "10548670"
+    ]
+  },
+  {
+    "id": "pubmedqa::10781708",
+    "question": "Thrombosis prophylaxis in hospitalised medical patients: does prophylaxis in all patients make sense?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "10781708"
+    ]
+  },
+  {
+    "id": "pubmedqa::16872243",
+    "question": "Can decisional algorithms replace global introspection in the individual causality assessment of spontaneously reported ADRs?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "16872243"
+    ]
+  },
+  {
+    "id": "pubmedqa::27394685",
+    "question": "Bony defects in chronic anterior posttraumatic dislocation of the shoulder: Is there a correlation between humeral and glenoidal lesions?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "27394685"
+    ]
+  },
+  {
+    "id": "pubmedqa::19430778",
+    "question": "Can magnetic resonance imaging accurately predict concordant pain provocation during provocative disc injection?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "19430778"
+    ]
+  },
+  {
+    "id": "pubmedqa::26907557",
+    "question": "Can a Novel Surgical Approach to the Temporomandibular Joint Improve Access and Reduce Complications?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "26907557"
+    ]
+  },
+  {
+    "id": "pubmedqa::18065862",
+    "question": "Can the postoperative pain level be predicted preoperatively?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "18065862"
+    ]
+  },
+  {
+    "id": "pubmedqa::18693227",
+    "question": "Does a geriatric oncology consultation modify the cancer treatment plan for elderly patients?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "18693227"
+    ]
+  },
+  {
+    "id": "pubmedqa::23794696",
+    "question": "Does the bracket-ligature combination affect the amount of orthodontic space closure over three months?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "23794696"
+    ]
+  },
+  {
+    "id": "pubmedqa::26370095",
+    "question": "Are financial incentives cost-effective to support smoking cessation during pregnancy?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "26370095"
+    ]
+  },
+  {
+    "id": "pubmedqa::15841770",
+    "question": "Do inhaled steroids differ from cromones in terms of hospital admission rates for asthma in children?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "15841770"
+    ]
+  },
+  {
+    "id": "pubmedqa::12805495",
+    "question": "Can patients be anticoagulated after intracerebral hemorrhage?",
+    "answer": "maybe",
+    "answer_letter": "C",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "12805495"
+    ]
+  },
+  {
+    "id": "pubmedqa::16538201",
+    "question": "Does use of hydrophilic guidewires significantly improve technical success rates of peripheral PTA?",
+    "answer": "maybe",
+    "answer_letter": "C",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "16538201"
+    ]
+  },
+  {
+    "id": "pubmedqa::19108857",
+    "question": "Cerebromediastinal tuberculosis in a child with a probable Say-Barber-Miller syndrome: a causative link?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "19108857"
+    ]
+  },
+  {
+    "id": "pubmedqa::8916748",
+    "question": "Do socioeconomic differences in mortality persist after retirement?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "8916748"
+    ]
+  },
+  {
+    "id": "pubmedqa::7547656",
+    "question": "Does continuous intravenous infusion of low-concentration epinephrine impair uterine blood flow in pregnant ewes?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "7547656"
+    ]
+  },
+  {
+    "id": "pubmedqa::22350859",
+    "question": "Can pictorial warning labels on cigarette packages address smoking-related health disparities?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "22350859"
+    ]
+  },
+  {
+    "id": "pubmedqa::10834864",
+    "question": "Risk factors for avascular necrosis of bone in patients with systemic lupus erythematosus: is there a role for antiphospholipid antibodies?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "10834864"
+    ]
+  },
+  {
+    "id": "pubmedqa::28196511",
+    "question": "Antiretroviral therapy related adverse effects: Can sub-Saharan Africa cope with the new \"test and treat\" policy of the World Health Organization?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "28196511"
+    ]
+  },
+  {
+    "id": "pubmedqa::18719011",
+    "question": "Do overweight children necessarily make overweight adults?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "18719011"
+    ]
+  },
+  {
+    "id": "pubmedqa::12090319",
+    "question": "Is there a need for pelvic CT scan in cases of renal cell carcinoma?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "12090319"
+    ]
+  },
+  {
+    "id": "pubmedqa::12377809",
+    "question": "Is anorectal endosonography valuable in dyschesia?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "12377809"
+    ]
+  },
+  {
+    "id": "pubmedqa::23321509",
+    "question": "Quaternary cytoreductive surgery in ovarian cancer: does surgical effort still matter?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "23321509"
+    ]
+  },
+  {
+    "id": "pubmedqa::14631523",
+    "question": "Sub-classification of low-grade cerebellar astrocytoma: is it clinically meaningful?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "14631523"
+    ]
+  },
+  {
+    "id": "pubmedqa::22680064",
+    "question": "Can third trimester ultrasound predict the presentation of the first twin at delivery?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "22680064"
+    ]
+  },
+  {
+    "id": "pubmedqa::26209118",
+    "question": "Utility of unenhanced fat-suppressed T1-weighted MRI in children with sickle cell disease -- can it differentiate bone infarcts from acute osteomyelitis?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "26209118"
+    ]
+  },
+  {
+    "id": "pubmedqa::16735905",
+    "question": "Does the severity of obstructive sleep apnea predict patients requiring high continuous positive airway pressure?",
+    "answer": "maybe",
+    "answer_letter": "C",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "16735905"
+    ]
+  },
+  {
+    "id": "pubmedqa::25043083",
+    "question": "Are failures of anterior cruciate ligament reconstruction associated with steep posterior tibial slopes?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "25043083"
+    ]
+  },
+  {
+    "id": "pubmedqa::22382608",
+    "question": "SPECT study with I-123-Ioflupane (DaTSCAN) in patients with essential tremor. Is there any correlation with Parkinson's disease?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "22382608"
+    ]
+  },
+  {
+    "id": "pubmedqa::22876568",
+    "question": "Is vitamin D deficiency a feature of pediatric celiac disease?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "22876568"
+    ]
+  },
+  {
+    "id": "pubmedqa::9483814",
+    "question": "Does para-cervical block offer additional advantages in abortion induction with gemeprost in the 2nd trimester?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "9483814"
+    ]
+  },
+  {
+    "id": "pubmedqa::23916653",
+    "question": "Orthostatic myoclonus: an underrecognized cause of unsteadiness?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "23916653"
+    ]
+  },
+  {
+    "id": "pubmedqa::16772913",
+    "question": "A comparison of 500 prefilled textured saline breast implants versus 500 standard textured saline breast implants: is there a difference in deflation rates?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "16772913"
+    ]
+  },
+  {
+    "id": "pubmedqa::8738894",
+    "question": "Diabetes mellitus among Swedish art glass workers--an effect of arsenic exposure?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "8738894"
+    ]
+  },
+  {
+    "id": "pubmedqa::12632437",
+    "question": "Are environmental factors important in primary systemic vasculitis?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "12632437"
+    ]
+  },
+  {
+    "id": "pubmedqa::15388567",
+    "question": "Are sports medicine journals relevant and applicable to practitioners and athletes?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "15388567"
+    ]
+  },
+  {
+    "id": "pubmedqa::11943048",
+    "question": "Does receipt of hospice care in nursing homes improve the management of pain at the end of life?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "11943048"
+    ]
+  },
+  {
+    "id": "pubmedqa::7664228",
+    "question": "Discharging patients earlier from Winnipeg hospitals: does it adversely affect quality of care?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "7664228"
+    ]
+  },
+  {
+    "id": "pubmedqa::17598882",
+    "question": "Is breast cancer prognosis inherited?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "17598882"
+    ]
+  },
+  {
+    "id": "pubmedqa::16392897",
+    "question": "BCRABL transcript detection by quantitative real-time PCR : are correlated results possible from homebrew assays?",
+    "answer": "maybe",
+    "answer_letter": "C",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "16392897"
+    ]
+  },
+  {
+    "id": "pubmedqa::24481006",
+    "question": "Should cavitation in proximal surfaces be reported in cone beam computed tomography examination?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "24481006"
+    ]
+  },
+  {
+    "id": "pubmedqa::7482275",
+    "question": "Necrotizing fasciitis: an indication for hyperbaric oxygenation therapy?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "7482275"
+    ]
+  },
+  {
+    "id": "pubmedqa::26561905",
+    "question": "Do teleoncology models of care enable safe delivery of chemotherapy in rural towns?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "26561905"
+    ]
+  },
+  {
+    "id": "pubmedqa::26548832",
+    "question": "Assessing Patient Reported Outcomes Measures via Phone Interviews Versus Patient Self-Survey in the Clinic: Are We Measuring the Same Thing?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "26548832"
+    ]
+  },
+  {
+    "id": "pubmedqa::16778275",
+    "question": "Is routine chest radiography after transbronchial biopsy necessary?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "16778275"
+    ]
+  },
+  {
+    "id": "pubmedqa::12006913",
+    "question": "Do lipids, blood pressure, diabetes, and smoking confer equal risk of myocardial infarction in women as in men?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "12006913"
+    ]
+  },
+  {
+    "id": "pubmedqa::19237087",
+    "question": "Are many colorectal cancers due to missed adenomas?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "19237087"
+    ]
+  },
+  {
+    "id": "pubmedqa::25793749",
+    "question": "Do Web-based and clinic samples of gay men living with HIV differ on self-reported physical and psychological symptoms?",
+    "answer": "maybe",
+    "answer_letter": "C",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "25793749"
+    ]
+  },
+  {
+    "id": "pubmedqa::12419743",
+    "question": "Is first-line single-agent mitoxantrone in the treatment of high-risk metastatic breast cancer patients as effective as combination chemotherapy?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "12419743"
+    ]
+  },
+  {
+    "id": "pubmedqa::10456814",
+    "question": "Does desflurane alter left ventricular function when used to control surgical stimulation during aortic surgery?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "10456814"
+    ]
+  },
+  {
+    "id": "pubmedqa::24139705",
+    "question": "Telemedicine and type 1 diabetes: is technology per se sufficient to improve glycaemic control?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "24139705"
+    ]
+  },
+  {
+    "id": "pubmedqa::21658267",
+    "question": "Do improvements in outreach, clinical, and family and community-based services predict improvements in child survival?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "21658267"
+    ]
+  },
+  {
+    "id": "pubmedqa::17076091",
+    "question": "Does obstructive sleep apnea affect aerobic fitness?",
+    "answer": "maybe",
+    "answer_letter": "C",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "17076091"
+    ]
+  },
+  {
+    "id": "pubmedqa::16968876",
+    "question": "Is a patient's self-reported health-related quality of life a prognostic factor for survival in non-small-cell lung cancer patients?",
+    "answer": "maybe",
+    "answer_letter": "C",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "16968876"
+    ]
+  },
+  {
+    "id": "pubmedqa::21848798",
+    "question": "MiraLAX vs. Golytely: is there a significant difference in the adenoma detection rate?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "21848798"
+    ]
+  },
+  {
+    "id": "pubmedqa::24191126",
+    "question": "Is CA72-4 a useful biomarker in differential diagnosis between ovarian endometrioma and epithelial ovarian cancer?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "24191126"
+    ]
+  },
+  {
+    "id": "pubmedqa::23347337",
+    "question": "Is intensive chemotherapy safe for rural cancer patients?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "23347337"
+    ]
+  },
+  {
+    "id": "pubmedqa::23422012",
+    "question": "Is vancomycin MIC creep a worldwide phenomenon?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "23422012"
+    ]
+  },
+  {
+    "id": "pubmedqa::22365295",
+    "question": "Totally implantable venous access device placement by interventional radiologists: are prophylactic antibiotics necessary?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "22365295"
+    ]
+  },
+  {
+    "id": "pubmedqa::16816043",
+    "question": "Do French lay people and health professionals find it acceptable to breach confidentiality to protect a patient's wife from a sexually transmitted disease?",
+    "answer": "maybe",
+    "answer_letter": "C",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "16816043"
+    ]
+  },
+  {
+    "id": "pubmedqa::12442934",
+    "question": "Does ibuprofen increase perioperative blood loss during hip arthroplasty?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "12442934"
+    ]
+  },
+  {
+    "id": "pubmedqa::9616411",
+    "question": "Do general practitioner hospitals reduce the utilisation of general hospital beds?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "9616411"
+    ]
+  },
+  {
+    "id": "pubmedqa::18714572",
+    "question": "Does vaginal intraepithelial neoplasia have the same evolution as cervical intraepithelial neoplasia?",
+    "answer": "maybe",
+    "answer_letter": "C",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "18714572"
+    ]
+  },
+  {
+    "id": "pubmedqa::18667100",
+    "question": "Do risk factors for suicidal behavior differ by affective disorder polarity?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "18667100"
+    ]
+  },
+  {
+    "id": "pubmedqa::21394762",
+    "question": "Is pelvic pain associated with defecatory symptoms in women with pelvic organ prolapse?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "21394762"
+    ]
+  },
+  {
+    "id": "pubmedqa::28056802",
+    "question": "Is non-HDL-cholesterol a better predictor of long-term outcome in patients after acute myocardial infarction compared to LDL-cholesterol?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "28056802"
+    ]
+  },
+  {
+    "id": "pubmedqa::10201555",
+    "question": "Is low serum chloride level a risk factor for cardiovascular mortality?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "10201555"
+    ]
+  },
+  {
+    "id": "pubmedqa::22348433",
+    "question": "Does partial expander deflation exacerbate the adverse effects of radiotherapy in two-stage breast reconstruction?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "22348433"
+    ]
+  },
+  {
+    "id": "pubmedqa::18565233",
+    "question": "Does the lipid-lowering peroxisome proliferator-activated receptors ligand bezafibrate prevent colon cancer in patients with coronary artery disease?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "18565233"
+    ]
+  },
+  {
+    "id": "pubmedqa::10173769",
+    "question": "Longer term quality of life and outcome in stroke patients: is the Barthel index alone an adequate measure of outcome?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "10173769"
+    ]
+  },
+  {
+    "id": "pubmedqa::22188074",
+    "question": "Do instrumental activities of daily living predict dementia at 1- and 2-year follow-up?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "22188074"
+    ]
+  },
+  {
+    "id": "pubmedqa::9488747",
+    "question": "Syncope during bathing in infants, a pediatric form of water-induced urticaria?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "9488747"
+    ]
+  },
+  {
+    "id": "pubmedqa::15041506",
+    "question": "Is fear of anaphylactic shock discouraging surgeons from more widely adopting percutaneous and laparoscopic techniques in the treatment of liver hydatid cyst?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "15041506"
+    ]
+  },
+  {
+    "id": "pubmedqa::18158048",
+    "question": "Histologic evaluation of the testicular remnant associated with the vanishing testes syndrome: is surgical management necessary?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "18158048"
+    ]
+  },
+  {
+    "id": "pubmedqa::24995509",
+    "question": "HIF1A as a major vascular endothelial growth factor regulator: do its polymorphisms have an association with age-related macular degeneration?",
+    "answer": "maybe",
+    "answer_letter": "C",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "24995509"
+    ]
+  },
+  {
+    "id": "pubmedqa::22266735",
+    "question": "Screening for gestational diabetes mellitus: are the criteria proposed by the international association of the Diabetes and Pregnancy Study Groups cost-effective?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "22266735"
+    ]
+  },
+  {
+    "id": "pubmedqa::23412195",
+    "question": "Should displaced midshaft clavicular fractures be treated surgically?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "23412195"
+    ]
+  },
+  {
+    "id": "pubmedqa::8566975",
+    "question": "Serovar specific immunity to Neisseria gonorrhoeae: does it exist?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "8566975"
+    ]
+  },
+  {
+    "id": "pubmedqa::12407608",
+    "question": "Does ultrasound imaging before puncture facilitate internal jugular vein cannulation?",
+    "answer": "maybe",
+    "answer_letter": "C",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "12407608"
+    ]
+  },
+  {
+    "id": "pubmedqa::21889895",
+    "question": "Will CT ordering practices change if we educate residents about the potential effects of radiation exposure?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "21889895"
+    ]
+  },
+  {
+    "id": "pubmedqa::10922093",
+    "question": "Does open access endoscopy close the door to an adequately informed patient?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "10922093"
+    ]
+  },
+  {
+    "id": "pubmedqa::22540518",
+    "question": "Is micro-computed tomography reliable to determine the microstructure of the maxillary alveolar bone?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "22540518"
+    ]
+  },
+  {
+    "id": "pubmedqa::23379759",
+    "question": "Can early second-look tympanoplasty reduce the rate of conversion to modified radical mastoidectomy?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "23379759"
+    ]
+  },
+  {
+    "id": "pubmedqa::23992109",
+    "question": "Is the urinary biomarkers assessment a non-invasive approach to tubular lesions of the solitary kidney?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "23992109"
+    ]
+  },
+  {
+    "id": "pubmedqa::10401824",
+    "question": "Is laparoscopic reoperation for failed antireflux surgery feasible?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "10401824"
+    ]
+  },
+  {
+    "id": "pubmedqa::25371231",
+    "question": "Is vitamin D insufficiency or deficiency related to the development of osteochondritis dissecans?",
+    "answer": "maybe",
+    "answer_letter": "C",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "25371231"
+    ]
+  },
+  {
+    "id": "pubmedqa::26852225",
+    "question": "Is adjustment for reporting heterogeneity necessary in sleep disorders?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "26852225"
+    ]
+  },
+  {
+    "id": "pubmedqa::18284441",
+    "question": "Expression of c-kit protooncogen in hepatitis B virus-induced chronic hepatitis, cirrhosis and hepatocellular carcinoma: has it a diagnostic role?",
+    "answer": "maybe",
+    "answer_letter": "C",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "18284441"
+    ]
+  },
+  {
+    "id": "pubmedqa::10223070",
+    "question": "Is perforation of the appendix a risk factor for tubal infertility and ectopic pregnancy?",
+    "answer": "maybe",
+    "answer_letter": "C",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "10223070"
+    ]
+  },
+  {
+    "id": "pubmedqa::18239988",
+    "question": "Differentiation of nonalcoholic from alcoholic steatohepatitis: are routine laboratory markers useful?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "18239988"
+    ]
+  },
+  {
+    "id": "pubmedqa::25394614",
+    "question": "Does timing of initial surfactant treatment make a difference in rates of chronic lung disease or mortality in premature infants?",
+    "answer": "maybe",
+    "answer_letter": "C",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "25394614"
+    ]
+  },
+  {
+    "id": "pubmedqa::16962519",
+    "question": "Volume change of uterine myomas during pregnancy: do myomas really grow?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "16962519"
+    ]
+  },
+  {
+    "id": "pubmedqa::24507422",
+    "question": "Can shape analysis differentiate free-floating internal carotid artery thrombus from atherosclerotic plaque in patients evaluated with CTA for stroke or transient ischemic attack?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "24507422"
+    ]
+  },
+  {
+    "id": "pubmedqa::23621776",
+    "question": "Does a history of unintended pregnancy lessen the likelihood of desire for sterilization reversal?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "23621776"
+    ]
+  },
+  {
+    "id": "pubmedqa::23806388",
+    "question": "Do nomograms designed to predict biochemical recurrence (BCR) do a better job of predicting more clinically relevant prostate cancer outcomes than BCR?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "23806388"
+    ]
+  },
+  {
+    "id": "pubmedqa::24751724",
+    "question": "Does ethnicity affect where people with cancer die?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "24751724"
+    ]
+  },
+  {
+    "id": "pubmedqa::27281318",
+    "question": "Can Flexible Instruments Create Adequate Femoral Tunnel Lengths at 90° of Knee Flexion in Anterior Cruciate Ligament Reconstruction?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "27281318"
+    ]
+  },
+  {
+    "id": "pubmedqa::26419377",
+    "question": "Are pelvic anatomical structures in danger during arthroscopic acetabular labral repair?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "26419377"
+    ]
+  },
+  {
+    "id": "pubmedqa::20736672",
+    "question": "Does perspective-taking increase patient satisfaction in medical encounters?",
+    "answer": "maybe",
+    "answer_letter": "C",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "20736672"
+    ]
+  },
+  {
+    "id": "pubmedqa::18783922",
+    "question": "Do cytokines have any role in epilepsy?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "18783922"
+    ]
+  },
+  {
+    "id": "pubmedqa::19575104",
+    "question": "Do foreign bodies migrate through the body towards the heart?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "19575104"
+    ]
+  },
+  {
+    "id": "pubmedqa::26536001",
+    "question": "Is There an Additional Value of Using Somatostatin Receptor Subtype 2a Immunohistochemistry Compared to Somatostatin Receptor Scintigraphy Uptake in Predicting Gastroenteropancreatic Neuroendocrine Tumor Response?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "26536001"
+    ]
+  },
+  {
+    "id": "pubmedqa::22154448",
+    "question": "Epidural analgesia for surgical treatment of peritoneal carcinomatosis: a risky technique?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "22154448"
+    ]
+  },
+  {
+    "id": "pubmedqa::18041059",
+    "question": "Do adjuvant aromatase inhibitors increase the cardiovascular risk in postmenopausal women with early breast cancer?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "18041059"
+    ]
+  },
+  {
+    "id": "pubmedqa::21214884",
+    "question": "Can 'high-risk' human papillomaviruses (HPVs) be detected in human breast milk?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "21214884"
+    ]
+  },
+  {
+    "id": "pubmedqa::15528969",
+    "question": "Is expert breast pathology assessment necessary for the management of ductal carcinoma in situ ?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "15528969"
+    ]
+  },
+  {
+    "id": "pubmedqa::18568290",
+    "question": "Is there a role for endothelin-1 in the hemodynamic changes during hemodialysis?",
+    "answer": "maybe",
+    "answer_letter": "C",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "18568290"
+    ]
+  },
+  {
+    "id": "pubmedqa::11079675",
+    "question": "Pulmonary valve replacement in adults late after repair of tetralogy of fallot: are we operating too late?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "11079675"
+    ]
+  },
+  {
+    "id": "pubmedqa::22537902",
+    "question": "Colorectal cancer with synchronous liver metastases: does global management at the same centre improve results?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "22537902"
+    ]
+  },
+  {
+    "id": "pubmedqa::21823940",
+    "question": "Department of Transportation vs self-reported data on motor vehicle collisions and driving convictions for stroke survivors: do they agree?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "21823940"
+    ]
+  },
+  {
+    "id": "pubmedqa::24495711",
+    "question": "Is crime associated with over-the-counter pharmacy syringe sales?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "24495711"
+    ]
+  },
+  {
+    "id": "pubmedqa::14627582",
+    "question": "Double reading of barium enemas: is it necessary?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "14627582"
+    ]
+  },
+  {
+    "id": "pubmedqa::26778755",
+    "question": "Vaginal dose assessment in image-guided brachytherapy for cervical cancer: Can we really rely on dose-point evaluation?",
+    "answer": "maybe",
+    "answer_letter": "C",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "26778755"
+    ]
+  },
+  {
+    "id": "pubmedqa::22453060",
+    "question": "Does a 4 diagram manual enable laypersons to operate the Laryngeal Mask Supreme®?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "22453060"
+    ]
+  },
+  {
+    "id": "pubmedqa::26578404",
+    "question": "Patient-Controlled Therapy of Breathlessness in Palliative Care: A New Therapeutic Concept for Opioid Administration?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "26578404"
+    ]
+  },
+  {
+    "id": "pubmedqa::23810330",
+    "question": "Is intraoperative neuromonitoring associated with better functional outcome in patients undergoing open TME?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "23810330"
+    ]
+  },
+  {
+    "id": "pubmedqa::20605051",
+    "question": "Does case-mix based reimbursement stimulate the development of process-oriented care delivery?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "20605051"
+    ]
+  },
+  {
+    "id": "pubmedqa::20187289",
+    "question": "Prescriptions as a proxy for asthma in children: a good choice?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "20187289"
+    ]
+  },
+  {
+    "id": "pubmedqa::21645374",
+    "question": "Do mitochondria play a role in remodelling lace plant leaves during programmed cell death?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "21645374"
+    ]
+  },
+  {
+    "id": "pubmedqa::27456836",
+    "question": "Do Electrochemiluminescence Assays Improve Prediction of Time to Type 1 Diabetes in Autoantibody-Positive TrialNet Subjects?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "27456836"
+    ]
+  },
+  {
+    "id": "pubmedqa::27643961",
+    "question": "Major depression and alcohol use disorder in adolescence: Does comorbidity lead to poorer outcomes of depression?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "27643961"
+    ]
+  },
+  {
+    "id": "pubmedqa::25079920",
+    "question": "Do parents recall and understand children's weight status information after BMI screening?",
+    "answer": "maybe",
+    "answer_letter": "C",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "25079920"
+    ]
+  },
+  {
+    "id": "pubmedqa::21850494",
+    "question": "Hepatorenal syndrome: are we missing some prognostic factors?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "21850494"
+    ]
+  },
+  {
+    "id": "pubmedqa::12963175",
+    "question": "Can progression of valvar aortic stenosis be predicted accurately?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "12963175"
+    ]
+  },
+  {
+    "id": "pubmedqa::26304701",
+    "question": "Can nurse-led preoperative education reduce anxiety and postoperative complications of patients undergoing cardiac surgery?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "26304701"
+    ]
+  },
+  {
+    "id": "pubmedqa::22683044",
+    "question": "Does open access publishing increase the impact of scientific articles?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "22683044"
+    ]
+  },
+  {
+    "id": "pubmedqa::26708803",
+    "question": "Treatment of contralateral hydrocele in neonatal testicular torsion: Is less more?",
+    "answer": "maybe",
+    "answer_letter": "C",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "26708803"
+    ]
+  },
+  {
+    "id": "pubmedqa::8521557",
+    "question": "The insertion allele of the ACE gene I/D polymorphism. A candidate gene for insulin resistance?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "8521557"
+    ]
+  },
+  {
+    "id": "pubmedqa::18926458",
+    "question": "Are octogenarians at high risk for carotid endarterectomy?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "18926458"
+    ]
+  },
+  {
+    "id": "pubmedqa::20602784",
+    "question": "Identification of racial disparities in breast cancer mortality: does scale matter?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "20602784"
+    ]
+  },
+  {
+    "id": "pubmedqa::15050326",
+    "question": "Does radiotherapy around the time of pregnancy for Hodgkin's disease modify the risk of breast cancer?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "15050326"
+    ]
+  },
+  {
+    "id": "pubmedqa::18319270",
+    "question": "Does confined placental mosaicism account for adverse perinatal outcomes in IVF pregnancies?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "18319270"
+    ]
+  },
+  {
+    "id": "pubmedqa::23361217",
+    "question": "Does the type of tibial component affect mechanical alignment in unicompartmental knee replacement?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "23361217"
+    ]
+  },
+  {
+    "id": "pubmedqa::24013712",
+    "question": "Preoperative platelet count in esophageal squamous cell carcinoma: is it a prognostic factor?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "24013712"
+    ]
+  },
+  {
+    "id": "pubmedqa::12070552",
+    "question": "Do antibiotics decrease post-tonsillectomy morbidity?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "12070552"
+    ]
+  },
+  {
+    "id": "pubmedqa::17342562",
+    "question": "The clinical significance of bile duct sludge: is it different from bile duct stones?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "17342562"
+    ]
+  }
+]

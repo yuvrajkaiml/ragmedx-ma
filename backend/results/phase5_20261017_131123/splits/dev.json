@@ -1,0 +1,1648 @@
+[
+  {
+    "id": "bioasq::602354e41cb411341a000098",
+    "question": "Nemolizumab has been shown to be effective for which disease?",
+    "answer": "Nemolizumab has been shown to be effective for atopic dermatitis.",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "33735876",
+      "34213742",
+      "32507066",
+      "29753033",
+      "28703903",
+      "32640132",
+      "33045848",
+      "34726262",
+      "31449914",
+      "33924978",
+      "33644104",
+      "28249150",
+      "32074418",
+      "33711179"
+    ]
+  },
+  {
+    "id": "bioasq::65f85fdbc4010b4d78000054",
+    "question": "What is the technique of choice to perform a caesarean section?",
+    "answer": "Low transverse incision Laparotomy followed by hysterotomy with a low transverse incision is the technique of choice to perform a caesarean section. The technique of choice to perform a caesarean section is a low transverse incision, which is made horizontally in the lower part of the uterus.",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "3497629",
+      "32760792"
+    ]
+  },
+  {
+    "id": "bioasq::5a9da37e4e03427e73000004",
+    "question": "What is Mendelian randomization?",
+    "answer": "Instrumental variable analysis is an approach for obtaining causal inferences on the effect of an exposure (risk factor) on an outcome from observational data. It has gained in popularity over the past decade with the use of genetic variants as instrumental variables, known as Mendelian randomization.",
+    "type": "summary",
+    "source": "bioasq",
+    "pmid": [
+      "26282889",
+      "27846416"
+    ]
+  },
+  {
+    "id": "bioasq::531464a6e3eabad021000014",
+    "question": "Mutation of which gene is associated with McLeod syndrome?",
+    "answer": "Mutation of XK gene  is associated with McLeod syndrome. The XK gene is an X-chromosomal gene. The McLeod phenotype is derived from various forms of XK gene defects that result in the absence of XK protein, and is defined hematologically by the absence of Kx antigen, weakening of Kell system antigens, and red cell acanthocytosis.",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "11099667",
+      "11761473",
+      "19909712",
+      "11562915",
+      "1734714",
+      "24098554",
+      "23943810",
+      "17300882",
+      "21145924",
+      "10846875",
+      "12899725",
+      "8004674",
+      "17277857",
+      "17469188",
+      "12243006",
+      "10651848",
+      "3334897",
+      "18167163",
+      "16344536",
+      "17870653",
+      "10930599",
+      "8634708",
+      "10426139",
+      "19040496",
+      "22383943",
+      "12823753",
+      "11746618",
+      "11703337",
+      "24179763",
+      "16314760",
+      "10882128",
+      "8619554",
+      "11261514",
+      "17302777"
+    ]
+  },
+  {
+    "id": "bioasq::5a67ade5b750ff445500000c",
+    "question": "Does erythromycin increase risk of hypertrophic pyloric stenosis?",
+    "answer": "Yes, post-natal erythromycin exposure is associated with increased risk of hypertrophic pyloric stenosis. The association is stronger when exposure occurs in the first 2 weeks of life.",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "27655365",
+      "12100810",
+      "12693559",
+      "11562617",
+      "25687145",
+      "23558266"
+    ]
+  },
+  {
+    "id": "bioasq::54edf72c94afd61504000013",
+    "question": "What is the presumed key event in Fanconi anemia pathogenesis?",
+    "answer": "Monoubiquitination of the Fanconi anaemia protein FANCD2 is a key event leading to repair of interstrand cross-links. Failure of FANCD2 monoubiquitination by the nuclear FA protein complex has a severe impact on the DNA repair functions of cells.",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "22675617",
+      "15601828",
+      "19609304",
+      "20937699",
+      "15502827",
+      "22258451",
+      "15383454"
+    ]
+  },
+  {
+    "id": "bioasq::55391ce8bc4f83e828000018",
+    "question": "Which signaling pathways have been associated with medulloblastoma formation and growth?",
+    "answer": "Medulloblastoma comprises approximately 20% of all primary pediatric brain tumors. Multiple signaling pathways have been associated with disease formation and growth. These include the developmental pathways Hedgehog, Notch, and Wnt, as well as pathways in which the receptor tyrosine kinases (RTK) c-Met, erbB2, IGF-R and TrkC, and the oncoprotein Myc are involved.",
+    "type": "list",
+    "source": "bioasq",
+    "pmid": [
+      "21679342",
+      "20232424",
+      "16510586",
+      "24982684",
+      "18651559",
+      "9973222",
+      "19738049",
+      "16707597",
+      "20053726",
+      "25052069",
+      "17545597",
+      "21358093",
+      "16398471",
+      "19747111",
+      "15013214",
+      "15195141"
+    ]
+  },
+  {
+    "id": "bioasq::5e4705753f54159529000017",
+    "question": "Can the radiation of cellphones be dangerous?",
+    "answer": "two sets of more recent studies with longer exposure duration: the Interphone studies and the Swedish studies led by Dr. Lennart Hardell. The recent studies reach very different conclusions. With four exceptions the industry-funded Interphone studies found no increased risk of brain tumors from cellphone use, while the Swedish studies, independent of industry funding, reported numerous findings of significant increased brain tumor risk from cellphone and cordless phone use.",
+    "type": "summary",
+    "source": "bioasq",
+    "pmid": [
+      "19356911",
+      "23302218"
+    ]
+  },
+  {
+    "id": "bioasq::5e639c051af46fc130000013",
+    "question": "What is chemokinesis?",
+    "answer": "Chemokinesis is chemically prompted kinesis, a motile response of unicellular prokaryotic or eukaryotic organisms to chemicals that cause the cell to make some kind of change in their migratory/swimming behaviour.",
+    "type": "summary",
+    "source": "bioasq",
+    "pmid": [
+      "29566102",
+      "8604012",
+      "15274332",
+      "21743962",
+      "25290568",
+      "16317716"
+    ]
+  },
+  {
+    "id": "bioasq::52ebb2c698d0239505000029",
+    "question": "Which are the clinical characteristics of Tuberous Sclerosis?",
+    "answer": "The clinical characteristics of Tuberous Sclerosis include epilepsy, subependymal giant cell astrocytomas, lymphangioleiomyomatosis, rhabdomyoma, renal angiomyolipomas, cortical tubers, neurofibromas, angiofibromas, mental retardation, and behavioral disorders.",
+    "type": "list",
+    "source": "bioasq",
+    "pmid": [
+      "14716484",
+      "22791573",
+      "19889303",
+      "16210669",
+      "11520735",
+      "23219029",
+      "23007140",
+      "19133941",
+      "24304436",
+      "15221338",
+      "24180681",
+      "12618672",
+      "19239998"
+    ]
+  },
+  {
+    "id": "bioasq::5e763c3fc6a8763d23000010",
+    "question": "Was vivotif licensed in Europe and the US at the same time?",
+    "answer": "No, vivotif was licensed in Europe in 1983 and in the US in 1989.",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "28515625"
+    ]
+  },
+  {
+    "id": "bioasq::5c5310c37e3cb0e231000010",
+    "question": "What part of the body is affected by Meniere's disease?",
+    "answer": "The inner ear is the body part that is associated with Meniere's disease.",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "29283101",
+      "28304075",
+      "28760332",
+      "12486835",
+      "21319945"
+    ]
+  },
+  {
+    "id": "bioasq::56ebfa13107309bc2f000004",
+    "question": "Which are the roles of chromatin compartments in the eukaryotic nucleus?",
+    "answer": "The complexity in composition and function of the eukaryotic nucleus is achieved through its organization in specialized nuclear compartments. Chromosome conformation capture approaches have shown that interphase chromatin is partitioned into spatially segregated Mb-sized compartments and sub-Mb-sized topological domains. This compartmentalization is thought to facilitate the matching of genes and regulatory elements. Cohesin-based chromatin interactions enable regulated gene expression within preexisting architectural compartments. Therefore, concentrating proteins needed to perform different steps of RNA synthesis within specialized nuclear compartments is important in orchestrating events required for efficient gene expression.",
+    "type": "list",
+    "source": "bioasq",
+    "pmid": [
+      "15791412",
+      "18974210",
+      "21637796",
+      "15140983",
+      "22198682",
+      "11909528",
+      "9636146",
+      "9291094",
+      "24002784",
+      "9587055",
+      "18434402",
+      "25409831",
+      "11186332"
+    ]
+  },
+  {
+    "id": "bioasq::5717e0717de986d80d000002",
+    "question": "What is known about diseases associated with mutations in the CHCHD10 gene?",
+    "answer": "Mutation c.197G>T p.G66V in CHCHD10 is the cause of the lower motor neuron syndrome LOSMoN/SMAJ. \nMutations in the CHCHD10 gene have been identified in a large family with a complex phenotype variably associating frontotemporal dementia (FTD) with amyotrophic lateral sclerosis (ALS), cerebellar ataxia, myopathy, and hearing impairment.\nOther findings links CHCHD10 mutations to mitochondrial myopathy. Mutations in the CHCHD10 gene have been recently identified in a large family with a complex phenotype variably associating frontotemporal dementia (FTD) with amyotrophic lateral sclerosis (ALS), cerebellar ataxia, myopathy, and hearing impairment.",
+    "type": "summary",
+    "source": "bioasq",
+    "pmid": [
+      "24934289",
+      "25428574",
+      "25193783",
+      "25155093"
+    ]
+  },
+  {
+    "id": "bioasq::53147b52e3eabad021000015",
+    "question": "What is a benefit of being g6PD-deficient?",
+    "answer": "Increased resistance to malaria, reduces the risk of coronary diseases, beneficial effect in terms of longevity",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "10403541",
+      "24152564",
+      "23534950",
+      "21403409",
+      "24502194",
+      "21929367",
+      "15906719",
+      "24052930",
+      "9553792",
+      "23696099",
+      "22639416",
+      "3582603",
+      "24316370",
+      "23479361",
+      "24188096"
+    ]
+  },
+  {
+    "id": "bioasq::5ad240f70340b9f058000015",
+    "question": "Is human lysyl oxidase-like 2 a glycoprotein?",
+    "answer": "Yes, human lysyl oxidase-like 2 is a glycoprotein.",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "21954900",
+      "23319596"
+    ]
+  },
+  {
+    "id": "bioasq::5c9fb583ecadf2e73f000042",
+    "question": "What are 5 key questions in human performance modeling?",
+    "answer": "There are five key questions of human performance modeling: 1) Why we build models of human performance; 2) What the expectations of a good human performance model are; 3) What the procedures and requirements in building and verifying a human performance model are; 4) How we integrate a human performance model with system design; and 5) What the possible future directions of human performance modeling research are. the five key questions of human performance modeling: 1) why we build models of human performance; 2) what the expectations of a good human performance model are; 3) what the procedures and requirements in building and verifying a human performance model are; 4) how we integrate a human performance model with system design; and 5) what the possible future directions of human performance modeling research are. the five key questions of human performance modeling: 1) Why we build models of human performance; 2) What the expectations of a good human performance model are; 3) What the procedures and requirements in building and verifying a human performance model are; 4) How we integrate a human performance model with system design; and 5) What the possible future directions of human performance modeling research are. the five key questions of human performance modeling: 1) Why we build models of human performance; 2) What the expectations of a good human performance model are; 3) What the procedures and requirements in building and verifying a human performance model are; 4) How we integrate a human performance model with system design; and 5) What the possible future directions of human performance modeling research are",
+    "type": "list",
+    "source": "bioasq",
+    "pmid": [
+      "22005615",
+      "29531424"
+    ]
+  },
+  {
+    "id": "bioasq::61f7d5a0882a024a10000035",
+    "question": "Which molecule is targeted by Fenebrutinib?",
+    "answer": "Fenebrutinib is a noncovalent, oral, and highly selective inhibitor of Bruton's tyrosine kinase (BTK).",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "34750553",
+      "31494233",
+      "32832028",
+      "32270926",
+      "33806595",
+      "31907670",
+      "31446134",
+      "34042314",
+      "33777941",
+      "31371481",
+      "33689480"
+    ]
+  },
+  {
+    "id": "bioasq::5a80d965faa1ab7d2e000025",
+    "question": "What is metaSPAdes?",
+    "answer": "MetaSPAdes is a new versatile metagenomic assembler. While metagenomics has emerged as a technology of choice for analyzing bacterial populations, the assembly of metagenomic data remains challenging, thus stifling biological discoveries. Moreover, recent studies revealed that complex bacterial populations may be composed from dozens of related strains, thus further amplifying the challenge of metagenomic assembly. MetaSPAdes is a new versatile metagenomic assembler which addresses various challenges of metagenomic assembly by capitalizing on computational ideas that proved to be useful in assemblies of single cells and highly polymorphic diploid genomes.",
+    "type": "summary",
+    "source": "bioasq",
+    "pmid": [
+      "28298430",
+      "29036597",
+      "28948103"
+    ]
+  },
+  {
+    "id": "bioasq::58bebc4c02b8c60953000015",
+    "question": "What is the connection between furin and hepcidin?",
+    "answer": "The iron-regulatory peptide hepcidin is synthesized in the liver as an 84-aa pre-pro-hormone maturated by proteolysis through a consensus furin cleavage site to generate the bioactive 25-aa peptide secreted in the circulation. The hepatic prohormone convertase furin mediates the posttranslational processing of hepcidin.",
+    "type": "summary",
+    "source": "bioasq",
+    "pmid": [
+      "19070914",
+      "20634490",
+      "24808863",
+      "18664504",
+      "17905609",
+      "18775801",
+      "23390091",
+      "19610021"
+    ]
+  },
+  {
+    "id": "bioasq::532f0c4ed6d3ac6a3400002e",
+    "question": "Are patients with marfan syndrome at increased risk of arrhythmias?",
+    "answer": "Patients with marfan syndrome carry increased risk for arrhythmias",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "17597390",
+      "22738784",
+      "12535830"
+    ]
+  },
+  {
+    "id": "bioasq::61f9605f882a024a1000004f",
+    "question": "Are variants in FHF2 (also known as FGF13) associated with encephalopathy?",
+    "answer": "Yes. FHF2 (also known as FGF13) variants are a cause of infantile-onset developmental and epileptic encephalopathy.",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "33245860"
+    ]
+  },
+  {
+    "id": "bioasq::518ba4b5310faafe08000005",
+    "question": "Which drugs are utilized to treat eosinophilic esophagitis?",
+    "answer": "Therapeutic options of eosinophilic esophagitis include use of proton-pump inhibitors, immunosuppressive drugs, elimination diets, and esophageal dilatation.\nOral viscous budesonide (OVB) is an effective treatment of pan-esophageal disease in children with EoE. OVB improves symptoms and endoscopic and histologic features.",
+    "type": "list",
+    "source": "bioasq",
+    "pmid": [
+      "19533356",
+      "22475741",
+      "22561055",
+      "20457157",
+      "23011019",
+      "23478244",
+      "21277394"
+    ]
+  },
+  {
+    "id": "bioasq::58848822e56acf517600000c",
+    "question": "What is the mechanism of action of Osimertinib?",
+    "answer": "Osimertinib is a third-generation irreversible tyrosine kinase inhibitor of both activating EGFR mutations and resistance-associated T790M point mutation.",
+    "type": "summary",
+    "source": "bioasq",
+    "pmid": [
+      "27861144",
+      "27393507",
+      "27923714",
+      "26902828",
+      "27169328",
+      "27835594",
+      "27912836",
+      "26620497",
+      "27885838",
+      "27196753",
+      "26720671",
+      "26515464",
+      "27660466",
+      "27071706",
+      "27649127",
+      "26898616",
+      "26943236"
+    ]
+  },
+  {
+    "id": "bioasq::5e920ddf2d3121100d00000d",
+    "question": "What is endoplasmic reticulum stress?",
+    "answer": "Endoplasmic reticulum stress,\" an imbalance between protein folding load and capacity leading to the accumulation of unfolded proteins in the endoplasmic reticulum lumen, has been implicated in rheumatoid arthritis and other inflammatory and metabolic diseases.\nEndoplasmic reticulum stress is associated with the pathophysiology of various liver diseases. Endoplasmic reticulum stress mediates the accumulation of abnormal proteins and leads to oxidative stress, cytoplasmic inclusion body formation, and apoptosis in hepatocytes.\nThe endoplasmic reticulum stress response (ERSR) is activated in a variety of neurodegenerative diseases and/or traumatic injuries. Subsequent restoration of ER homeostasis may contribute to improvement in the functional outcome of these diseases. Endoplasmic reticulum stress is an imbalance between protein folding load and capacity leading to the accumulation of unfolded proteins in the endoplasmic reticulum lumen.",
+    "type": "summary",
+    "source": "bioasq",
+    "pmid": [
+      "28833755",
+      "26842780",
+      "28295916"
+    ]
+  },
+  {
+    "id": "bioasq::5e480909d14c9f295d000003",
+    "question": "Are astronauts in higher risk for developing cancer?",
+    "answer": "No significant associations between space radiation dose and mortality were found using logistic regression with an internal reference group, adjusting for medical radiation.",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "29855508",
+      "29644336"
+    ]
+  },
+  {
+    "id": "bioasq::53398855d6d3ac6a3400005b",
+    "question": "What histone modification is recognized by the bromodomain?",
+    "answer": "Acetylated lysines in histones (generally H3 and H4)",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "15014446",
+      "21596426",
+      "17049045",
+      "21189220",
+      "16265664",
+      "10746732",
+      "15382140",
+      "15143168",
+      "21851057",
+      "15970672",
+      "23095041",
+      "21271695",
+      "10716917"
+    ]
+  },
+  {
+    "id": "bioasq::5e2f972bfbd6abf43b000030",
+    "question": "List Alkaptonuria Triad.",
+    "answer": "Alkaptonuria is a rare inherited genetic disorder of tyrosine metabolism characterized by a triad of homogentisic aciduria, ochronosis, and arthritis.",
+    "type": "list",
+    "source": "bioasq",
+    "pmid": [
+      "18846913",
+      "27142149",
+      "21772695",
+      "21927854",
+      "31022456",
+      "29501639",
+      "23105706",
+      "26474772",
+      "21254745"
+    ]
+  },
+  {
+    "id": "bioasq::5c54d1a207647bbc4b000007",
+    "question": "What is nyctinasty in plants?",
+    "answer": "Nyctinasty is the circadian rhythmic nastic movement of leguminous plants in response to the onset of darkness; a unique and intriguing phenomenon that has attracted attention for centuries. Leguminous plants open their leaves during the daytime and close them at night as if sleeping, a type of movement that follows circadian rhythms, and is known as nyctinastic movement",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "17304541",
+      "14527150",
+      "29983317",
+      "29998471",
+      "20349506"
+    ]
+  },
+  {
+    "id": "bioasq::51640b4a298dcd4e51000050",
+    "question": "Is it safe to take isotretinoin during pregnancy?",
+    "answer": "No. The isotretinoin has severe teratogenic effects and it is not safe to use during pregnancy.",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "3209676",
+      "18937624",
+      "3459732",
+      "23559397",
+      "2923442",
+      "17214828",
+      "21198520",
+      "7962395",
+      "19961047",
+      "12171680",
+      "2102396",
+      "9439011",
+      "9035347",
+      "20436882",
+      "3162101",
+      "3162748",
+      "11445913",
+      "15545101",
+      "3501432",
+      "9091512",
+      "9299599",
+      "1473624"
+    ]
+  },
+  {
+    "id": "bioasq::553babc0f321868558000007",
+    "question": "Which types of bacterial microflora are associated with the progression of peri-implantitis?",
+    "answer": "Bacteria such as A. actinomycetemcomitans, P. gingivalis, T. forsythensis, T. denticola, P. intermedia and F. nucleatum are associated with the progression of peri-implantitis.",
+    "type": "list",
+    "source": "bioasq",
+    "pmid": [
+      "20976394",
+      "9526919",
+      "14598129",
+      "23937262"
+    ]
+  },
+  {
+    "id": "bioasq::5d35ef017bc3fee31f000001",
+    "question": "Which epigenetic mark is deposited by PRC2?",
+    "answer": "H3K27me3 is the major histone methyltransferase activity of PRC2. The Polycomb Repressive Complex 2 (PRC2) has been identified as a key regulator of epigenetic mark H3K27me3. There are data showing coordinate regulation between DNAme and H3K27me3, which are both involved in the establishment and maintenance of epigenetic gene silencing. We found that the Polycomb Repressive Complex 2 (PRC2), which is responsible for di- and trimethylation of H3K27 (H3K27me2/me3), binds to its own site of methylation. H3K27me3 is the endogenous epigenetic mark deposited by PRC2. H3K27me3 is an epigenetic mark deposited by PRC2 (Polycomb repressive complex 2). polycomb repressive complex 2 (prc2 ) mediates trimethylation of lysine 27 on histone h3 Polycomb repressive complex 2 (PRC2) trimethylates histone H3 at lysine 27, which establishes H3K27me3 repressive epigenetic marks that promote tissue-specific differentiation by silencing ectopic gene programs. PRC2 is H3K27me3 ubiquitously-associated and acts as an epigenetic mark deposition mechanism.",
+    "type": "factoid",
+    "source": "bioasq",
+    "pmid": [
+      "27410265",
+      "27216774",
+      "22158708",
+      "28256832",
+      "17525233",
+      "24469045",
+      "18931660",
+      "19377285",
+      "23326524"
+    ]
+  },
+  {
+    "id": "bioasq::5c6df86b7c78d69471000045",
+    "question": "Is baricitinib effective for rheumatoid arthritis?",
+    "answer": "Yes, baricitinib is effective treatment of rheumatoid arthritis.",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "28097393",
+      "28440680",
+      "24818516",
+      "29134891",
+      "27427830",
+      "30058112",
+      "29687421",
+      "29500799",
+      "30191390",
+      "28199814",
+      "28290136",
+      "30219772",
+      "28811354",
+      "30006916",
+      "29415145",
+      "30183607"
+    ]
+  },
+  {
+    "id": "pubmedqa::23571528",
+    "question": "Sternal skin conductance: a reasonable surrogate for hot flash measurement?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "23571528"
+    ]
+  },
+  {
+    "id": "pubmedqa::19640728",
+    "question": "Surgical treatment of prosthetic valve endocarditis in patients with double prostheses: is single-valve replacement safe?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "19640728"
+    ]
+  },
+  {
+    "id": "pubmedqa::22042121",
+    "question": "Perioperative care in an animal model for training in abdominal surgery: is it necessary a preoperative fasting?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "22042121"
+    ]
+  },
+  {
+    "id": "pubmedqa::25280365",
+    "question": "Reporting and interpreting red blood cell morphology: is there discordance between clinical pathologists and clinicians?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "25280365"
+    ]
+  },
+  {
+    "id": "pubmedqa::19394934",
+    "question": "Israeli hospital preparedness for terrorism-related multiple casualty incidents: can the surge capacity and injury severity distribution be better predicted?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "19394934"
+    ]
+  },
+  {
+    "id": "pubmedqa::15095519",
+    "question": "Are patients with diabetes receiving the same message from dietitians and nurses?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "15095519"
+    ]
+  },
+  {
+    "id": "pubmedqa::15053041",
+    "question": "Do acute changes in heart rate by isoproterenol affect aortic stiffness in patients with hypertension?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "15053041"
+    ]
+  },
+  {
+    "id": "pubmedqa::18537964",
+    "question": "Does a physician's specialty influence the recording of medication history in patients' case notes?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "18537964"
+    ]
+  },
+  {
+    "id": "pubmedqa::11570976",
+    "question": "Is it Crohn's disease?",
+    "answer": "maybe",
+    "answer_letter": "C",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "11570976"
+    ]
+  },
+  {
+    "id": "pubmedqa::23517744",
+    "question": "Is solitary kidney really more resistant to ischemia?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "23517744"
+    ]
+  },
+  {
+    "id": "pubmedqa::21481154",
+    "question": "Improvements in survival of gynaecological cancer in the Anglia region of England: are these an effect of centralisation of care and use of multidisciplinary management?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "21481154"
+    ]
+  },
+  {
+    "id": "pubmedqa::28247485",
+    "question": "Is the first urinary albumin/creatinine ratio (ACR) in women with suspected preeclampsia a prognostic factor for maternal and neonatal adverse outcome?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "28247485"
+    ]
+  },
+  {
+    "id": "pubmedqa::21946341",
+    "question": "Is there a relationship between complex fractionated atrial electrograms recorded during atrial fibrillation and sinus rhythm fractionation?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "21946341"
+    ]
+  },
+  {
+    "id": "pubmedqa::24614789",
+    "question": "Is lumbar drainage of postoperative cerebrospinal fluid fistula after spine surgery effective?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "24614789"
+    ]
+  },
+  {
+    "id": "pubmedqa::22902073",
+    "question": "Estimated fetal weight by ultrasound: a modifiable risk factor for cesarean delivery?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "22902073"
+    ]
+  },
+  {
+    "id": "pubmedqa::25756710",
+    "question": "Can emergency physicians accurately and reliably assess acute vertigo in the emergency department?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "25756710"
+    ]
+  },
+  {
+    "id": "pubmedqa::20629769",
+    "question": "Is primary angioplasty an acceptable alternative to thrombolysis?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "20629769"
+    ]
+  },
+  {
+    "id": "pubmedqa::20971618",
+    "question": "Are lifetime prevalence of impetigo, molluscum and herpes infection really increased in children having atopic dermatitis?",
+    "answer": "maybe",
+    "answer_letter": "C",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "20971618"
+    ]
+  },
+  {
+    "id": "pubmedqa::22117569",
+    "question": "Is an advance care planning model feasible in community palliative care?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "22117569"
+    ]
+  },
+  {
+    "id": "pubmedqa::9920954",
+    "question": "Do \"America's Best Hospitals\" perform better for acute myocardial infarction?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "9920954"
+    ]
+  },
+  {
+    "id": "pubmedqa::24270957",
+    "question": "Is combined therapy more effective than growth hormone or hyperbaric oxygen alone in the healing of left ischemic and non-ischemic colonic anastomoses?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "24270957"
+    ]
+  },
+  {
+    "id": "pubmedqa::21342862",
+    "question": "Is EQ-5D a valid quality of life instrument in patients with acute coronary syndrome?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "21342862"
+    ]
+  },
+  {
+    "id": "pubmedqa::27136599",
+    "question": "Is it safe to perform rectal anastomosis in gynaecological debulking surgery without a diverting stoma?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "27136599"
+    ]
+  },
+  {
+    "id": "pubmedqa::15597845",
+    "question": "Is the combination with 2-methoxyestradiol able to reduce the dosages of chemotherapeutices in the treatment of human ovarian cancer?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "15597845"
+    ]
+  },
+  {
+    "id": "pubmedqa::12848629",
+    "question": "Is a 9-month treatment sufficient in tuberculous enterocolitis?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "12848629"
+    ]
+  },
+  {
+    "id": "pubmedqa::23224030",
+    "question": "Do European people with type 1 diabetes consume a high atherogenic diet?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "23224030"
+    ]
+  },
+  {
+    "id": "pubmedqa::18507507",
+    "question": "The promise of specialty pharmaceuticals: are they worth the price?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "18507507"
+    ]
+  },
+  {
+    "id": "pubmedqa::22656647",
+    "question": "Are acceptance rates of a national preventive home visit programme for older people socially imbalanced?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "22656647"
+    ]
+  },
+  {
+    "id": "pubmedqa::22532370",
+    "question": "Are increased carotid artery pulsatility and resistance indexes early signs of vascular abnormalities in young obese males?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "22532370"
+    ]
+  },
+  {
+    "id": "pubmedqa::12970636",
+    "question": "Does early discharge with nurse home visits affect adequacy of newborn metabolic screening?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "12970636"
+    ]
+  },
+  {
+    "id": "pubmedqa::26126304",
+    "question": "Estradiol and Antagonist Pretreatment Prior to Microdose Leuprolide in in Vitro Fertilization. Does It Improve IVF Outcomes in Poor Responders as Compared to Oral Contraceptive Pill?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "26126304"
+    ]
+  },
+  {
+    "id": "pubmedqa::24799031",
+    "question": "Is diffusion-weighted imaging a significant indicator of the development of vascularization in hypovascular hepatocellular lesions?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "24799031"
+    ]
+  },
+  {
+    "id": "pubmedqa::12765819",
+    "question": "Spinal subdural hematoma: a sequela of a ruptured intracranial aneurysm?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "12765819"
+    ]
+  },
+  {
+    "id": "pubmedqa::10135926",
+    "question": "Is oral endotracheal intubation efficacy impaired in the helicopter environment?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "10135926"
+    ]
+  },
+  {
+    "id": "pubmedqa::21864397",
+    "question": "Factors determining the survival of nasopharyngeal carcinoma with lung metastasis alone: does combined modality treatment benefit?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "21864397"
+    ]
+  },
+  {
+    "id": "pubmedqa::16465002",
+    "question": "Dose end-tidal carbon dioxide measurement correlate with arterial carbon dioxide in extremely low birth weight infants in the first week of life?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "16465002"
+    ]
+  },
+  {
+    "id": "pubmedqa::22534881",
+    "question": "Does the radiographic transition zone correlate with the level of aganglionosis on the specimen in Hirschsprung's disease?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "22534881"
+    ]
+  },
+  {
+    "id": "pubmedqa::22302761",
+    "question": "Can fractional lasers enhance transdermal absorption of topical lidocaine in an in vivo animal model?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "22302761"
+    ]
+  },
+  {
+    "id": "pubmedqa::15488260",
+    "question": "Is the type of remission after a major depressive episode an important risk factor to relapses in a 4-year follow up?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "15488260"
+    ]
+  },
+  {
+    "id": "pubmedqa::20197761",
+    "question": "Is irritable bowel syndrome a diagnosis of exclusion?",
+    "answer": "maybe",
+    "answer_letter": "C",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "20197761"
+    ]
+  },
+  {
+    "id": "pubmedqa::20608141",
+    "question": "PSA repeatedly fluctuating levels are reassuring enough to avoid biopsy?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "20608141"
+    ]
+  },
+  {
+    "id": "pubmedqa::19913785",
+    "question": "Is it necessary to insert a nasobiliary drainage tube routinely after endoscopic clearance of the common bile duct in patients with choledocholithiasis-induced cholangitis?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "19913785"
+    ]
+  },
+  {
+    "id": "pubmedqa::10331115",
+    "question": "Is amoxapine an atypical antipsychotic?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "10331115"
+    ]
+  },
+  {
+    "id": "pubmedqa::23761381",
+    "question": "Is calibration the cause of variation in liquid chromatography tandem mass spectrometry testosterone measurement?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "23761381"
+    ]
+  },
+  {
+    "id": "pubmedqa::23076787",
+    "question": "Can increases in the cigarette tax rate be linked to cigarette retail prices?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "23076787"
+    ]
+  },
+  {
+    "id": "pubmedqa::9582182",
+    "question": "Does the SCL 90-R obsessive-compulsive dimension identify cognitive impairments?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "9582182"
+    ]
+  },
+  {
+    "id": "pubmedqa::24336869",
+    "question": "Can routinely collected ambulance data about assaults contribute to reduction in community violence?",
+    "answer": "maybe",
+    "answer_letter": "C",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "24336869"
+    ]
+  },
+  {
+    "id": "pubmedqa::18708308",
+    "question": "Can surgeon familiarization with current evidence lead to a change in practice?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "18708308"
+    ]
+  },
+  {
+    "id": "pubmedqa::23690198",
+    "question": "Implementation of epidural analgesia for labor: is the standard of effective analgesia reachable in all women?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "23690198"
+    ]
+  },
+  {
+    "id": "pubmedqa::21726930",
+    "question": "Is endometrial polyp formation associated with increased expression of vascular endothelial growth factor and transforming growth factor-beta1?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "21726930"
+    ]
+  },
+  {
+    "id": "pubmedqa::22227642",
+    "question": "Can we measure mesopic pupil size with the cobalt blue light slit-lamp biomicroscopy method?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "22227642"
+    ]
+  },
+  {
+    "id": "pubmedqa::18182265",
+    "question": "Body diffusion-weighted MR imaging of uterine endometrial cancer: is it helpful in the detection of cancer in nonenhanced MR imaging?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "18182265"
+    ]
+  },
+  {
+    "id": "pubmedqa::26965932",
+    "question": "Is Bare-Metal Stent Implantation Still Justifiable in High Bleeding Risk Patients Undergoing Percutaneous Coronary Intervention?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "26965932"
+    ]
+  },
+  {
+    "id": "pubmedqa::21194998",
+    "question": "Does minimal access major surgery in the newborn hurt less?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "21194998"
+    ]
+  },
+  {
+    "id": "pubmedqa::22668712",
+    "question": "Internal derangement of the temporomandibular joint: is there still a place for ultrasound?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "22668712"
+    ]
+  },
+  {
+    "id": "pubmedqa::19836806",
+    "question": "Should prostate specific antigen be adjusted for body mass index?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "19836806"
+    ]
+  },
+  {
+    "id": "pubmedqa::25277731",
+    "question": "Sternal fracture in growing children : A rare and often overlooked fracture?",
+    "answer": "maybe",
+    "answer_letter": "C",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "25277731"
+    ]
+  },
+  {
+    "id": "pubmedqa::23025584",
+    "question": "Does stress increase imitation of drinking behavior?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "23025584"
+    ]
+  },
+  {
+    "id": "pubmedqa::25887165",
+    "question": "Does Sensation Return to the Nasal Tip After Microfat Grafting?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "25887165"
+    ]
+  },
+  {
+    "id": "pubmedqa::29112560",
+    "question": "Is the Distance Worth It?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "29112560"
+    ]
+  },
+  {
+    "id": "pubmedqa::15919266",
+    "question": "Adjuvant radiation of stage III thymoma: is it necessary?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "15919266"
+    ]
+  },
+  {
+    "id": "pubmedqa::17208539",
+    "question": "Are the long-term results of the transanal pull-through equal to those of the transabdominal pull-through?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "17208539"
+    ]
+  },
+  {
+    "id": "pubmedqa::24359102",
+    "question": "Two-year follow-up survey of patients with allergic contact dermatitis from an occupational cohort: is the prognosis dependent on the omnipresence of the allergen?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "24359102"
+    ]
+  },
+  {
+    "id": "pubmedqa::18322741",
+    "question": "Does laparoscopic surgery decrease the risk of atrial fibrillation after foregut surgery?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "18322741"
+    ]
+  },
+  {
+    "id": "pubmedqa::21361755",
+    "question": "Laminoplasty outcomes: is there a difference between patients with degenerative stenosis and those with ossification of the posterior longitudinal ligament?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "21361755"
+    ]
+  },
+  {
+    "id": "pubmedqa::11481599",
+    "question": "Acute respiratory distress syndrome in children with malignancy--can we predict outcome?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "11481599"
+    ]
+  },
+  {
+    "id": "pubmedqa::19100463",
+    "question": "Is the affinity column-mediated immunoassay method suitable as an alternative to the microparticle enzyme immunoassay method as a blood tacrolimus assay?",
+    "answer": "yes",
+    "answer_letter": "A",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "19100463"
+    ]
+  }
+]

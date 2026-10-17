@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Nemolizumab has been shown to be effective for which disease?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "313402cb105638f0195096f44d05684898a85a70482cf904de70789a977aab7f",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_65cfa70f1930410b1300000f_s5588_chunk_0",
+        "document_id": "bioasq_65cfa70f1930410b1300000f_s5588",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/37556125",
+        "title": "PubMed 37556125 [abstract]",
+        "cited_text": "Nemolizumab, a monoclonal antibody targeting interleukin 31 receptor α, is a promising novel therapy for the treatment of moderate to severe PN.",
+        "cross_encoder_logit": 0.9296980500221252,
+        "relevance_score": 0.7170140223735285,
+        "cross_encoder_score": 0.7170140223735285,
+        "evidence_quality_score": 0.7170140223735285,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/37556125",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_65cfa70f1930410b1300000f_s5593_chunk_0",
+        "document_id": "bioasq_65cfa70f1930410b1300000f_s5593",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/35842249",
+        "title": "PubMed 35842249 [abstract]",
+        "cited_text": "Nemolizumab is a humanized monoclonal antibody that blocks the α subunit of the IL-31 receptor, modulates the neuroimmune response, and rapidly alleviates itching by directly blocking signaling. It reduces inflammation and lesion severity in atopic dermatitis and prurigo nodularis by restoring epithelial function and promoting skin barrier integrity.",
+        "cross_encoder_logit": 0.8975269198417664,
+        "relevance_score": 0.7104410188781242,
+        "cross_encoder_score": 0.7104410188781242,
+        "evidence_quality_score": 0.7104410188781242,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/35842249",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_65cfa70f1930410b1300000f_s5611_chunk_0",
+        "document_id": "bioasq_65cfa70f1930410b1300000f_s5611",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/37556125",
+        "title": "PubMed 37556125 [abstract]",
+        "cited_text": "in nodules. Nemolizumab, a monoclonal antibody targeting interleukin 31 receptor α, is a promising novel therapy for the treatment of moderate",
+        "cross_encoder_logit": 0.7668353319168091,
+        "relevance_score": 0.6828359152264423,
+        "cross_encoder_score": 0.6828359152264423,
+        "evidence_quality_score": 0.6828359152264423,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/37556125",
+        "index_id": null
+      }
+    ]
+  }
+}

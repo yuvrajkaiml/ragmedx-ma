@@ -483,22 +483,38 @@ class TestCacheDefaultOffWiring:
         import ast
         import subprocess
 
-        # (1) Static source inspection: neither default-pipeline module may
-        # reference the QueryCache class or import the caching package at all.
-        # This is the versioning guarantee — there is no code path that
-        # constructs a cache in the default pipeline.
+        # (1) Static source inspection.
+        #
+        # orchestrator.py must never reference the cache at all (the cache lives
+        # entirely on the retrieval boundary).
+        #
+        # pipeline.py (Phase 5, P5-3) now wires an OPTIONAL QueryCache behind a
+        # default-OFF `cache_enabled` flag. The versioning guarantee is NOT that
+        # the string is absent, but that the caching package is imported LAZILY
+        # (inside the cache_enabled branch only) so that the default path never
+        # imports or constructs a cache. We therefore assert that any `caching`
+        # import in pipeline.py is NOT at module top level (indentation > 0),
+        # and that orchestrator.py has no cache reference whatsoever. The
+        # authoritative default-OFF proof is the runtime subprocess check (2).
         pipeline_src = (_BACKEND_DIR / "app" / "rag" / "pipeline.py").read_text(encoding="utf-8")
         orchestrator_src = (_BACKEND_DIR / "app" / "agents" / "orchestrator.py").read_text(encoding="utf-8")
-        for label, src in (("pipeline.py", pipeline_src), ("orchestrator.py", orchestrator_src)):
-            assert "QueryCache" not in src, (
-                f"{label} must not reference QueryCache (cache is standalone, default OFF)"
-            )
-            assert "from caching" not in src, (
-                f"{label} must not import the caching package at module load"
-            )
-            assert "import caching" not in src, (
-                f"{label} must not import the caching package at module load"
-            )
+
+        assert "QueryCache" not in orchestrator_src, (
+            "orchestrator.py must not reference QueryCache (cache lives on the retrieval boundary)"
+        )
+        assert "from caching" not in orchestrator_src and "import caching" not in orchestrator_src, (
+            "orchestrator.py must not import the caching package"
+        )
+
+        # Any caching import in pipeline.py must be indented (lazy, inside a
+        # method branch) — never a module-level import.
+        for line in pipeline_src.splitlines():
+            stripped = line.strip()
+            if stripped.startswith("from caching") or stripped.startswith("import caching"):
+                assert line != stripped, (
+                    "pipeline.py must import the caching package lazily (indented, "
+                    f"inside the cache_enabled branch), not at module level: {line!r}"
+                )
 
         # (2) Runtime import-time check in a fresh subprocess: importing the
         # two default-pipeline modules must not pull `caching` (or
