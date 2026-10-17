@@ -146,6 +146,27 @@ _CONFIGS: Dict[str, Dict[str, Any]] = {
 
 _GENERATOR_TEMPERATURE = 0.0  # deterministic, benchmark-only override
 
+# The 16 validated pilot question IDs (frozen; see context.json / FEAT-001 manifest).
+# Used to seed the reusable pilot cells into a new run dir without re-running them.
+_PILOT_REUSED_IDS_16 = [
+    "pubmedqa::15943725",
+    "bioasq::602825a61cb411341a0000fa",
+    "bioasq::53372ba3d6d3ac6a34000058",
+    "bioasq::54d7a1047035c08008000002",
+    "pubmedqa::21394762",
+    "pubmedqa::16735905",
+    "pubmedqa::26215326",
+    "pubmedqa::23321509",
+    "pubmedqa::24449622",
+    "pubmedqa::22251324",
+    "pubmedqa::18719011",
+    "pubmedqa::10548670",
+    "pubmedqa::20605051",
+    "bioasq::6060996394d57fd879000045",
+    "pubmedqa::12098035",
+    "pubmedqa::23621776",
+]
+
 
 # ---------------------------------------------------------------------------
 # VRAM helpers
@@ -544,8 +565,646 @@ def _append_jsonl(path: Path, record: Dict[str, Any]) -> None:
 
 
 # ---------------------------------------------------------------------------
+# Per-cell checkpoint / resume (FEAT-002)
+# ---------------------------------------------------------------------------
+#
+# Granularity is a single matrix cell (question_id, config_id). The on-disk
+# layout mirrors the pilot run dir exactly: per_question/<config>.jsonl holds
+# one JSON record per completed cell; a sidecar checkpoints/phase5_matrix_state.json
+# maps cell_key -> {state, output_file, attempts, updated_at}. All state writes
+# are atomic (write .tmp then os.replace), following run_step4_matrix.py.
+
+_CHECKPOINT_FILENAME = "phase5_matrix_state.json"
+_MAX_CELL_ATTEMPTS = 3  # 1 initial try + up to 2 retries (design §2 bounded retries)
+
+# Required keys for a per-cell JSONL record to be accepted as reusable.
+_REQUIRED_RECORD_KEYS = (
+    "question_id",
+    "resolved_index_path",
+    "split",
+    "config",
+    "answer",
+    "citations",
+    "claim_verdicts",
+    "confidence",
+    "abstain_flag",
+    "errors",
+)
+
+
+def _cell_key(question_id: str, config_id: str) -> str:
+    """Stable, dedup-/resume-unit key for a single matrix cell."""
+    return f"{question_id}::{config_id}"
+
+
+def _checkpoint_path(out_root: Path) -> Path:
+    return out_root / "checkpoints" / _CHECKPOINT_FILENAME
+
+
+def _load_checkpoint(out_root: Path) -> Dict[str, Any]:
+    """Return the persisted cell-state map, or a fresh skeleton if absent/corrupt.
+
+    A corrupt/unreadable state file is treated as "no prior state" so the run
+    simply re-validates the JSONL files and re-runs anything unproven — it never
+    silently trusts a broken checkpoint.
+    """
+    path = _checkpoint_path(out_root)
+    if not path.exists():
+        return {"version": 1, "cells": {}}
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        if not isinstance(data, dict) or "cells" not in data:
+            raise ValueError("missing 'cells'")
+        return data
+    except (json.JSONDecodeError, OSError, ValueError) as exc:
+        logger.warning("[P5] checkpoint unreadable (%s); starting from JSONL re-validation.", exc)
+        return {"version": 1, "cells": {}}
+
+
+def _save_checkpoint(out_root: Path, state: Dict[str, Any]) -> None:
+    """Atomically persist the cell-state map (write .tmp then os.replace)."""
+    path = _checkpoint_path(out_root)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_suffix(".json.tmp")
+    try:
+        tmp.write_text(json.dumps(state, indent=2, ensure_ascii=False), encoding="utf-8")
+        os.replace(tmp, path)
+    except OSError as exc:
+        logger.error("[P5] checkpoint write failed: %s", exc)
+
+
+def _mark_cell(
+    out_root: Path,
+    state: Dict[str, Any],
+    key: str,
+    cell_state: str,
+    *,
+    output_file: Optional[str] = None,
+    attempts: Optional[int] = None,
+) -> None:
+    """Update one cell's state and flush atomically."""
+    entry = state["cells"].get(key, {})
+    entry["state"] = cell_state
+    if output_file is not None:
+        entry["output_file"] = output_file
+    if attempts is not None:
+        entry["attempts"] = attempts
+    entry["updated_at"] = datetime.now(timezone.utc).isoformat()
+    state["cells"][key] = entry
+    _save_checkpoint(out_root, state)
+
+
+def _validate_record(
+    record: Any,
+    *,
+    question_id: str,
+    config_id: str,
+    allowed_ids: set,
+) -> bool:
+    """Return True iff *record* is a trustworthy completed cell for (qid, config).
+
+    Checks (design §2 validation-on-resume):
+      (a) parses to a dict with all required schema keys,
+      (b) question_id matches and is in the frozen set; config matches an 8-config name,
+      (c) resolved_index_path ends with 'eval_split' (or is the plain-llm sentinel),
+      (d) exactly one of the answered / abstain / error branches holds.
+    Any failure -> not reusable -> the cell is re-run.
+    """
+    if not isinstance(record, dict):
+        return False
+    for k in _REQUIRED_RECORD_KEYS:
+        if k not in record:
+            return False
+    if record.get("question_id") != question_id or question_id not in allowed_ids:
+        return False
+    if record.get("config") != config_id or config_id not in _CONFIGS:
+        return False
+
+    resolved = str(record.get("resolved_index_path", ""))
+    is_plain = config_id == "phase5-plain-llm-no-rag"
+    if is_plain:
+        if not resolved.startswith("N/A"):
+            return False
+    else:
+        # Normalise trailing separators then require the eval_split leaf.
+        norm = resolved.replace("\\", "/").rstrip("/")
+        if not norm.endswith("eval_split"):
+            return False
+
+    # Exactly one of: answered / abstain / error.
+    has_error = bool(record.get("errors"))
+    abstained = record.get("abstain_flag") is True
+    answer = record.get("answer")
+    # An answer is present when it is a non-empty str or a non-empty list (the
+    # plain-llm path stores list answers) and is not the NOT MEASURED sentinel.
+    if isinstance(answer, str):
+        has_answer = answer not in ("", _NOT_MEASURED)
+    elif isinstance(answer, (list, tuple)):
+        has_answer = len(answer) > 0
+    else:
+        has_answer = False
+    answered = not has_error and not abstained and has_answer
+    return (int(answered) + int(abstained) + int(has_error)) == 1
+
+
+def _load_question_ids(path: Path) -> List[str]:
+    """Load a frozen question-ID list (a JSON array of strings)."""
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(data, list) or not all(isinstance(x, str) for x in data):
+        raise SystemExit(f"[P5] {path} is not a JSON array of question-id strings.")
+    return data
+
+
+def _select_question_records(
+    pool: List[Dict[str, Any]],
+    question_ids: List[str],
+) -> List[Dict[str, Any]]:
+    """Return pool records matching *question_ids*, preserving the ID-list order.
+
+    Raises if any requested ID is absent from the pool so a typo'd/altered ID
+    list can never silently shrink the matrix.
+    """
+    by_id = {r.get("id"): r for r in pool}
+    missing = [qid for qid in question_ids if qid not in by_id]
+    if missing:
+        raise SystemExit(
+            f"[P5] {len(missing)} requested question id(s) not in the split pool: {missing[:5]}"
+        )
+    return [by_id[qid] for qid in question_ids]
+
+
+def _existing_question_ids(path: Path) -> set:
+    """Return the set of question_ids already present in a per_question JSONL file."""
+    ids: set = set()
+    for rec in _read_jsonl(path):
+        qid = rec.get("question_id")
+        if qid is not None:
+            ids.add(qid)
+    return ids
+
+
+def _append_cell_guarded(out_path: Path, record: Dict[str, Any]) -> bool:
+    """Append *record* only if its question_id is not already in the file.
+
+    Returns True if written, False if a line for that question_id already
+    existed (duplicate prevention). The file is <=50 lines/config so the
+    re-scan is cheap and guards against a duplicate after a crash between the
+    append and the state flush.
+    """
+    qid = record.get("question_id")
+    if qid in _existing_question_ids(out_path):
+        logger.warning(
+            "[P5] refusing duplicate append for question_id=%s in %s", qid, out_path.name
+        )
+        return False
+    _append_jsonl(out_path, record)
+    return True
+
+
+def _seed_pilot_cells(
+    *,
+    out_root: Path,
+    pilot_dir: Path,
+    question_ids: List[str],
+    pilot_reused_ids: List[str],
+    allowed_ids: set,
+    state: Dict[str, Any],
+) -> int:
+    """Copy validated pilot JSONL lines for reusable cells into the new run dir.
+
+    For each pilot id that is in the chosen question set, copy that id's line
+    from the pilot's per_question/<config>.jsonl into the new run's file (deduped
+    by question_id) for every config, re-validating each line before accepting,
+    and mark the cell completed in the checkpoint. Returns the number of cells
+    seeded.
+    """
+    chosen = set(question_ids)
+    reusable_ids = [qid for qid in pilot_reused_ids if qid in chosen]
+    per_q_src = pilot_dir / "per_question"
+    per_q_dst = out_root / "per_question"
+    per_q_dst.mkdir(parents=True, exist_ok=True)
+
+    seeded = 0
+    for config_id in _CONFIGS:
+        src = per_q_src / f"{config_id}.jsonl"
+        dst = per_q_dst / f"{config_id}.jsonl"
+        src_by_id = {r.get("question_id"): r for r in _read_jsonl(src)}
+        for qid in reusable_ids:
+            rec = src_by_id.get(qid)
+            if rec is None:
+                logger.warning(
+                    "[P5][seed] pilot line missing for %s/%s; cell will be run fresh.",
+                    config_id, qid,
+                )
+                continue
+            if not _validate_record(
+                rec, question_id=qid, config_id=config_id, allowed_ids=allowed_ids
+            ):
+                logger.warning(
+                    "[P5][seed] pilot line for %s/%s failed re-validation; cell will be run fresh.",
+                    config_id, qid,
+                )
+                continue
+            if _append_cell_guarded(dst, rec):
+                _mark_cell(
+                    out_root, state, _cell_key(qid, config_id), "completed",
+                    output_file=str(dst), attempts=0,
+                )
+                seeded += 1
+    logger.info("[P5][seed] seeded %d reused pilot cells from %s", seeded, pilot_dir.name)
+    return seeded
+
+
+def plan_matrix(
+    *,
+    out_root: Path,
+    question_ids: List[str],
+    allowed_ids: set,
+    state: Dict[str, Any],
+) -> Dict[str, Any]:
+    """Partition the full matrix into reused (completed+validated) vs missing cells.
+
+    A cell counts as reused only if the checkpoint marks it completed AND its
+    JSONL record re-validates. Everything else (missing / running / failed /
+    invalid) is scheduled to run. Pure bookkeeping — no model work.
+    """
+    per_q_dir = out_root / "per_question"
+    # Cache per-config id->record maps so we re-scan each file once.
+    rec_cache: Dict[str, Dict[Any, Dict[str, Any]]] = {}
+    for config_id in _CONFIGS:
+        rec_cache[config_id] = {
+            r.get("question_id"): r for r in _read_jsonl(per_q_dir / f"{config_id}.jsonl")
+        }
+
+    reused: List[str] = []
+    missing: List[str] = []
+    for qid in question_ids:
+        for config_id in _CONFIGS:
+            key = _cell_key(qid, config_id)
+            entry = state["cells"].get(key, {})
+            rec = rec_cache[config_id].get(qid)
+            if (
+                entry.get("state") == "completed"
+                and rec is not None
+                and _validate_record(
+                    rec, question_id=qid, config_id=config_id, allowed_ids=allowed_ids
+                )
+            ):
+                reused.append(key)
+            else:
+                missing.append(key)
+    return {
+        "total": len(question_ids) * len(_CONFIGS),
+        "reused": reused,
+        "missing": missing,
+        "n_reused": len(reused),
+        "n_missing": len(missing),
+    }
+
+
+async def run_matrix(
+    *,
+    out_root: Path,
+    question_records: List[Dict[str, Any]],
+    allowed_ids: set,
+    state: Dict[str, Any],
+    cell_runner,
+    budget_s: Optional[float] = None,
+) -> Dict[str, Any]:
+    """Run only the missing cells of the question-OUTER / config-INNER matrix.
+
+    *cell_runner* is an async callable ``(question_item, split_name, config_id,
+    config_def) -> record`` so this orchestration is CPU-testable with a stub
+    (no GPU/model required). Each cell:
+      1. is skipped if the checkpoint marks it completed AND its record validates;
+      2. is marked ``running`` (atomic) before execution;
+      3. retries exceptions up to ``_MAX_CELL_ATTEMPTS`` with a short backoff,
+         then records a ``failed`` cell with answer="NOT MEASURED" (never dropped);
+      4. appends its record guarded against duplicates, then marks ``completed``
+         (abstentions stay distinct from errors).
+    Returns run counters.
+    """
+    per_q_dir = out_root / "per_question"
+    per_q_dir.mkdir(parents=True, exist_ok=True)
+    config_order = list(_CONFIGS.keys())
+
+    counts = {"completed": 0, "failed": 0, "abstained": 0, "reused_skipped": 0, "duplicate_skipped": 0}
+    run_start = time.perf_counter()
+    per_question_wall: List[float] = []
+    budget_stopped = False
+    questions_completed = 0
+
+    for qi, q in enumerate(question_records, start=1):
+        qid = q.get("id")
+        split_name = q.get("split", "test")
+
+        if budget_s is not None and per_question_wall:
+            elapsed = time.perf_counter() - run_start
+            mean_q = sum(per_question_wall) / len(per_question_wall)
+            if elapsed + mean_q > budget_s:
+                logger.warning(
+                    "[P5][budget] Stopping before question %d: elapsed %.0fs + mean/q %.0fs "
+                    "> budget %.0fs.", qi, elapsed, mean_q, budget_s,
+                )
+                budget_stopped = True
+                break
+
+        q_start = time.perf_counter()
+        for config_id in config_order:
+            cdef = _CONFIGS[config_id]
+            out_path = per_q_dir / f"{config_id}.jsonl"
+            key = _cell_key(qid, config_id)
+            entry = state["cells"].get(key, {})
+
+            # 1. Skip only validated-completed cells.
+            if entry.get("state") == "completed":
+                rec = {r.get("question_id"): r for r in _read_jsonl(out_path)}.get(qid)
+                if rec is not None and _validate_record(
+                    rec, question_id=qid, config_id=config_id, allowed_ids=allowed_ids
+                ):
+                    counts["reused_skipped"] += 1
+                    continue
+                logger.warning(
+                    "[P5] cell %s marked completed but failed validation; re-running.", key
+                )
+
+            attempts_done = int(entry.get("attempts", 0))
+            record: Optional[Dict[str, Any]] = None
+            last_exc: Optional[Exception] = None
+
+            # 2 + 3. Mark running, run with bounded retries.
+            while attempts_done < _MAX_CELL_ATTEMPTS:
+                attempts_done += 1
+                _mark_cell(out_root, state, key, "running", output_file=str(out_path),
+                           attempts=attempts_done)
+                try:
+                    record = await cell_runner(
+                        question_item=q, split_name=split_name,
+                        config_id=config_id, config_def=cdef,
+                    )
+                    last_exc = None
+                    break
+                except Exception as exc:  # transient GPU/IO hiccup — retry
+                    last_exc = exc
+                    logger.error(
+                        "[P5] cell %s attempt %d/%d raised: %s",
+                        key, attempts_done, _MAX_CELL_ATTEMPTS, exc,
+                    )
+                    if attempts_done < _MAX_CELL_ATTEMPTS:
+                        time.sleep(min(2.0 * attempts_done, 10.0))
+
+            if record is None:
+                # 3. Exhausted retries -> failed cell, not dropped.
+                record = _failed_record(
+                    question_item=q, split_name=split_name, config_id=config_id,
+                    error=last_exc,
+                )
+
+            # 4. Guarded append + state transition.
+            written = _append_cell_guarded(out_path, record)
+            if not written:
+                counts["duplicate_skipped"] += 1
+                # A line already exists for this cell; trust it, mark completed.
+                _mark_cell(out_root, state, key, "completed", output_file=str(out_path),
+                           attempts=attempts_done)
+                continue
+
+            if record.get("errors"):
+                _mark_cell(out_root, state, key, "failed", output_file=str(out_path),
+                           attempts=attempts_done)
+                counts["failed"] += 1
+            else:
+                _mark_cell(out_root, state, key, "completed", output_file=str(out_path),
+                           attempts=attempts_done)
+                counts["completed"] += 1
+                if record.get("abstain_flag") is True:
+                    counts["abstained"] += 1
+
+        per_question_wall.append(time.perf_counter() - q_start)
+        questions_completed += 1
+
+    counts["questions_completed"] = questions_completed
+    counts["budget_stopped_early"] = budget_stopped
+    counts["run_seconds"] = round(time.perf_counter() - run_start, 1)
+    return counts
+
+
+def _failed_record(
+    *,
+    question_item: Dict[str, Any],
+    split_name: str,
+    config_id: str,
+    error: Any,
+) -> Dict[str, Any]:
+    """Build a NOT MEASURED failure record for a cell that exhausted retries.
+
+    Distinct from an abstention: errors are set, abstain_flag is False.
+    """
+    is_plain = config_id == "phase5-plain-llm-no-rag"
+    return {
+        "question_id": question_item.get("id"),
+        "resolved_index_path": "N/A (plain-llm-no-rag)" if is_plain else _NOT_MEASURED,
+        "split": split_name,
+        "config": config_id,
+        "source": question_item.get("source"),
+        "gold_answer": question_item.get("answer"),
+        "answer": _NOT_MEASURED,
+        "status": "error",
+        "citations": _NOT_MEASURED,
+        "claim_verdicts": _NOT_MEASURED,
+        "confidence": _NOT_MEASURED,
+        "confidence_note": "execution error after exhausting retries",
+        "abstain_flag": False,
+        "errors": str(error) if error else "unknown_error",
+        "error_code": "CELL_RETRIES_EXHAUSTED",
+        "per_stage_latency_ms": _NOT_MEASURED,
+        "model_call_count": _NOT_MEASURED,
+        "retrieval_call_count": _NOT_MEASURED,
+        "cache_hits": _NOT_MEASURED,
+        "peak_vram_mb": _NOT_MEASURED,
+        "cold_latency_ms": _NOT_MEASURED,
+        "warm_latency_ms": _NOT_MEASURED,
+    }
+
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
+
+def _make_gpu_cell_runner(*, index_dir, base_pipeline, cached_pipeline, llm):
+    """Return an async cell_runner bound to the loaded model + pipelines.
+
+    Preserves the exact per-cell behaviour of the legacy loop: cached vs base
+    pipeline by config, _run_plain_question for the plain-llm config, and
+    _run_rag_question (temperature 0.0, retrieval params, prompts) otherwise.
+    """
+
+    async def _cell_runner(*, question_item, split_name, config_id, config_def):
+        if config_def["kind"] == "plain":
+            return _run_plain_question(
+                question_item=question_item, split_name=split_name,
+                config_name=config_id, config_def=config_def, llm_wrapper=llm,
+            )
+        pipeline = cached_pipeline if config_def.get("cache_enabled") else base_pipeline
+        return await _run_rag_question(
+            question_item=question_item, split_name=split_name, index_dir=index_dir,
+            pipeline=pipeline, config_name=config_id, config_def=config_def,
+            llm_wrapper=llm, measure_warm=True,
+        )
+
+    return _cell_runner
+
+
+async def _run_target_matrix(args: argparse.Namespace) -> None:
+    """FEAT-002 target mode: 50/40 x 8 matrix with per-cell checkpoint + pilot reuse.
+
+    Writes to a NEW backend/results/phase5_<ts>/ dir, seeds the validated pilot
+    cells, and runs only the missing cells. Never touches the pilot dir.
+    """
+    settings = get_settings()
+
+    # Resolve + guard eval_split path (unchanged guard).
+    index_dir = _resolve_and_guard_index_dir(None)
+    guard = IndexLeakageGuard()
+    guard.assert_safe(str(index_dir))
+    if index_dir != _CANONICAL_EVAL_SPLIT_DIR:
+        raise RuntimeError(
+            f"[P5] index_dir ({index_dir}) != canonical eval_split ({_CANONICAL_EVAL_SPLIT_DIR})"
+        )
+    logger.info("[P5] eval_split guard PASS: %s", index_dir)
+
+    # Resolve the frozen pool (pilot splits/test.json) and the chosen ID list.
+    pilot_dir = Path(args.pilot_dir) if args.pilot_dir else (_RESULTS_ROOT / "phase5_20261017_131123")
+    pool = _load_split(pilot_dir, "test")
+
+    if args.question_ids:
+        ids_path = Path(args.question_ids)
+        question_ids = _load_question_ids(ids_path)
+    else:
+        # Pull from the frozen manifest (FEAT-001) by target.
+        manifest_path = _RESULTS_ROOT / "phase5_manifest" / "experiment_manifest.json"
+        if not manifest_path.exists():
+            raise SystemExit(
+                f"[P5] No --question-ids given and manifest missing: {manifest_path}. "
+                "Run build_phase5_manifest.py first."
+            )
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        key = "question_ids_40" if args.target == 40 else "question_ids_50"
+        question_ids = manifest[key]
+    allowed_ids = set(question_ids)
+    question_records = _select_question_records(pool, question_ids)
+    for r in question_records:
+        r.setdefault("split", "test")
+
+    # Pilot reuse ids: prefer the manifest's list, fall back to frozen context.
+    pilot_reused_ids = _PILOT_REUSED_IDS_16
+
+    # NEW timestamped output dir (never the pilot dir).
+    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+    out_root = Path(args.output_root) if args.output_root else (_RESULTS_ROOT / f"phase5_{ts}")
+    if out_root.resolve() == pilot_dir.resolve():
+        raise SystemExit("[P5] REFUSING to write into the read-only pilot dir.")
+    out_root.mkdir(parents=True, exist_ok=True)
+    logger.info("[P5] target=%d questions -> new run dir %s", len(question_ids), out_root)
+
+    # Copy the frozen split pool into the new run dir so aggregation + reproducibility
+    # have the same layout as the pilot (never writes back to the pilot dir).
+    (out_root / "splits").mkdir(parents=True, exist_ok=True)
+    _atomic_write_json(out_root / "splits" / "test.json", pool)
+
+    # Write config defs.
+    configs_dir = out_root / "configs"
+    for name, cdef in _CONFIGS.items():
+        _atomic_write_json(configs_dir / f"{name}.json", {"config_name": name, **cdef})
+
+    # Load (or init) checkpoint, then seed pilot cells once.
+    state = _load_checkpoint(out_root)
+    already_seeded = any(e.get("attempts") == 0 for e in state["cells"].values())
+    if not already_seeded:
+        _seed_pilot_cells(
+            out_root=out_root, pilot_dir=pilot_dir, question_ids=question_ids,
+            pilot_reused_ids=pilot_reused_ids, allowed_ids=allowed_ids, state=state,
+        )
+
+    plan = plan_matrix(
+        out_root=out_root, question_ids=question_ids, allowed_ids=allowed_ids, state=state,
+    )
+    logger.info("[P5] matrix plan: total=%d reused=%d missing=%d",
+                plan["total"], plan["n_reused"], plan["n_missing"])
+
+    if args.dry_run:
+        print(
+            f"PHASE5_DRYRUN target={args.target} total={plan['total']} "
+            f"reused={plan['n_reused']} missing={plan['n_missing']} root={out_root}"
+        )
+        return
+
+    # --- Real GPU run from here (load model once, build pipelines once) ----
+    from app.llm.local_llm import LLMRuntimeMode, LocalLLMWrapper
+
+    llm = LocalLLMWrapper(
+        model_name_or_path=settings.llm_model_name,
+        mode=LLMRuntimeMode.LOCAL,
+        allow_fallback=False,
+    )
+    t_llm = time.perf_counter()
+    llm.load_model()
+    model_load_ms = int((time.perf_counter() - t_llm) * 1000)
+    if llm.active_runtime_mode != LLMRuntimeMode.LOCAL:
+        raise RuntimeError(
+            f"[P5] llm_mode is '{llm.active_runtime_mode}', not LOCAL. Aborting (no mock fallback)."
+        )
+
+    from app.rag.pipeline import RAGPipeline
+
+    base_pipeline = RAGPipeline.build(index_dir=index_dir, top_k_retrieval=10, top_k_final=3)
+    cached_pipeline = RAGPipeline.build(
+        index_dir=index_dir, top_k_retrieval=10, top_k_final=3,
+        cache_enabled=True, cache_dir=str(out_root / "query_cache"),
+    )
+    cell_runner = _make_gpu_cell_runner(
+        index_dir=index_dir, base_pipeline=base_pipeline,
+        cached_pipeline=cached_pipeline, llm=llm,
+    )
+
+    budget_s = args.budget_hours * 3600.0 if args.budget_hours else None
+    counts = await run_matrix(
+        out_root=out_root, question_records=question_records, allowed_ids=allowed_ids,
+        state=state, cell_runner=cell_runner, budget_s=budget_s,
+    )
+
+    environment = {
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "resolved_eval_split_path": str(index_dir),
+        "canonical_eval_split": str(_CANONICAL_EVAL_SPLIT_DIR),
+        "llm_model": settings.llm_model_name,
+        "llm_mode": llm.active_runtime_mode.value,
+        "generator_temperature": _GENERATOR_TEMPERATURE,
+        "model_load_ms": model_load_ms,
+        "configs": list(_CONFIGS.keys()),
+        "mode": "target_matrix",
+        "target": args.target,
+        "n_questions": len(question_ids),
+        "matrix": {"plan": {"total": plan["total"], "reused": plan["n_reused"],
+                            "missing": plan["n_missing"]}, "run_counts": counts},
+        "subset": {"dev": 0, "test": len(question_ids), "full": False},
+    }
+    try:
+        import torch
+        environment["torch_version"] = torch.__version__
+        environment["cuda_version"] = torch.version.cuda
+        environment["cuda_available"] = torch.cuda.is_available()
+        if torch.cuda.is_available():
+            environment["peak_vram_mb_run"] = round(
+                torch.cuda.max_memory_allocated() / (1024 * 1024), 2
+            )
+    except Exception:
+        pass
+    _atomic_write_json(out_root / "environment_run.json", environment)
+    aggregate_outputs(out_root, environment)
+    logger.info("[P5] target matrix complete.")
+    print(f"PHASE5_RUN_COMPLETE root={out_root} counts={counts}")
+
 
 async def _amain(args: argparse.Namespace) -> None:
     settings = get_settings()
@@ -1070,8 +1729,28 @@ def main() -> None:
                              "new question if the projected finish would exceed it.")
     parser.add_argument("--full", action="store_true",
                         help="Run the full dev+test sweep (LONG, ~40h — exceeds the 4h budget).")
+    # FEAT-002 target-matrix mode (per-cell checkpoint + pilot reuse).
+    parser.add_argument("--target", type=int, default=None, choices=(50, 40),
+                        help="FEAT-002 matrix mode: run TARGET unique questions x 8 configs with "
+                             "per-cell checkpoint/resume and pilot-cell reuse into a NEW run dir.")
+    parser.add_argument("--question-ids", type=str, default=None,
+                        help="Path to a frozen question-id JSON list (overrides --target's manifest "
+                             "lookup). Enables target-matrix mode.")
+    parser.add_argument("--pilot-dir", type=str, default=None,
+                        help="Read-only pilot run dir to reuse validated cells from "
+                             "(default: results/phase5_20261017_131123).")
+    parser.add_argument("--dry-run", action="store_true",
+                        help="Target-matrix mode only: compute reused/missing cell counts (seed + "
+                             "plan) without loading the model or running any cell.")
     args = parser.parse_args()
-    asyncio.run(_amain(args))
+
+    # Dispatch: target-matrix mode (FEAT-002) vs the legacy pilot/subset/full runner.
+    if args.target is not None or args.question_ids is not None or args.dry_run:
+        if args.target is None:
+            args.target = 50  # default when only --question-ids / --dry-run given
+        asyncio.run(_run_target_matrix(args))
+    else:
+        asyncio.run(_amain(args))
 
 
 if __name__ == "__main__":
