@@ -1,10 +1,10 @@
-import re
 from datetime import datetime, timezone
 from typing import Any, Dict, List
 
 from app.llm.parser import LLMParseError, extract_raw_text, parse_json_from_llm
 from app.llm.prompt_templates import render_prompt
 from app.rag.chunking.models import MedicalChunk
+from app.rag.citations.markers import extract_markers, normalize_marker
 from app.rag.verification.evidence_verifier import EvidenceVerifier
 from .base import BaseAgent
 from .state import CriticVerdict
@@ -175,9 +175,7 @@ class CriticAgent(BaseAgent):
         strict_provenance = True
         for index, raw_item in enumerate(evidence, start=1):
             item = dict(raw_item) if isinstance(raw_item, dict) else raw_item.__dict__
-            marker = str(item.get("citation_marker") or f"[Doc {index}]")
-            if not marker.startswith("["):
-                marker = f"[{marker}]"
+            marker = normalize_marker(item.get("citation_marker")) or f"[Doc {index}]"
             marker_to_item[marker] = item
             required = ("chunk_id", "document_id", "title", "journal", "publication_year")
             strict_provenance = strict_provenance and all(item.get(field) not in (None, "") for field in required)
@@ -191,7 +189,7 @@ class CriticAgent(BaseAgent):
                 source=str(item.get("source_type") or "unknown"),
             ))
 
-        referenced = set(re.findall(r"\[(?:Doc\s+\d+|[A-Za-z0-9_-]+)\]", answer))
+        referenced = extract_markers(answer)
         unresolved = sorted(referenced - set(marker_to_item))
         report = EvidenceVerifier(min_content_length=1).verify(
             [(chunk, 1.0) for chunk in chunks]

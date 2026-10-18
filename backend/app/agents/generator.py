@@ -1,9 +1,13 @@
-import re
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Set
 
 from app.llm.parser import extract_raw_text
 from app.llm.prompt_templates import render_prompt
+from app.rag.citations.markers import (
+    CITATION_MARKER_PATTERN,
+    extract_markers,
+    normalize_marker,
+)
 from .base import BaseAgent
 
 
@@ -22,7 +26,9 @@ class GeneratorAgent(BaseAgent):
     - Refuse to invent citations.
     """
 
-    CITATION_PATTERN = re.compile(r"\[([A-Za-z0-9_-]+)\]")
+    # Shared canonical pattern (single source of truth with the critic). Matches
+    # both the production `[Doc N]` form and the legacy `[E1]` form.
+    CITATION_PATTERN = CITATION_MARKER_PATTERN
 
     #: Default generation temperature — small amount of sampling for natural-sounding
     #: answers in the live API.  Benchmark callers should pass temperature=0.0 for
@@ -173,21 +179,23 @@ class GeneratorAgent(BaseAgent):
         cls,
         evidence: List[Any],
     ) -> Set[str]:
-        citations = set()
-        for index, item in enumerate(evidence, start=1):
+        """Canonical set of markers the answer is allowed to cite.
+
+        Every evidence item contributes its ``citation_marker`` normalized to
+        bracketed form (e.g. ``[Doc 1]``, ``[E1]``). Extracted answer markers are
+        normalized the same way, so the comparison in ``run`` is apples-to-apples
+        regardless of marker style.
+        """
+        citations: Set[str] = set()
+        for item in evidence:
             if isinstance(item, dict):
                 marker = item.get("citation_marker")
             else:
                 marker = getattr(item, "citation_marker", None)
 
-            if marker:
-                m_str = str(marker).strip()
-                # Accept both [E1] and E1 in set
-                citations.add(m_str)
-                if not m_str.startswith("["):
-                    citations.add(f"[{m_str}]")
-                else:
-                    citations.add(m_str.strip("[]"))
+            normalized = normalize_marker(marker)
+            if normalized:
+                citations.add(normalized)
 
         return citations
 
@@ -196,6 +204,10 @@ class GeneratorAgent(BaseAgent):
         cls,
         answer: str,
     ) -> Set[str]:
-        # Extract [E1] format or E1 inside brackets
-        raw_matches = re.findall(r"\[[A-Za-z0-9_-]+\]", answer)
-        return set(raw_matches)
+        """Extract in-text citation markers using the shared canonical pattern.
+
+        Handles both the production ``[Doc N]`` form (which contains a space and
+        was previously dropped) and the legacy ``[E1]`` form. Returns normalized
+        bracketed markers.
+        """
+        return extract_markers(answer)

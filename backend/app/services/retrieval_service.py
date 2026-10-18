@@ -49,7 +49,7 @@ class RetrievalService:
         cls,
         index_dir: Optional[Path] = None,
         model_name: Optional[str] = None,
-        top_k_retrieval: int = 20,
+        top_k_retrieval: int = 40,
         top_k_final: int = 5,
     ) -> "RetrievalService":
         """Build a fully wired retrieval service from a persisted FAISS index.

@@ -329,7 +329,7 @@ class RAGPipeline:
         cls,
         index_dir: str | Path | None = None,
         model_name: str | None = None,
-        top_k_retrieval: int = 20,
+        top_k_retrieval: int = 40,
         top_k_final: int = 5,
         cache_enabled: bool = False,
         cache_dir: str | Path | None = None,
