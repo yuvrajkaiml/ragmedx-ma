@@ -1,6 +1,6 @@
 # Phase 5 — 8-Config Experiment Report
 
-Generated: 2026-10-18T05:18:31.234821+00:00
+Generated: 2026-10-18T05:48:00.273029+00:00
 Tier: **REDUCED_VALIDATION_SUBSET**  (dev=0, test=40)
 
 - Resolved eval_split: `D:\Ragmed_2\backend\data\faiss_index\eval_split`
@@ -58,5 +58,5 @@ PRD: single-pass <5s; iterative ≤3 rounds <15s; retrieval <500ms; rerank <2s (
 The full 500-question × 8-config sweep is estimated at ~40+ hours of GPU wall-clock and was deliberately NOT run (it exceeds the 4-hour budget). To run it later:
 
 ```
-d:\Ragmed_2\.venv-cu128-pilot\Scripts\python.exe backend\scripts\run_phase5_experiment.py --full --output-root d:\Ragmed_2\backend\results\phase5_20261018_053140
+d:\Ragmed_2\.venv-cu128-pilot\Scripts\python.exe backend\scripts\run_phase5_experiment.py --full --output-root D:\Ragmed_2\backend\results\phase5_20261018_053140
 ```
