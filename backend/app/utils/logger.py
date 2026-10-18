@@ -1,19 +1,16 @@
-from loguru import logger
-import sys
+# Owner: Pranav Sukale
+"""Convenience re-export of the application logger.
 
-logger.remove()
+All existing code that imports from here continues to work unchanged:
 
-logger.add(
-    sys.stdout,
-    format="<green>{time:YYYY-MM-DD HH:mm:ss}</green> | "
-           "<level>{level}</level> | "
-           "{message}",
-    level="INFO"
-)
+    from app.utils.logger import logger
 
-logger.add(
-    "logs/retrieval.log",
-    rotation="5 MB",
-    retention="7 days",
-    level="DEBUG"
-)
+The actual logging configuration lives in ``app.core.logging``.
+Importing this module triggers ``configure_logging()`` exactly once.
+"""
+
+from app.core.logging import get_logger  # noqa: F401 — triggers configure_logging
+
+logger = get_logger()
+
+__all__ = ["logger"]
