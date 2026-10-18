@@ -28,3 +28,6 @@ data/faiss_index/
 data/embeddings/
 data/cache/
 data/results/
+# Generated retrieval indexes and checkpoints
+data/indexes/
+data/vectorstore/

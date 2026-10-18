@@ -1,31 +1,54 @@
+
+import json
 from pathlib import Path
 
 from app.rag.loaders.medqa_loader import MedQALoader
 
 
-loader = MedQALoader(
-    Path("data/datasets/medqa")
-)
+def test_medqa_loader_loads_jsonl_documents(tmp_path):
+    dataset_file = tmp_path / "sample.jsonl"
 
-documents = loader.load()
+    record = {
+        "question": "What is hypertension?",
+        "answer": "Persistently elevated blood pressure",
+        "answer_idx": "A",
+        "options": {"A": "Elevated blood pressure"},
+        "meta_info": "medicine",
+    }
 
-print(f"\nTotal documents loaded: {len(documents)}")
+    dataset_file.write_text(
+        json.dumps(record) + "\n",
+        encoding="utf-8",
+    )
 
-# Basic validation
-assert len(documents) > 0, "No documents were loaded."
+    loader = MedQALoader(tmp_path)
+    documents = loader.load()
 
-for document in documents:
-    assert document.id, "Document ID is missing."
-    assert document.title, "Document title is missing."
-    assert document.content, "Document content is missing."
-    assert document.source == "MedQA", "Incorrect document source."
-    assert document.metadata is not None, "Document metadata is missing."
-    assert "answer" in document.metadata, "Answer missing from metadata."
-    assert "options" in document.metadata, "Options missing from metadata."
+    assert len(documents) == 1
 
-print("\n✓ All documents passed validation.")
-print("✓ Every document has an ID.")
-print("✓ Every document has a title.")
-print("✓ Every document has content.")
-print("✓ Every document has source = MedQA.")
-print("✓ Every document contains answer and options metadata.")
+    document = documents[0]
+    assert document.id == "sample_0"
+    assert document.title == record["question"]
+    assert document.content == record["question"]
+    assert document.source == "MedQA"
+    assert document.metadata["answer"] == record["answer"]
+    assert document.metadata["options"] == record["options"]
+
+
+def test_medqa_loader_skips_blank_lines(tmp_path):
+    dataset_file = tmp_path / "sample.jsonl"
+    dataset_file.write_text(
+        '\n{"question": "What is diabetes?", "answer": "A disease"}\n\n',
+        encoding="utf-8",
+    )
+
+    documents = MedQALoader(tmp_path).load()
+
+    assert len(documents) == 1
+    assert documents[0].content == "What is diabetes?"
+
+
+def test_medqa_loader_returns_empty_list_for_empty_directory(tmp_path):
+    documents = MedQALoader(tmp_path).load()
+
+    assert documents == []

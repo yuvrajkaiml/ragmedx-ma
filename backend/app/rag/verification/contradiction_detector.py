@@ -209,22 +209,24 @@ class MedicalContradictionDetector:
                 )
 
                 # predict_pair returns (relation, score).
-                candidates = [
-                    forward,
-                    reverse,
-                ]
-                contradiction_scores = [
-                    score
-                    for relation, score in candidates
-                    if relation == "contradiction"
-                ]
-
-                if not contradiction_scores:
+                # Conservatively flag a contradiction only when both
+                # sentence orders predict contradiction above the threshold.
+                if (
+                    forward[0] != "contradiction"
+                    or reverse[0] != "contradiction"
+                ):
                     continue
 
-                best_score = max(contradiction_scores)
-                if best_score < self.contradiction_threshold:
+                # Use the lower score so both directions must be confident.
+                contradiction_score = min(
+                    forward[1],
+                    reverse[1],
+                )
+
+                if contradiction_score < self.contradiction_threshold:
                     continue
+
+                best_score = contradiction_score
 
                 contradictions.append(
                     ContradictionResult(
