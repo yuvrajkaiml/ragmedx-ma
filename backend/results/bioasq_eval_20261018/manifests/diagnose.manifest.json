@@ -1,0 +1,32 @@
+{
+  "phase": "diagnose",
+  "seed": 42,
+  "config": {
+    "roundtrip": false,
+    "corpus": null
+  },
+  "config_hash": "58f12f6d094a60ce54359a1e1f926f9b947294f46e2b7fe946e36c4fd4009b42",
+  "inputs": {
+    "eval_questions": {
+      "path": "D:\\Ragmed_2\\backend\\data\\datasets\\bioasq_eval_split\\eval_questions.json",
+      "sha256": "ff138be55d5e3da2183462ee3df9821ddd9612f24ad026f6f99a7d8d0b294698"
+    },
+    "eval_split_chunks": {
+      "path": "D:\\Ragmed_2\\backend\\data\\faiss_index\\eval_split\\chunks.pkl",
+      "sha256": "6370a1b47b2d0e799788f3406f320dc29057c008db4f4d8ce19f761456a5f5d1"
+    }
+  },
+  "embedding_model": "BAAI/bge-m3",
+  "package_versions": {
+    "numpy": "2.5.2",
+    "faiss": "1.15.0",
+    "torch": "2.13.0+cpu",
+    "transformers": "5.15.0",
+    "sentence_transformers": "5.7.0",
+    "sklearn": "1.9.0"
+  },
+  "timestamp_utc": "2026-10-18T10:46:32.801930+00:00",
+  "n_queries": 250,
+  "n_gold_pmids_unique_normalized": 2394,
+  "gold_pmids_matched_in_eval_split": 0
+}

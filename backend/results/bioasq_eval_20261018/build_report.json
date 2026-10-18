@@ -1,0 +1,20 @@
+{
+  "index_dir": "D:\\Ragmed_2\\backend\\data\\indexes\\bioasq_retrieval_eval\\v1",
+  "version": "v1",
+  "config_hash": "e80684a3627d528d84c83c206d64db762b8b6540595d2eb770b48415c81ef8ea",
+  "raw_snippets": 3077,
+  "n_chunks": 2947,
+  "n_distinct_pmids": 2010,
+  "skipped_no_pmid": 0,
+  "skipped_duplicate": 130,
+  "ntotal": 2947,
+  "len_chunks": 2947,
+  "ntotal_equals_len_chunks": true,
+  "d": 1024,
+  "d_equals_1024": true,
+  "metadata_source_pmid_match": "10/10",
+  "metadata_source_pmid_all_ok": true,
+  "gold_roundtrip": "10/10",
+  "gold_roundtrip_queries": 10,
+  "gold_roundtrip_hits": 10
+}

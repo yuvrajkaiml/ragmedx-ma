@@ -1,0 +1,30 @@
+{
+  "phase": "calibration",
+  "seed": 42,
+  "config": {
+    "source": "phase5-full-pipeline",
+    "seed": 42,
+    "incumbent_threshold": 0.65
+  },
+  "config_hash": "378eff21b35d24c82ded26908b0ab8e4750af8a06834468936b5831dfcb35bb1",
+  "inputs": {
+    "selected_source": {
+      "path": "D:\\Ragmed_2\\RAGMedXMA_Chapter5_Validated_Results\\predictions.jsonl",
+      "sha256": "aaf98d0b95b0e729ca6f7502fbefda069cffef2cbe0678adb7059b4002e44dbb"
+    }
+  },
+  "embedding_model": "BAAI/bge-m3",
+  "package_versions": {
+    "numpy": "2.5.2",
+    "faiss": "1.15.0",
+    "torch": "2.13.0+cpu",
+    "transformers": "5.15.0",
+    "sentence_transformers": "5.7.0",
+    "sklearn": "1.9.0"
+  },
+  "timestamp_utc": "2026-10-18T12:21:37.845820+00:00",
+  "N": 2,
+  "P": 0,
+  "data_regime": "DEGENERATE",
+  "source_consistency": "ok"
+}

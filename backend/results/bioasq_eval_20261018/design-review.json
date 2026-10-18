@@ -1,0 +1,27 @@
+{
+  "verdict": "APPROVED",
+  "findings": [
+    {
+      "id": 1,
+      "severity": "NIT",
+      "location": "design.md \u00a714 (finding-1 response), \u00a78.2",
+      "problem": "States that backend/results/phase5_20261017_131123/per_question/<config>.jsonl 'does not exist'; the file actually exists on disk (phase5-full-pipeline.jsonl is present there, and another under phase5_20261018_053140/). The plan is unaffected because the design pins a fixed three-candidate precedence that excludes these timestamped runs, but the stated justification is factually wrong.",
+      "fix": "Reword to 'removed because it is a non-canonical, timestamped run superseded by the phase5_benchmark mirror' rather than claiming non-existence."
+    },
+    {
+      "id": 2,
+      "severity": "NIT",
+      "location": "design.md \u00a78.2",
+      "problem": "A fourth on-disk candidate backend/results/chapter5_package/predictions.jsonl exists and is a plausible calibration source but is not acknowledged. Discovery is still deterministic via the fixed precedence list, so this is not a correctness defect, only an unexplained omission.",
+      "fix": "Add one sentence noting backend/results/chapter5_package/predictions.jsonl exists but is intentionally excluded from the precedence list, and why, so the omission is clearly deliberate."
+    },
+    {
+      "id": 3,
+      "severity": "NIT",
+      "location": "design.md \u00a78.5 (per-stratum sparsity guard)",
+      "problem": "The pre-call per-stratum check uses max(1, round(frac*d/c/t)), but the verified build_splits runs an _adjust pass that can shift allocations to hit exact totals, so a stratum that passes the pre-check could still raise inside build_splits. The ValueError wrapper (-> \u00a78.4 provisional path) fully covers this, so it never crashes; the pre-check is simply not a perfect predictor.",
+      "fix": "Note in \u00a78.5 that the pre-check is advisory and the authoritative guard is the ValueError wrapper, so it is not mistaken for a guarantee that the stratified call will succeed."
+    }
+  ],
+  "reviewDoc": "d:\\Ragmed_2\\backend\\results\\bioasq_eval_20261018\\design-review.md"
+}

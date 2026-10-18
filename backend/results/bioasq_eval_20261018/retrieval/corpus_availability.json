@@ -1,0 +1,6 @@
+{
+  "corpus": "D:\\Ragmed_2\\backend\\data\\indexes\\bioasq_retrieval_eval\\v1",
+  "corpus_distinct_pmids": 2010,
+  "n_queries_with_at_least_one_available_gold": 250,
+  "n_queries_with_all_gold_available": 188
+}

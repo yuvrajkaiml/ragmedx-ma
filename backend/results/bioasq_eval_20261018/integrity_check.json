@@ -1,0 +1,70 @@
+{
+  "pre_run_ok": true,
+  "pre_run_files": {
+    "d:\\Ragmed_2\\backend\\data\\faiss_index\\index.faiss": {
+      "exists": true,
+      "expected": "44799d53b0ea05835b0dae40e5247876f78354af2aa735255db790889a8cff1a",
+      "actual": "44799d53b0ea05835b0dae40e5247876f78354af2aa735255db790889a8cff1a",
+      "match": true
+    },
+    "d:\\Ragmed_2\\backend\\data\\faiss_index\\chunks.pkl": {
+      "exists": true,
+      "expected": "51c750403b0bcb48e45ed25390d16f3e8b89ea13d7bdffdc8c141fccea977fb4",
+      "actual": "51c750403b0bcb48e45ed25390d16f3e8b89ea13d7bdffdc8c141fccea977fb4",
+      "match": true
+    },
+    "d:\\Ragmed_2\\backend\\data\\faiss_index\\eval_split\\index.faiss": {
+      "exists": true,
+      "expected": "fc18d20d30ea92e6d4b7581786bd1ba640e18e658d994466d47d924c847fc258",
+      "actual": "fc18d20d30ea92e6d4b7581786bd1ba640e18e658d994466d47d924c847fc258",
+      "match": true
+    },
+    "d:\\Ragmed_2\\backend\\data\\faiss_index\\eval_split\\chunks.pkl": {
+      "exists": true,
+      "expected": "6370a1b47b2d0e799788f3406f320dc29057c008db4f4d8ce19f761456a5f5d1",
+      "actual": "6370a1b47b2d0e799788f3406f320dc29057c008db4f4d8ce19f761456a5f5d1",
+      "match": true
+    }
+  },
+  "pre_run_eval_split_membership": {
+    "n_chunks": 58173,
+    "expected_chunks": 58173,
+    "chunks_unchanged": true,
+    "distinct_pmids": 37395,
+    "chunks_missing_pmid": 0
+  },
+  "post_run_ok": true,
+  "post_run_files": {
+    "d:\\Ragmed_2\\backend\\data\\faiss_index\\index.faiss": {
+      "exists": true,
+      "expected": "44799d53b0ea05835b0dae40e5247876f78354af2aa735255db790889a8cff1a",
+      "actual": "44799d53b0ea05835b0dae40e5247876f78354af2aa735255db790889a8cff1a",
+      "match": true
+    },
+    "d:\\Ragmed_2\\backend\\data\\faiss_index\\chunks.pkl": {
+      "exists": true,
+      "expected": "51c750403b0bcb48e45ed25390d16f3e8b89ea13d7bdffdc8c141fccea977fb4",
+      "actual": "51c750403b0bcb48e45ed25390d16f3e8b89ea13d7bdffdc8c141fccea977fb4",
+      "match": true
+    },
+    "d:\\Ragmed_2\\backend\\data\\faiss_index\\eval_split\\index.faiss": {
+      "exists": true,
+      "expected": "fc18d20d30ea92e6d4b7581786bd1ba640e18e658d994466d47d924c847fc258",
+      "actual": "fc18d20d30ea92e6d4b7581786bd1ba640e18e658d994466d47d924c847fc258",
+      "match": true
+    },
+    "d:\\Ragmed_2\\backend\\data\\faiss_index\\eval_split\\chunks.pkl": {
+      "exists": true,
+      "expected": "6370a1b47b2d0e799788f3406f320dc29057c008db4f4d8ce19f761456a5f5d1",
+      "actual": "6370a1b47b2d0e799788f3406f320dc29057c008db4f4d8ce19f761456a5f5d1",
+      "match": true
+    }
+  },
+  "post_run_eval_split_membership": {
+    "n_chunks": 58173,
+    "expected_chunks": 58173,
+    "chunks_unchanged": true,
+    "distinct_pmids": 37395,
+    "chunks_missing_pmid": 0
+  }
+}

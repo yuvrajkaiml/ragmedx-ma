@@ -1,0 +1,32 @@
+{
+  "version": "v1",
+  "config": {
+    "corpus": "eval_questions.json snippets only",
+    "embedding_model": "BAAI/bge-m3",
+    "normalize": true,
+    "max_length": 512,
+    "batch_size": 16,
+    "dimension": 1024,
+    "section_prefix_rule": "[{beginSection}] prepended; endSection ignored",
+    "dense_only": true,
+    "dedup_key": "(pmid, normalized_text)",
+    "seed": 42
+  },
+  "config_hash": "e80684a3627d528d84c83c206d64db762b8b6540595d2eb770b48415c81ef8ea",
+  "seed": 42,
+  "source_file": "D:\\Ragmed_2\\backend\\data\\datasets\\bioasq_eval_split\\eval_questions.json",
+  "source_file_sha256": "ff138be55d5e3da2183462ee3df9821ddd9612f24ad026f6f99a7d8d0b294698",
+  "n_chunks": 2947,
+  "n_distinct_pmids": 2010,
+  "build_stats": {
+    "raw_snippets": 3077,
+    "n_chunks": 2947,
+    "n_distinct_pmids": 2010,
+    "skipped_no_pmid": 0,
+    "skipped_duplicate": 130
+  },
+  "forced_bge_m3_note": "Embedding model is BAAI/bge-m3 (1024-dim), instantiated directly, NOT the stale bge-small-en-v1.5 id in app/config.py \u2014 required for comparability with the 1024-dim production/eval_split indexes.",
+  "batch_size_note": "batch_size=16 overrides the embedder default of 8.",
+  "section_prefix_note": "[{beginSection}] prepended to content; endSection ignored.",
+  "build_timestamp_utc": "2026-10-18T11:08:39.293469+00:00"
+}
