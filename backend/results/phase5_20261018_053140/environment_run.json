@@ -1,0 +1,48 @@
+{
+  "generated_at": "2026-10-18T05:18:31.042114+00:00",
+  "resolved_eval_split_path": "D:\\Ragmed_2\\backend\\data\\faiss_index\\eval_split",
+  "canonical_eval_split": "D:\\Ragmed_2\\backend\\data\\faiss_index\\eval_split",
+  "llm_model": "Qwen/Qwen3-8B",
+  "llm_mode": "local",
+  "generator_temperature": 0.0,
+  "model_load_ms": 34431,
+  "configs": [
+    "phase5-improved-v2",
+    "phase5-improved-no-verification",
+    "phase5-full-pipeline",
+    "phase5-no-critic",
+    "phase5-no-iterative-retrieval",
+    "phase5-no-calibration",
+    "phase5-basic-rag",
+    "phase5-plain-llm-no-rag"
+  ],
+  "mode": "target_matrix",
+  "target": 40,
+  "n_questions": 40,
+  "matrix": {
+    "plan": {
+      "total": 320,
+      "reused": 128,
+      "missing": 192
+    },
+    "run_counts": {
+      "completed": 192,
+      "failed": 0,
+      "abstained": 161,
+      "reused_skipped": 128,
+      "duplicate_skipped": 0,
+      "questions_completed": 40,
+      "budget_stopped_early": false,
+      "run_seconds": 18903.8
+    }
+  },
+  "subset": {
+    "dev": 0,
+    "test": 40,
+    "full": false
+  },
+  "torch_version": "2.11.0+cu128",
+  "cuda_version": "12.8",
+  "cuda_available": true,
+  "peak_vram_mb_run": 10161.24
+}

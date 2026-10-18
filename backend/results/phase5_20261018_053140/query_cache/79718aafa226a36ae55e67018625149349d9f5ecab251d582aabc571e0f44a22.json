@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What is Catamenial pneumothorax?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "79718aafa226a36ae55e67018625149349d9f5ecab251d582aabc571e0f44a22",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_601efda31cb411341a000069_s47008_chunk_0",
+        "document_id": "bioasq_601efda31cb411341a000069_s47008",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/30755913",
+        "title": "PubMed 30755913 [abstract]",
+        "cited_text": "Bleomycin lung toxicity is well established and can manifest as bleomycin-induced pneumonitis, but pneumomediastinum and pneumothorax are very rare complications.",
+        "cross_encoder_logit": 0.0020059929229319096,
+        "relevance_score": 0.5005014980625636,
+        "cross_encoder_score": 0.5005014980625636,
+        "evidence_quality_score": 0.5005014980625636,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/30755913",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_61f81912882a024a10000041_s52726_chunk_0",
+        "document_id": "bioasq_61f81912882a024a10000041_s52726",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/34145047",
+        "title": "PubMed 34145047 [title]",
+        "cited_text": "Combining clinical, radiological and genetic approaches to pneumothorax management.",
+        "cross_encoder_logit": 0.0007901976350694895,
+        "relevance_score": 0.500197549398488,
+        "cross_encoder_score": 0.500197549398488,
+        "evidence_quality_score": 0.500197549398488,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/34145047",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_530cf4fe960c95ad0c000003_s1434_chunk_0",
+        "document_id": "bioasq_530cf4fe960c95ad0c000003_s1434",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/20676041",
+        "title": "PubMed 20676041 [abstract]",
+        "cited_text": "Catecholaminergic polymorphic ventricular tachycardia (CPVT) is an arrhythmogenic disease that manifests as syncope or sudden death during high adrenergic tone in the absence of structural heart defects.",
+        "cross_encoder_logit": 0.00048746942775323987,
+        "relevance_score": 0.5001218673545251,
+        "cross_encoder_score": 0.5001218673545251,
+        "evidence_quality_score": 0.5001218673545251,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/20676041",
+        "index_id": null
+      }
+    ]
+  }
+}

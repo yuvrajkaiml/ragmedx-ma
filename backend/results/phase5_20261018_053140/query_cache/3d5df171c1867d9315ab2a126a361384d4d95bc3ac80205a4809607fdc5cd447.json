@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Describe the mechanism of action of ibalizumab.",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "3d5df171c1867d9315ab2a126a361384d4d95bc3ac80205a4809607fdc5cd447",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_54d9071a4b1fd0d33c000007_s26009_chunk_0",
+        "document_id": "bioasq_54d9071a4b1fd0d33c000007_s26009",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/24259600",
+        "title": "PubMed 24259600 [abstract]",
+        "cited_text": "Bedaquiline possesses a unique mechanism of action that disrupts the activity of the mycobacterial adenosine triphosphate synthase",
+        "cross_encoder_logit": 0.03680315613746643,
+        "relevance_score": 0.5091997506571867,
+        "cross_encoder_score": 0.5091997506571867,
+        "evidence_quality_score": 0.5091997506571867,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/24259600",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_621218fc3a8413c653000014_s41367_chunk_0",
+        "document_id": "bioasq_621218fc3a8413c653000014_s41367",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/33651100",
+        "title": "PubMed 33651100 [abstract]",
+        "cited_text": "Here we describe a fully human bsAb (REGN5458) that binds to B-cell maturation antigen (BCMA) and CD3, and compare its antitumor activities vs those of anti-BCMA CAR T cells to identify differences in efficacy and mechanism of action.",
+        "cross_encoder_logit": 0.023786593228578568,
+        "relevance_score": 0.5059463679375407,
+        "cross_encoder_score": 0.5059463679375407,
+        "evidence_quality_score": 0.5059463679375407,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/33651100",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5a7237672dc08e987e000008_s58020_chunk_0",
+        "document_id": "bioasq_5a7237672dc08e987e000008_s58020",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/27317414",
+        "title": "PubMed 27317414 [abstract]",
+        "cited_text": "BACKGROUND AND OBJECTIVES: Idarucizumab is an antibody fragment that specifically reverses dabigatran-mediated anticoagulation.",
+        "cross_encoder_logit": 0.017209678888320923,
+        "relevance_score": 0.5043023135368284,
+        "cross_encoder_score": 0.5043023135368284,
+        "evidence_quality_score": 0.5043023135368284,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/27317414",
+        "index_id": null
+      }
+    ]
+  }
+}

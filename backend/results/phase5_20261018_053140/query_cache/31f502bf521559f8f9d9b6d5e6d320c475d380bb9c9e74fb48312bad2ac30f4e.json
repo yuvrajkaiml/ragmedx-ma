@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What are the guidelines for reporting cavitation in proximal surfaces on CBCT?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "31f502bf521559f8f9d9b6d5e6d320c475d380bb9c9e74fb48312bad2ac30f4e",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_601eac531cb411341a000054_s6619_chunk_0",
+        "document_id": "bioasq_601eac531cb411341a000054_s6619",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/32299690",
+        "title": "PubMed 32299690 [abstract]",
+        "cited_text": "SIONS: The sensitivity of the scratch collapse test for CTS and cubital tunnel syndrome was lower than that found in other studies, regardless of whether a clinical or an electrodiagnostic reference standard was used. The",
+        "cross_encoder_logit": 0.001337992143817246,
+        "relevance_score": 0.5003344979860521,
+        "cross_encoder_score": 0.5003344979860521,
+        "evidence_quality_score": 0.5003344979860521,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/32299690",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_601eac531cb411341a000054_s6595_chunk_0",
+        "document_id": "bioasq_601eac531cb411341a000054_s6595",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/19774420",
+        "title": "PubMed 19774420 [abstract]",
+        "cited_text": "The objective of this study is to demonstrate the utility of the scratch collapse test (SCT) in localizing the point of maximal compression in cubital tunnel syndrome.",
+        "cross_encoder_logit": 0.0010532953310757875,
+        "relevance_score": 0.500263323808424,
+        "cross_encoder_score": 0.500263323808424,
+        "evidence_quality_score": 0.500263323808424,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/19774420",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_601eac531cb411341a000054_s6620_chunk_0",
+        "document_id": "bioasq_601eac531cb411341a000054_s6620",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/32299690",
+        "title": "PubMed 32299690 [abstract]",
+        "cited_text": "results call into question the sensitivity and interrater reliability of the scratch collapse test for CTS and cubital tunnel syndrome.TYPE",
+        "cross_encoder_logit": 0.0009635703172534704,
+        "relevance_score": 0.5002408925606749,
+        "cross_encoder_score": 0.5002408925606749,
+        "evidence_quality_score": 0.5002408925606749,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/32299690",
+        "index_id": null
+      }
+    ]
+  }
+}

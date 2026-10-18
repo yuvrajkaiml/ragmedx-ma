@@ -1,0 +1,35 @@
+{
+  "generated_at": "2026-10-18T05:18:31.234821+00:00",
+  "tier": "REDUCED_VALIDATION_SUBSET",
+  "mode": "target_matrix",
+  "pilot": null,
+  "wall_clock": null,
+  "peak_vram_mb_run": 10161.24,
+  "subset": {
+    "dev": 0,
+    "test": 40,
+    "full": false
+  },
+  "configs": [
+    "phase5-basic-rag",
+    "phase5-full-pipeline",
+    "phase5-improved-no-verification",
+    "phase5-improved-v2",
+    "phase5-no-calibration",
+    "phase5-no-critic",
+    "phase5-no-iterative-retrieval",
+    "phase5-plain-llm-no-rag"
+  ],
+  "accuracy": {
+    "phase5-basic-rag": 0.025,
+    "phase5-full-pipeline": 0.0,
+    "phase5-improved-no-verification": 0.0,
+    "phase5-improved-v2": 0.0,
+    "phase5-no-calibration": 0.0,
+    "phase5-no-critic": 0.025,
+    "phase5-no-iterative-retrieval": 0.0,
+    "phase5-plain-llm-no-rag": 0.375
+  },
+  "n_failures": 0,
+  "notes": "Every metric carries an evidence tier; NOT MEASURED used where data is absent. No superiority claim without a Holm-significant paired test."
+}

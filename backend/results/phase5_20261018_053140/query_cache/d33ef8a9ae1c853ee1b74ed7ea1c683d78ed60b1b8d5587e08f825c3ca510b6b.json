@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What studies have examined self-reported health-related quality of life as a prognostic factor in non-small-cell lung cancer?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "d33ef8a9ae1c853ee1b74ed7ea1c683d78ed60b1b8d5587e08f825c3ca510b6b",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_621e9e7b3a8413c653000054_s35282_chunk_0",
+        "document_id": "bioasq_621e9e7b3a8413c653000054_s35282",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/32156276",
+        "title": "PubMed 32156276 [abstract]",
+        "cited_text": "BACKGROUND: There is a lack of cohort studies on the influence factors of oral health-related quality of life (OHRQoL).",
+        "cross_encoder_logit": 0.10677917301654816,
+        "relevance_score": 0.5266694581008123,
+        "cross_encoder_score": 0.5266694581008123,
+        "evidence_quality_score": 0.5266694581008123,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/32156276",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_65cf96ce1930410b1300000a_s1504_chunk_0",
+        "document_id": "bioasq_65cf96ce1930410b1300000a_s1504",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/35616682",
+        "title": "PubMed 35616682 [abstract]",
+        "cited_text": "BACKGROUND: Amivantamab was approved on May 21st, 2021, by United States food and drug administration with the brand name Rybervant, used particularly for adult patients with exon20 insertion of epithelial growth factor receptor with locally advanced metastatic non-small cell lung cancer.OBJECTIVE: In this review, we explain the non-small cell lung cancer and molecular distinctions between non-small cell lung cancer and small cell lung cancer",
+        "cross_encoder_logit": 0.09512504190206528,
+        "relevance_score": 0.5237633440839878,
+        "cross_encoder_score": 0.5237633440839878,
+        "evidence_quality_score": 0.5237633440839878,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/35616682",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5e476da1d14c9f295d000002_s51100_chunk_0",
+        "document_id": "bioasq_5e476da1d14c9f295d000002_s51100",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/11894017",
+        "title": "PubMed 11894017 [abstract]",
+        "cited_text": "There were no significant differences in survival in a non-small cell lung cancer prinomastat study, and in a small cell lung cancer marimastat trial.",
+        "cross_encoder_logit": 0.0723324790596962,
+        "relevance_score": 0.5180752396663346,
+        "cross_encoder_score": 0.5180752396663346,
+        "evidence_quality_score": 0.5180752396663346,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/11894017",
+        "index_id": null
+      }
+    ]
+  }
+}

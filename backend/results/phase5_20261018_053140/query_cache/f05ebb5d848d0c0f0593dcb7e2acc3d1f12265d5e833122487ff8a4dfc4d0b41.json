@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What are the clinical features of KIF1A-related disorders in children?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "f05ebb5d848d0c0f0593dcb7e2acc3d1f12265d5e833122487ff8a4dfc4d0b41",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_65f70a55c4010b4d7800001b_s7526_chunk_0",
+        "document_id": "bioasq_65f70a55c4010b4d7800001b_s7526",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/35853369",
+        "title": "PubMed 35853369 [abstract]",
+        "cited_text": "Ranging from bleeding to thrombosis, the clinical features of congenital fibrinogen qualitative disorders, including dysfibrinogenemia and hypodysfibrinogenemia, ar",
+        "cross_encoder_logit": 0.07290320843458176,
+        "relevance_score": 0.5182177340707639,
+        "cross_encoder_score": 0.5182177340707639,
+        "evidence_quality_score": 0.5182177340707639,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/35853369",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5148f6f0d24251bc0500003c_s58215_chunk_0",
+        "document_id": "bioasq_5148f6f0d24251bc0500003c_s58215",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/22258533",
+        "title": "PubMed 22258533 [sections.0]",
+        "cited_text": "We have shown that mutations in the KIF1A gene are responsible for SPG30 in two autosomal recessive HSP families. In published families, the nature of the KIF1A mutations seems to be of good predictor of the underlying phenotype and vice versa.",
+        "cross_encoder_logit": 0.035724300891160965,
+        "relevance_score": 0.5089301255050374,
+        "cross_encoder_score": 0.5089301255050374,
+        "evidence_quality_score": 0.5089301255050374,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/22258533",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_601dc46c1cb411341a000050_s25188_chunk_0",
+        "document_id": "bioasq_601dc46c1cb411341a000050_s25188",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/32631771",
+        "title": "PubMed 32631771 [abstract]",
+        "cited_text": "Recent reports have described a secondary Multisystem Inflammatory Syndrome in Children (MIS-C) after a prior COVID-19 infection that often has features of Kawasaki disease (KD).",
+        "cross_encoder_logit": 0.020004520192742348,
+        "relevance_score": 0.5050009632751625,
+        "cross_encoder_score": 0.5050009632751625,
+        "evidence_quality_score": 0.5050009632751625,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/32631771",
+        "index_id": null
+      }
+    ]
+  }
+}

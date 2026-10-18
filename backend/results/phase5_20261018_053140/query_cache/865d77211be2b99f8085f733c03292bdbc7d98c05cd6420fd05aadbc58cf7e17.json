@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Cardiogenic shock complicating acute myocardial infarction in elderly patients: does admission to a tertiary center improve survival?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "865d77211be2b99f8085f733c03292bdbc7d98c05cd6420fd05aadbc58cf7e17",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_532f062ad6d3ac6a34000027_s7970_chunk_0",
+        "document_id": "bioasq_532f062ad6d3ac6a34000027_s7970",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/20000882",
+        "title": "PubMed 20000882 [abstract]",
+        "cited_text": "The most important finding of the study was that patients with high baseline HR had an increase in serious cardiovascular events including death (34%), hospital admission secondary to congestive heart failure (53%), acute myocardial infarction (46%), or revascularization procedure (38%). In addition, in the subset analysis focusing on patients with baseline HR > or =70 bpm and left ventricular ejection fraction <40% the agent resulted in a 36% decrease in hospital admissions secondary to fatal and nonfatal myocardial infarction and a 30% decrease in coronary revascularization.",
+        "cross_encoder_logit": 0.502468466758728,
+        "relevance_score": 0.6230392544559921,
+        "cross_encoder_score": 0.6230392544559921,
+        "evidence_quality_score": 0.6230392544559921,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/20000882",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5509df4ac2af5d5b70000003_s40684_chunk_0",
+        "document_id": "bioasq_5509df4ac2af5d5b70000003_s40684",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/21626366",
+        "title": "PubMed 21626366 [abstract]",
+        "cited_text": "Common class I agents are excluded due to the inherent abnormal cardiac structure and function in the setting of cardiogenic shock. Class III drug options include dofetilide and amiodarone.",
+        "cross_encoder_logit": 0.04999065026640892,
+        "relevance_score": 0.512495060510827,
+        "cross_encoder_score": 0.512495060510827,
+        "evidence_quality_score": 0.512495060510827,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/21626366",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_58a342e760087bc10a00001c_s48679_chunk_0",
+        "document_id": "bioasq_58a342e760087bc10a00001c_s48679",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/10979347",
+        "title": "PubMed 10979347 [abstract]",
+        "cited_text": "Iatrogenic illness, defined as a disease that results from a diagnostic procedure or from any form of therapy, is a well-recognized phenomenon in clinical practice.To study and evaluate major cardiac iatrogenic disease as the cause of admission to the intensive cardiac care unit in the modern era.We assessed 64 critically ill patients suffering from major cardiac iatrogenic problems among a total of 2,559 patients admitted to the intensive cardiac care unit during 3 years.",
+        "cross_encoder_logit": 0.03161953389644623,
+        "relevance_score": 0.5079042249347543,
+        "cross_encoder_score": 0.5079042249347543,
+        "evidence_quality_score": 0.5079042249347543,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/10979347",
+        "index_id": null
+      }
+    ]
+  }
+}

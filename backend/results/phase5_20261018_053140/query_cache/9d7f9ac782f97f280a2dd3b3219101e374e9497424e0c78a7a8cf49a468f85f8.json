@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What is the effectiveness of HIV1/2 point of care test on sputum for TB/HIV co-infection in Central India?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "9d7f9ac782f97f280a2dd3b3219101e374e9497424e0c78a7a8cf49a468f85f8",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_5a68fd01b750ff445500001b_s63145_chunk_0",
+        "document_id": "bioasq_5a68fd01b750ff445500001b_s63145",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/27272704",
+        "title": "PubMed 27272704 [title]",
+        "cited_text": "Diagnosing acute HIV infection at point of care: a retrospective analysis of the sensitivity and specificity of a fourth-generation point-of-care test for detection of HIV core protein p24.",
+        "cross_encoder_logit": 0.020324386656284332,
+        "relevance_score": 0.5050809217627183,
+        "cross_encoder_score": 0.5050809217627183,
+        "evidence_quality_score": 0.5050809217627183,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/27272704",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_551829a76487737b43000009_s50461_chunk_0",
+        "document_id": "bioasq_551829a76487737b43000009_s50461",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/22647661",
+        "title": "PubMed 22647661 [title]",
+        "cited_text": "Point-of-care breath test for biomarkers of active pulmonary tuberculosis.",
+        "cross_encoder_logit": 0.015501492656767368,
+        "relevance_score": 0.5038752955629121,
+        "cross_encoder_score": 0.5038752955629121,
+        "evidence_quality_score": 0.5038752955629121,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/22647661",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_551829a76487737b43000009_s50463_chunk_0",
+        "document_id": "bioasq_551829a76487737b43000009_s50463",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/22647661",
+        "title": "PubMed 22647661 [abstract]",
+        "cited_text": "CONCLUSIONS: A six-minute point-of-care breath test for volatile biomarkers accurately identified subjects with active pulmonary TB.",
+        "cross_encoder_logit": 0.01285435352474451,
+        "relevance_score": 0.5032135441323037,
+        "cross_encoder_score": 0.5032135441323037,
+        "evidence_quality_score": 0.5032135441323037,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/22647661",
+        "index_id": null
+      }
+    ]
+  }
+}

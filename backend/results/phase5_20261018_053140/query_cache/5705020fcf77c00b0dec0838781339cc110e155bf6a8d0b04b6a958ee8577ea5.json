@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What is the surgical treatment for displaced midshaft clavicular fractures?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "5705020fcf77c00b0dec0838781339cc110e155bf6a8d0b04b6a958ee8577ea5",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_66099a25fdcbea915f00001e_s26726_chunk_0",
+        "document_id": "bioasq_66099a25fdcbea915f00001e_s26726",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/33836264",
+        "title": "PubMed 33836264 [abstract]",
+        "cited_text": "The current standard therapies for first-line treatment of BRAF-mutated mCRC are chemotherapy with bevacizumab as well as 5-fluorouracil, leucovorin, oxaliplatin, and irinotecan (FOLFOXIRI) plus bevacizumab in patients with a good performance status",
+        "cross_encoder_logit": 0.21497243642807007,
+        "relevance_score": 0.5535370912714533,
+        "cross_encoder_score": 0.5535370912714533,
+        "evidence_quality_score": 0.5535370912714533,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/33836264",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_63f03d58f36125a42600001f_s40426_chunk_0",
+        "document_id": "bioasq_63f03d58f36125a42600001f_s40426",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/35909375",
+        "title": "PubMed 35909375 [title]",
+        "cited_text": "Cost-utility analysis of cemented hemiarthroplasty versus hydroxyapatite-coated uncemented hemiarthroplasty for the treatment of displaced intracapsular hip fractures : the World Hip Trauma Evaluation 5 (WHiTE 5) trial.",
+        "cross_encoder_logit": 0.01809811219573021,
+        "relevance_score": 0.5045244045553565,
+        "cross_encoder_score": 0.5045244045553565,
+        "evidence_quality_score": 0.5045244045553565,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/35909375",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_56bce63cd36b5da37800000b_s35116_chunk_0",
+        "document_id": "bioasq_56bce63cd36b5da37800000b_s35116",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/9269112",
+        "title": "PubMed 9269112 [abstract]",
+        "cited_text": "The authors report 7 cases involving the surgical treatment of unstable pelvic ring fractures (Malgaigne type) using two compression bars, as described by Tile.",
+        "cross_encoder_logit": 0.011647948063910007,
+        "relevance_score": 0.5029119540928453,
+        "cross_encoder_score": 0.5029119540928453,
+        "evidence_quality_score": 0.5029119540928453,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/9269112",
+        "index_id": null
+      }
+    ]
+  }
+}

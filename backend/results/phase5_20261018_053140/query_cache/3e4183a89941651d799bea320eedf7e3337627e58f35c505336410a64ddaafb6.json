@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Is a patient's self-reported health-related quality of life a prognostic factor for survival in non-small-cell lung cancer patients?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "3e4183a89941651d799bea320eedf7e3337627e58f35c505336410a64ddaafb6",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_66099c57fdcbea915f000025_s7842_chunk_0",
+        "document_id": "bioasq_66099c57fdcbea915f000025_s7842",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/17109105",
+        "title": "PubMed 17109105 [abstract]",
+        "cited_text": "tal cancer. We analyzed the treatment outcome and prognostic factors affecting survival in this subset of patients.MATERIALS AND METHODS: Between October 1994 and December 2004, 59 patients underwent curative resection for pulmonary metastases of colorectal cancer. Uncontrollable synchronous liver and lung metastasis or synchronous colorectal cancer with isolated lung metastasis were excluded from this study. A retrospective review of patient characteristics and factors influencing survival was performed. Survival was analyzed by the Kaplan-Meier method. Comparison between groups were performed by a log-rank analysis and the Cox pro",
+        "cross_encoder_logit": 0.48354777693748474,
+        "relevance_score": 0.6185852799316071,
+        "cross_encoder_score": 0.6185852799316071,
+        "evidence_quality_score": 0.6185852799316071,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/17109105",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5e476da1d14c9f295d000002_s51101_chunk_0",
+        "document_id": "bioasq_5e476da1d14c9f295d000002_s51101",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/11894017",
+        "title": "PubMed 11894017 [abstract]",
+        "cited_text": "There were no significant differences in survival in a non-small cell lung cancer prinomastat study , and in a small cell lung cancer marimastat trial.",
+        "cross_encoder_logit": 0.22266140580177307,
+        "relevance_score": 0.5554365040942901,
+        "cross_encoder_score": 0.5554365040942901,
+        "evidence_quality_score": 0.5554365040942901,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/11894017",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5e476da1d14c9f295d000002_s51100_chunk_0",
+        "document_id": "bioasq_5e476da1d14c9f295d000002_s51100",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/11894017",
+        "title": "PubMed 11894017 [abstract]",
+        "cited_text": "There were no significant differences in survival in a non-small cell lung cancer prinomastat study, and in a small cell lung cancer marimastat trial.",
+        "cross_encoder_logit": 0.21005384624004364,
+        "relevance_score": 0.5523212237671978,
+        "cross_encoder_score": 0.5523212237671978,
+        "evidence_quality_score": 0.5523212237671978,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/11894017",
+        "index_id": null
+      }
+    ]
+  }
+}

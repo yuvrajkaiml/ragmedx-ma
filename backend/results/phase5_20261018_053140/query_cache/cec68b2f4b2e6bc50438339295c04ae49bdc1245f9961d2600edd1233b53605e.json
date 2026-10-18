@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Do mitochondria play a role in remodelling lace plant leaves during programmed cell death?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "cec68b2f4b2e6bc50438339295c04ae49bdc1245f9961d2600edd1233b53605e",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_54f5bc7d5f206a0c06000001_s38173_chunk_0",
+        "document_id": "bioasq_54f5bc7d5f206a0c06000001_s38173",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/11032171",
+        "title": "PubMed 11032171 [abstract]",
+        "cited_text": "Programmed cell death plays an important role in maintaining homeostasis during animal development, and has been conserved in animals as different as nematodes and humans.",
+        "cross_encoder_logit": 0.0508243665099144,
+        "relevance_score": 0.5127033572245113,
+        "cross_encoder_score": 0.5127033572245113,
+        "evidence_quality_score": 0.5127033572245113,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/11032171",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5a8714e261bb38fb24000005_s58740_chunk_0",
+        "document_id": "bioasq_5a8714e261bb38fb24000005_s58740",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/11557765",
+        "title": "PubMed 11557765 [abstract]",
+        "cited_text": "From these results, we propose that in plant mitochondria, poly(A) tails added at the 3' ends of mRNAs promote an efficient 3'- to 5'- degradation process..",
+        "cross_encoder_logit": 0.017129680141806602,
+        "relevance_score": 0.5042823153240965,
+        "cross_encoder_score": 0.5042823153240965,
+        "evidence_quality_score": 0.5042823153240965,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/11557765",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_53175f0bb166e2b80600000c_s63133_chunk_0",
+        "document_id": "bioasq_53175f0bb166e2b80600000c_s63133",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/23625539",
+        "title": "PubMed 23625539 [abstract]",
+        "cited_text": "Inducing programmed cell death (PCD) is a promising method to prevent or inhibit the progression of tumor cells. Intricate cross talk among various programmed cell death pathways including cell death by apoptosis, necroptosis or autophagy plays a critical role in the regulation of PCD.",
+        "cross_encoder_logit": 0.01518341526389122,
+        "relevance_score": 0.5037957808942096,
+        "cross_encoder_score": 0.5037957808942096,
+        "evidence_quality_score": 0.5037957808942096,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/23625539",
+        "index_id": null
+      }
+    ]
+  }
+}

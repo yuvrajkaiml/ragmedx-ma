@@ -728,3 +728,51 @@ NEVER MODIFY:
 | BLOCKED-003 | 500-question eval split | RESOLVED (built); full 500×8 sweep CARRY-FORWARD | Split built + leakage-checked; full GPU sweep (~40+ h) exceeds budget, pilot run instead |
 | BLOCKED-004 | NLI model download | CARRY-FORWARD | Download `cross-encoder/nli-MiniLM-L2-v2` (not during a benchmark run); claim support NOT MEASURED until then |
 | BLOCKED-005 | Human annotation labels | CARRY-FORWARD | Human review using Phase 2 schema; abstention/faithfulness metrics NOT MEASURED until then |
+
+---
+
+## Phase 7 — Time-Bounded 40×8 Evaluation (benchmark → go/no-go → execute → metrics)
+
+**Status:** IMPLEMENTED AND TESTED
+**Target env:** GPU (`.venv-cu128-pilot`) for benchmark+execute; CPU (`.venv`) for metrics+tests
+**Completed:** 2026-10-18 · **Run dir:** `backend/results/phase5_20261018_053140/`
+
+### Benchmark + go/no-go (honest re-measurement; old 40 GPU-hr estimate discarded)
+
+- Fresh benchmark: 3 representative non-pilot questions × all 8 configs. **815.5 s/question-all-8-configs
+  (101.9 s/cell), peak VRAM 10,164 MB, 0 OOM / 0 errors.** Within ~2% of the pilot's 830.4 s/q.
+- Projection: 50×8 ≈ 8.73 h (OVER the 8 h hard budget, negative margin); 40×8 ≈ 6.24 h (fits, ~1.76 h
+  margin). Recorded in `.agents/tasks/ragmed2-50x8-eval-2026-10-18/benchmark-decision.json`.
+- **User go/no-go: approved 40×8** (per task rule "if projected total exceeds 8 h, reduce to 40").
+
+### Execute — COMPLETE 40×8 (not partial)
+
+- **40 questions × 8 configs = 320 cells; 320 completed, 0 failed.** 128 pilot cells reused
+  byte-faithfully (not re-run), 192 run fresh. Run wall-clock 18,903.8 s ≈ **5.25 h**; peak VRAM
+  **10,161 MB**; budget not stopped early.
+- Per-cell checkpoint/resume: dry-run against the completed dir reports `reused=320 missing=0`
+  (restart repeats zero valid completed cells). 161 genuine abstentions recorded distinct from errors.
+- **Safety verified:** production index + eval_split SHA-256 **unchanged** pre/post run; guard PASS;
+  temp 0.0 / v1 prompts / top_k 10,3 / Qwen3-8B NF4 / precision / batch all unchanged; `llm_mode=local`.
+
+### Metrics (recomputed from raw saved outputs; no metric redefined)
+
+- `metric_summary.json` — accuracy + Wilson CIs + paired McNemar vs full-pipeline + Holm.
+- `extended_metrics.json` + `comparison_table.md` — ROUGE-L, citation support, paired bootstrap CIs
+  (`backend/scripts/recompute_phase5_extended_metrics.py`, CPU, reuses evaluation/metrics+statistics).
+- **Key finding (verified):** retrieval quality is **NOT MEASURED** — 0/789 BioASQ gold PMIDs are present
+  in the eval_split index universe (90,074 PMID-like ids in chunks.pkl), correcting the manifest's earlier
+  "BioASQ MEASURABLE" assumption with direct evidence. PubMedQA retrieval also NOT MEASURED.
+- Honest read: the one Holm-significant result (plain-LLM > RAG on containment accuracy, ROUGE-L bootstrap
+  CI excludes 0) is an always-answer vs mostly-abstain (0.875–0.95) artifact — **no superiority or
+  clinical-safety claim**. Small n=40 ⇒ all between-RAG deltas indistinguishable.
+
+### Reports / deliverables (in run dir)
+
+`runtime_completion_report.md`, `reproducibility_report.md`, `research_results_summary.md`,
+`comparison_table.md`. Reports distinguish the original 500-q / 50×8 goal from the actual completed 40×8.
+
+### Tests
+
+`backend/tests/test_phase5_checkpoint.py` — **18 passed** (per-cell resume, dedup, corrupted record,
+partial write, failure recovery).

@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What is the use of Brain Metastasis Velocity (BMV) Model?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "d3593c99dec1084ab1d41f7026f0ddb2c955c676d3cf4587bcb669d08cb7f70d",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_5e3356c0fbd6abf43b00005c_s13175_chunk_0",
+        "document_id": "bioasq_5e3356c0fbd6abf43b00005c_s13175",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/28186259",
+        "title": "PubMed 28186259 [abstract]",
+        "cited_text": "Results We described here MBV (Match BAM to VCF); a method to quickly solve sample mislabeling and detect cross-sample contamination and PCR amplification bias.",
+        "cross_encoder_logit": 0.1100846603512764,
+        "relevance_score": 0.5274934054878271,
+        "cross_encoder_score": 0.5274934054878271,
+        "evidence_quality_score": 0.5274934054878271,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/28186259",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5e3356c0fbd6abf43b00005c_s13174_chunk_0",
+        "document_id": "bioasq_5e3356c0fbd6abf43b00005c_s13174",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/28186259",
+        "title": "PubMed 28186259 [abstract]",
+        "cited_text": "Results We described here MBV (Match BAM to VCF); a method to quickly solve sample mislabeling and detect cross-sample contamination and PCR amplification bias.",
+        "cross_encoder_logit": 0.1100846603512764,
+        "relevance_score": 0.5274934054878271,
+        "cross_encoder_score": 0.5274934054878271,
+        "evidence_quality_score": 0.5274934054878271,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/28186259",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5e3356c0fbd6abf43b00005c_s13177_chunk_0",
+        "document_id": "bioasq_5e3356c0fbd6abf43b00005c_s13177",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/28186259",
+        "title": "PubMed 28186259 [abstract]",
+        "cited_text": "We described here MBV (Match BAM to VCF); a method to quickly solve sample mislabeling and detect cross-sample contamination and PCR amplification bias.",
+        "cross_encoder_logit": 0.09475739300251007,
+        "relevance_score": 0.5236716386689964,
+        "cross_encoder_score": 0.5236716386689964,
+        "evidence_quality_score": 0.5236716386689964,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/28186259",
+        "index_id": null
+      }
+    ]
+  }
+}

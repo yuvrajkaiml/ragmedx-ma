@@ -1,0 +1,1925 @@
+{
+  "version": 1,
+  "cells": {
+    "pubmedqa::15943725::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:40.591625+00:00"
+    },
+    "bioasq::602825a61cb411341a0000fa::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:40.597661+00:00"
+    },
+    "bioasq::53372ba3d6d3ac6a34000058::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:40.602747+00:00"
+    },
+    "bioasq::54d7a1047035c08008000002::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:40.603758+00:00"
+    },
+    "pubmedqa::21394762::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:40.631309+00:00"
+    },
+    "pubmedqa::16735905::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:40.652733+00:00"
+    },
+    "pubmedqa::26215326::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:40.680195+00:00"
+    },
+    "pubmedqa::23321509::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:40.708872+00:00"
+    },
+    "pubmedqa::24449622::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:40.735569+00:00"
+    },
+    "pubmedqa::22251324::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:40.763280+00:00"
+    },
+    "pubmedqa::18719011::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:40.791016+00:00"
+    },
+    "pubmedqa::10548670::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:40.819130+00:00"
+    },
+    "pubmedqa::20605051::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:40.846723+00:00"
+    },
+    "bioasq::6060996394d57fd879000045::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:40.874516+00:00"
+    },
+    "pubmedqa::12098035::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:40.902504+00:00"
+    },
+    "pubmedqa::23621776::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:40.930211+00:00"
+    },
+    "pubmedqa::15943725::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:40.937191+00:00"
+    },
+    "bioasq::602825a61cb411341a0000fa::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:40.944063+00:00"
+    },
+    "bioasq::53372ba3d6d3ac6a34000058::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:40.944063+00:00"
+    },
+    "bioasq::54d7a1047035c08008000002::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:40.955469+00:00"
+    },
+    "pubmedqa::21394762::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:40.982763+00:00"
+    },
+    "pubmedqa::16735905::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.006266+00:00"
+    },
+    "pubmedqa::26215326::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.033980+00:00"
+    },
+    "pubmedqa::23321509::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.055553+00:00"
+    },
+    "pubmedqa::24449622::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.076246+00:00"
+    },
+    "pubmedqa::22251324::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.097207+00:00"
+    },
+    "pubmedqa::18719011::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.124952+00:00"
+    },
+    "pubmedqa::10548670::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.152882+00:00"
+    },
+    "pubmedqa::20605051::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.173337+00:00"
+    },
+    "bioasq::6060996394d57fd879000045::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.202036+00:00"
+    },
+    "pubmedqa::12098035::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.228852+00:00"
+    },
+    "pubmedqa::23621776::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.256619+00:00"
+    },
+    "pubmedqa::15943725::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.263938+00:00"
+    },
+    "bioasq::602825a61cb411341a0000fa::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.269493+00:00"
+    },
+    "bioasq::53372ba3d6d3ac6a34000058::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.270508+00:00"
+    },
+    "bioasq::54d7a1047035c08008000002::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.277889+00:00"
+    },
+    "pubmedqa::21394762::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.305162+00:00"
+    },
+    "pubmedqa::16735905::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.325892+00:00"
+    },
+    "pubmedqa::26215326::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.353731+00:00"
+    },
+    "pubmedqa::23321509::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.377515+00:00"
+    },
+    "pubmedqa::24449622::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.402407+00:00"
+    },
+    "pubmedqa::22251324::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.429149+00:00"
+    },
+    "pubmedqa::18719011::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.450935+00:00"
+    },
+    "pubmedqa::10548670::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.485767+00:00"
+    },
+    "pubmedqa::20605051::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.507104+00:00"
+    },
+    "bioasq::6060996394d57fd879000045::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.534323+00:00"
+    },
+    "pubmedqa::12098035::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.557069+00:00"
+    },
+    "pubmedqa::23621776::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.583252+00:00"
+    },
+    "pubmedqa::15943725::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.589840+00:00"
+    },
+    "bioasq::602825a61cb411341a0000fa::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.596904+00:00"
+    },
+    "bioasq::53372ba3d6d3ac6a34000058::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.601613+00:00"
+    },
+    "bioasq::54d7a1047035c08008000002::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.603895+00:00"
+    },
+    "pubmedqa::21394762::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.610735+00:00"
+    },
+    "pubmedqa::16735905::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.637465+00:00"
+    },
+    "pubmedqa::26215326::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.659355+00:00"
+    },
+    "pubmedqa::23321509::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.694924+00:00"
+    },
+    "pubmedqa::24449622::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.720813+00:00"
+    },
+    "pubmedqa::22251324::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.742656+00:00"
+    },
+    "pubmedqa::18719011::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.777667+00:00"
+    },
+    "pubmedqa::10548670::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.805126+00:00"
+    },
+    "pubmedqa::20605051::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.833009+00:00"
+    },
+    "bioasq::6060996394d57fd879000045::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.861014+00:00"
+    },
+    "pubmedqa::12098035::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.889094+00:00"
+    },
+    "pubmedqa::23621776::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.915879+00:00"
+    },
+    "pubmedqa::15943725::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.923056+00:00"
+    },
+    "bioasq::602825a61cb411341a0000fa::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.923056+00:00"
+    },
+    "bioasq::53372ba3d6d3ac6a34000058::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.951228+00:00"
+    },
+    "bioasq::54d7a1047035c08008000002::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.978506+00:00"
+    },
+    "pubmedqa::21394762::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:41.999406+00:00"
+    },
+    "pubmedqa::16735905::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.027037+00:00"
+    },
+    "pubmedqa::26215326::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.047881+00:00"
+    },
+    "pubmedqa::23321509::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.075974+00:00"
+    },
+    "pubmedqa::24449622::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.096319+00:00"
+    },
+    "pubmedqa::22251324::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.126196+00:00"
+    },
+    "pubmedqa::18719011::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.152558+00:00"
+    },
+    "pubmedqa::10548670::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.173195+00:00"
+    },
+    "pubmedqa::20605051::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.201007+00:00"
+    },
+    "bioasq::6060996394d57fd879000045::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.228691+00:00"
+    },
+    "pubmedqa::12098035::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.252179+00:00"
+    },
+    "pubmedqa::23621776::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.274786+00:00"
+    },
+    "pubmedqa::15943725::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.281930+00:00"
+    },
+    "bioasq::602825a61cb411341a0000fa::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.288607+00:00"
+    },
+    "bioasq::53372ba3d6d3ac6a34000058::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.294086+00:00"
+    },
+    "bioasq::54d7a1047035c08008000002::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.301121+00:00"
+    },
+    "pubmedqa::21394762::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.325907+00:00"
+    },
+    "pubmedqa::16735905::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.352733+00:00"
+    },
+    "pubmedqa::26215326::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.381218+00:00"
+    },
+    "pubmedqa::23321509::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.402292+00:00"
+    },
+    "pubmedqa::24449622::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.430177+00:00"
+    },
+    "pubmedqa::22251324::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.450615+00:00"
+    },
+    "pubmedqa::18719011::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.479044+00:00"
+    },
+    "pubmedqa::10548670::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.506232+00:00"
+    },
+    "pubmedqa::20605051::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.534113+00:00"
+    },
+    "bioasq::6060996394d57fd879000045::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.561029+00:00"
+    },
+    "pubmedqa::12098035::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.582899+00:00"
+    },
+    "pubmedqa::23621776::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.610480+00:00"
+    },
+    "pubmedqa::15943725::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.617707+00:00"
+    },
+    "bioasq::602825a61cb411341a0000fa::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.624708+00:00"
+    },
+    "bioasq::53372ba3d6d3ac6a34000058::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.631581+00:00"
+    },
+    "bioasq::54d7a1047035c08008000002::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.638653+00:00"
+    },
+    "pubmedqa::21394762::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.645543+00:00"
+    },
+    "pubmedqa::16735905::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.666223+00:00"
+    },
+    "pubmedqa::26215326::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.693763+00:00"
+    },
+    "pubmedqa::23321509::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.721432+00:00"
+    },
+    "pubmedqa::24449622::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.742141+00:00"
+    },
+    "pubmedqa::22251324::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.763438+00:00"
+    },
+    "pubmedqa::18719011::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.791178+00:00"
+    },
+    "pubmedqa::10548670::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.817944+00:00"
+    },
+    "pubmedqa::20605051::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.840409+00:00"
+    },
+    "bioasq::6060996394d57fd879000045::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.867663+00:00"
+    },
+    "pubmedqa::12098035::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.888550+00:00"
+    },
+    "pubmedqa::23621776::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.916367+00:00"
+    },
+    "pubmedqa::15943725::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.923420+00:00"
+    },
+    "bioasq::602825a61cb411341a0000fa::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.932207+00:00"
+    },
+    "bioasq::53372ba3d6d3ac6a34000058::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.937002+00:00"
+    },
+    "bioasq::54d7a1047035c08008000002::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.944104+00:00"
+    },
+    "pubmedqa::21394762::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.971789+00:00"
+    },
+    "pubmedqa::16735905::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.978919+00:00"
+    },
+    "pubmedqa::26215326::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:42.999653+00:00"
+    },
+    "pubmedqa::23321509::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:43.020234+00:00"
+    },
+    "pubmedqa::24449622::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:43.041257+00:00"
+    },
+    "pubmedqa::22251324::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:43.061871+00:00"
+    },
+    "pubmedqa::18719011::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:43.082876+00:00"
+    },
+    "pubmedqa::10548670::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:43.109706+00:00"
+    },
+    "pubmedqa::20605051::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:43.131515+00:00"
+    },
+    "bioasq::6060996394d57fd879000045::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:43.152271+00:00"
+    },
+    "pubmedqa::12098035::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:43.175638+00:00"
+    },
+    "pubmedqa::23621776::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 0,
+      "updated_at": "2026-10-18T00:01:43.200943+00:00"
+    },
+    "pubmedqa::12040336::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:06:11.014026+00:00"
+    },
+    "pubmedqa::12040336::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:08:27.620510+00:00"
+    },
+    "pubmedqa::12040336::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:10:52.278211+00:00"
+    },
+    "pubmedqa::12040336::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:13:29.334546+00:00"
+    },
+    "pubmedqa::12040336::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:14:39.310881+00:00"
+    },
+    "pubmedqa::12040336::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:17:03.577676+00:00"
+    },
+    "pubmedqa::12040336::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:18:06.311946+00:00"
+    },
+    "pubmedqa::12040336::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:18:19.116800+00:00"
+    },
+    "pubmedqa::10223070::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:20:40.223604+00:00"
+    },
+    "pubmedqa::10223070::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:22:45.564214+00:00"
+    },
+    "pubmedqa::10223070::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:25:00.728015+00:00"
+    },
+    "pubmedqa::10223070::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:27:26.825707+00:00"
+    },
+    "pubmedqa::10223070::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:28:35.347025+00:00"
+    },
+    "pubmedqa::10223070::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:31:00.869862+00:00"
+    },
+    "pubmedqa::10223070::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:32:02.987319+00:00"
+    },
+    "pubmedqa::10223070::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:32:13.438726+00:00"
+    },
+    "pubmedqa::25394614::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:34:24.106976+00:00"
+    },
+    "pubmedqa::25394614::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:36:32.559797+00:00"
+    },
+    "pubmedqa::25394614::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:38:42.981684+00:00"
+    },
+    "pubmedqa::25394614::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:40:51.539874+00:00"
+    },
+    "pubmedqa::25394614::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:41:51.810807+00:00"
+    },
+    "pubmedqa::25394614::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:44:08.796558+00:00"
+    },
+    "pubmedqa::25394614::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:45:07.718335+00:00"
+    },
+    "pubmedqa::25394614::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:45:18.907123+00:00"
+    },
+    "pubmedqa::12377809::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:47:26.047564+00:00"
+    },
+    "pubmedqa::12377809::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:49:15.903172+00:00"
+    },
+    "pubmedqa::12377809::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:51:25.136831+00:00"
+    },
+    "pubmedqa::12377809::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:53:32.094456+00:00"
+    },
+    "pubmedqa::12377809::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:54:28.221923+00:00"
+    },
+    "pubmedqa::12377809::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:56:37.796352+00:00"
+    },
+    "pubmedqa::12377809::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:57:42.404566+00:00"
+    },
+    "pubmedqa::12377809::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T00:57:53.310491+00:00"
+    },
+    "bioasq::620086aac9dfcb9c09000020::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:00:05.530375+00:00"
+    },
+    "bioasq::620086aac9dfcb9c09000020::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:01:57.558748+00:00"
+    },
+    "bioasq::620086aac9dfcb9c09000020::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:04:01.525010+00:00"
+    },
+    "bioasq::620086aac9dfcb9c09000020::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:06:05.837933+00:00"
+    },
+    "bioasq::620086aac9dfcb9c09000020::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:06:57.033330+00:00"
+    },
+    "bioasq::620086aac9dfcb9c09000020::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:08:55.103762+00:00"
+    },
+    "bioasq::620086aac9dfcb9c09000020::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:09:47.291564+00:00"
+    },
+    "bioasq::620086aac9dfcb9c09000020::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:09:55.985747+00:00"
+    },
+    "bioasq::5139ec51bee46bd34c000006::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:11:37.937424+00:00"
+    },
+    "bioasq::5139ec51bee46bd34c000006::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:13:29.292452+00:00"
+    },
+    "bioasq::5139ec51bee46bd34c000006::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:15:19.749918+00:00"
+    },
+    "bioasq::5139ec51bee46bd34c000006::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:16:45.682727+00:00"
+    },
+    "bioasq::5139ec51bee46bd34c000006::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:18:28.061092+00:00"
+    },
+    "bioasq::5139ec51bee46bd34c000006::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:20:09.847657+00:00"
+    },
+    "bioasq::5139ec51bee46bd34c000006::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:21:32.046394+00:00"
+    },
+    "bioasq::5139ec51bee46bd34c000006::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:21:41.018555+00:00"
+    },
+    "bioasq::63f57f7f33942b094c000006::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:23:42.581332+00:00"
+    },
+    "bioasq::63f57f7f33942b094c000006::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:25:25.996836+00:00"
+    },
+    "bioasq::63f57f7f33942b094c000006::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:27:33.482424+00:00"
+    },
+    "bioasq::63f57f7f33942b094c000006::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:29:44.134665+00:00"
+    },
+    "bioasq::63f57f7f33942b094c000006::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:30:35.363259+00:00"
+    },
+    "bioasq::63f57f7f33942b094c000006::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:32:36.049360+00:00"
+    },
+    "bioasq::63f57f7f33942b094c000006::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:33:26.213884+00:00"
+    },
+    "bioasq::63f57f7f33942b094c000006::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:33:39.244037+00:00"
+    },
+    "pubmedqa::24481006::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:35:49.693479+00:00"
+    },
+    "pubmedqa::24481006::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:37:43.375689+00:00"
+    },
+    "pubmedqa::24481006::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:39:55.066031+00:00"
+    },
+    "pubmedqa::24481006::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:42:13.987442+00:00"
+    },
+    "pubmedqa::24481006::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:43:10.042479+00:00"
+    },
+    "pubmedqa::24481006::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:45:31.064838+00:00"
+    },
+    "pubmedqa::24481006::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:46:20.498557+00:00"
+    },
+    "pubmedqa::24481006::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:46:34.366478+00:00"
+    },
+    "pubmedqa::16968876::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:48:52.121252+00:00"
+    },
+    "pubmedqa::16968876::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:50:53.049866+00:00"
+    },
+    "pubmedqa::16968876::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:53:12.550949+00:00"
+    },
+    "pubmedqa::16968876::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:55:31.486205+00:00"
+    },
+    "pubmedqa::16968876::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:56:35.846600+00:00"
+    },
+    "pubmedqa::16968876::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T01:59:04.201681+00:00"
+    },
+    "pubmedqa::16968876::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:00:10.915869+00:00"
+    },
+    "pubmedqa::16968876::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:00:22.415353+00:00"
+    },
+    "pubmedqa::23412195::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:02:33.212302+00:00"
+    },
+    "pubmedqa::23412195::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:04:31.331313+00:00"
+    },
+    "pubmedqa::23412195::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:06:41.889478+00:00"
+    },
+    "pubmedqa::23412195::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:08:52.309279+00:00"
+    },
+    "pubmedqa::23412195::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:09:43.144848+00:00"
+    },
+    "pubmedqa::23412195::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:11:58.952646+00:00"
+    },
+    "pubmedqa::23412195::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:12:58.811472+00:00"
+    },
+    "pubmedqa::23412195::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:13:10.227879+00:00"
+    },
+    "pubmedqa::20549895::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:15:24.995941+00:00"
+    },
+    "pubmedqa::20549895::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:17:15.653470+00:00"
+    },
+    "pubmedqa::20549895::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:19:20.401346+00:00"
+    },
+    "pubmedqa::20549895::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:21:26.137778+00:00"
+    },
+    "pubmedqa::20549895::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:22:20.401913+00:00"
+    },
+    "pubmedqa::20549895::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:24:25.577943+00:00"
+    },
+    "pubmedqa::20549895::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:25:19.893298+00:00"
+    },
+    "pubmedqa::20549895::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:25:32.233373+00:00"
+    },
+    "pubmedqa::10922093::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:27:40.536032+00:00"
+    },
+    "pubmedqa::10922093::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:29:38.623756+00:00"
+    },
+    "pubmedqa::10922093::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:31:46.159445+00:00"
+    },
+    "pubmedqa::10922093::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:33:53.916638+00:00"
+    },
+    "pubmedqa::10922093::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:34:41.920584+00:00"
+    },
+    "pubmedqa::10922093::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:36:36.964018+00:00"
+    },
+    "pubmedqa::10922093::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:37:21.803449+00:00"
+    },
+    "pubmedqa::10922093::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:37:32.419600+00:00"
+    },
+    "bioasq::601d35111cb411341a00002f::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:39:34.249778+00:00"
+    },
+    "bioasq::601d35111cb411341a00002f::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:41:31.510233+00:00"
+    },
+    "bioasq::601d35111cb411341a00002f::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:43:53.742872+00:00"
+    },
+    "bioasq::601d35111cb411341a00002f::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:46:11.052472+00:00"
+    },
+    "bioasq::601d35111cb411341a00002f::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:47:03.307793+00:00"
+    },
+    "bioasq::601d35111cb411341a00002f::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:49:16.012724+00:00"
+    },
+    "bioasq::601d35111cb411341a00002f::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:50:08.956382+00:00"
+    },
+    "bioasq::601d35111cb411341a00002f::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:50:23.059623+00:00"
+    },
+    "pubmedqa::23375036::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:52:31.529092+00:00"
+    },
+    "pubmedqa::23375036::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:54:29.623406+00:00"
+    },
+    "pubmedqa::23375036::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:56:56.259638+00:00"
+    },
+    "pubmedqa::23375036::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T02:59:28.768647+00:00"
+    },
+    "pubmedqa::23375036::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:00:34.659742+00:00"
+    },
+    "pubmedqa::23375036::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:02:49.126186+00:00"
+    },
+    "pubmedqa::23375036::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:03:50.859886+00:00"
+    },
+    "pubmedqa::23375036::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:04:11.313346+00:00"
+    },
+    "pubmedqa::18019905::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:06:31.973149+00:00"
+    },
+    "pubmedqa::18019905::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:08:37.640250+00:00"
+    },
+    "pubmedqa::18019905::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:10:56.994109+00:00"
+    },
+    "pubmedqa::18019905::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:13:28.932983+00:00"
+    },
+    "pubmedqa::18019905::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:14:31.856821+00:00"
+    },
+    "pubmedqa::18019905::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:16:55.630766+00:00"
+    },
+    "pubmedqa::18019905::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:17:52.998961+00:00"
+    },
+    "pubmedqa::18019905::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:18:06.678846+00:00"
+    },
+    "bioasq::5881e8e8713cbdfd3d000003::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:20:16.876897+00:00"
+    },
+    "bioasq::5881e8e8713cbdfd3d000003::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:22:16.949868+00:00"
+    },
+    "bioasq::5881e8e8713cbdfd3d000003::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:24:29.958945+00:00"
+    },
+    "bioasq::5881e8e8713cbdfd3d000003::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:26:41.078748+00:00"
+    },
+    "bioasq::5881e8e8713cbdfd3d000003::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:27:40.990694+00:00"
+    },
+    "bioasq::5881e8e8713cbdfd3d000003::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:29:57.177257+00:00"
+    },
+    "bioasq::5881e8e8713cbdfd3d000003::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:30:50.894706+00:00"
+    },
+    "bioasq::5881e8e8713cbdfd3d000003::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:31:02.314240+00:00"
+    },
+    "bioasq::65f7728fc4010b4d78000021::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:33:37.826069+00:00"
+    },
+    "bioasq::65f7728fc4010b4d78000021::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:35:45.128369+00:00"
+    },
+    "bioasq::65f7728fc4010b4d78000021::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:38:20.837365+00:00"
+    },
+    "bioasq::65f7728fc4010b4d78000021::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:40:56.690819+00:00"
+    },
+    "bioasq::65f7728fc4010b4d78000021::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:41:55.142515+00:00"
+    },
+    "bioasq::65f7728fc4010b4d78000021::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:44:39.016972+00:00"
+    },
+    "bioasq::65f7728fc4010b4d78000021::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:45:37.035998+00:00"
+    },
+    "bioasq::65f7728fc4010b4d78000021::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:45:46.029448+00:00"
+    },
+    "pubmedqa::21645374::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:47:58.255900+00:00"
+    },
+    "pubmedqa::21645374::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:49:52.036014+00:00"
+    },
+    "pubmedqa::21645374::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:51:58.556600+00:00"
+    },
+    "pubmedqa::21645374::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:54:04.424996+00:00"
+    },
+    "pubmedqa::21645374::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:54:57.486021+00:00"
+    },
+    "pubmedqa::21645374::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:57:06.624806+00:00"
+    },
+    "pubmedqa::21645374::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:58:03.912278+00:00"
+    },
+    "pubmedqa::21645374::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T03:58:20.157637+00:00"
+    },
+    "pubmedqa::21848798::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:00:49.673778+00:00"
+    },
+    "pubmedqa::21848798::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:03:03.382348+00:00"
+    },
+    "pubmedqa::21848798::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:05:31.388340+00:00"
+    },
+    "pubmedqa::21848798::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:07:58.292658+00:00"
+    },
+    "pubmedqa::21848798::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:09:01.344592+00:00"
+    },
+    "pubmedqa::21848798::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:11:29.890038+00:00"
+    },
+    "pubmedqa::21848798::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:12:38.000575+00:00"
+    },
+    "pubmedqa::21848798::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:12:54.398386+00:00"
+    },
+    "bioasq::601d6ec61cb411341a000032::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:14:59.859508+00:00"
+    },
+    "bioasq::601d6ec61cb411341a000032::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:16:47.097181+00:00"
+    },
+    "bioasq::601d6ec61cb411341a000032::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:18:43.936767+00:00"
+    },
+    "bioasq::601d6ec61cb411341a000032::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:20:40.233490+00:00"
+    },
+    "bioasq::601d6ec61cb411341a000032::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:21:23.310639+00:00"
+    },
+    "bioasq::601d6ec61cb411341a000032::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:23:14.779744+00:00"
+    },
+    "bioasq::601d6ec61cb411341a000032::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:23:56.716170+00:00"
+    },
+    "bioasq::601d6ec61cb411341a000032::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:24:05.875713+00:00"
+    },
+    "pubmedqa::20602784::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:26:25.079333+00:00"
+    },
+    "pubmedqa::20602784::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:28:27.370003+00:00"
+    },
+    "pubmedqa::20602784::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:30:51.905271+00:00"
+    },
+    "pubmedqa::20602784::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:33:12.084825+00:00"
+    },
+    "pubmedqa::20602784::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:34:08.570939+00:00"
+    },
+    "pubmedqa::20602784::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:36:32.343462+00:00"
+    },
+    "pubmedqa::20602784::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:37:38.050276+00:00"
+    },
+    "pubmedqa::20602784::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:37:52.299890+00:00"
+    },
+    "pubmedqa::15528969::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:40:10.820302+00:00"
+    },
+    "pubmedqa::15528969::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:42:14.255168+00:00"
+    },
+    "pubmedqa::15528969::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:44:41.979876+00:00"
+    },
+    "pubmedqa::15528969::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:46:55.742553+00:00"
+    },
+    "pubmedqa::15528969::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:48:01.003139+00:00"
+    },
+    "pubmedqa::15528969::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:50:15.969265+00:00"
+    },
+    "pubmedqa::15528969::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:51:21.555338+00:00"
+    },
+    "pubmedqa::15528969::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:51:34.048973+00:00"
+    },
+    "bioasq::58ea7248eda5a57672000002::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:53:52.257664+00:00"
+    },
+    "bioasq::58ea7248eda5a57672000002::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:55:50.866545+00:00"
+    },
+    "bioasq::58ea7248eda5a57672000002::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T04:58:12.945833+00:00"
+    },
+    "bioasq::58ea7248eda5a57672000002::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T05:00:34.201917+00:00"
+    },
+    "bioasq::58ea7248eda5a57672000002::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T05:01:30.172338+00:00"
+    },
+    "bioasq::58ea7248eda5a57672000002::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T05:03:39.481683+00:00"
+    },
+    "bioasq::58ea7248eda5a57672000002::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T05:04:39.205056+00:00"
+    },
+    "bioasq::58ea7248eda5a57672000002::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T05:04:47.907840+00:00"
+    },
+    "bioasq::5c58b26386df2b9174000011::phase5-improved-v2": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-v2.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T05:07:05.365702+00:00"
+    },
+    "bioasq::5c58b26386df2b9174000011::phase5-improved-no-verification": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-improved-no-verification.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T05:09:05.568525+00:00"
+    },
+    "bioasq::5c58b26386df2b9174000011::phase5-full-pipeline": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-full-pipeline.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T05:11:25.267976+00:00"
+    },
+    "bioasq::5c58b26386df2b9174000011::phase5-no-critic": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-critic.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T05:13:54.506608+00:00"
+    },
+    "bioasq::5c58b26386df2b9174000011::phase5-no-iterative-retrieval": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-iterative-retrieval.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T05:14:54.069049+00:00"
+    },
+    "bioasq::5c58b26386df2b9174000011::phase5-no-calibration": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-no-calibration.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T05:17:25.312931+00:00"
+    },
+    "bioasq::5c58b26386df2b9174000011::phase5-basic-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-basic-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T05:18:19.493742+00:00"
+    },
+    "bioasq::5c58b26386df2b9174000011::phase5-plain-llm-no-rag": {
+      "state": "completed",
+      "output_file": "d:\\Ragmed_2\\backend\\results\\phase5_20261018_053140\\per_question\\phase5-plain-llm-no-rag.jsonl",
+      "attempts": 1,
+      "updated_at": "2026-10-18T05:18:31.037395+00:00"
+    }
+  }
+}

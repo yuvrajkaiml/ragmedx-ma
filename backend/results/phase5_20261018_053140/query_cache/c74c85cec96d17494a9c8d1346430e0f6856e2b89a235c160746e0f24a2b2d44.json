@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What audit methods are used for maternal mortality in different socioeconomic settings?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "c74c85cec96d17494a9c8d1346430e0f6856e2b89a235c160746e0f24a2b2d44",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_65f86b3ac4010b4d78000058_s9681_chunk_0",
+        "document_id": "bioasq_65f86b3ac4010b4d78000058_s9681",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/31133069",
+        "title": "PubMed 31133069 [abstract]",
+        "cited_text": "BACKGROUND: Low socioeconomic status (SES) is often associated with excess morbidity and premature mortality. Such health disparities claim a steep economic cost: Possibly-preventable poor health outcomes harm societal welfare, impair the domestic product, and increase health care e",
+        "cross_encoder_logit": 0.009321458637714386,
+        "relevance_score": 0.5023303477858725,
+        "cross_encoder_score": 0.5023303477858725,
+        "evidence_quality_score": 0.5023303477858725,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/31133069",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_65f86b3ac4010b4d78000058_s9664_chunk_0",
+        "document_id": "bioasq_65f86b3ac4010b4d78000058_s9664",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/27696682",
+        "title": "PubMed 27696682 [abstract]",
+        "cited_text": "There is substantial evidence across different healthcare contexts that social determinants of health are strongly associated with morbidity and mortality in the United States.",
+        "cross_encoder_logit": 0.007665195968002081,
+        "relevance_score": 0.5019162896093401,
+        "cross_encoder_score": 0.5019162896093401,
+        "evidence_quality_score": 0.5019162896093401,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/27696682",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_531375a6e3eabad021000011_s17120_chunk_0",
+        "document_id": "bioasq_531375a6e3eabad021000011_s17120",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/17652294",
+        "title": "PubMed 17652294 [abstract]",
+        "cited_text": "Measured risk factors for sudden death included family history of sudden death, massive left ventricular hypertrophy, nonsustained ventricular tachycardia on Holter monitoring, and unexplained prior syncope.",
+        "cross_encoder_logit": 0.0006699165096506476,
+        "relevance_score": 0.5001674791211491,
+        "cross_encoder_score": 0.5001674791211491,
+        "evidence_quality_score": 0.5001674791211491,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/17652294",
+        "index_id": null
+      }
+    ]
+  }
+}

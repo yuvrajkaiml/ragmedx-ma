@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What are the guidelines for reporting cavitation in CBCT exams?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "3e27bb17c2aa995af015b321fe23454f630ece6039cbc61e5234f2238d5188c7",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_5896e4d478275d0c4a000015_s20222_chunk_0",
+        "document_id": "bioasq_5896e4d478275d0c4a000015_s20222",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/24955447",
+        "title": "PubMed 24955447 [abstract]",
+        "cited_text": "The aim of this systematic review was to evaluate the efficacy and safety of biological agents (vedolizumab, abatacept, visilizumab, golimumab) in patients with active moderate to severe ulcerative colitis.This paper was prepared according to the Preferred Reporting Items for Systematic Reviews and Meta-Analysis guidelines.",
+        "cross_encoder_logit": 0.0005645633209496737,
+        "relevance_score": 0.5001411408264886,
+        "cross_encoder_score": 0.5001411408264886,
+        "evidence_quality_score": 0.5001411408264886,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/24955447",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_601eac531cb411341a000054_s6596_chunk_0",
+        "document_id": "bioasq_601eac531cb411341a000054_s6596",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/32299690",
+        "title": "PubMed 32299690 [abstract]",
+        "cited_text": "PURPOSE: To clarify the sensitivity, specificity, and interrater reliability of the scratch collapse test for carpal tunnel syndrome (CTS) and cubital tunnel syndrome, using blinded observers in a general patient population.",
+        "cross_encoder_logit": 0.0005599975120276213,
+        "relevance_score": 0.5001399993743483,
+        "cross_encoder_score": 0.5001399993743483,
+        "evidence_quality_score": 0.5001399993743483,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/32299690",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_601eac531cb411341a000054_s6590_chunk_0",
+        "document_id": "bioasq_601eac531cb411341a000054_s6590",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/32299690",
+        "title": "PubMed 32299690 [abstract]",
+        "cited_text": "clarify the sensitivity, specificity, and interrater reliability of the scratch collapse test for carpal tunnel syndrome (CTS) and cubital tunnel syndrome, using blinded observers in a general patient population",
+        "cross_encoder_logit": 0.0005381345981732011,
+        "relevance_score": 0.5001345336462967,
+        "cross_encoder_score": 0.5001345336462967,
+        "evidence_quality_score": 0.5001345336462967,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/32299690",
+        "index_id": null
+      }
+    ]
+  }
+}

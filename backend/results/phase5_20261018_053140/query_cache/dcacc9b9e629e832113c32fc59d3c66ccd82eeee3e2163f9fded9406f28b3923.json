@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Does open access endoscopy close the door to an adequately informed patient?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "dcacc9b9e629e832113c32fc59d3c66ccd82eeee3e2163f9fded9406f28b3923",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_5c73ace67c78d69471000083_s42114_chunk_0",
+        "document_id": "bioasq_5c73ace67c78d69471000083_s42114",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/8256819",
+        "title": "PubMed 8256819 [title]",
+        "cited_text": "DOOR syndrome (deafness, onycho-osteodystrophy, and mental retardation): a new patient and delineation of neurologic variability among recessive cases.",
+        "cross_encoder_logit": 0.00037183676613494754,
+        "relevance_score": 0.5000929591904627,
+        "cross_encoder_score": 0.5000929591904627,
+        "evidence_quality_score": 0.5000929591904627,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/8256819",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_56a3a386496b62f23f000007_s21496_chunk_0",
+        "document_id": "bioasq_56a3a386496b62f23f000007_s21496",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/19906716",
+        "title": "PubMed 19906716 [title]",
+        "cited_text": "JASPAR 2010: the greatly expanded open-access database of transcription factor binding profiles.",
+        "cross_encoder_logit": 0.00010569531877990812,
+        "relevance_score": 0.5000264238296704,
+        "cross_encoder_score": 0.5000264238296704,
+        "evidence_quality_score": 0.5000264238296704,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/19906716",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_56a3a386496b62f23f000007_s21497_chunk_0",
+        "document_id": "bioasq_56a3a386496b62f23f000007_s21497",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/24194598",
+        "title": "PubMed 24194598 [title]",
+        "cited_text": "JASPAR 2014: an extensively expanded and updated open-access database of transcription factor binding profiles.",
+        "cross_encoder_logit": 9.795937512535602e-05,
+        "relevance_score": 0.5000244898437617,
+        "cross_encoder_score": 0.5000244898437617,
+        "evidence_quality_score": 0.5000244898437617,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/24194598",
+        "index_id": null
+      }
+    ]
+  }
+}

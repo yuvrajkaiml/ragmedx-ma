@@ -1,0 +1,10 @@
+{
+  "config_name": "phase5-no-critic",
+  "kind": "rag",
+  "orchestrator": {
+    "disable_critic": true
+  },
+  "max_retrieval_iterations": 3,
+  "cache_enabled": false,
+  "experiment_id": "phase5-no-critic"
+}

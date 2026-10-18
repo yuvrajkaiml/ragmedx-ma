@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What are the clinical features and causes of catamenial pneumothorax?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "a568582a6505a1684e8584e0519326ea6b5e4259307ac09aa5918bfe12c8cb1d",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_60274aca1cb411341a0000e3_s23373_chunk_0",
+        "document_id": "bioasq_60274aca1cb411341a0000e3_s23373",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/19665681",
+        "title": "PubMed 19665681 [abstract]",
+        "cited_text": "While the pentad of thrombocytopenia, microangiopathic hemolytic anemia, fever, and renal and neurologic abnormalities characterize the clinical presentation of TTP, few patients present with all signs and symptoms.",
+        "cross_encoder_logit": 0.05018779635429382,
+        "relevance_score": 0.5125443161315687,
+        "cross_encoder_score": 0.5125443161315687,
+        "evidence_quality_score": 0.5125443161315687,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/19665681",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_61f81912882a024a10000041_s52726_chunk_0",
+        "document_id": "bioasq_61f81912882a024a10000041_s52726",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/34145047",
+        "title": "PubMed 34145047 [title]",
+        "cited_text": "Combining clinical, radiological and genetic approaches to pneumothorax management.",
+        "cross_encoder_logit": 0.01569802686572075,
+        "relevance_score": 0.5039244261260388,
+        "cross_encoder_score": 0.5039244261260388,
+        "evidence_quality_score": 0.5039244261260388,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/34145047",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5503263fe9bde69634000030_s60105_chunk_0",
+        "document_id": "bioasq_5503263fe9bde69634000030_s60105",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/17195938",
+        "title": "PubMed 17195938 [abstract]",
+        "cited_text": "Congenital cataracts-facial dysmorphism-neuropathy syndrome (CCFDN, MIM: 604168), is a recently delineated neurogenetic disease causing recurrent episodes of rhabdomyolysis; prevention and early diagnosis of rhabdomyolysis should be part of the clinical management of the disease.",
+        "cross_encoder_logit": 0.008990529924631119,
+        "relevance_score": 0.502247617341672,
+        "cross_encoder_score": 0.502247617341672,
+        "evidence_quality_score": 0.502247617341672,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/17195938",
+        "index_id": null
+      }
+    ]
+  }
+}

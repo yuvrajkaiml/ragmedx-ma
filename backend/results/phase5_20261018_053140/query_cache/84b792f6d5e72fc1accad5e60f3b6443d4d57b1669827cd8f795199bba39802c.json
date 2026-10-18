@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What is the mechanism of action of ibalizumab?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "84b792f6d5e72fc1accad5e60f3b6443d4d57b1669827cd8f795199bba39802c",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_6278da4456bf9aee6f00000f_s35263_chunk_0",
+        "document_id": "bioasq_6278da4456bf9aee6f00000f_s35263",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/12789488",
+        "title": "PubMed 12789488 [abstract]",
+        "cited_text": "The mechanism of action of thalidomide is probably based on its immunomodulatory effect, namely the suppression of production of tumor necrosis factor alpha and the modulation of interleukins.",
+        "cross_encoder_logit": 0.108177550137043,
+        "relevance_score": 0.5270180447142527,
+        "cross_encoder_score": 0.5270180447142527,
+        "evidence_quality_score": 0.5270180447142527,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/12789488",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5c73acec7c78d69471000086_s52870_chunk_0",
+        "document_id": "bioasq_5c73acec7c78d69471000086_s52870",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/9421300",
+        "title": "PubMed 9421300 [abstract]",
+        "cited_text": "Losigamone is a novel anticonvulsant the mechanism of action of which is not known.",
+        "cross_encoder_logit": 0.020728332921862602,
+        "relevance_score": 0.5051818976923127,
+        "cross_encoder_score": 0.5051818976923127,
+        "evidence_quality_score": 0.5051818976923127,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/9421300",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_54e221f6ae9738404b000010_s6753_chunk_0",
+        "document_id": "bioasq_54e221f6ae9738404b000010_s6753",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/21285669",
+        "title": "PubMed 21285669 [abstract]",
+        "cited_text": "With its unique mechanism of action, combining aliskiren with another RAAS-blocking agent that has a different mechanism of action may provide more comprehensive blockade of the RAAS, potentially conferring additional clinical benefits.",
+        "cross_encoder_logit": 0.01845824345946312,
+        "relevance_score": 0.5046144298516593,
+        "cross_encoder_score": 0.5046144298516593,
+        "evidence_quality_score": 0.5046144298516593,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/21285669",
+        "index_id": null
+      }
+    ]
+  }
+}

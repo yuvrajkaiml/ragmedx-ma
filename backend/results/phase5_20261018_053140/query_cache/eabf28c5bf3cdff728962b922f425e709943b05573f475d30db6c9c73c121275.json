@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What is Pfh1's role in replisome assembly and function?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "eabf28c5bf3cdff728962b922f425e709943b05573f475d30db6c9c73c121275",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_553ca8d8f32186855800000d_s6081_chunk_0",
+        "document_id": "bioasq_553ca8d8f32186855800000d_s6081",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/18725402",
+        "title": "PubMed 18725402 [abstract]",
+        "cited_text": "However, the essential nuclear function of Pfh1p could be supplied by Rrm3p. Expression of Rrm3p suppressed the accumulation of DNA damage foci but not the hydroxyurea sensitivity of cells depleted of nuclear Pfh1p. Together, these data demonstrate that Pfh1p has essential roles in the replication of both nuclear and mitochondrial DNA",
+        "cross_encoder_logit": 0.3813084065914154,
+        "relevance_score": 0.5941886358943884,
+        "cross_encoder_score": 0.5941886358943884,
+        "evidence_quality_score": 0.5941886358943884,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/18725402",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5710ed19a5ed216440000003_s54677_chunk_0",
+        "document_id": "bioasq_5710ed19a5ed216440000003_s54677",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/22279046",
+        "title": "PubMed 22279046 [abstract]",
+        "cited_text": "Rif1 is a critical determinant of the origin activation program on the fission yeast chromosomes.",
+        "cross_encoder_logit": 0.011206400580704212,
+        "relevance_score": 0.5028015708260017,
+        "cross_encoder_score": 0.5028015708260017,
+        "evidence_quality_score": 0.5028015708260017,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/22279046",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_54fb4b34d176fff445000001_s21768_chunk_0",
+        "document_id": "bioasq_54fb4b34d176fff445000001_s21768",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/8548797",
+        "title": "PubMed 8548797 [abstract]",
+        "cited_text": "Thus, HMG I(Y) plays an essential role in the assembly and function of the IFN beta gene enhanceosome.",
+        "cross_encoder_logit": 0.007886423729360104,
+        "relevance_score": 0.5019715957136227,
+        "cross_encoder_score": 0.5019715957136227,
+        "evidence_quality_score": 0.5019715957136227,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/8548797",
+        "index_id": null
+      }
+    ]
+  }
+}

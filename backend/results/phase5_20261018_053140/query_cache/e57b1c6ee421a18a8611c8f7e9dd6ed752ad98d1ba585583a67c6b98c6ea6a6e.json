@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Which conditions are manifested by TRIM8 mutations?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "e57b1c6ee421a18a8611c8f7e9dd6ed752ad98d1ba585583a67c6b98c6ea6a6e",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_530f900ee3eabad021000003_s43399_chunk_0",
+        "document_id": "bioasq_530f900ee3eabad021000003_s43399",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/22719050",
+        "title": "PubMed 22719050 [abstract]",
+        "cited_text": "The hallmarks of Allan-Herndon-Dudley syndrome, caused by MCT8 mutations, are severe psychomotor retardation and elevated T(3) levels.",
+        "cross_encoder_logit": 0.015540750697255135,
+        "relevance_score": 0.5038851094819657,
+        "cross_encoder_score": 0.5038851094819657,
+        "evidence_quality_score": 0.5038851094819657,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/22719050",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_58932cd87d9090f353000001_s21838_chunk_0",
+        "document_id": "bioasq_58932cd87d9090f353000001_s21838",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/11876976",
+        "title": "PubMed 11876976 [title]",
+        "cited_text": "Detection of trisomy 8 with interphase fluorescence in situ hybridization in myelodysplastic syndromes",
+        "cross_encoder_logit": 0.0070393020287156105,
+        "relevance_score": 0.5017598182403421,
+        "cross_encoder_score": 0.5017598182403421,
+        "evidence_quality_score": 0.5017598182403421,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/11876976",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_530f900ee3eabad021000003_s43408_chunk_0",
+        "document_id": "bioasq_530f900ee3eabad021000003_s43408",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/20083155",
+        "title": "PubMed 20083155 [abstract]",
+        "cited_text": "Therefore, the criterion for MCT8 mutation screening in these patients is the profile of increased T(3) and low-normal to low FT(4) serum levels.",
+        "cross_encoder_logit": 0.006591205019503832,
+        "relevance_score": 0.5016477952893144,
+        "cross_encoder_score": 0.5016477952893144,
+        "evidence_quality_score": 0.5016477952893144,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/20083155",
+        "index_id": null
+      }
+    ]
+  }
+}

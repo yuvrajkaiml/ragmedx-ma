@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What studies examine surfactant timing, chronic lung disease, and mortality in premature infants?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "58a59d930a96f580a66eeeca449249505a1cfd4bea242f6edc28ea5f8e2080cc",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_5a67a207b750ff4455000008_s49578_chunk_0",
+        "document_id": "bioasq_5a67a207b750ff4455000008_s49578",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/28084708",
+        "title": "PubMed 28084708 [abstract]",
+        "cited_text": "Children at risk of severe lower respiratory tract infection should receive immunoprophylaxis with palivizumab, a humanized monoclonal antibody, in up to five monthly doses. Prophylaxis guidelines are restricted to infants born before 29 weeks' gestation, infants with chronic lung disease of prematurity, and infants and children with hemodynamically significant heart disease.",
+        "cross_encoder_logit": 0.13766220211982727,
+        "relevance_score": 0.5343613029122112,
+        "cross_encoder_score": 0.5343613029122112,
+        "evidence_quality_score": 0.5343613029122112,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/28084708",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_65cebc0c1930410b13000003_s38849_chunk_0",
+        "document_id": "bioasq_65cebc0c1930410b13000003_s38849",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/36634694",
+        "title": "PubMed 36634694 [title]",
+        "cited_text": "Efficacy of nirsevimab against respiratory syncytial virus lower respiratory tract infections in preterm and term infants, and pharmacokinetic extrapolation to infants with congenital heart disease and chronic lung disease: a pooled analysis of randomised controlled trials.",
+        "cross_encoder_logit": 0.12814447283744812,
+        "relevance_score": 0.5319923513037247,
+        "cross_encoder_score": 0.5319923513037247,
+        "evidence_quality_score": 0.5319923513037247,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/36634694",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_515db54c298dcd4e51000016_s42042_chunk_0",
+        "document_id": "bioasq_515db54c298dcd4e51000016_s42042",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/22266202",
+        "title": "PubMed 22266202 [sections.0]",
+        "cited_text": "The INSURE method, which consists of an intubation-surfactant-extubation sequence, is effective in reducing the need for mechanical ventilation (MV), the duration of respiratory support, and the need for surfactant replacement in preterm infants with respiratory distress syndrome",
+        "cross_encoder_logit": 0.11865963786840439,
+        "relevance_score": 0.5296301513079565,
+        "cross_encoder_score": 0.5296301513079565,
+        "evidence_quality_score": 0.5296301513079565,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/22266202",
+        "index_id": null
+      }
+    ]
+  }
+}

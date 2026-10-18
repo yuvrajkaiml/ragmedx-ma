@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What studies compare survival in elderly MI patients between tertiary and non-tertiary centers?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "9c6c0af3b1ff954276883905603bd56f55c15386059c0fa2cc559bbeb80e9821",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_531b2fc3b166e2b80600003c_s42970_chunk_0",
+        "document_id": "bioasq_531b2fc3b166e2b80600003c_s42970",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/12963854",
+        "title": "PubMed 12963854 [abstract]",
+        "cited_text": "The authors conclude that among elderly patients with heart failure, lower triiodothyronine concentrations are more prevalent and are associated with a worse prognosis.",
+        "cross_encoder_logit": 0.0020180591382086277,
+        "relevance_score": 0.5005045146133299,
+        "cross_encoder_score": 0.5005045146133299,
+        "evidence_quality_score": 0.5005045146133299,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/12963854",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_54d630283706e89528000004_s30808_chunk_0",
+        "document_id": "bioasq_54d630283706e89528000004_s30808",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/25269031",
+        "title": "PubMed 25269031 [abstract]",
+        "cited_text": "In three of the trials, patients with GBM who received carmustine wafers had significantly longer median survival than patients who did not receive wafers.",
+        "cross_encoder_logit": 0.0009684177930466831,
+        "relevance_score": 0.5002421044293405,
+        "cross_encoder_score": 0.5002421044293405,
+        "evidence_quality_score": 0.5002421044293405,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/25269031",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_54d630283706e89528000004_s30820_chunk_0",
+        "document_id": "bioasq_54d630283706e89528000004_s30820",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/25269031",
+        "title": "PubMed 25269031 [abstract]",
+        "cited_text": "In three of the trials, patients with GBM who received carmustine wafers had significantly longer median survival than patients who did not receive wafers",
+        "cross_encoder_logit": 0.0008633107645437121,
+        "relevance_score": 0.5002158276777311,
+        "cross_encoder_score": 0.5002158276777311,
+        "evidence_quality_score": 0.5002158276777311,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/25269031",
+        "index_id": null
+      }
+    ]
+  }
+}

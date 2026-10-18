@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Does timing of initial surfactant treatment make a difference in rates of chronic lung disease or mortality in premature infants?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "3b59ae72b9bb1a92e9fdf11ffb62d676df34ed147d5941cc37827c6475e8e34f",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_5a67a207b750ff4455000008_s49578_chunk_0",
+        "document_id": "bioasq_5a67a207b750ff4455000008_s49578",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/28084708",
+        "title": "PubMed 28084708 [abstract]",
+        "cited_text": "Children at risk of severe lower respiratory tract infection should receive immunoprophylaxis with palivizumab, a humanized monoclonal antibody, in up to five monthly doses. Prophylaxis guidelines are restricted to infants born before 29 weeks' gestation, infants with chronic lung disease of prematurity, and infants and children with hemodynamically significant heart disease.",
+        "cross_encoder_logit": 0.08225271850824356,
+        "relevance_score": 0.5205515940992586,
+        "cross_encoder_score": 0.5205515940992586,
+        "evidence_quality_score": 0.5205515940992586,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/28084708",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_65cebc0c1930410b13000003_s38849_chunk_0",
+        "document_id": "bioasq_65cebc0c1930410b13000003_s38849",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/36634694",
+        "title": "PubMed 36634694 [title]",
+        "cited_text": "Efficacy of nirsevimab against respiratory syncytial virus lower respiratory tract infections in preterm and term infants, and pharmacokinetic extrapolation to infants with congenital heart disease and chronic lung disease: a pooled analysis of randomised controlled trials.",
+        "cross_encoder_logit": 0.02962442673742771,
+        "relevance_score": 0.5074055650945082,
+        "cross_encoder_score": 0.5074055650945082,
+        "evidence_quality_score": 0.5074055650945082,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/36634694",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_661d20b7eac11fad33000016_s2450_chunk_0",
+        "document_id": "bioasq_661d20b7eac11fad33000016_s2450",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/21164427",
+        "title": "PubMed 21164427 [abstract]",
+        "cited_text": "At our institutes, we mainly use frozen-thawed breast milk. We found low CMV transmission rates even in extremely premature infants, and the CMV-posit",
+        "cross_encoder_logit": 0.017837857827544212,
+        "relevance_score": 0.5044593462145399,
+        "cross_encoder_score": 0.5044593462145399,
+        "evidence_quality_score": 0.5044593462145399,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/21164427",
+        "index_id": null
+      }
+    ]
+  }
+}

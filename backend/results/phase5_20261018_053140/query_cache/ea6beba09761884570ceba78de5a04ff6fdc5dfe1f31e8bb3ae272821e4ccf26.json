@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What is the role of mitochondria in plant programmed cell death and leaf remodelling?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "ea6beba09761884570ceba78de5a04ff6fdc5dfe1f31e8bb3ae272821e4ccf26",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_52e0141498d023950500000e_s42507_chunk_0",
+        "document_id": "bioasq_52e0141498d023950500000e_s42507",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/22968828",
+        "title": "PubMed 22968828 [abstract]",
+        "cited_text": "loss of Lon1 significantly modifies respiratory function and plant performance by small but broad alterations in the mitochondrial proteome gained by subtly changing steady-state protein assembly, stability, and damage of a range of components that debilitate an anaplerotic role for mitochondria in cellular carbon metabolism.",
+        "cross_encoder_logit": 0.27219703793525696,
+        "relevance_score": 0.5676321948641952,
+        "cross_encoder_score": 0.5676321948641952,
+        "evidence_quality_score": 0.5676321948641952,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/22968828",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_54f5bc7d5f206a0c06000001_s38173_chunk_0",
+        "document_id": "bioasq_54f5bc7d5f206a0c06000001_s38173",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/11032171",
+        "title": "PubMed 11032171 [abstract]",
+        "cited_text": "Programmed cell death plays an important role in maintaining homeostasis during animal development, and has been conserved in animals as different as nematodes and humans.",
+        "cross_encoder_logit": 0.20752552151679993,
+        "relevance_score": 0.5516959815246248,
+        "cross_encoder_score": 0.5516959815246248,
+        "evidence_quality_score": 0.5516959815246248,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/11032171",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_53175f0bb166e2b80600000c_s63133_chunk_0",
+        "document_id": "bioasq_53175f0bb166e2b80600000c_s63133",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/23625539",
+        "title": "PubMed 23625539 [abstract]",
+        "cited_text": "Inducing programmed cell death (PCD) is a promising method to prevent or inhibit the progression of tumor cells. Intricate cross talk among various programmed cell death pathways including cell death by apoptosis, necroptosis or autophagy plays a critical role in the regulation of PCD.",
+        "cross_encoder_logit": 0.08974511921405792,
+        "relevance_score": 0.5224212330906205,
+        "cross_encoder_score": 0.5224212330906205,
+        "evidence_quality_score": 0.5224212330906205,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/23625539",
+        "index_id": null
+      }
+    ]
+  }
+}

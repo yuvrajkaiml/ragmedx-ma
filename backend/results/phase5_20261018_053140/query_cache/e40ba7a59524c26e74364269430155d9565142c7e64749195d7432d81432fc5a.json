@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Is expert breast pathology assessment necessary for the management of ductal carcinoma in situ ?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "e40ba7a59524c26e74364269430155d9565142c7e64749195d7432d81432fc5a",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_56ccae765795f9a73e000035_s34403_chunk_0",
+        "document_id": "bioasq_56ccae765795f9a73e000035_s34403",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/18922117",
+        "title": "PubMed 18922117 [abstract]",
+        "cited_text": "To evaluate the ability to guide treatment decisions in the group with a mid-range recurrence score, the North American Cooperative Groups developed the Trial Assessing IndiviuaLized Options for Treatment for breast cancer, a randomized trial of chemotherapy followed by hormonal therapy versus hormonal therapy alone on invasive disease-free survival-ductal carcinoma in situ (IDFS-DCIS) survival in women with node-negative, estrogen-receptor-positive breast cancer with a recurrence score of 11-25.",
+        "cross_encoder_logit": 0.17586460709571838,
+        "relevance_score": 0.5438531844030257,
+        "cross_encoder_score": 0.5438531844030257,
+        "evidence_quality_score": 0.5438531844030257,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/18922117",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5aa67b6ad6d6b54f79000010_s22294_chunk_0",
+        "document_id": "bioasq_5aa67b6ad6d6b54f79000010_s22294",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/15920545",
+        "title": "PubMed 15920545 [abstract]",
+        "cited_text": "Mammary Paget's disease is almost exclusively associated with underlying invasive breast carcinoma or high-grade ductal carcinoma in situ (DCIS G3).",
+        "cross_encoder_logit": 0.06250684708356857,
+        "relevance_score": 0.5156216258231613,
+        "cross_encoder_score": 0.5156216258231613,
+        "evidence_quality_score": 0.5156216258231613,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/15920545",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5318929fb166e2b80600001b_s7257_chunk_0",
+        "document_id": "bioasq_5318929fb166e2b80600001b_s7257",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/22392042",
+        "title": "PubMed 22392042 [abstract]",
+        "cited_text": "The 43 tumors from 39 women comprise 32 invasive ductal carcinomas and 11 ductal carcinomas in situ (DCIS).",
+        "cross_encoder_logit": 0.027117857709527016,
+        "relevance_score": 0.506779049002065,
+        "cross_encoder_score": 0.506779049002065,
+        "evidence_quality_score": 0.506779049002065,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/22392042",
+        "index_id": null
+      }
+    ]
+  }
+}

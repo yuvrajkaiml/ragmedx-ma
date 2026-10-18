@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What studies evaluate anorectal endosonography in dyschesia?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "34e78c28d728583cf701413d2642774b60348fa7fd3b80cea64f3fbe4cdfbe6a",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_6278ddfe56bf9aee6f000013_s6955_chunk_0",
+        "document_id": "bioasq_6278ddfe56bf9aee6f000013_s6955",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/31546754",
+        "title": "PubMed 31546754 [abstract]",
+        "cited_text": "agnosis and tracking of symptom progression of DMD usually relies on creatine kinase tests, evaluation of patient performance in various ambulatory assessments, and detection of dystrophin from muscle biopsies, which are invasive and painful for the patient. While the",
+        "cross_encoder_logit": 0.0037596854381263256,
+        "relevance_score": 0.5009399202523657,
+        "cross_encoder_score": 0.5009399202523657,
+        "evidence_quality_score": 0.5009399202523657,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/31546754",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_621eb1d83a8413c653000059_s48496_chunk_0",
+        "document_id": "bioasq_621eb1d83a8413c653000059_s48496",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/21822742",
+        "title": "PubMed 21822742 [abstract]",
+        "cited_text": "PURPOSE: To evaluate magnetic resonance (MR) imaging morphologic- and signal intensity abnormalities of deep infiltrating endometriosis (DIE) of the bowel wall and to assess its value in predicting depth and extent of bowel wall infiltra",
+        "cross_encoder_logit": 0.0029372242279350758,
+        "relevance_score": 0.5007343055290618,
+        "cross_encoder_score": 0.5007343055290618,
+        "evidence_quality_score": 0.5007343055290618,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/21822742",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5131fa145274a5fb07000009_s37460_chunk_0",
+        "document_id": "bioasq_5131fa145274a5fb07000009_s37460",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/22990134",
+        "title": "PubMed 22990134 [sections.0]",
+        "cited_text": "In group 2 and 3, two anomalies, anorectal malformation and cystic fibrosis, were detected postnatally",
+        "cross_encoder_logit": 0.001974140526726842,
+        "relevance_score": 0.5004935349713967,
+        "cross_encoder_score": 0.5004935349713967,
+        "evidence_quality_score": 0.5004935349713967,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/22990134",
+        "index_id": null
+      }
+    ]
+  }
+}

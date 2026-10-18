@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "The use of audit to identify maternal mortality in different settings: is it just a difference between the rich and the poor?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "fe3ce2a39c18dc9e43dbb1e7e68259c6a6ff61092d9ea6ea3df8edbb292bc510",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_6278df3c56bf9aee6f000015_s27732_chunk_0",
+        "document_id": "bioasq_6278df3c56bf9aee6f000015_s27732",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/30571821",
+        "title": "PubMed 30571821 [abstract]",
+        "cited_text": "Kaplan Meier survival analysis was applied, where global survival was defined between birth and age of death.",
+        "cross_encoder_logit": 0.0005887097795493901,
+        "relevance_score": 0.5001471774406366,
+        "cross_encoder_score": 0.5001471774406366,
+        "evidence_quality_score": 0.5001471774406366,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/30571821",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_660c44f7fdcbea915f000033_s34167_chunk_0",
+        "document_id": "bioasq_660c44f7fdcbea915f000033_s34167",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/37962487",
+        "title": "PubMed 37962487 [abstract]",
+        "cited_text": "The highest area under the curve value for the lactate/albumin ratio was detected at the 24th h. Conclusion: Lactate/albumin ratio can be used to predict mortality in children with nosocomial infections.",
+        "cross_encoder_logit": 0.00041365448851138353,
+        "relevance_score": 0.5001034136206532,
+        "cross_encoder_score": 0.5001034136206532,
+        "evidence_quality_score": 0.5001034136206532,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/37962487",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_56f403d009dd18d46b000004_s50960_chunk_0",
+        "document_id": "bioasq_56f403d009dd18d46b000004_s50960",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/22038362",
+        "title": "PubMed 22038362 [abstract]",
+        "cited_text": "This study examined the methylation difference in AIRE and RASSF1A between maternal and placental DNA, and the implication of this difference in the identification of free fetal DNA in maternal plasma and in prenatal diagnosis of trisomy 21.",
+        "cross_encoder_logit": 0.00036068304325453937,
+        "relevance_score": 0.5000901707598361,
+        "cross_encoder_score": 0.5000901707598361,
+        "evidence_quality_score": 0.5000901707598361,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/22038362",
+        "index_id": null
+      }
+    ]
+  }
+}

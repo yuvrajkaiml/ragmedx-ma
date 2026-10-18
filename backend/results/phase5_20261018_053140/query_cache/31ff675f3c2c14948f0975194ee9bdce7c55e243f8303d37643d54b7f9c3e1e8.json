@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What are the clinical applications of the Brain Metastasis Velocity Model?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "31ff675f3c2c14948f0975194ee9bdce7c55e243f8303d37643d54b7f9c3e1e8",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_5512c91b6a8cde6b7200000b_s24115_chunk_0",
+        "document_id": "bioasq_5512c91b6a8cde6b7200000b_s24115",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/23594689",
+        "title": "PubMed 23594689 [abstract]",
+        "cited_text": "Indeed, recent clinical trials involving BRAF selective inhibitors exhibited promising response rates in metastatic melanoma patients.",
+        "cross_encoder_logit": 0.07654943317174911,
+        "relevance_score": 0.5191280186496793,
+        "cross_encoder_score": 0.5191280186496793,
+        "evidence_quality_score": 0.5191280186496793,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/23594689",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_517404878ed59a060a000023_s64534_chunk_0",
+        "document_id": "bioasq_517404878ed59a060a000023_s64534",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/19789319",
+        "title": "PubMed 19789319 [sections.0]",
+        "cited_text": "We report the first preclinical data for the prevention of brain metastasis of triple-negative breast cancer. Vorinostat is brain permeable and can prevent the formation of brain metastases by 62%. Its mechanism of action involves the induction of DNA double-strand breaks, suggesting rational combinations with DNA active drugs or radiation.",
+        "cross_encoder_logit": 0.04083021357655525,
+        "relevance_score": 0.5102061355407607,
+        "cross_encoder_score": 0.5102061355407607,
+        "evidence_quality_score": 0.5102061355407607,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/19789319",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_515df5b2298dcd4e5100002c_s12138_chunk_0",
+        "document_id": "bioasq_515df5b2298dcd4e5100002c_s12138",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/21440544",
+        "title": "PubMed 21440544 [sections.0]",
+        "cited_text": "Autologous bone marrow stromal cells (BMSCs) offer significant practical advantages for potential clinical applications in multiple sclerosis (MS). Based on recent experimental data, a number of clinical trials have been designed for the intravenous (IV) and/or intrathecal (ITH) administration of BMSCs in MS patients.",
+        "cross_encoder_logit": 0.03418363258242607,
+        "relevance_score": 0.5085450760702628,
+        "cross_encoder_score": 0.5085450760702628,
+        "evidence_quality_score": 0.5085450760702628,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/21440544",
+        "index_id": null
+      }
+    ]
+  }
+}

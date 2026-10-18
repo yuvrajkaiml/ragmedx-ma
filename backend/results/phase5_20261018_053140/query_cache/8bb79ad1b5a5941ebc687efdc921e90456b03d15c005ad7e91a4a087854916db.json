@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What studies link appendicitis to tubal infertility or ectopic pregnancy?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "8bb79ad1b5a5941ebc687efdc921e90456b03d15c005ad7e91a4a087854916db",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_514a51c2d24251bc0500005c_s37715_chunk_0",
+        "document_id": "bioasq_514a51c2d24251bc0500005c_s37715",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/2738821",
+        "title": "PubMed 2738821 [sections.0]",
+        "cited_text": "Of the remaining six patients who had been investigated for infertility, no demonstrable cause of infertility was found in three. Of the other three patients, one showed evidence of bilateral tubal occlusion secondary to pelvic inflammatory disease, one has had a right ectopic pregnancy followed by two abortions, and the third patient was found to have a pituitary adenoma.",
+        "cross_encoder_logit": 0.12798014283180237,
+        "relevance_score": 0.5319514367807984,
+        "cross_encoder_score": 0.5319514367807984,
+        "evidence_quality_score": 0.5319514367807984,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/2738821",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_531a3fe3b166e2b806000038_s30749_chunk_0",
+        "document_id": "bioasq_531a3fe3b166e2b806000038_s30749",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/23116790",
+        "title": "PubMed 23116790 [abstract]",
+        "cited_text": "In terms of pregnancy, the studies have shown contradictory results due to variations in methodology and medical care.",
+        "cross_encoder_logit": 0.021661875769495964,
+        "relevance_score": 0.5054152571908391,
+        "cross_encoder_score": 0.5054152571908391,
+        "evidence_quality_score": 0.5054152571908391,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/23116790",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_622632483a8413c653000081_s12890_chunk_0",
+        "document_id": "bioasq_622632483a8413c653000081_s12890",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/32161574",
+        "title": "PubMed 32161574 [abstract]",
+        "cited_text": "Disruption of well-controlled immune functions leads to infertility, placental inflammation, and numerous pregnancy complications, including preeclampsia (PE).",
+        "cross_encoder_logit": 0.010018142871558666,
+        "relevance_score": 0.5025045147711678,
+        "cross_encoder_score": 0.5025045147711678,
+        "evidence_quality_score": 0.5025045147711678,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/32161574",
+        "index_id": null
+      }
+    ]
+  }
+}

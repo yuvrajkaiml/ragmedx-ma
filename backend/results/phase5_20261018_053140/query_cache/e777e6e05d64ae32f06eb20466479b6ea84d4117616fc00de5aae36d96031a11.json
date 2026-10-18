@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Identification of racial disparities in breast cancer mortality: does scale matter?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "e777e6e05d64ae32f06eb20466479b6ea84d4117616fc00de5aae36d96031a11",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_66214c5db9f8b89d7e000002_s47913_chunk_0",
+        "document_id": "bioasq_66214c5db9f8b89d7e000002_s47913",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/29128568",
+        "title": "PubMed 29128568 [abstract]",
+        "cited_text": "African Americans have the highest incidence and mortality rates of colorectal cancer (CRC) of any ethnic group in the United States. Although some of these disparities can be explained by differences in access to care, cancer screening, and other socioeconomic factors, disparities remain after adjustment for these factors. Consequently, an examination of recent advances in the understanding of ethnicity-specific factors, including genetic and environmental factors relating to risk of CRC, the biology of CRC progression, and the changes in screening and mortality, is important for evaluating our progress toward eliminating the disparities. An overarching limitation in this field is the number and sample size of studies performed to characterize the etiological bases of CRC incidence and mortality in African Americans. Despite this limitation, significant differences in etiology are manifest in many studies. These differences need validation, and their impacts on disparities need more detailed investigation.",
+        "cross_encoder_logit": 0.20522761344909668,
+        "relevance_score": 0.5511275783364421,
+        "cross_encoder_score": 0.5511275783364421,
+        "evidence_quality_score": 0.5511275783364421,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/29128568",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_66214c5db9f8b89d7e000002_s47915_chunk_0",
+        "document_id": "bioasq_66214c5db9f8b89d7e000002_s47915",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/33616738",
+        "title": "PubMed 33616738 [abstract]",
+        "cited_text": "INTRODUCTION: The incidence of CRC is higher in minority racial and ethnic groups. However, studies assessing trends among sex and racial groups on the incidence and mortality of CRC are lacking. We aim to investigate disparities in CRC by reviewing a large national cancer registry.METHODS: This is a retrospective cross-sectional study of the Surveillance, Epidemiology, and End Results Registry (SEER) of individuals aged 45-79 years from 2000-2017.RESULTS: During the study period, the incidence of CRC decreased for both males and females, resp",
+        "cross_encoder_logit": 0.18510396778583527,
+        "relevance_score": 0.5461443117375037,
+        "cross_encoder_score": 0.5461443117375037,
+        "evidence_quality_score": 0.5461443117375037,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/33616738",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_66214c5db9f8b89d7e000002_s47931_chunk_0",
+        "document_id": "bioasq_66214c5db9f8b89d7e000002_s47931",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/24574761",
+        "title": "PubMed 24574761 [abstract]",
+        "cited_text": "There are significant differences in CRC incidence and mortality by race with the highest burden occurring among blacks.",
+        "cross_encoder_logit": 0.13081158697605133,
+        "relevance_score": 0.5326563429687451,
+        "cross_encoder_score": 0.5326563429687451,
+        "evidence_quality_score": 0.5326563429687451,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/24574761",
+        "index_id": null
+      }
+    ]
+  }
+}

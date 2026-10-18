@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What is the proportion of colorectal cancer risk attributable to obesity in women?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "2f12d9ea6f85df0014e4423fe1f41d364a185ef61d82b14e9d3521cff745bd90",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_662fc0bc187cba990d000011_s18411_chunk_0",
+        "document_id": "bioasq_662fc0bc187cba990d000011_s18411",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/12467133",
+        "title": "PubMed 12467133 [abstract]",
+        "cited_text": "Women with the highest calcium intake (median 914 mg/day) had a reduced risk of colorectal cancer (rate ratio = 0.72, 95% confidence interval = 0.056-0.93, P for trend = 0.02) compared with women with the lowest intake (median 486 mg/day).",
+        "cross_encoder_logit": 0.21368657052516937,
+        "relevance_score": 0.5532192885362447,
+        "cross_encoder_score": 0.5532192885362447,
+        "evidence_quality_score": 0.5532192885362447,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/12467133",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5e3390fafbd6abf43b000060_s57404_chunk_0",
+        "document_id": "bioasq_5e3390fafbd6abf43b000060_s57404",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/24696219",
+        "title": "PubMed 24696219 [abstract]",
+        "cited_text": "After 8 years, the hazard ratio for developing colon cancer was 2.00 (95% CI 1.43-2.80) for women with radiation versus those without radiation treatment.",
+        "cross_encoder_logit": 0.15084069967269897,
+        "relevance_score": 0.5376388358586289,
+        "cross_encoder_score": 0.5376388358586289,
+        "evidence_quality_score": 0.5376388358586289,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/24696219",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_662fc0bc187cba990d000011_s18429_chunk_0",
+        "document_id": "bioasq_662fc0bc187cba990d000011_s18429",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/12467133",
+        "title": "PubMed 12467133 [abstract]",
+        "cited_text": "Although laboratory data and a few adenoma prevention trials suggest that calcium supplementation may reduce the risk of colorectal neoplasia, the results of observational studies of calcium intake and colorectal cancer risk are contradictory. However, few studies have examined the association among women or effects in specific colon subsites. Women with colorectal cancer diagnosed through 31 December 2000 were identified by linkage to regional cancer registries. During an average 11.3 yr of follow-up of 61,463 women, we observed 572 incident cases of colorectal cancer. Using data obtained from a 67-item food frequency questionnaire and Cox proportional hazards models to estimate rate ratios and 95% confidence intervals, we found an inverse association between dietary calcium intake and colorectal cancer risk. Women with the highest calcium intake (median 914 mg/day) had a reduced risk of colorectal cancer (rate ratio = 0.72, 95% confidence interval = 0.056-0.93, P for trend = 0.02) compared with women with the lowest intake (median 486 mg/day). Furthermore, our results suggest that the inverse association may be strongest in relation to distal cancers and among older women. The association with dairy products was less clear, suggesting that calcium intake per se is more important than specific calcium sources. Vitamin D intake was not clearly associated with risk.",
+        "cross_encoder_logit": 0.13159288465976715,
+        "relevance_score": 0.5328508292130437,
+        "cross_encoder_score": 0.5328508292130437,
+        "evidence_quality_score": 0.5328508292130437,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/12467133",
+        "index_id": null
+      }
+    ]
+  }
+}
