@@ -1,0 +1,12 @@
+{
+  "config_name": "phase5-improved-v2",
+  "kind": "rag",
+  "orchestrator": {
+    "enable_claim_verification": true,
+    "record_node_timing": true,
+    "pipeline_version": "v2"
+  },
+  "max_retrieval_iterations": 3,
+  "cache_enabled": true,
+  "experiment_id": "phase5-improved-v2"
+}

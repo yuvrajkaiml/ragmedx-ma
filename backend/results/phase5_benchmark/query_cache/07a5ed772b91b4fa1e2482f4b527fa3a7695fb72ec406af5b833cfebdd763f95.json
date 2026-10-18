@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What studies compare survival in elderly cardiogenic shock patients between tertiary and non-tertiary centers?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "07a5ed772b91b4fa1e2482f4b527fa3a7695fb72ec406af5b833cfebdd763f95",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_5509df4ac2af5d5b70000003_s40684_chunk_0",
+        "document_id": "bioasq_5509df4ac2af5d5b70000003_s40684",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/21626366",
+        "title": "PubMed 21626366 [abstract]",
+        "cited_text": "Common class I agents are excluded due to the inherent abnormal cardiac structure and function in the setting of cardiogenic shock. Class III drug options include dofetilide and amiodarone.",
+        "cross_encoder_logit": 0.007343594450503588,
+        "relevance_score": 0.501835890362084,
+        "cross_encoder_score": 0.501835890362084,
+        "evidence_quality_score": 0.501835890362084,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/21626366",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_62007dcec9dfcb9c09000019_s22707_chunk_0",
+        "document_id": "bioasq_62007dcec9dfcb9c09000019_s22707",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/31987887",
+        "title": "PubMed 31987887 [title]",
+        "cited_text": "The CAHP (cardiac arrest hospital prognosis) score: A tool for risk stratification after out-of-hospital cardiac arrest in elderly patients.",
+        "cross_encoder_logit": 0.006408826448023319,
+        "relevance_score": 0.5016022011280681,
+        "cross_encoder_score": 0.5016022011280681,
+        "evidence_quality_score": 0.5016022011280681,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/31987887",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_531b2fc3b166e2b80600003c_s42970_chunk_0",
+        "document_id": "bioasq_531b2fc3b166e2b80600003c_s42970",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/12963854",
+        "title": "PubMed 12963854 [abstract]",
+        "cited_text": "The authors conclude that among elderly patients with heart failure, lower triiodothyronine concentrations are more prevalent and are associated with a worse prognosis.",
+        "cross_encoder_logit": 0.005682425107806921,
+        "relevance_score": 0.5014206024543547,
+        "cross_encoder_score": 0.5014206024543547,
+        "evidence_quality_score": 0.5014206024543547,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/12963854",
+        "index_id": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What studies show changes in rotavirus genotypes post-vaccine introduction?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "e6c7fea491e4f1861230649e127e377a9a971517f33ff9670ccbd11a97c2bb4b",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_5e64f1921af46fc130000018_s45762_chunk_0",
+        "document_id": "bioasq_5e64f1921af46fc130000018_s45762",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/20661105",
+        "title": "PubMed 20661105 [title]",
+        "cited_text": "Change in rotavirus epidemiology in northeast Florida after the introduction of rotavirus vaccine",
+        "cross_encoder_logit": 0.6361402869224548,
+        "relevance_score": 0.6538804468203248,
+        "cross_encoder_score": 0.6538804468203248,
+        "evidence_quality_score": 0.6538804468203248,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/20661105",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5e64f1921af46fc130000018_s45751_chunk_0",
+        "document_id": "bioasq_5e64f1921af46fc130000018_s45751",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/29102168",
+        "title": "PubMed 29102168 [abstract]",
+        "cited_text": "We described trends in rotavirus positivity among tested stool samples before and after rotavirus vaccine introduction.",
+        "cross_encoder_logit": 0.6195869445800781,
+        "relevance_score": 0.6501245997392692,
+        "cross_encoder_score": 0.6501245997392692,
+        "evidence_quality_score": 0.6501245997392692,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/29102168",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5e64f1921af46fc130000018_s45794_chunk_0",
+        "document_id": "bioasq_5e64f1921af46fc130000018_s45794",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/11389295",
+        "title": "PubMed 11389295 [abstract]",
+        "cited_text": "Other studies were initiated to further define the relationship between rotavirus vaccine and intussusception.",
+        "cross_encoder_logit": 0.22386164963245392,
+        "relevance_score": 0.5557328567013493,
+        "cross_encoder_score": 0.5557328567013493,
+        "evidence_quality_score": 0.5557328567013493,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/11389295",
+        "index_id": null
+      }
+    ]
+  }
+}

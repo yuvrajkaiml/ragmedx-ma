@@ -1,0 +1,8 @@
+{
+  "config_name": "phase5-no-iterative-retrieval",
+  "kind": "rag",
+  "orchestrator": {},
+  "max_retrieval_iterations": 1,
+  "cache_enabled": false,
+  "experiment_id": "phase5-no-iterative-retrieval"
+}
