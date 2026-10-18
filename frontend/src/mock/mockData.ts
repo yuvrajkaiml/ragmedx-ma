@@ -347,6 +347,18 @@ export const MOCK_ERRORS: Record<ErrorType, { title: string; message: string }> 
     title: '[MOCK TEST] Contradictory Evidence Alert',
     message: 'Top retrieved literature sources contained directly opposing therapeutic claims.',
   },
+  timeout: {
+    title: '[MOCK TEST] Request Timed Out',
+    message: 'The pipeline took longer than expected on this machine before a response arrived.',
+  },
+  network: {
+    title: '[MOCK TEST] Connection Problem',
+    message: 'The frontend could not reach the backend API/WebSocket service.',
+  },
+  auth: {
+    title: '[MOCK TEST] Sign In Required',
+    message: 'Guest mode cannot run live queries; a signed-in account is required.',
+  },
 };
 
 // ----------------------------------------------------------------------

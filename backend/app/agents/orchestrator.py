@@ -69,6 +69,15 @@ class MultiAgentOrchestrator:
                     mode=LLMRuntimeMode.LOCAL,
                     allow_fallback=False,
                 )
+            elif settings.llm_mode == "ollama":
+                # CPU inference via local Ollama REST — raises ModelLoadError if
+                # the server/model is unavailable; no silent fallback.
+                self.llm_wrapper = LocalLLMWrapper(
+                    mode=LLMRuntimeMode.OLLAMA,
+                    ollama_base_url=settings.ollama_base_url,
+                    ollama_model=settings.ollama_model,
+                    allow_fallback=False,
+                )
             else:
                 # mock mode (default): deterministic stub responses, safe for dev/CI.
                 self.llm_wrapper = LocalLLMWrapper(use_mock_fallback=True)

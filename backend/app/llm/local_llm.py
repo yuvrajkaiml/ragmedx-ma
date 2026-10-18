@@ -1,5 +1,6 @@
 import logging
 import os
+import re
 import time
 from enum import Enum
 from typing import Any, Dict, Optional, Tuple, Union
@@ -9,11 +10,16 @@ from app.llm.tokenizer import count_tokens, truncate_to_max_tokens
 
 logger = logging.getLogger(__name__)
 
+# Matches a leading/embedded qwen3 reasoning block so it never leaks into the
+# answer text or breaks the strict-JSON control-plane agents.
+_THINK_BLOCK_RE = re.compile(r"<think>.*?</think>", re.DOTALL | re.IGNORECASE)
+
 
 class LLMRuntimeMode(str, Enum):
     MOCK = "mock"
     LOCAL = "local"
     AUTO = "auto"
+    OLLAMA = "ollama"
 
 
 class LocalLLMWrapper:
@@ -32,11 +38,15 @@ class LocalLLMWrapper:
         mode: Union[LLMRuntimeMode, str] = LLMRuntimeMode.AUTO,
         allow_fallback: bool = False,
         use_mock_fallback: Optional[bool] = None,
+        ollama_base_url: Optional[str] = None,
+        ollama_model: Optional[str] = None,
     ):
         self.model_name_or_path = model_name_or_path
         self.quantization_bits = quantization_bits
         self.device_map = device_map
         self.max_context_length = max_context_length
+        self.ollama_base_url = ollama_base_url
+        self.ollama_model = ollama_model
 
         # Handle backward compatibility parameter use_mock_fallback
         if use_mock_fallback is True:
@@ -66,6 +76,20 @@ class LocalLLMWrapper:
             logger.info("LocalLLMWrapper initialized explicitly in MOCK mode.")
             self.active_runtime_mode = LLMRuntimeMode.MOCK
             self.is_loaded = True
+            return True
+
+        if self.mode == LLMRuntimeMode.OLLAMA:
+            # CPU inference via a local Ollama REST server. Do NOT import
+            # torch/transformers. Perform a strict readiness check (reachable +
+            # target tag present) and raise ModelLoadError on failure — never a
+            # silent mock fallback.
+            self._load_ollama()
+            self.active_runtime_mode = LLMRuntimeMode.OLLAMA
+            self.is_loaded = True
+            logger.info(
+                f"LocalLLMWrapper initialized in OLLAMA mode "
+                f"(model='{self.ollama_model}', base_url='{self.ollama_base_url}')."
+            )
             return True
 
         # LOCAL or AUTO mode: Attempt real model loading
@@ -167,6 +191,17 @@ class LocalLLMWrapper:
         if not self.is_loaded:
             self.load_model()
 
+        # OLLAMA runtime: real CPU inference via the local Ollama REST server.
+        # Checked before the MOCK/LOCAL branches and leaves them unchanged.
+        if self.active_runtime_mode == LLMRuntimeMode.OLLAMA:
+            return self._generate_ollama(
+                prompt=prompt,
+                max_new_tokens=max_new_tokens,
+                temperature=temperature,
+                top_p=top_p,
+                system_prompt=system_prompt,
+            )
+
         full_prompt = prompt
         if system_prompt:
             full_prompt = f"System: {system_prompt}\nUser: {prompt}\nAssistant:"
@@ -247,6 +282,109 @@ class LocalLLMWrapper:
         except Exception as e:
             logger.error(f"Error during local LLM generation: {e}")
             raise LLMGenerationError(f"Local LLM generation failed: {e}") from e
+
+    def _ollama_url(self, path: str) -> str:
+        base = (self.ollama_base_url or "http://localhost:11434").rstrip("/")
+        return f"{base}{path}"
+
+    def _load_ollama(self) -> None:
+        """
+        Strict readiness check for the OLLAMA runtime. Confirms the Ollama server
+        is reachable and the configured model tag is present. Raises ModelLoadError
+        (no silent mock fallback) when unreachable or the tag is missing.
+        """
+        import requests
+
+        target = self.ollama_model or "qwen3:8b"
+        base_tag = target.split(":", 1)[0]
+        try:
+            response = requests.get(self._ollama_url("/api/tags"), timeout=10)
+            response.raise_for_status()
+            payload = response.json()
+        except Exception as exc:
+            self.is_loaded = False
+            raise ModelLoadError(
+                f"Ollama is not reachable at '{self.ollama_base_url}'. "
+                f"Start the Ollama server (llm_mode='ollama'). Original error: {exc}"
+            ) from exc
+
+        models = payload.get("models", []) if isinstance(payload, dict) else []
+        available = {str(m.get("name", "")) for m in models if isinstance(m, dict)}
+        matched = any(
+            name == target or name.split(":", 1)[0] == base_tag for name in available
+        )
+        if not matched:
+            self.is_loaded = False
+            raise ModelLoadError(
+                f"Ollama model tag '{target}' is not available on the server at "
+                f"'{self.ollama_base_url}'. Pulled tags: {sorted(available) or 'none'}."
+            )
+
+    def _generate_ollama(
+        self,
+        prompt: str,
+        max_new_tokens: int,
+        temperature: float,
+        top_p: float,
+        system_prompt: Optional[str],
+    ) -> Tuple[str, Dict[str, Any]]:
+        """Real CPU inference through the Ollama /api/chat endpoint."""
+        import requests
+
+        model = self.ollama_model or "qwen3:8b"
+        messages = []
+        if system_prompt:
+            messages.append({"role": "system", "content": system_prompt})
+        # Append ` /no_think` as a belt-and-suspenders directive alongside the
+        # body-level "think": false so qwen3 does not emit <think> reasoning that
+        # would pollute medical answers and break strict-JSON control-plane agents.
+        messages.append({"role": "user", "content": f"{prompt} /no_think"})
+
+        body = {
+            "model": model,
+            "stream": False,
+            "think": False,
+            "messages": messages,
+            "options": {
+                "temperature": temperature,
+                "top_p": top_p,
+                "num_predict": max_new_tokens,
+            },
+        }
+
+        try:
+            response = requests.post(
+                self._ollama_url("/api/chat"), json=body, timeout=600
+            )
+            response.raise_for_status()
+            data = response.json()
+        except Exception as exc:
+            logger.error(f"Error during Ollama LLM generation: {exc}")
+            raise LLMGenerationError(f"Ollama LLM generation failed: {exc}") from exc
+
+        content = ""
+        message = data.get("message") if isinstance(data, dict) else None
+        if isinstance(message, dict):
+            content = message.get("content", "") or ""
+        # Strip any residual <think>…</think> block and surrounding whitespace.
+        text = _THINK_BLOCK_RE.sub("", content).strip()
+
+        prompt_tokens = data.get("prompt_eval_count")
+        completion_tokens = data.get("eval_count")
+        if not isinstance(prompt_tokens, int):
+            prompt_tokens = self.count_tokens(prompt)
+        if not isinstance(completion_tokens, int):
+            completion_tokens = self.count_tokens(text)
+
+        token_usage = {
+            "prompt_tokens": prompt_tokens,
+            "completion_tokens": completion_tokens,
+            "total_tokens": prompt_tokens + completion_tokens,
+            "mode": LLMRuntimeMode.OLLAMA.value,
+            "is_mock": False,
+            "model_name": model,
+        }
+        return text, token_usage
 
     def _generate_mock_response(self, prompt: str) -> str:
         """Deterministic mock responses tailored to standard agent prompt types."""

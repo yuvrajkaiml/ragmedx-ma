@@ -162,6 +162,15 @@ class Evaluator:
                     mode=LLMRuntimeMode.LOCAL,
                     allow_fallback=False,
                 )
+            elif config.llm_mode == "ollama":
+                from app.config import get_settings
+                settings = get_settings()
+                llm_wrapper = LocalLLMWrapper(
+                    mode=LLMRuntimeMode.OLLAMA,
+                    ollama_base_url=settings.ollama_base_url,
+                    ollama_model=settings.ollama_model,
+                    allow_fallback=False,
+                )
             else:
                 llm_wrapper = LocalLLMWrapper(use_mock_fallback=True)
 

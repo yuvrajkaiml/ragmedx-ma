@@ -66,6 +66,22 @@ async def lifespan(app: FastAPI):
         llm_wrapper.load_model()   # raises ModelLoadError on failure — intentional
         app.state.llm_wrapper = llm_wrapper
         logger.info("LLM loaded successfully.")
+    elif settings.llm_mode == "ollama":
+        logger.info(
+            f"Checking Ollama readiness for model '{settings.ollama_model}' at "
+            f"'{settings.ollama_base_url}' (llm_mode=ollama) …"
+        )
+        llm_wrapper = LocalLLMWrapper(
+            mode=LLMRuntimeMode.OLLAMA,
+            ollama_base_url=settings.ollama_base_url,
+            ollama_model=settings.ollama_model,
+            allow_fallback=False,
+        )
+        # Lightweight /api/tags readiness check — raises ModelLoadError on
+        # failure so a bad config surfaces at startup, no multi-GB load.
+        llm_wrapper.load_model()
+        app.state.llm_wrapper = llm_wrapper
+        logger.info("Ollama LLM ready.")
     else:
         app.state.llm_wrapper = None
 
@@ -83,8 +99,21 @@ async def lifespan(app: FastAPI):
     await engine.dispose()
 
 
+_DEFAULT_SECRET_KEY = "change-me-before-production"
+
+
 def create_app() -> FastAPI:
     settings = get_settings()
+
+    # Production secret guard: refuse to start with the weak default signing key
+    # unless running in debug/dev. The value is never logged.
+    if settings.secret_key == _DEFAULT_SECRET_KEY and settings.debug is False:
+        logger.critical(
+            "SECRET_KEY is still the insecure default while DEBUG is false. "
+            "Set a strong SECRET_KEY (>=16 chars) before starting in production."
+        )
+        raise RuntimeError("SECRET_KEY must be set in production")
+
     app = FastAPI(title=settings.app_name, version=settings.app_version, lifespan=lifespan)
     app.add_middleware(CORSMiddleware, allow_origins=settings.cors_origins, allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
     register_exception_handlers(app)
@@ -103,6 +132,27 @@ def create_app() -> FastAPI:
         ).is_file()
         llm_mode = (runtime_settings.llm_runtime_mode or runtime_settings.llm_mode).lower()
         llm_ready = llm_mode != "mock"
+        if llm_mode == "ollama":
+            # ollama is a real (non-mock) mode: it is only ready when the Ollama
+            # server is reachable and the configured model tag is present.
+            llm_ready = False
+            try:
+                import requests
+
+                target = runtime_settings.ollama_model
+                base_tag = target.split(":", 1)[0]
+                base_url = runtime_settings.ollama_base_url.rstrip("/")
+                tags_response = requests.get(f"{base_url}/api/tags", timeout=5)
+                tags_response.raise_for_status()
+                tags_payload = tags_response.json()
+                models = tags_payload.get("models", []) if isinstance(tags_payload, dict) else []
+                available = {str(m.get("name", "")) for m in models if isinstance(m, dict)}
+                llm_ready = any(
+                    name == target or name.split(":", 1)[0] == base_tag
+                    for name in available
+                )
+            except Exception:
+                llm_ready = False
         checks = {
             "llm": {
                 "ready": llm_ready,

@@ -1,10 +1,11 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useRef, ReactNode } from 'react';
 import { AnswerData } from '../types/answer';
 import { CitationItem } from '../types/citation';
-import { AgentTraceStep, PipelineStage } from '../types/agent';
+import { AgentPhase, AgentTraceStep, PipelineStage } from '../types/agent';
 import { PassageItem, EvidenceSourceItem } from '../types/evidence';
 import { HistorySessionItem } from '../types/history';
 import { askQuestion } from '../services/api';
+import { getAccessToken } from '../services/authService';
 import {
   uploadDocument,
   pollUntilIndexed,
@@ -46,6 +47,20 @@ interface QAContextState {
   reopenSession: (session: HistorySessionItem) => void;
 }
 
+// Collapse the backend's agent phases (as adapted by api.ts adaptTraceSteps)
+// into the four UI PipelineStages shown by the RetrievalProgress stepper. This
+// reflects only events the backend actually emits — it never fabricates
+// progress. The map is exhaustive over AgentPhase so tsc flags a missing key.
+const PHASE_TO_STAGE: Record<AgentPhase, PipelineStage> = {
+  'Query Understanding': 'Searching',
+  'Iterative Retrieval': 'Searching',
+  'Re-ranking': 'Re-ranking',
+  'Generator': 'Drafting',
+  'Critic': 'Reviewing',
+  'Confidence Calibration': 'Reviewing',
+  'Abstention Gatekeeper': 'Reviewing',
+};
+
 const QAContext = createContext<QAContextState | undefined>(undefined);
 
 export const QAProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
@@ -53,7 +68,7 @@ export const QAProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [answerData, setAnswerData] = useState<AnswerData | null>(null);
   const [citations, setCitations] = useState<CitationItem[]>([]);
   const [agentTraceSteps, setAgentTraceSteps] = useState<AgentTraceStep[]>([]);
-  const [activeStage] = useState<PipelineStage>('Searching');
+  const [activeStage, setActiveStage] = useState<PipelineStage>('Searching');
   const [subQueries] = useState<string[]>([]);
   const [retrievedEvidence, setRetrievedEvidence] = useState<{
     passages: PassageItem[];
@@ -71,6 +86,12 @@ export const QAProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [activeDocumentName, setActiveDocumentName] = useState<string | null>(null);
   const [uploadStatus, setUploadStatus] = useState<DocumentStatus | null>(null);
   const [uploadChunkCount, setUploadChunkCount] = useState<number | null>(null);
+
+  // Synchronous in-flight guard. A useRef mutates immediately, so a second
+  // same-tick submitQuestion call sees it set — unlike isLoading (useState),
+  // whose update is batched and would still read false. This closes the
+  // double-submit / duplicate-pipeline-run gap at the context layer.
+  const inFlightRef = useRef(false);
 
   const uploadAndAttachDocument = async (file: File): Promise<void> => {
     setUploadStatus('queued');
@@ -112,12 +133,35 @@ export const QAProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   };
 
   const submitQuestion = (question: string) => {
+    // Synchronous guard against duplicate/rapid submits (same-tick safe).
+    if (inFlightRef.current) return;
+
+    // Lightweight client-side lower-bound mirroring the backend minimum (5
+    // chars). The backend 422 remains the authority; this just avoids an
+    // obvious round-trip failure and gives an instant, readable message.
+    if (question.trim().length < 5) {
+      setError('Please enter a question of at least 5 characters.');
+      return;
+    }
+
+    // Live queries require a real account. Guest mode (and a logged-out
+    // session) carries no access token, so POST /query/ask would be rejected
+    // with 401. Detect that up front and show an actionable sign-in message
+    // instead of letting it fall through to a misleading network error card.
+    if (!getAccessToken()) {
+      setActiveQuestion(question);
+      setError('Guest mode can\u2019t run live queries — please sign in or create an account to ask a question.');
+      return;
+    }
+
+    inFlightRef.current = true;
     setActiveQuestion(question);
     setAnswerData(null);
     setCitations([]);
     setAgentTraceSteps([]);
     setRetrievedEvidence({ passages: [], sources: [] });
     setSelectedCitationIndex(null);
+    setActiveStage('Searching');
     setError(null);
     setIsLoading(true);
     setLoadingMessage('Starting pipeline…');
@@ -128,6 +172,7 @@ export const QAProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       // onTraceStep — append each step as it streams in
       (step: AgentTraceStep) => {
         setAgentTraceSteps((prev) => [...prev, step]);
+        setActiveStage(PHASE_TO_STAGE[step.phase]);
         setLoadingMessage(`Running ${step.phase}…`);
       },
       // onStatusMessage
@@ -136,6 +181,10 @@ export const QAProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       .then(({ answerData: result, traceSteps, evidence }) => {
         setAnswerData(result);
         setAgentTraceSteps(traceSteps);
+        // Settle the stepper on completion so all stages read as done. On
+        // error the last reached stage is left as-is; the ErrorCard (FIX A)
+        // communicates the failure.
+        setActiveStage('Reviewing');
         setRetrievedEvidence(evidence);
         setCitations(result.citationObjects ?? []);
         // Save to history
@@ -161,6 +210,7 @@ export const QAProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         setError(msg);
       })
       .finally(() => {
+        inFlightRef.current = false;
         setIsLoading(false);
       });
   };
@@ -172,6 +222,7 @@ export const QAProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     setAgentTraceSteps([]);
     setRetrievedEvidence({ passages: [], sources: [] });
     setSelectedCitationIndex(null);
+    setActiveStage('Searching');
     setError(null);
     setIsLoading(false);
   };
@@ -187,6 +238,7 @@ export const QAProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     });
     setSelectedCitationIndex(null);
     setIsEvidencePanelOpen(true);
+    setActiveStage('Searching');
     setError(null);
   };
 

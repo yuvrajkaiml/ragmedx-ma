@@ -3,7 +3,45 @@ import { QuestionInput } from '../components/ask/QuestionInput';
 import { AnswerContainer } from '../components/ask/AnswerContainer';
 import { EvidencePanel } from '../components/evidence/EvidencePanel';
 import { ExportControls } from '../components/history/ExportControls';
+import { ErrorType } from '../components/common/ErrorCard';
 import { useQA } from '../context/QAContext';
+
+/**
+ * Map a thrown pipeline/transport error string to an honest ErrorType.
+ *
+ * The thrown strings originate in services/api.ts (POST/WS/poll failure
+ * paths). A thrown error is NEVER a genuine retrieval-empty signal — a real
+ * backend retrieval abstention arrives as a `verified_answer`-less
+ * `abstention` and renders as an abstained AnswerCard, not this error card.
+ * So we classify transport/pipeline failures honestly and never route them to
+ * `retrieval_failure`.
+ */
+const classifyError = (msg: string): ErrorType => {
+  const m = msg.toLowerCase();
+  // Sign-in-required: guest/no-token up front, or a real backend 401
+  // (expired/stale token after a restart). Checked first so it is never
+  // mislabeled as a network/retrieval error.
+  if (
+    m.includes('sign in') ||
+    m.includes('session expired') ||
+    m.includes('not authenticated') ||
+    m.includes('(401)')
+  ) {
+    return 'auth';
+  }
+  if (m.includes('timed out') || m.includes('timeout') || m.includes('120s')) {
+    return 'timeout';
+  }
+  if (
+    m.includes('network error') ||
+    m.includes('unable to reach') ||
+    m.includes('no response received from pipeline')
+  ) {
+    return 'network';
+  }
+  // Everything else (e.g. 'Pipeline failed') is a generic pipeline exception.
+  return 'model_failure';
+};
 
 export const AskPage: React.FC = () => {
   const [draftInput, setDraftInput] = useState<string>('');
@@ -99,7 +137,8 @@ export const AskPage: React.FC = () => {
             agentTraceSteps={agentTraceSteps}
             activeStage={activeStage}
             subQueries={subQueries}
-            errorType={error ? 'retrieval_failure' : null}
+            errorType={error ? classifyError(error) : null}
+            errorMessage={error ?? undefined}
             onClearQuestion={isLoading ? undefined : clearQuestion}
             onSelectCitation={handleSelectCitation}
             onSelectExampleQuestion={handleSelectExampleQuestion}

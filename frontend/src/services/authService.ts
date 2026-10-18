@@ -95,17 +95,47 @@ function scheduleRefresh(expiresInSeconds: number): void {
 
 const BASE = '/api/v1';
 
+/**
+ * Parse a response body as JSON without throwing on an empty or non-JSON body.
+ * A bare `res.json()` throws "Unexpected end of JSON input" when the body is
+ * empty (e.g. a proxy hiccup, a 204, or a network-truncated response), which
+ * surfaces to the user as a confusing error on an otherwise ordinary failure.
+ * We read the text first and only attempt to parse when there is something to
+ * parse, returning `{}` otherwise so callers can fall back to a status message.
+ */
+async function safeJson(res: Response): Promise<Record<string, unknown>> {
+  const text = await res.text();
+  if (!text) return {};
+  try {
+    return JSON.parse(text) as Record<string, unknown>;
+  } catch {
+    return {};
+  }
+}
+
 async function apiPost<T>(path: string, body: unknown, token?: string): Promise<T> {
   const headers: Record<string, string> = { 'Content-Type': 'application/json' };
   if (token) headers['Authorization'] = `Bearer ${token}`;
-  const res = await fetch(`${BASE}${path}`, {
-    method: 'POST',
-    headers,
-    body: JSON.stringify(body),
-  });
-  const json = await res.json();
+
+  let res: Response;
+  try {
+    res = await fetch(`${BASE}${path}`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(body),
+    });
+  } catch {
+    // fetch rejects only on a network-level failure (server down, DNS, CORS).
+    throw new Error('Network error — unable to reach the server. Is the backend running?');
+  }
+
+  const json = await safeJson(res);
   if (!res.ok) {
-    throw new Error(json.message || json.detail || `Request failed (${res.status})`);
+    const message =
+      (json.message as string) ||
+      (json.detail as string) ||
+      `Request failed (${res.status})`;
+    throw new Error(message);
   }
   return json as T;
 }

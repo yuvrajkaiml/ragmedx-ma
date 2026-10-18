@@ -15,6 +15,7 @@ interface AnswerContainerProps {
   activeStage?: PipelineStage;
   subQueries?: string[];
   errorType?: ErrorType | null;
+  errorMessage?: string;
   onClearQuestion?: () => void;
   onSelectCitation?: (index: number) => void;
   onSelectExampleQuestion?: (question: string) => void;
@@ -27,6 +28,7 @@ export const AnswerContainer: React.FC<AnswerContainerProps> = ({
   activeStage = 'Searching',
   subQueries = [],
   errorType = null,
+  errorMessage,
   onClearQuestion,
   onSelectCitation,
   onSelectExampleQuestion,
@@ -77,7 +79,7 @@ export const AnswerContainer: React.FC<AnswerContainerProps> = ({
         </div>
 
         {/* Optional Error State Card */}
-        {errorType && <ErrorCard type={errorType} onRetry={onClearQuestion} />}
+        {errorType && <ErrorCard type={errorType} message={errorMessage} onRetry={onClearQuestion} />}
 
         {/* Card 2: Retrieval & Pipeline Progress Indicator */}
         <div className="animate-card-3d" style={{ animationDelay: '200ms' }}>

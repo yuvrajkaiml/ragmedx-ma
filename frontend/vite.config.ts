@@ -11,9 +11,13 @@ export default defineConfig({
     proxy: {
       // Forward every /api request to the FastAPI backend.
       // The frontend can call fetch('/api/v1/...') without CORS issues.
+      // `ws: true` also upgrades WebSocket connections (/api/v1/ws/query-stream)
+      // through the dev proxy, so the dev origin is single-origin like prod and
+      // buildWsUrl can default to window.location.host.
       '/api': {
         target: 'http://localhost:8000',
         changeOrigin: true,
+        ws: true,
       },
     },
   },

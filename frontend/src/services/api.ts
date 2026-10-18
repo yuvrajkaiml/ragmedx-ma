@@ -15,6 +15,19 @@ import { getAccessToken } from './authService';
 
 const BASE = '/api/v1';
 
+// Bounded timeout for individual HTTP fetches so a hung TCP connection cannot
+// exceed the intended budget (browsers do not time out fetch by default).
+const FETCH_TIMEOUT_MS = 30_000;
+
+/** Parse a Response body as JSON, tolerating non-JSON/empty bodies. */
+async function safeJson<T>(res: Response): Promise<T | null> {
+  try {
+    return (await res.json()) as T;
+  } catch {
+    return null;
+  }
+}
+
 // ── Backend shapes ────────────────────────────────────────────────────────────
 
 // Fix #4: status typed as the actual enum values, not a loose string
@@ -248,6 +261,31 @@ function adaptEvidence(
   return { passages, sources };
 }
 
+// Adapt the partial findings carried by an abstention so the Evidence panel
+// reflects what the backend actually retrieved (instead of forcing 0/0).
+// BackendEvidenceSnippet only has chunk_id/document_id/source_type/title/
+// cited_text/relevance_score, so journal/year/doi/url/pmid are left undefined
+// — we do not fabricate metadata the snippet does not carry.
+function adaptPartialEvidence(
+  findings: BackendEvidenceSnippet[],
+): { passages: PassageItem[]; sources: EvidenceSourceItem[] } {
+  const sources: EvidenceSourceItem[] = findings.map((f) => ({
+    id: f.document_id,
+    title: f.title,
+    snippet: f.cited_text.slice(0, 200),
+    relevanceScore: f.relevance_score,
+  }));
+  const passages: PassageItem[] = findings.map((f, i) => ({
+    id: `passage-${i}`,
+    markerIndex: i + 1,
+    sourceId: f.document_id,
+    sourceTitle: f.title,
+    snippet: f.cited_text,
+    relevanceScore: f.relevance_score,
+  }));
+  return { passages, sources };
+}
+
 // ── Public result type ────────────────────────────────────────────────────────
 
 export interface QueryResult {
@@ -259,13 +297,12 @@ export interface QueryResult {
 // ── Fix #2: derive WebSocket URL from window.location instead of hardcoding ──
 
 function buildWsUrl(path: string): string {
-  // In dev the Vite proxy does not handle WebSocket upgrades for /api, so we
-  // connect directly to the backend host.  In production, if the reverse proxy
-  // handles WS, swap to window.location.host instead.
+  // One rule for dev and prod. In dev the Vite `/api` proxy (ws: true) upgrades
+  // WebSocket connections to the backend, so window.location.host works; in prod
+  // the reverse proxy upgrades /api on the same origin. VITE_BACKEND_WS_HOST is
+  // an optional public override for topologies where the proxy does not upgrade.
   const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-  const backendHost =
-    import.meta.env.VITE_BACKEND_WS_HOST ??
-    (import.meta.env.DEV ? 'localhost:8000' : window.location.host);
+  const backendHost = import.meta.env.VITE_BACKEND_WS_HOST ?? window.location.host;
   return `${protocol}//${backendHost}${path}`;
 }
 
@@ -279,11 +316,23 @@ async function pollUntilComplete(
   const deadline = Date.now() + maxWaitMs;
   while (Date.now() < deadline) {
     await new Promise((r) => setTimeout(r, 2000));
-    const res = await fetch(`${BASE}/query/${queryId}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+    let res: Response;
+    try {
+      res = await fetch(`${BASE}/query/${queryId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+        signal: controller.signal,
+      });
+    } catch {
+      // Network error or aborted poll — retry until the deadline.
+      continue;
+    } finally {
+      clearTimeout(timer);
+    }
     if (!res.ok) continue;
-    const exec: BackendQueryExecution = await res.json();
+    const exec = await safeJson<BackendQueryExecution>(res);
+    if (!exec) continue;
     if (exec.status === 'completed' || exec.status === 'failed') return exec;
   }
   throw new Error('Query timed out after 120s');
@@ -301,20 +350,43 @@ export async function askQuestion(
   if (!token) throw new Error('Not authenticated');
 
   // 1. POST /api/v1/query/ask → 202 with query_id
-  const startRes = await fetch(`${BASE}/query/ask`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-    body: JSON.stringify({
-      question,
-      include_agent_trace: true,
-      ...(documentId ? { document_id: documentId } : {}),
-    }),
-  });
-  if (!startRes.ok) {
-    const err = await startRes.json();
-    throw new Error(err.message || err.detail || 'Failed to start query');
+  // The 30s FETCH_TIMEOUT_MS abort below is for the quick 202 accept only; the
+  // pipeline runs server-side and is observed via WS/poll (120s budget), so
+  // this never aborts the long-running query.
+  const controller = new AbortController();
+  const startTimer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+  let startRes: Response;
+  try {
+    startRes = await fetch(`${BASE}/query/ask`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+      body: JSON.stringify({
+        question,
+        include_agent_trace: true,
+        ...(documentId ? { document_id: documentId } : {}),
+      }),
+      signal: controller.signal,
+    });
+  } catch (e: unknown) {
+    const aborted = e instanceof DOMException && e.name === 'AbortError';
+    throw new Error(aborted ? 'Request timed out — please try again' : 'Network error — unable to reach the server');
+  } finally {
+    clearTimeout(startTimer);
   }
-  const accepted: QueryAcceptedResponse = await startRes.json();
+  if (!startRes.ok) {
+    // A 401 here means the token is missing/expired/stale (e.g. the backend
+    // restarted and rotated its signing key). Surface an actionable sign-in
+    // message rather than a raw auth error or a misleading network card.
+    if (startRes.status === 401) {
+      throw new Error('Your session expired — please sign in again to run a query.');
+    }
+    const err = await safeJson<{ message?: string; detail?: string }>(startRes);
+    throw new Error(err?.message || err?.detail || `Request failed (${startRes.status})`);
+  }
+  const accepted = await safeJson<QueryAcceptedResponse>(startRes);
+  if (!accepted?.query_id) {
+    throw new Error(`Request failed (${startRes.status})`);
+  }
   const queryId = accepted.query_id;
 
   onStatusMessage?.('Query started — waiting for results…');
@@ -411,7 +483,9 @@ export async function askQuestion(
   const evidence =
     resp.response_type === 'verified_answer'
       ? adaptEvidence(resp.citations)
-      : { passages: [], sources: [] };
+      : resp.response_type === 'abstention'
+        ? adaptPartialEvidence(resp.partial_findings ?? [])
+        : { passages: [], sources: [] };
 
   return { answerData, traceSteps, evidence };
 }

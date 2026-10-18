@@ -5,7 +5,10 @@ export type ErrorType =
   | 'retrieval_failure'
   | 'model_failure'
   | 'out_of_domain'
-  | 'contradictory_evidence';
+  | 'contradictory_evidence'
+  | 'timeout'
+  | 'network'
+  | 'auth';
 
 interface ErrorCardProps {
   type: ErrorType;
@@ -58,6 +61,30 @@ const ERROR_CONFIGS: Record<
     bgClass: 'bg-[#2a0d12]',
     textClass: 'text-[#f87171]',
     borderClass: 'border-[#7a1c28]',
+  },
+  timeout: {
+    defaultTitle: 'Request Timed Out',
+    defaultMessage: 'The pipeline is taking longer than expected on this machine. Please try again.',
+    badgeLabel: 'Timeout',
+    bgClass: 'bg-[var(--warn-bg)]',
+    textClass: 'text-[var(--warn-text)]',
+    borderClass: 'border-[var(--warn-border)]',
+  },
+  network: {
+    defaultTitle: 'Connection Problem',
+    defaultMessage: 'Unable to reach the server. Check the backend is running and try again.',
+    badgeLabel: 'Network',
+    bgClass: 'bg-[var(--warn-bg)]',
+    textClass: 'text-[var(--warn-text)]',
+    borderClass: 'border-[var(--warn-border)]',
+  },
+  auth: {
+    defaultTitle: 'Sign In Required',
+    defaultMessage: 'Guest mode can\u2019t run live queries. Please sign in or create an account to ask a question.',
+    badgeLabel: 'Sign In',
+    bgClass: 'bg-[var(--warn-bg)]',
+    textClass: 'text-[var(--warn-text)]',
+    borderClass: 'border-[var(--warn-border)]',
   },
 };
 

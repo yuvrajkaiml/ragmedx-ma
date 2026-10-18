@@ -238,6 +238,38 @@ class QueryExecutionService:
             scoped_provider = UploadedDocumentIndexService().evidence_provider(
                 execution.request.document_id
             )
+        else:
+            # KB query: reuse the warm retrieval singleton wired by lifespan
+            # (main.py rebinds agent_service.retrieval_provider to the shared
+            # RetrievalService). Resolving it explicitly here guarantees reuse
+            # on the production path. If it is missing, lifespan wiring was
+            # bypassed — fail loudly instead of letting the orchestrator
+            # silently RetrievalService.build() per request (~14s) or serve
+            # empty evidence. The orchestrator's build() fallback stays intact
+            # for tests/scripts that construct the pipeline without lifespan;
+            # this loud path only fires for a KB query with no warm provider.
+            scoped_provider = self.agent_service.retrieval_provider
+            if scoped_provider is None:
+                logger.error(
+                    "Query %s: no warm retrieval provider on agent_service — the "
+                    "app.state singleton was not threaded through lifespan. "
+                    "Refusing to rebuild per request.",
+                    execution.query_id,
+                )
+                execution.status = QueryExecutionStatus.FAILED
+                execution.error = "Retrieval service is not initialised"
+                await self._persist_status(
+                    execution, error_code="RETRIEVAL_NOT_INITIALISED"
+                )
+                self._publish(
+                    execution,
+                    WebSocketEventType.ERROR,
+                    {
+                        "message": "Query execution failed",
+                        "error_code": "RETRIEVAL_NOT_INITIALISED",
+                    },
+                )
+                return
 
         try:
             response, trace = await self.agent_service.execute_query(

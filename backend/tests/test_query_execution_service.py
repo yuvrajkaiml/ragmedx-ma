@@ -12,13 +12,22 @@ from app.services.query_execution_service import QueryExecutionService
 
 
 class FakeAgentService:
-    def __init__(self):
+    def __init__(self, retrieval_provider=None):
         self.calls = []
+        # Mirror the real AgentService interface. A non-None provider models a
+        # service wired by the FastAPI lifespan (the production KB-query path);
+        # QueryExecutionService._run reads this to reuse the warm singleton.
+        self.retrieval_provider = retrieval_provider if retrieval_provider is not None else _noop_retrieval_provider
 
     async def execute_query(self, **kwargs):
         self.calls.append(kwargs)
         await asyncio.sleep(0)
         return ErrorResponse(message="mock result", error_code="MOCK"), None
+
+
+async def _noop_retrieval_provider(*_, **__):
+    """Stand-in warm retrieval provider for unit tests (never invoked by the fake)."""
+    return [], []
 
 
 class FakeWebSocket:
@@ -240,3 +249,29 @@ async def test_websocket_replays_durable_terminal_result_when_live_registry_is_g
 
     assert websocket.accepted
     assert websocket.messages[-1]["data"]["response"]["message"] == "stored result"
+
+
+async def test_kb_query_fails_loudly_when_warm_retrieval_provider_is_missing(monkeypatch):
+    """A KB query must fail loudly (not silently rebuild) when the lifespan
+    singleton was never wired — i.e. agent_service.retrieval_provider is None."""
+    monkeypatch.setattr(QueryExecutionService, "_persist_status", _skip_persistence)
+    agent_service = FakeAgentService()
+    agent_service.retrieval_provider = None  # simulate bypassed lifespan wiring
+    service = QueryExecutionService(agent_service=agent_service)
+    user_id = uuid4()
+
+    accepted = await service.start(
+        MedicalQueryRequest(question="What is the treatment for hypertension?"),
+        user_id,
+        FakeSession(),
+    )
+
+    execution = service.get(accepted.query_id, user_id)
+    assert execution is not None
+    await execution.task
+
+    # The pipeline must NOT have run, and the terminal event must be a loud error.
+    assert execution.status == QueryExecutionStatus.FAILED
+    assert agent_service.calls == []
+    assert execution.events[-1].event_type == WebSocketEventType.ERROR
+    assert execution.events[-1].data["error_code"] == "RETRIEVAL_NOT_INITIALISED"

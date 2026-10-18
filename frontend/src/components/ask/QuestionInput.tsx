@@ -115,8 +115,12 @@ export const QuestionInput: React.FC<QuestionInputProps> = ({
     }
   };
 
-  // Status pill config
+  // Status pill config — keys must cover the full DocumentStatus union
+  // ('uploaded' | 'queued' | 'processing' | 'indexed' | 'failed' | 'deleted')
+  // so indexing by uploadStatus type-checks. 'uploaded' is the pre-queue state
+  // right after POST /documents/upload, styled as an early/muted indicator.
   const uploadPillConfig = {
+    uploaded:   { label: 'Uploaded…',   color: 'text-[var(--text-muted)]',  bg: 'bg-[var(--surface-2)]',           dot: 'bg-gray-400'    },
     queued:     { label: 'Queued…',     color: 'text-[var(--text-muted)]',  bg: 'bg-[var(--surface-2)]',           dot: 'bg-gray-400'    },
     processing: { label: 'Indexing…',   color: 'text-[var(--accent)]',       bg: 'bg-[rgba(20,184,166,0.12)]',      dot: 'bg-[var(--accent)] animate-pulse' },
     indexed:    { label: uploadChunkCount ? `${uploadChunkCount} chunks` : 'Indexed', color: 'text-[#4ade80]', bg: 'bg-[rgba(74,222,128,0.1)]', dot: 'bg-[#4ade80]' },

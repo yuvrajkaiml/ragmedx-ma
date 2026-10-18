@@ -132,12 +132,14 @@ class Settings(BaseSettings):
     embedding_model_name: str = "BAAI/bge-small-en-v1.5"
 
     # LLM runtime
-    llm_mode: Literal["real", "mock"] = Field(
+    llm_mode: Literal["real", "mock", "ollama"] = Field(
         default="mock",
         validation_alias="RAGMEDX_LLM_MODE",
         description=(
-            "Controls whether the local GPU LLM is used for inference. "
-            "'real' loads the model via bitsandbytes 4-bit NF4 and raises on failure. "
+            "Controls which LLM backend serves inference. "
+            "'real' loads the local GPU model via bitsandbytes 4-bit NF4 and raises on failure. "
+            "'ollama' runs the configured Qwen model on CPU through a local Ollama REST server "
+            "(no GPU/bitsandbytes required). "
             "'mock' (default) returns deterministic stub responses — safe for dev/CI."
         ),
     )
@@ -145,6 +147,18 @@ class Settings(BaseSettings):
         default="Qwen/Qwen3-8B",
         validation_alias="RAGMEDX_LLM_MODEL_NAME",
         description="HuggingFace model ID or local path used when llm_mode='real'.",
+    )
+
+    # Ollama (CPU) runtime — used when llm_mode='ollama'.
+    ollama_base_url: str = Field(
+        default="http://localhost:11434",
+        validation_alias="RAGMEDX_OLLAMA_BASE_URL",
+        description="Base URL of the local Ollama REST server used when llm_mode='ollama'.",
+    )
+    ollama_model: str = Field(
+        default="qwen3:8b",
+        validation_alias="RAGMEDX_OLLAMA_MODEL",
+        description="Ollama model tag served when llm_mode='ollama' (e.g. 'qwen3:8b').",
     )
 
     # Compatibility setting retained for readiness probes that override the legacy name.
