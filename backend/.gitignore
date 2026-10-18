@@ -39,6 +39,9 @@ data/datasets/
 
 # Generated retrieval artifacts
 data/faiss_index/
+# Generated retrieval indexes and checkpoints
+data/indexes/
+data/vectorstore/
 backend/data/faiss_index/*
 backend/data/documents/*
 backend/data/cache/*

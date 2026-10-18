@@ -15,3 +15,38 @@ AsyncSessionLocal = async_sessionmaker(engine, expire_on_commit=False, class_=As
 async def get_session():
     async with AsyncSessionLocal() as session:
         yield session
+
+
+# Re-export the ORM models for convenience. Imported lazily at module end to
+# avoid a circular import (models.py imports ``Base`` from this package).
+from app.db.models import (  # noqa: E402
+    Chunk,
+    ConsumedAuthToken,
+    Conversation,
+    ConversationMessage,
+    Document,
+    QueryExecutionRecord,
+    QueryFeedback,
+    RetrievedEvidence,
+    RevokedRefreshToken,
+    User,
+)
+
+__all__ = [
+    "Base",
+    "engine",
+    "AsyncSessionLocal",
+    "get_session",
+    # Auth / conversation / query models (yuvraj/llm)
+    "User",
+    "RevokedRefreshToken",
+    "ConsumedAuthToken",
+    "Conversation",
+    "ConversationMessage",
+    "QueryExecutionRecord",
+    "QueryFeedback",
+    # Retrieval models (sana/retrieval)
+    "Document",
+    "Chunk",
+    "RetrievedEvidence",
+]

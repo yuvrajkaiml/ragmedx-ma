@@ -3,6 +3,7 @@ import logging
 from datetime import datetime, timezone
 import sys
 import os
+import pytest
 
 # Ensure backend root is on sys.path
 backend_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -98,6 +99,7 @@ def test_prompt_rendering():
     print("[OK] Prompt template test passed.")
 
 
+@pytest.mark.asyncio
 async def test_llm_generation():
     logger.info("=== Testing Local LLM Wrapper ===")
 
@@ -129,6 +131,7 @@ async def test_llm_generation():
     print("[OK] LLM Wrapper generation test passed.")
 
 
+@pytest.mark.asyncio
 async def test_base_agent():
     logger.info(
         "=== Testing BaseAgent & Pipeline State Integration ==="

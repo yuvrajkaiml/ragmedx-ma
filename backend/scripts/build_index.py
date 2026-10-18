@@ -1,311 +1,289 @@
-"""
-Production FAISS index build script for RAGMedX-MA.
+"""Build resumable dense FAISS and sparse BM25 indexes from chunk JSONL files.
 
-Pipeline:
-  DocumentLoader.load_all()        — discovers bioasq/ (and medqa/) under
-                                     backend/data/datasets/
-      ↓ deduplicate by exact text
-  MedicalChunker.from_settings()   — splits long passages; short BioASQ
-      ↓ .chunk_documents()           snippets pass through as single chunks
-  BGEEmbedding(bge-m3)             — 1024-dim L2-normalised dense vectors
-      ↓ .embed_documents()
-  FAISSVectorStore(dim=1024)       — IndexFlatIP (≡ cosine for unit vecs)
-      ↓ .add() then .save()
-  settings.faiss_index_dir/        — index.faiss + chunks.pkl
+This script reads one or more JSONL chunk files, deduplicates by chunk ID,
+embeds with BGE-M3, and builds dense (FAISS) and sparse (BM25) indexes with
+resumable checkpointing. It is the counterpart of ``scripts/update_index.py``.
 
-Usage (from backend/):
-    python -m scripts.build_index                    # full production index
-    python -m scripts.build_index \\
-        --corpus-file data/datasets/bioasq_eval_split/train_corpus.json \\
-        --output-dir  data/faiss_index/eval_split    # eval-split index
-
-    RAGMEDX_FAISS_INDEX_DIR=data/faiss_index \\
-        python -m scripts.build_index               # explicit output dir (env)
-
-When --corpus-file is supplied the script reads that JSON file directly
-(a list of snippet dicts as written by build_eval_split.py) instead of
-calling DocumentLoader.load_all().  The production index is never touched.
-
-Env vars read via Settings (apply to both modes unless overridden by flags):
-    RAGMEDX_FAISS_INDEX_DIR   — output directory (default: data/faiss_index)
-    RAGMEDX_LLM_MODE          — informational only; index build always runs
-    RETRIEVAL_CHUNK_SIZE      — MedicalChunker.chunk_size   (default 1000)
-    RETRIEVAL_CHUNK_OVERLAP   — MedicalChunker.chunk_overlap (default 150)
-    RETRIEVAL_CHUNK_MIN_CHARS — MedicalChunker.min_chunk_size (default 50)
+Note: the earlier datasets-directory build flow (``DocumentLoader.load_all``
++ ``MedicalChunker.from_settings`` + ``--corpus-file``) still lives in its own
+modules — ``app.retrieval.document_loader`` and
+``app.rag.chunking.semantic_chunker`` — and is exercised by their own tests.
 """
 
 from __future__ import annotations
 
 import argparse
+import json
+import shutil
 import sys
-import time
+import uuid
 from pathlib import Path
 
-# Ensure the backend/ app package is on the path whether the script is run
-# via `python scripts/build_index.py` or `python -m scripts.build_index`.
-_BACKEND_DIR = Path(__file__).resolve().parent.parent
-if str(_BACKEND_DIR) not in sys.path:
-    sys.path.insert(0, str(_BACKEND_DIR))
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
-from app.config import DATASETS_DIR, get_settings
-from app.rag.chunking.semantic_chunker import MedicalChunker
+from app.rag.chunking.models import MedicalChunk
 from app.rag.embeddings.bge_embedding import BGEEmbedding
-from app.rag.loaders.models import MedicalDocument
+from app.rag.retrievers.dense_retriever import DenseRetriever
+from app.rag.retrievers.sparse_retriever import SparseRetriever
 from app.rag.vectorstore.faiss_store import FAISSVectorStore
-from app.retrieval.document_loader import DocumentLoader
-from app.utils.logger import logger
-
-# BGE-M3 produces 1024-dim embeddings.  FAISSVectorStore must be initialised
-# with the same dimension.  Do not use Settings.embedding_model_name here —
-# that field defaults to bge-small-en-v1.5 (384-dim) and is inconsistent with
-# the store's dimension; bge-m3 is the production embedding model for this index.
-_EMBED_MODEL = BGEEmbedding.DEFAULT_MODEL   # "BAAI/bge-m3"
-_EMBED_DIM   = 1024
-_EMBED_BATCH = 64   # Reduced from 128; BGE-M3 hidden states are large.
 
 
-def _deduplicate(documents):
-    """Return a new list with exact-text duplicates removed (first-seen wins)."""
-    seen: set[str] = set()
-    unique = []
-    skipped = 0
-    for doc in documents:
-        if doc.content in seen:
-            skipped += 1
-        else:
-            seen.add(doc.content)
-            unique.append(doc)
-    return unique, skipped
-
-
-def main() -> None:
-    # ------------------------------------------------------------------ #
-    # CLI argument parsing
-    # ------------------------------------------------------------------ #
-    ap = argparse.ArgumentParser(
-        description=(
-            "Build a FAISS index for RAGMedX-MA. "
-            "Without --corpus-file, scans the standard datasets directory. "
-            "With --corpus-file, reads a pre-built snippet JSON (e.g. from "
-            "build_eval_split.py) and writes to --output-dir."
-        )
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Build resumable FAISS and BM25 indexes from chunk JSONL files."
     )
-    ap.add_argument(
-        "--corpus-file",
+    parser.add_argument(
+        "--inputs",
+        nargs="+",
         type=Path,
-        default=None,
-        help=(
-            "Path to a train_corpus.json produced by build_eval_split.py. "
-            "When supplied, skips DocumentLoader.load_all() entirely. "
-            "The production index (data/faiss_index/) is never touched."
-        ),
+        default=[
+            PROJECT_ROOT / "data" / "cache" / "pubmed_chunks.jsonl",
+            PROJECT_ROOT / "data" / "cache" / "pmc_chunks.jsonl",
+        ],
+        help="One or more JSONL chunk files.",
     )
-    ap.add_argument(
-        "--output-dir",
+    parser.add_argument(
+        "--dense-dir",
         type=Path,
-        default=None,
-        help=(
-            "Directory to write index.faiss and chunks.pkl into. "
-            "Overrides RAGMEDX_FAISS_INDEX_DIR when supplied. "
-            "Use a path DIFFERENT from data/faiss_index/ to avoid "
-            "overwriting the production index."
-        ),
+        default=PROJECT_ROOT / "data" / "indexes" / "dense",
+        help="Final FAISS index directory.",
     )
-    args = ap.parse_args()
+    parser.add_argument(
+        "--sparse-file",
+        type=Path,
+        default=PROJECT_ROOT / "data" / "indexes" / "bm25.pkl",
+        help="Final BM25 index file.",
+    )
+    parser.add_argument(
+        "--checkpoint-dir",
+        type=Path,
+        default=PROJECT_ROOT / "data" / "indexes" / "build_checkpoint",
+        help="Directory used to resume an interrupted build.",
+    )
+    parser.add_argument(
+        "--checkpoint-every",
+        type=int,
+        default=512,
+        help="Number of chunks processed between checkpoints.",
+    )
+    parser.add_argument(
+        "--device",
+        choices=["auto", "cpu", "cuda"],
+        default="auto",
+        help="Embedding device.",
+    )
+    parser.add_argument(
+        "--batch-size",
+        type=int,
+        default=8,
+        help="Number of chunks embedded per batch.",
+    )
+    return parser.parse_args()
 
-    t_total = time.perf_counter()
-    settings = get_settings()
 
-    # Resolve output directory: CLI flag > env var/settings default
-    if args.output_dir is not None:
-        output_dir = args.output_dir
-        if not output_dir.is_absolute():
-            output_dir = _BACKEND_DIR / output_dir
-    else:
-        output_dir = settings.faiss_index_dir
-        if not output_dir.is_absolute():
-            output_dir = _BACKEND_DIR / output_dir
+def read_chunks(paths: list[Path]) -> list[MedicalChunk]:
+    """Read JSONL chunks, keeping the first occurrence of each ID."""
+    chunks_by_id: dict[str, MedicalChunk] = {}
 
-    corpus_file: Path | None = args.corpus_file
-    if corpus_file is not None and not corpus_file.is_absolute():
-        corpus_file = _BACKEND_DIR / corpus_file
+    for path in paths:
+        if not path.is_file():
+            raise FileNotFoundError(f"Chunk file not found: {path}")
 
-    logger.info("=" * 60)
-    if corpus_file:
-        logger.info("RAGMedX-MA — eval-split index build")
-        logger.info(f"  corpus_file  : {corpus_file}")
-    else:
-        logger.info("RAGMedX-MA — production index build")
-        logger.info(f"  datasets_dir : {DATASETS_DIR}")
-    logger.info(f"  output_dir   : {output_dir}")
-    logger.info(f"  chunk_size   : {settings.retrieval_chunk_size}")
-    logger.info(f"  chunk_overlap: {settings.retrieval_chunk_overlap}")
-    logger.info(f"  min_chars    : {settings.retrieval_chunk_min_chars}")
-    logger.info(f"  embed_model  : {_EMBED_MODEL}")
-    logger.info("=" * 60)
+        print(f"Reading {path}...")
+        with path.open("r", encoding="utf-8") as file:
+            for line_number, line in enumerate(file, start=1):
+                if not line.strip():
+                    continue
+                try:
+                    chunk = MedicalChunk.model_validate_json(line)
+                except Exception as exc:
+                    raise ValueError(
+                        f"Invalid chunk in {path}, line {line_number}: {exc}"
+                    ) from exc
+                chunks_by_id.setdefault(chunk.id, chunk)
 
-    # ------------------------------------------------------------------ #
-    # 1. Load documents
-    # ------------------------------------------------------------------ #
-    logger.info("Step 1/4 — loading documents …")
-    t0 = time.perf_counter()
+    return list(chunks_by_id.values())
 
-    if corpus_file is not None:
-        # --corpus-file path: read snippet dicts written by build_eval_split.py
-        if not corpus_file.exists():
-            logger.error(f"Corpus file not found: {corpus_file}")
-            sys.exit(1)
-        import json as _json
-        with open(corpus_file, "r", encoding="utf-8") as fh:
-            snippet_dicts = _json.load(fh)
-        # Convert to MedicalDocument objects matching the BioASQLoader contract
-        raw_docs: list[MedicalDocument] = []
-        for idx, s in enumerate(snippet_dicts):
-            pmid_url      = s.get("document", "")
-            pmid          = pmid_url.rstrip("/").rsplit("/", 1)[-1] if pmid_url else ""
-            begin_section = s.get("beginSection", "abstract")
-            end_section   = s.get("endSection", "abstract")
-            section_label = (
-                begin_section if begin_section == end_section
-                else f"{begin_section}–{end_section}"
-            )
-            q_id  = s.get("question_id", f"snippet_{idx}")
-            title = f"PubMed {pmid} [{section_label}]" if pmid else f"BioASQ snippet {idx}"
-            raw_docs.append(
-                MedicalDocument(
-                    id=f"bioasq_{q_id}_s{idx}",
-                    title=title,
-                    content=s.get("text", ""),
-                    source=pmid_url or "bioasq",
-                    metadata={
-                        "pmid_url":    pmid_url,
-                        "pmid":        pmid,
-                        "begin_section": begin_section,
-                        "end_section":   end_section,
-                        "offset_begin":  s.get("offsetInBeginSection", 0),
-                        "offset_end":    s.get("offsetInEndSection", 0),
-                        "question_id":   q_id,
-                        "source_file":   s.get("source_file", ""),
-                    },
-                )
-            )
-        logger.info(
-            f"  Loaded {len(raw_docs)} documents from corpus file "
-            f"({time.perf_counter() - t0:.1f}s)"
-        )
-    else:
-        # Default path: discover all datasets via DocumentLoader
-        loader = DocumentLoader(DATASETS_DIR)
-        raw_docs = loader.load_all()
-        logger.info(
-            f"  Loaded {len(raw_docs)} raw documents "
-            f"({time.perf_counter() - t0:.1f}s)"
+
+def save_json_atomic(path: Path, data: dict) -> None:
+    """Write JSON via a temporary file, then atomically replace the target."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    temporary.write_text(json.dumps(data, indent=2), encoding="utf-8")
+    temporary.replace(path)
+
+
+def save_checkpoint(
+    checkpoint_dir: Path,
+    dense: DenseRetriever,
+    sparse: SparseRetriever,
+    processed_ids: set[str],
+) -> None:
+    """Publish a checkpoint only after both indexes and metadata are saved."""
+    checkpoint_dir.mkdir(parents=True, exist_ok=True)
+    generation = f"generation_{uuid.uuid4().hex}"
+    generation_dir = checkpoint_dir / generation
+    generation_dir.mkdir()
+
+    try:
+        dense.save(generation_dir / "dense")
+        sparse.save(generation_dir / "bm25.pkl")
+
+        save_json_atomic(
+            generation_dir / "metadata.json",
+            {
+                "processed_ids": sorted(processed_ids),
+                "dense_size": dense.size,
+                "sparse_size": sparse.size,
+            },
         )
 
-    if not raw_docs:
-        logger.error(
-            "No documents loaded — check the corpus file or "
-            "backend/data/datasets/bioasq/."
+        # This manifest is updated last. It identifies a complete generation.
+        save_json_atomic(
+            checkpoint_dir / "current.json",
+            {"generation": generation},
         )
-        sys.exit(1)
+    except Exception:
+        shutil.rmtree(generation_dir, ignore_errors=True)
+        raise
 
-    # ------------------------------------------------------------------ #
-    # 2. Deduplicate by exact snippet text
-    # ------------------------------------------------------------------ #
-    logger.info("Step 2/4 — deduplicating …")
-    unique_docs, n_dupes = _deduplicate(raw_docs)
-    logger.info(
-        f"  {len(unique_docs)} unique documents kept, "
-        f"{n_dupes} exact-text duplicates skipped"
-    )
+    # Keep the current generation and remove older complete generations.
+    for old_dir in checkpoint_dir.glob("generation_*"):
+        if old_dir != generation_dir and old_dir.is_dir():
+            shutil.rmtree(old_dir, ignore_errors=True)
 
-    # ------------------------------------------------------------------ #
-    # 3. Chunk
-    # ------------------------------------------------------------------ #
-    logger.info("Step 3/4 — chunking …")
-    t0 = time.perf_counter()
-    chunker = MedicalChunker.from_settings()
-    chunks = chunker.chunk_documents(unique_docs)
-    logger.info(
-        f"  {len(chunks)} chunks from {len(unique_docs)} documents "
-        f"({time.perf_counter() - t0:.1f}s)"
-    )
+
+def load_checkpoint(
+    checkpoint_dir: Path,
+    embedder: BGEEmbedding,
+) -> tuple[DenseRetriever, SparseRetriever, set[str]] | None:
+    manifest_path = checkpoint_dir / "current.json"
+    if not manifest_path.is_file():
+        return None
+
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    generation = manifest.get("generation")
+
+    # Do not allow a manifest to refer outside the checkpoint directory.
+    if not isinstance(generation, str) or Path(generation).name != generation:
+        raise ValueError("Invalid checkpoint generation manifest.")
+
+    generation_dir = checkpoint_dir / generation
+    metadata_path = generation_dir / "metadata.json"
+    dense_dir = generation_dir / "dense"
+    sparse_file = generation_dir / "bm25.pkl"
+
+    if not metadata_path.is_file() or not dense_dir.is_dir() or not sparse_file.is_file():
+        raise ValueError("Checkpoint is incomplete; do not delete it manually.")
+
+    metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+    processed_ids = set(metadata["processed_ids"])
+
+    dense = DenseRetriever.load(dense_dir, embedder)
+    sparse = SparseRetriever.load(sparse_file)
+
+    if dense.size != sparse.size or dense.size != len(processed_ids):
+        raise ValueError(
+            "Checkpoint consistency check failed: dense, sparse, and processed "
+            "chunk counts do not match."
+        )
+
+    if dense.size != metadata["dense_size"] or sparse.size != metadata["sparse_size"]:
+        raise ValueError("Checkpoint sizes do not match saved metadata.")
+
+    return dense, sparse, processed_ids
+
+
+def main() -> int:
+    args = parse_args()
+
+    if args.batch_size < 1 or args.checkpoint_every < 1:
+        print("ERROR: batch-size and checkpoint-every must be at least 1.")
+        return 1
+
+    try:
+        chunks = read_chunks(args.inputs)
+    except (OSError, ValueError) as exc:
+        print(f"ERROR: Could not read chunks: {exc}")
+        return 1
 
     if not chunks:
-        logger.error("Chunker produced zero chunks — nothing to embed.")
-        sys.exit(1)
+        print("ERROR: No chunks found; no indexes were built.")
+        return 1
 
-    # Sanity check: near-1:1 ratio is expected for BioASQ (most snippets
-    # are shorter than chunk_size so each becomes a single chunk).
-    ratio = len(chunks) / len(unique_docs)
-    if ratio < 0.5:
-        logger.warning(
-            f"Chunk/doc ratio is unusually low ({ratio:.2f}). "
-            "Many documents may have been discarded by min_chunk_size. "
-            "Consider lowering RETRIEVAL_CHUNK_MIN_CHARS."
-        )
-    elif ratio > 5.0:
-        logger.warning(
-            f"Chunk/doc ratio is unusually high ({ratio:.2f}). "
-            "Documents may be much longer than expected."
-        )
+    print(f"Unique chunks available: {len(chunks)}")
+    print("Loading BGE-M3. The first run may download model files...")
 
-    # ------------------------------------------------------------------ #
-    # 4. Embed + store
-    # ------------------------------------------------------------------ #
-    logger.info(f"Step 4/4 — embedding {len(chunks)} chunks with {_EMBED_MODEL} …")
-    t0 = time.perf_counter()
-    embedder = BGEEmbedding(model_name=_EMBED_MODEL)
+    try:
+        device = None if args.device == "auto" else args.device
+        embedder = BGEEmbedding(device=device, batch_size=args.batch_size)
 
-    # Embed in reporting blocks so VRAM and throughput are visible.
-    _LOG_EVERY = 2000   # log a progress line every this many chunks
-    texts = [c.content for c in chunks]
-    all_embeddings = []
-    n = len(texts)
+        if embedder.embedding_dimension != 1024:
+            raise ValueError(
+                f"BGE-M3 must produce 1024-dimensional vectors; "
+                f"got {embedder.embedding_dimension}."
+            )
 
-    import torch as _torch
-    def _vram_str() -> str:
-        if not _torch.cuda.is_available():
-            return "cpu"
-        alloc = _torch.cuda.memory_allocated() / 1_048_576
-        reserv = _torch.cuda.memory_reserved() / 1_048_576
-        total = _torch.cuda.get_device_properties(0).total_memory / 1_048_576
-        return f"VRAM {alloc:.0f}/{total:.0f} MiB alloc, {reserv:.0f} MiB reserved"
+        checkpoint = load_checkpoint(args.checkpoint_dir, embedder)
 
-    for start in range(0, n, _LOG_EVERY):
-        end = min(start + _LOG_EVERY, n)
-        block = texts[start:end]
-        block_emb = embedder.embed_documents(block, batch_size=_EMBED_BATCH)
-        all_embeddings.append(block_emb)
-        elapsed = time.perf_counter() - t0
-        rate = end / elapsed if elapsed > 0 else 0
-        eta  = (n - end) / rate if rate > 0 else 0
-        logger.info(
-            f"  embedded {end}/{n} chunks "
-            f"({elapsed:.0f}s elapsed, ~{eta:.0f}s remaining) | {_vram_str()}"
-        )
+        if checkpoint is None:
+            print("No checkpoint found; starting a new build.")
+            dense = DenseRetriever(
+                embedder, FAISSVectorStore(dimension=1024)
+            )
+            sparse = SparseRetriever()
+            processed_ids: set[str] = set()
+        else:
+            dense, sparse, processed_ids = checkpoint
+            print(f"Resuming from checkpoint: {len(processed_ids)} chunks saved.")
 
-    import numpy as np
-    embeddings = np.vstack(all_embeddings)
-    logger.info(
-        f"  Embedding complete — shape {embeddings.shape} "
-        f"({time.perf_counter() - t0:.1f}s total)"
-    )
+        pending = [chunk for chunk in chunks if chunk.id not in processed_ids]
+        print(f"Chunks remaining: {len(pending)}")
 
-    store = FAISSVectorStore(dimension=_EMBED_DIM)
-    store.add(embeddings, chunks)
+        for start in range(0, len(pending), args.checkpoint_every):
+            batch = pending[start : start + args.checkpoint_every]
 
-    output_dir.mkdir(parents=True, exist_ok=True)
-    store.save(output_dir)
+            print(
+                f"Indexing chunks {len(processed_ids) + 1}–"
+                f"{len(processed_ids) + len(batch)} of {len(chunks)}..."
+            )
 
-    logger.success(
-        f"Index saved to {output_dir}  "
-        f"({store.size} vectors, "
-        f"{(output_dir / 'index.faiss').stat().st_size / 1_048_576:.1f} MB index, "
-        f"{(output_dir / 'chunks.pkl').stat().st_size / 1_048_576:.1f} MB metadata)"
-    )
-    logger.info(f"Total build time: {time.perf_counter() - t_total:.1f}s")
+            dense.add_chunks(batch, batch_size=args.batch_size)
+            sparse.add_chunks(batch)
+            processed_ids.update(chunk.id for chunk in batch)
+
+            if dense.size != sparse.size or dense.size != len(processed_ids):
+                raise ValueError("Dense/sparse index counts diverged.")
+
+            save_checkpoint(
+                args.checkpoint_dir, dense, sparse, processed_ids
+            )
+            print(f"Checkpoint saved: {len(processed_ids)} chunks.")
+
+        if len(processed_ids) != len(chunks):
+            raise ValueError(
+                "Not all chunks were indexed. Check input files and checkpoint."
+            )
+
+        # Publish only after the complete, consistent build is checkpointed.
+        dense.save(args.dense_dir)
+        sparse.save(args.sparse_file)
+
+    except Exception as exc:
+        print(f"ERROR: Index build failed: {exc}")
+        print("If a checkpoint was saved, rerun the same command to resume.")
+        return 1
+
+    print("Index build completed successfully.")
+    print(f"Dense chunks: {dense.size}")
+    print(f"Sparse chunks: {sparse.size}")
+    print(f"FAISS directory: {args.dense_dir}")
+    print(f"BM25 file: {args.sparse_file}")
+    print(f"Checkpoint directory: {args.checkpoint_dir}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

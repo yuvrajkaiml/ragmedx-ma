@@ -1,5 +1,5 @@
 import re
-from typing import List
+from typing import List, Tuple
 
 from app.rag.loaders.models import MedicalDocument
 from app.rag.chunking.models import MedicalChunk
@@ -7,51 +7,27 @@ from app.utils.logger import logger
 
 
 class MedicalChunker:
-    """
-    Splits medical documents into retrieval-friendly chunks.
-
-    The chunker attempts to:
-    - preserve section boundaries
-    - remove unwanted article metadata
-    - avoid extremely small chunks
-    - maintain contextual overlap
-    """
+    """Split medical documents into retrieval-ready text chunks."""
 
     def __init__(
         self,
-        chunk_size: int = 800,
-        chunk_overlap: int = 100,
+        chunk_size: int = 2000,
+        chunk_overlap: int = 400,
         min_chunk_size: int = 150,
         overlap: int | None = None,
     ):
-        """
-        Initialize the medical chunker.
-
-        Args:
-            chunk_size: Maximum target chunk size in characters.
-            chunk_overlap: Number of characters to preserve as overlap.
-            min_chunk_size: Minimum accepted chunk size.
-            overlap: Backward-compatible alias for chunk_overlap.
-        """
-
-        # Support both `chunk_overlap` and the older `overlap`
-        # parameter used by some tests.
+        # Preserve compatibility with callers using `overlap`.
         if overlap is not None:
             chunk_overlap = overlap
 
         if chunk_size <= 0:
             raise ValueError("chunk_size must be greater than 0")
-
         if chunk_overlap < 0:
             raise ValueError("chunk_overlap cannot be negative")
-
         if min_chunk_size < 0:
             raise ValueError("min_chunk_size cannot be negative")
-
         if chunk_overlap >= chunk_size:
-            raise ValueError(
-                "chunk_overlap must be smaller than chunk_size"
-            )
+            raise ValueError("chunk_overlap must be smaller than chunk_size")
 
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
@@ -86,302 +62,266 @@ class MedicalChunker:
     # ---------------------------------------------------------
 
     def _clean_text(self, text: str) -> str:
-        """
-        Normalize whitespace and remove obvious XML/article noise.
-        """
-
+        """Normalize whitespace and remove common article markers."""
         if not text:
             return ""
 
-        # Normalize line endings.
-        text = text.replace("\r\n", "\n")
-        text = text.replace("\r", "\n")
-
-        # Normalize spaces and tabs.
+        text = text.replace("\r\n", "\n").replace("\r", "\n")
         text = re.sub(r"[ \t]+", " ", text)
-
-        # Normalize excessive blank lines.
         text = re.sub(r"\n{3,}", "\n\n", text)
-
-        # Remove common article markers.
         text = re.sub(
             r"^\s*(TEXT|ARTICLE)\s*$",
             "",
             text,
             flags=re.IGNORECASE | re.MULTILINE,
         )
-
         return text.strip()
 
-    # ---------------------------------------------------------
-    # REMOVE REFERENCES / ARTICLE END MATTER
-    # ---------------------------------------------------------
-
     def _remove_article_end_matter(self, text: str) -> str:
-        """
-        Remove references and publication-related material that
-        should not normally participate in semantic retrieval.
-        """
-
+        """Remove references and common publication end matter."""
         patterns = [
             r"\n\s*References\s*\n",
-            r"\n\s*REFERENCES\s*\n",
             r"\n\s*Conflict[- ]of[- ]interest statement\s*:",
             r"\n\s*Conflict of interest\s*:",
             r"\n\s*Manuscript source\s*:",
-            r"\n\s*Peer-review report classification\s*",
-            r"\n\s*Peer review report classification\s*",
+            r"\n\s*Peer[- ]review report classification\s*",
         ]
 
-        earliest_index = None
+        earliest_index = len(text)
 
         for pattern in patterns:
-            match = re.search(
-                pattern,
-                text,
-                flags=re.IGNORECASE,
-            )
-
+            match = re.search(pattern, text, flags=re.IGNORECASE)
             if match:
-                if (
-                    earliest_index is None
-                    or match.start() < earliest_index
-                ):
-                    earliest_index = match.start()
+                earliest_index = min(earliest_index, match.start())
 
-        if earliest_index is not None:
-            text = text[:earliest_index]
-
-        return text.strip()
-
-    # ---------------------------------------------------------
-    # SECTION DETECTION
-    # ---------------------------------------------------------
+        return text[:earliest_index].strip()
 
     def _looks_like_heading(self, paragraph: str) -> bool:
-        """
-        Heuristic detection of medical article section headings.
-        """
-
+        """Identify likely standalone medical section headings."""
         paragraph = paragraph.strip()
 
-        if not paragraph:
+        if not paragraph or len(paragraph) > 120:
             return False
 
-        # Headings should generally be relatively short.
-        if len(paragraph) > 150:
+        if paragraph.endswith((".", "!", ";", ",")):
             return False
 
-        # Avoid treating normal sentences as headings.
-        if paragraph.endswith("."):
-            return False
-
-        # Common heading characteristics.
-        heading_keywords = [
+        known_headings = {
+            "abstract",
             "introduction",
             "background",
             "methods",
             "materials and methods",
+            "methodology",
             "results",
             "discussion",
             "conclusion",
             "conclusions",
-            "evaluation",
             "limitations",
+            "case presentation",
+            "case report",
+            "clinical presentation",
             "treatment",
             "diagnosis",
-            "pathogenesis",
-            "clinical",
             "management",
-            "imaging",
-            "diagnostic",
             "references",
-        ]
+            "acknowledgments",
+            "acknowledgements",
+            "data availability",
+            "ethical approval",
+            "patient consent",
+        }
 
-        lowered = paragraph.lower()
+        normalized = re.sub(r"\s+", " ", paragraph).strip().lower()
+        normalized = re.sub(r"^\d+(?:\.\d+)*\.?\s*", "", normalized)
 
-        if lowered in heading_keywords:
+        if normalized in known_headings:
             return True
 
-        # Question-style headings are common in medical papers.
-        if paragraph.endswith("?"):
-            return True
-
-        # Short title-like paragraphs.
-        words = paragraph.split()
-
-        if len(words) <= 12:
+        # Permit numbered or short question-style headings.
+        if paragraph.endswith("?") and len(paragraph.split()) <= 12:
             return True
 
         return False
 
-    # ---------------------------------------------------------
-    # PARAGRAPH EXTRACTION
-    # ---------------------------------------------------------
-
     def _extract_paragraphs(self, text: str) -> List[str]:
-        """
-        Convert article text into clean paragraphs.
-        """
-
+        """Extract non-empty paragraphs without losing heading boundaries."""
         text = self._clean_text(text)
-
-        paragraphs = re.split(
-            r"\n\s*\n",
-            text,
-        )
-
-        cleaned = []
+        paragraphs = re.split(r"\n\s*\n", text)
+        result = []
 
         for paragraph in paragraphs:
-            paragraph = re.sub(
-                r"\s+",
-                " ",
-                paragraph,
-            ).strip()
-
+            paragraph = re.sub(r"\s+", " ", paragraph).strip()
             if paragraph:
-                cleaned.append(paragraph)
+                result.append(paragraph)
 
-        return cleaned
+        return result
 
-    # ---------------------------------------------------------
-    # SECTION-AWARE CHUNKING
-    # ---------------------------------------------------------
+    def _split_long_text(self, text: str) -> List[str]:
+        """Split long text into bounded chunks with word-safe overlap."""
+        text = text.strip()
+        if not text:
+            return []
+
+        if len(text) <= self.chunk_size:
+            return [text]
+
+        chunks = []
+        start = 0
+        text_length = len(text)
+
+        while start < text_length:
+            end = min(start + self.chunk_size, text_length)
+
+            if end < text_length:
+                # Prefer a sentence boundary, then a word boundary.
+                search_start = start + max(1, self.chunk_size // 2)
+                sentence_boundary = max(
+                    text.rfind(". ", search_start, end),
+                    text.rfind("? ", search_start, end),
+                    text.rfind("! ", search_start, end),
+                )
+
+                if sentence_boundary >= search_start:
+                    end = sentence_boundary + 1
+                else:
+                    space_boundary = text.rfind(" ", search_start, end)
+                    if space_boundary > start:
+                        end = space_boundary
+
+            piece = text[start:end].strip()
+
+            if piece:
+                chunks.append(piece)
+
+            if end >= text_length:
+                break
+
+            # Move backward from the end to retain contextual overlap.
+            next_start = max(start + 1, end - self.chunk_overlap)
+
+            # Start on a word boundary where possible.
+            while next_start < end and text[next_start].isspace():
+                next_start += 1
+
+            if (
+                next_start > 0
+                and next_start < text_length
+                and not text[next_start - 1].isspace()
+            ):
+                next_space = text.find(" ", next_start, end)
+                if next_space != -1:
+                    next_start = next_space + 1
+
+            # Guarantee forward progress.
+            if next_start <= start:
+                next_start = end
+
+            start = next_start
+
+        # Defensive bound check.
+        for chunk in chunks:
+            if len(chunk) > self.chunk_size:
+                raise RuntimeError(
+                    "Chunk size limit exceeded: "
+                    f"{len(chunk)} > {self.chunk_size}"
+                )
+
+        return chunks
 
     def _create_chunks(
         self,
         paragraphs: List[str],
-    ) -> List[tuple[str, str]]:
-        """
-        Create section-aware text chunks.
-
-        Returns:
-            List of (section, chunk_text)
-        """
-
-        chunks = []
-
+    ) -> List[Tuple[str, str]]:
+        """Create section-aware chunks and split oversized paragraphs."""
+        chunks: List[Tuple[str, str]] = []
         current_section = "Unknown"
-        current_paragraphs = []
+        current_parts: List[str] = []
         current_length = 0
 
-        def flush_chunk():
-            nonlocal current_paragraphs
-            nonlocal current_length
+        def flush():
+            nonlocal current_parts, current_length
 
-            if not current_paragraphs:
+            if not current_parts:
                 return
 
-            content = " ".join(
-                current_paragraphs
-            ).strip()
+            content = " ".join(current_parts).strip()
 
-            if len(content) >= self.min_chunk_size:
-                chunks.append(
-                    (
-                        current_section,
-                        content,
-                    )
-                )
+            if content:
+                for piece in self._split_long_text(content):
+                    if len(piece) >= self.min_chunk_size or not chunks:
+                        chunks.append((current_section, piece))
 
-            current_paragraphs = []
+            current_parts = []
             current_length = 0
 
         for paragraph in paragraphs:
-
-            # Detect a new medical section.
             if self._looks_like_heading(paragraph):
-                flush_chunk()
-
+                flush()
                 current_section = paragraph
-
                 continue
 
-            paragraph_length = len(paragraph)
+            # Split an individual oversized paragraph before grouping.
+            if len(paragraph) > self.chunk_size:
+                flush()
+                for piece in self._split_long_text(paragraph):
+                    if len(piece) >= self.min_chunk_size or not chunks:
+                        chunks.append((current_section, piece))
+                continue
 
-            # If adding the paragraph exceeds the chunk limit,
-            # finalize the current chunk first.
-            if (
-                current_length + paragraph_length
-                > self.chunk_size
-                and current_paragraphs
-            ):
-                flush_chunk()
+            separator_length = 1 if current_parts else 0
+            proposed_length = current_length + separator_length + len(paragraph)
 
-                # Add contextual overlap from the previous chunk.
-                if chunks and self.chunk_overlap > 0:
-                    previous_text = chunks[-1][1]
+            if current_parts and proposed_length > self.chunk_size:
+                previous_content = " ".join(current_parts).strip()
+                flush()
 
-                    # Approximate character overlap.
-                    overlap_text = previous_text[
-                        -self.chunk_overlap:
-                    ]
+                # Carry a bounded tail into the next chunk for context.
+                if self.chunk_overlap and previous_content:
+                    tail = previous_content[-self.chunk_overlap:].strip()
 
-                    if overlap_text:
-                        current_paragraphs = [
-                            overlap_text
-                        ]
+                    # Avoid starting overlap in the middle of a word.
+                    first_space = tail.find(" ")
+                    if first_space != -1:
+                        tail = tail[first_space + 1:]
 
-                        current_length = len(
-                            overlap_text
-                        )
+                    if tail and len(tail) < self.chunk_size:
+                        current_parts = [tail]
+                        current_length = len(tail)
 
-            current_paragraphs.append(paragraph)
-            current_length += paragraph_length
+            separator_length = 1 if current_parts else 0
+            if current_length + separator_length + len(paragraph) <= self.chunk_size:
+                current_parts.append(paragraph)
+                current_length += separator_length + len(paragraph)
+            else:
+                flush()
+                current_parts = [paragraph]
+                current_length = len(paragraph)
 
-        # Flush the final chunk.
-        flush_chunk()
-
+        flush()
         return chunks
 
-    # ---------------------------------------------------------
-    # PUBLIC API
-    # ---------------------------------------------------------
+    def chunk_document(self, document: MedicalDocument) -> List[MedicalChunk]:
+        """Convert one MedicalDocument into retrieval-ready chunks."""
+        logger.info(f"Chunking document: {document.id}")
 
-    def chunk_document(
-        self,
-        document: MedicalDocument,
-    ) -> List[MedicalChunk]:
-        """
-        Convert a MedicalDocument into retrieval-ready chunks.
-        """
+        text = self._clean_text(document.content)
 
-        logger.info(
-            f"Chunking document: {document.id}"
-        )
+        # Remove a duplicated leading title when the source includes it.
+        title = (document.title or "").strip()
+        if title and text[:len(title)].casefold() == title.casefold():
+            text = text[len(title):].lstrip(" \n:-")
 
-        # Clean document text.
-        text = self._clean_text(
-            document.content
-        )
-
-        # Remove references and publication metadata.
-        text = self._remove_article_end_matter(
-            text
-        )
-
-        # Extract paragraphs.
-        paragraphs = self._extract_paragraphs(
-            text
-        )
-
-        # Create raw section-aware chunks.
-        raw_chunks = self._create_chunks(
-            paragraphs
-        )
+        text = self._remove_article_end_matter(text)
+        paragraphs = self._extract_paragraphs(text)
+        raw_chunks = self._create_chunks(paragraphs)
 
         chunks = []
+        total_chunks = len(raw_chunks)
 
-        for index, (section, content) in enumerate(
-            raw_chunks
-        ):
-            chunk_id = (
-                f"{document.id}_chunk_{index}"
-            )
-
+        for index, (section, content) in enumerate(raw_chunks):
             chunk = MedicalChunk(
-                id=chunk_id,
+                id=f"{document.id}_chunk_{index}",
                 document_id=document.id,
                 content=content,
                 title=document.title,
@@ -390,53 +330,30 @@ class MedicalChunker:
                 journal=document.journal,
                 publication_year=document.publication_year,
                 metadata={
-                    **document.metadata,
+                    **(document.metadata or {}),
                     "chunk_index": index,
-                    "total_chunks": len(raw_chunks),
+                    "total_chunks": total_chunks,
                 },
             )
-
             chunks.append(chunk)
 
-        logger.info(
-            f"Created {len(chunks)} chunks "
-            f"from {document.id}"
-        )
-
+        logger.info(f"Created {len(chunks)} chunks from {document.id}")
         return chunks
 
     def chunk_documents(
         self,
         documents: List[MedicalDocument],
     ) -> List[MedicalChunk]:
-        """
-        Chunk multiple medical documents.
-        """
-
+        """Chunk multiple medical documents."""
         all_chunks = []
 
-        logger.info(
-            f"Starting chunking for "
-            f"{len(documents)} document(s)"
-        )
+        logger.info(f"Starting chunking for {len(documents)} document(s)")
 
         for document in documents:
             try:
-                chunks = self.chunk_document(
-                    document
-                )
+                all_chunks.extend(self.chunk_document(document))
+            except Exception as exc:
+                logger.error(f"Failed to chunk {document.id}: {exc}")
 
-                all_chunks.extend(chunks)
-
-            except Exception as e:
-                logger.error(
-                    f"Failed to chunk "
-                    f"{document.id}: {e}"
-                )
-
-        logger.success(
-            f"Created {len(all_chunks)} total "
-            f"medical chunks."
-        )
-
+        logger.success(f"Created {len(all_chunks)} total medical chunks.")
         return all_chunks

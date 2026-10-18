@@ -8,6 +8,10 @@ multi-agent verification layers.
 This component does NOT generate medical claims and does NOT use
 an LLM.
 
+Supported input formats:
+    1. (MedicalChunk, score) tuples
+    2. EvidenceVerificationResult objects
+
 Pipeline:
 
     Verified Evidence
@@ -23,17 +27,16 @@ from dataclasses import dataclass
 from typing import Sequence
 
 from app.rag.chunking.models import MedicalChunk
+from app.rag.verification.evidence_verifier import (
+    EvidenceVerificationResult,
+)
 
 
 @dataclass(frozen=True)
 class Citation:
     """
     Structured citation associated with one medical evidence chunk.
-
-    The citation contains bibliographic metadata together with the
-    originating chunk identifier so that generated answers can be
-    traced back to the exact retrieved evidence.
-    """
+"""
 
     citation_id: str
     chunk_id: str
@@ -49,9 +52,8 @@ class CitationGenerator:
     """
     Generate deterministic citation records from medical evidence.
 
-    Citation generation is intentionally independent from the LLM
-    layer. The generator only extracts and normalizes metadata that
-    already exists in MedicalChunk.
+    Citation generation is independent from the LLM layer.
+    Bibliographic metadata is extracted from MedicalChunk.
     """
 
     DEFAULT_SOURCE_TYPE = "medical_literature"
@@ -76,23 +78,15 @@ class CitationGenerator:
 
         return f"[Doc {index}]"
 
-    # ------------------------------------------------------------------
-    # INDIVIDUAL CITATION
-    # ------------------------------------------------------------------
-
     def _create_citation(
         self,
         chunk: MedicalChunk,
         index: int,
     ) -> Citation:
-        """
-        Create a citation from one MedicalChunk.
-        """
+        """Create a citation from one MedicalChunk."""
 
         if not isinstance(chunk, MedicalChunk):
-            raise TypeError(
-                "chunk must be a MedicalChunk."
-            )
+            raise TypeError("chunk must be a MedicalChunk.")
 
         return Citation(
             citation_id=self._build_citation_id(index),
@@ -105,53 +99,73 @@ class CitationGenerator:
             source_type=self.DEFAULT_SOURCE_TYPE,
         )
 
-    # ------------------------------------------------------------------
-    # GENERATION
-    # ------------------------------------------------------------------
+    def _extract_evidence(
+        self,
+        item: tuple[MedicalChunk, float]
+        | EvidenceVerificationResult,
+    ) -> tuple[MedicalChunk, float] | None:
+        """
+        Normalize supported evidence formats.
+
+        Returns None for verification results that are invalid.
+        """
+
+        if isinstance(item, EvidenceVerificationResult):
+            if not item.is_valid:
+                return None
+
+            chunk = item.chunk
+            score = item.score
+
+        elif isinstance(item, tuple) and len(item) == 2:
+            chunk, score = item
+
+        else:
+            raise TypeError(
+                "Each evidence item must be either a "
+                "(MedicalChunk, score) tuple or an "
+                "EvidenceVerificationResult."
+            )
+
+        if not isinstance(chunk, MedicalChunk):
+            raise TypeError(
+                "Each evidence item must contain a MedicalChunk."
+            )
+
+        if not isinstance(score, (int, float)):
+            raise TypeError(
+                "Each evidence score must be numeric."
+            )
+
+        return chunk, float(score)
 
     def generate(
         self,
         evidence: Sequence[
             tuple[MedicalChunk, float]
+            | EvidenceVerificationResult
         ],
     ) -> list[Citation]:
         """
-        Generate citations for retrieved evidence.
+        Generate citations for evidence while preserving input order.
 
-        Args:
-            evidence:
-                Evidence chunks in the form:
-
-                    [(MedicalChunk, score), ...]
-
-                The evidence is expected to already have passed
-                the evidence verification layer.
-
-        Returns:
-            List of Citation objects preserving the evidence order.
+        Invalid EvidenceVerificationResult objects are skipped.
+        Duplicate chunk IDs produce only one citation.
         """
 
         if evidence is None:
-            raise TypeError(
-                "evidence cannot be None."
-            )
+            raise TypeError("evidence cannot be None.")
 
         citations: list[Citation] = []
-
         seen_chunks: set[str] = set()
 
-        for index, (chunk, _) in enumerate(
-            evidence,
-            start=1,
-        ):
-            if not isinstance(chunk, MedicalChunk):
-                raise TypeError(
-                    "Each evidence item must contain a MedicalChunk."
-                )
+        for item in evidence:
+            normalized = self._extract_evidence(item)
 
-            # ----------------------------------------------------------
-            # Avoid duplicate citations for the same chunk.
-            # ----------------------------------------------------------
+            if normalized is None:
+                continue
+
+            chunk, _score = normalized
 
             if chunk.id in seen_chunks:
                 continue
@@ -167,22 +181,14 @@ class CitationGenerator:
 
         return citations
 
-    # ------------------------------------------------------------------
-    # CITATION LOOKUP
-    # ------------------------------------------------------------------
-
     def citation_map(
         self,
         evidence: Sequence[
             tuple[MedicalChunk, float]
+            | EvidenceVerificationResult
         ],
     ) -> dict[str, Citation]:
-        """
-        Create a mapping from chunk ID to Citation.
-
-        Useful when the generation layer needs to associate a
-        retrieved chunk with its citation metadata.
-        """
+        """Create a mapping from chunk ID to Citation."""
 
         citations = self.generate(evidence)
 
@@ -191,22 +197,11 @@ class CitationGenerator:
             for citation in citations
         }
 
-    # ------------------------------------------------------------------
-    # FORMATTING
-    # ------------------------------------------------------------------
-
     def format_citation(
         self,
         citation: Citation,
     ) -> str:
-        """
-        Format a citation for human-readable output.
-
-        Example:
-
-            [1] Evaluation of response to immune checkpoint
-            inhibitors... — Nat Rev Cancer (2017)
-        """
+        """Format a citation for human-readable output."""
 
         if not isinstance(citation, Citation):
             raise TypeError(
@@ -229,9 +224,7 @@ class CitationGenerator:
         self,
         citations: Sequence[Citation],
     ) -> list[str]:
-        """
-        Format multiple citations for display.
-        """
+        """Format multiple citations for display."""
 
         return [
             self.format_citation(citation)

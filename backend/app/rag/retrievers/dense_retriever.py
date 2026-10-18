@@ -83,28 +83,53 @@ class DenseRetriever:
     # INDEXING
     # ------------------------------------------------------------------
 
+    
     def add_chunks(
         self,
         chunks: Sequence[MedicalChunk],
+        batch_size: int | None = None,
+        on_batch_complete=None,
     ) -> None:
         """
-        Generate embeddings for chunks and add them to FAISS.
+        Embed and index chunks in batches.
 
-        This method allows the retriever to be used when building
-        or extending the knowledge base.
+        Args:
+            chunks: Medical chunks to index.
+            batch_size: Maximum number of chunks per batch.
+                Defaults to the embedder's configured batch size.
+            on_batch_complete: Optional callback invoked after each
+                successfully indexed batch with (processed, total).
         """
-
         if not chunks:
             return
 
-        texts = [chunk.content for chunk in chunks]
+        if batch_size is None:
+            batch_size = self.embedder.batch_size
 
-        embeddings = self.embedder.embed_documents(texts)
+        if batch_size < 1:
+            raise ValueError("batch_size must be at least 1.")
 
-        self.vector_store.add(
-            embeddings=embeddings,
-            chunks=chunks,
-        )
+        total = len(chunks)
+
+        for start in range(0, total, batch_size):
+            batch = chunks[start : start + batch_size]
+            texts = [chunk.content for chunk in batch]
+
+            embeddings = self.embedder.embed_documents(
+                texts,
+                batch_size=batch_size,
+            )
+
+            self.vector_store.add(
+                embeddings=embeddings,
+                chunks=batch,
+            )
+
+            processed = min(start + len(batch), total)
+
+            if on_batch_complete is not None:
+                on_batch_complete(processed, total)
+
 
     # ------------------------------------------------------------------
     # PERSISTENCE
