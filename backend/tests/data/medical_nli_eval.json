@@ -1,0 +1,42 @@
+[
+  {
+    "id": "pilot_001",
+    "category": "contradiction",
+    "premise": "In the study population, treatment A reduced systolic blood pressure compared with placebo.",
+    "hypothesis": "In the same study population, treatment A did not reduce systolic blood pressure compared with placebo.",
+    "expected_label": "contradiction",
+    "source_status": "synthetic_controlled_example"
+  },
+  {
+    "id": "pilot_002",
+    "category": "entailment",
+    "premise": "The trial found that treatment B reduced systolic blood pressure.",
+    "hypothesis": "The trial reported a decrease in systolic blood pressure after treatment B.",
+    "expected_label": "entailment",
+    "source_status": "synthetic_controlled_example"
+  },
+  {
+    "id": "pilot_003",
+    "category": "neutral",
+    "premise": "The study examined whether treatment C reduced blood pressure.",
+    "hypothesis": "The study reported the prevalence of asthma among children.",
+    "expected_label": "neutral",
+    "source_status": "synthetic_controlled_example"
+  },
+  {
+    "id": "pilot_004",
+    "category": "contradiction",
+    "premise": "Among the enrolled patients, the intervention lowered fasting blood glucose compared with control.",
+    "hypothesis": "Among the same enrolled patients, the intervention increased fasting blood glucose compared with control.",
+    "expected_label": "contradiction",
+    "source_status": "synthetic_controlled_example"
+  },
+  {
+    "id": "pilot_005",
+    "category": "neutral",
+    "premise": "The trial enrolled adults with type 2 diabetes.",
+    "hypothesis": "The trial measured the change in systolic blood pressure after treatment.",
+    "expected_label": "neutral",
+    "source_status": "synthetic_controlled_example"
+  }
+]
