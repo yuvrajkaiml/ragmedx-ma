@@ -1,10 +1,18 @@
 # BioASQ Retrieval Evaluation & Confidence Calibration — Consolidated Report
 
 Workflow `wf_f9d894c9ec5422e5`. Seed **42**. Embedding model **BAAI/bge-m3** (1024-dim).
-Run status: **VALID** (integrity pre-check and post-check both passed; the four protected
-files are byte-unchanged). All numbers below are measured from the artifacts in this
-directory — none are fabricated. Where the available data cannot support a claim, that is
-stated plainly rather than filled in.
+Run status: **VALID** (integrity pre-check, post-check, and finalization re-check all
+passed; `integrity_final.json` → `intact: true`; the four protected files are
+byte-unchanged). All numbers below are measured from the artifacts in this directory —
+none are fabricated. Where the available data cannot support a claim, that is stated plainly
+rather than filled in.
+
+Section map to the brief: **A** root cause + 789/2,394 reconciliation; **B** fixes +
+artifacts + safeguards; **C** retrieval table (scope, n, coverage, 95% CIs); **D**
+calibration (ECE/Brier, provenance, partitions); **E** threshold 0.65 validation; **F**
+integrity + testing; **G** reproduction commands (immediately below).
+
+### Phase G — Exact reproduction commands
 
 Reproduce end to end from `d:\Ragmed_2\backend`:
 
@@ -89,8 +97,13 @@ only** (local; no bulk download). The production index and `eval_split` are neve
 **Coverage (honest, < 100%).** Snippet-only means a gold PMID is present only if some eval
 question produced a snippet for it. Corpus coverage of the 2,394 distinct gold PMIDs =
 **83.96%** (2,010 covered). This is the "corpus coverage" view below and is reported, not
-hidden. Optional `--fetch-missing` / `--add-training-distractors` flags exist (default OFF)
-to raise coverage; they were not used in this run.
+hidden. The `--fetch-missing` / `--add-training-distractors` flags are **placeholders**
+(default OFF and out of the gated scope of this run): in the current code `--fetch-missing`
+only prints that auto-fetch is not enabled and `--add-training-distractors` only warns if
+the distractor file is absent — neither actually ingests or downloads documents. So the
+83.96% ceiling is a hard limit of this snippet-only corpus, not something toggled on/off
+here. Raising coverage would require a follow-up change to wire those paths to a real
+PubMed/BioASQ corpus source.
 
 ---
 
@@ -108,16 +121,25 @@ top-5 article-rank membership counts.
 - Corpus distinct PMIDs = 2,010.
 
 ### End-to-end view (denominator = all 250; uncovered-gold queries score 0)
-| Metric | Value |
-|---|---|
-| Precision@5 | **0.564** |
-| Recall@5 | **0.5611** |
-| nDCG@5 | **0.8328** |
-| MRR | **0.961** |
+
+Scope: full BioASQ eval set. Sample size **n = 250** queries (macro-averaged, article-level,
+chunks collapsed to articles). Corpus coverage of this scope: `coverage@≥1` = 1.000,
+`coverage@all` = 0.752 (see above). 95% CIs are nonparametric percentile bootstrap
+(B = 10,000, seed 42, resampling over the 250 per-query values); they are persisted in
+`retrieval/retrieval_metrics.json` under `bootstrap_ci95`.
+
+| Metric | Value | 95% CI | n | Scope / coverage |
+|---|---|---|---|---|
+| Precision@5 | **0.564** | [0.526, 0.602] | 250 | full set; coverage@≥1 1.00 / coverage@all 0.752 |
+| Recall@5 | **0.5611** | [0.519, 0.604] | 250 | full set; recall vs FULL gold (penalizes 62 partially-covered queries) |
+| nDCG@5 | **0.8328** | [0.804, 0.860] | 250 | full set; binary relevance (BioASQ gives no graded labels here) |
+| MRR | **0.961** | [0.937, 0.982] | 250 | full set |
 
 ### Retrieval effectiveness view (denominator = covered queries)
 Because `coverage@≥1 == 1.0`, every query is covered, so the conditional view equals the
-end-to-end view exactly: P@5 **0.564**, R@5 **0.5611**, nDCG@5 **0.8328**, MRR **0.961**.
+end-to-end view exactly (same n = 250, same CIs): P@5 **0.564**, R@5 **0.5611**,
+nDCG@5 **0.8328**, MRR **0.961**. The two views collapsing is a direct consequence of the
+snippet-only corpus (every query's own gold is present); it is disclosed, not hidden.
 Recall is still measured against the *full* gold set, so the 62 partially-covered queries
 are correctly penalized for their uncovered gold portion (this is why R@5 < coverage@all).
 
@@ -177,13 +199,20 @@ implemented and exercised by `tests/test_bioasq_calibration.py`.
 
 ---
 
-## Phase F — Resumable driver
+## Resumable driver
 
 `run_all.py` orchestrates integrity-pre → build → diagnose → retrieval → calibration →
 integrity-post with stable per-query ids, config-hash idempotence (the index build was
-**skipped** on the second run via config-hash match), atomic incremental JSONL writes
+**skipped** on the rerun via config-hash match), atomic incremental JSONL writes
 (resumable by `question_id`), bounded 3× retry for transient failures, and never silently
 drops a failed phase. `--no-model` / `--diagnostic-only` run without the generation LLM.
+
+**Finalization rerun (reproducibility check).** The documented command
+`-m evaluation.bioasq_eval.run_all --no-model` was re-executed as a finalization step: it
+resumed cleanly, **skipped the index build via config-hash match** (reuse of the valid v1
+artifact — no rebuild, no duplication), and reproduced every headline figure exactly
+(250 queries, 2,394 distinct gold PMIDs, coverage@all 0.752, calibration N=2/P=0,
+status VALID). Only the manifest timestamps changed between runs.
 
 ---
 
@@ -209,12 +238,30 @@ reused unmodified.
 
 ---
 
-## Integrity
+## Phase F — Integrity + testing
 
-SHA-256 of the four protected files (production `index.faiss`/`chunks.pkl`, `eval_split`
-`index.faiss`/`chunks.pkl`) matched `integrity_baseline.json` **before and after** the run,
-and eval_split membership (58,173 chunks, 0 missing PMIDs) was unchanged. See
-`integrity_check.json`. The run is marked VALID only because both checks passed.
+**Production-index integrity.** SHA-256 of the four protected files — production
+`index.faiss` + `chunks.pkl` and `eval_split` `index.faiss` + `chunks.pkl` — matched
+`integrity_baseline.json` **before the run, after the run, and again at finalization**.
+Pre/post are in `integrity_check.json`; the finalization recomputation is in
+`integrity_final.json` with top-level **`intact: true`** (all four files byte-unchanged,
+`changed_files: []`).
+
+**Eval-split integrity.** `eval_split` membership is unchanged: **58,173 chunks**, 37,395
+distinct PMIDs, **0 chunks missing a PMID** (identical pre and post). Nothing under
+`data/faiss_index/` or `data/datasets/bioasq_eval_split/` was modified, rebuilt, or
+re-embedded at any point.
+
+**Testing.** `tests/test_bioasq_*.py` re-run at finalization with
+`d:\Ragmed_2\.venv\Scripts\python.exe` from `backend/`: **33 passed, 0 failed** in 28.76s
+(fresh `test_report.txt`).
+
+**Remaining risks.** (1) Calibration/threshold conclusions are blocked by data (N=2, P=0),
+not code — see Phases D/E. (2) The retrieval corpus is snippet-only (83.96% distinct-PMID
+coverage), so the two retrieval views collapse and ranking metrics are optimistic relative
+to a full-PubMed corpus; this is disclosed, not hidden. (3) The pre-existing
+`tests/test_workstream_b_metrics.py` import convention (noted in Phase G) is unrelated to
+this work.
 
 ## What succeeded and what remains blocked
 

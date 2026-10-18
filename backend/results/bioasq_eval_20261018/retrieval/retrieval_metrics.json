@@ -9218,5 +9218,39 @@
       "ndcg_at_5": 1.0,
       "reciprocal_rank": 1.0
     }
-  ]
+  ],
+  "bootstrap_ci95": {
+    "method": "nonparametric percentile bootstrap, B=10000, seed=42, resampling over per-query values",
+    "n": 250,
+    "metrics": {
+      "precision_at_5": {
+        "mean": 0.564,
+        "ci95": [
+          0.5264,
+          0.6016
+        ]
+      },
+      "recall_at_5": {
+        "mean": 0.561097,
+        "ci95": [
+          0.518828,
+          0.603825
+        ]
+      },
+      "ndcg_at_5": {
+        "mean": 0.832771,
+        "ci95": [
+          0.803899,
+          0.859577
+        ]
+      },
+      "mrr": {
+        "mean": 0.961,
+        "ci95": [
+          0.937,
+          0.982
+        ]
+      }
+    }
+  }
 }
