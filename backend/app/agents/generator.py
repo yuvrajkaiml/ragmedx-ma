@@ -24,12 +24,20 @@ class GeneratorAgent(BaseAgent):
 
     CITATION_PATTERN = re.compile(r"\[([A-Za-z0-9_-]+)\]")
 
-    def __init__(self, llm_wrapper=None):
+    #: Default generation temperature — small amount of sampling for natural-sounding
+    #: answers in the live API.  Benchmark callers should pass temperature=0.0 for
+    #: deterministic, reproducible outputs.  This is an instance attribute so it
+    #: can be overridden per-instance without touching the class default.
+    DEFAULT_TEMPERATURE: float = 0.1
+
+    def __init__(self, llm_wrapper=None, temperature: float | None = None):
         super().__init__(
             agent_name="Medical Answer Generator",
             agent_type="generator",
             llm_wrapper=llm_wrapper,
         )
+        # Use caller-supplied temperature if given; fall back to class default.
+        self.temperature: float = temperature if temperature is not None else self.DEFAULT_TEMPERATURE
 
     async def run(
         self,
@@ -62,7 +70,7 @@ class GeneratorAgent(BaseAgent):
 
             raw_response = self.llm_wrapper.generate(
                 prompt,
-                temperature=0.1,
+                temperature=self.temperature,
             )
 
             raw_text = extract_raw_text(raw_response)

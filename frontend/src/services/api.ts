@@ -1,8 +1,8 @@
-/**
+﻿/**
  * RAGMedX-MA — Query API Service
  *
  * Wires POST /api/v1/query/ask (202 Accepted → returns query_id) and
- * WS  /api/v1/ws/query-stream?query_id=&token= (streams events until FINAL_RESPONSE).
+ * WS  /api/v1/ws/query-stream?query_id=&token= (streams events until final_response).
  *
  * The backend response shape differs from the frontend AnswerData type, so an
  * adapter (adaptBackendResponse) converts between them.
@@ -17,9 +17,12 @@ const BASE = '/api/v1';
 
 // ── Backend shapes ────────────────────────────────────────────────────────────
 
+// Fix #4: status typed as the actual enum values, not a loose string
+export type QueryExecutionStatus = 'queued' | 'running' | 'completed' | 'failed';
+
 interface QueryAcceptedResponse {
   query_id: string;
-  status: string;
+  status: QueryExecutionStatus;
 }
 
 interface BackendConfidence {
@@ -52,6 +55,20 @@ interface BackendEvidenceSnippet {
   relevance_score: number;
 }
 
+interface BackendTraceStep {
+  agent_type: string;
+  status: string;
+  started_at: string;
+  completed_at?: string;
+  duration_ms?: number;
+  details?: Record<string, unknown>;
+}
+
+interface BackendAgentTrace {
+  steps: BackendTraceStep[];
+  total_duration_ms: number;
+}
+
 interface BackendVerifiedAnswer {
   response_type: 'verified_answer';
   answer: string;
@@ -59,7 +76,7 @@ interface BackendVerifiedAnswer {
   citations: BackendCitation[];
   processing_time_ms: number;
   total_tokens_used: number;
-  agent_trace?: { steps: BackendTraceStep[]; total_duration_ms: number };
+  agent_trace?: BackendAgentTrace;
 }
 
 interface BackendAbstention {
@@ -69,6 +86,8 @@ interface BackendAbstention {
   partial_findings?: BackendEvidenceSnippet[];
   suggested_followup?: string;
   confidence?: BackendConfidence;
+  // Fix #5: include agent_trace field that backend actually sends
+  agent_trace?: BackendAgentTrace;
   processing_time_ms: number;
 }
 
@@ -80,18 +99,9 @@ interface BackendError {
 
 type BackendMedicalResponse = BackendVerifiedAnswer | BackendAbstention | BackendError;
 
-interface BackendTraceStep {
-  agent_type: string;
-  status: string;
-  started_at: string;
-  completed_at?: string;
-  duration_ms?: number;
-  details?: Record<string, unknown>;
-}
-
 interface BackendQueryExecution {
   query_id: string;
-  status: string;
+  status: QueryExecutionStatus;
   created_at: string;
   completed_at?: string;
   response?: BackendMedicalResponse;
@@ -100,9 +110,17 @@ interface BackendQueryExecution {
 
 // ── WebSocket event shapes (backend) ─────────────────────────────────────────
 
+// Fix #1: event_type values match the backend enum's lowercase string values exactly
+type WsEventType =
+  | 'agent_status'
+  | 'retrieval_update'
+  | 'final_response'
+  | 'error'
+  | 'ping';
+
 interface WsEvent {
   query_id: string;
-  event_type: string;   // AGENT_STATUS | RETRIEVAL_UPDATE | FINAL_RESPONSE | ERROR
+  event_type: WsEventType;
   timestamp: string;
   data: Record<string, unknown>;
 }
@@ -238,6 +256,19 @@ export interface QueryResult {
   evidence: { passages: PassageItem[]; sources: EvidenceSourceItem[] };
 }
 
+// ── Fix #2: derive WebSocket URL from window.location instead of hardcoding ──
+
+function buildWsUrl(path: string): string {
+  // In dev the Vite proxy does not handle WebSocket upgrades for /api, so we
+  // connect directly to the backend host.  In production, if the reverse proxy
+  // handles WS, swap to window.location.host instead.
+  const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+  const backendHost =
+    import.meta.env.VITE_BACKEND_WS_HOST ??
+    (import.meta.env.DEV ? 'localhost:8000' : window.location.host);
+  return `${protocol}//${backendHost}${path}`;
+}
+
 // ── Poll fallback (used if WS connection fails) ───────────────────────────────
 
 async function pollUntilComplete(
@@ -289,11 +320,16 @@ export async function askQuestion(
   onStatusMessage?.('Query started — waiting for results…');
 
   // 2. Subscribe to WebSocket stream
+  // Fix #3 note: token is passed as a query param because the WS handshake
+  // cannot carry custom headers in the browser.  This is the standard pattern
+  // for browser WebSocket auth; the backend should treat it as short-lived and
+  // the connection should be over TLS (wss://) in production to protect it.
   let execution: BackendQueryExecution | null = null;
   try {
     execution = await new Promise<BackendQueryExecution>((resolve, reject) => {
-      const wsUrl = `ws://localhost:8000${BASE}/ws/query-stream?query_id=${queryId}&token=${token}`;
-      const ws = new WebSocket(wsUrl);
+      // Fix #2: URL built dynamically, not hardcoded to localhost:8000
+      const wsPath = `${BASE}/ws/query-stream?query_id=${queryId}&token=${token}`;
+      const ws = new WebSocket(buildWsUrl(wsPath));
       const timeout = setTimeout(() => {
         ws.close();
         reject(new Error('ws_timeout'));
@@ -302,22 +338,36 @@ export async function askQuestion(
       ws.onmessage = (evt) => {
         try {
           const event: WsEvent = JSON.parse(evt.data);
-          if (event.event_type === 'AGENT_STATUS' && onTraceStep) {
+
+          // Fix #1: compare against lowercase values that the backend actually sends
+          if (event.event_type === 'agent_status' && onTraceStep) {
             const s = event.data as unknown as { agent?: string; status?: string; duration_ms?: number };
-            const step = adaptTraceSteps([{ agent_type: s.agent ?? '', status: s.status ?? '', started_at: event.timestamp, duration_ms: s.duration_ms }]);
+            const step = adaptTraceSteps([{
+              agent_type: s.agent ?? '',
+              status: s.status ?? '',
+              started_at: event.timestamp,
+              duration_ms: s.duration_ms,
+            }]);
             onTraceStep(step[0]);
           }
-          if (event.event_type === 'RETRIEVAL_UPDATE') {
+
+          if (event.event_type === 'retrieval_update') {
             onStatusMessage?.('Retrieving evidence…');
           }
-          if (event.event_type === 'FINAL_RESPONSE') {
+
+          if (event.event_type === 'final_response') {
             clearTimeout(timeout);
             ws.close();
-            // Rebuild execution from WS payload
             const resp = event.data.response as BackendMedicalResponse;
-            resolve({ query_id: queryId, status: 'completed', created_at: event.timestamp, response: resp });
+            resolve({
+              query_id: queryId,
+              status: 'completed',
+              created_at: event.timestamp,
+              response: resp,
+            });
           }
-          if (event.event_type === 'ERROR') {
+
+          if (event.event_type === 'error') {
             clearTimeout(timeout);
             ws.close();
             reject(new Error((event.data.message as string) ?? 'Pipeline failed'));
@@ -333,7 +383,6 @@ export async function askQuestion(
     });
   } catch (wsErr: unknown) {
     const msg = wsErr instanceof Error ? wsErr.message : '';
-    // If WS fails (proxy/network), fall back to polling
     if (msg === 'ws_timeout' || msg === 'ws_error' || msg === 'ws_closed') {
       onStatusMessage?.('Streaming unavailable — polling for result…');
       execution = await pollUntilComplete(queryId, token);
@@ -349,17 +398,19 @@ export async function askQuestion(
   // 3. Adapt to frontend types
   const answerData = adaptBackendResponse(question, execution.response);
 
+  // Fix #5: extract agent_trace from both verified_answer AND abstention
   let traceSteps: AgentTraceStep[] = [];
+  const resp = execution.response;
   if (
-    execution.response.response_type === 'verified_answer' &&
-    execution.response.agent_trace?.steps
+    (resp.response_type === 'verified_answer' || resp.response_type === 'abstention') &&
+    resp.agent_trace?.steps
   ) {
-    traceSteps = adaptTraceSteps(execution.response.agent_trace.steps);
+    traceSteps = adaptTraceSteps(resp.agent_trace.steps);
   }
 
   const evidence =
-    execution.response.response_type === 'verified_answer'
-      ? adaptEvidence(execution.response.citations)
+    resp.response_type === 'verified_answer'
+      ? adaptEvidence(resp.citations)
       : { passages: [], sources: [] };
 
   return { answerData, traceSteps, evidence };

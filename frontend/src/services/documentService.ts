@@ -1,16 +1,16 @@
-/**
- * RAGMedX-MA — Document Upload Service
+﻿/**
+ * RAGMedX-MA â€” Document Upload Service
  *
- * POST /api/v1/documents/upload  — upload a PDF, get back document_id
- * GET  /api/v1/documents/{id}/status — poll until status === 'indexed'
- * DELETE /api/v1/documents/{id}  — remove document + its index
+ * POST /api/v1/documents/upload  â€” upload a PDF, get back document_id
+ * GET  /api/v1/documents/{id}/status â€” poll until status === 'indexed'
+ * DELETE /api/v1/documents/{id}  â€” remove document + its index
  */
 
 import { getAccessToken } from './authService';
 
 const BASE = '/api/v1';
 
-export type DocumentStatus = 'queued' | 'processing' | 'indexed' | 'failed' | 'deleted';
+export type DocumentStatus = 'uploaded' | 'queued' | 'processing' | 'indexed' | 'failed' | 'deleted';
 
 export interface DocumentUploadResponse {
   document_id: string;
@@ -79,3 +79,4 @@ export async function deleteDocument(documentId: string): Promise<void> {
     headers: authHeader(),
   });
 }
+

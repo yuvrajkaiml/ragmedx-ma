@@ -1,4 +1,4 @@
-/**
+﻿/**
  * RAGMedX-MA — Authentication Service (Real backend integration)
  *
  * Connects to the FastAPI backend at /api/v1/auth/*.
@@ -10,6 +10,9 @@
  *   ragmedx_access_token  — short-lived JWT access token
  *   ragmedx_refresh_token — long-lived refresh token
  *   ragmedx_session       — AuthUser object (id, name, email, isGuest)
+ *
+ * Fix #8: expires_in is now used to schedule a proactive token refresh
+ * (at 90% of the token lifetime) so callers never silently hit a 401.
  */
 
 export interface AuthUser {
@@ -21,7 +24,7 @@ export interface AuthUser {
 
 // ── Storage helpers ──────────────────────────────────────────────────────────
 
-const ACCESS_KEY = 'ragmedx_access_token';
+const ACCESS_KEY  = 'ragmedx_access_token';
 const REFRESH_KEY = 'ragmedx_refresh_token';
 const SESSION_KEY = 'ragmedx_session';
 
@@ -38,6 +41,7 @@ function clearTokens(): void {
   localStorage.removeItem(ACCESS_KEY);
   localStorage.removeItem(REFRESH_KEY);
   localStorage.removeItem(SESSION_KEY);
+  cancelScheduledRefresh();
 }
 
 function saveSession(user: AuthUser): void {
@@ -51,6 +55,40 @@ export function getCurrentUser(): AuthUser | null {
   } catch {
     return null;
   }
+}
+
+// ── Proactive token refresh (Fix #8) ─────────────────────────────────────────
+
+let _refreshTimer: ReturnType<typeof setTimeout> | null = null;
+
+function cancelScheduledRefresh(): void {
+  if (_refreshTimer !== null) {
+    clearTimeout(_refreshTimer);
+    _refreshTimer = null;
+  }
+}
+
+/**
+ * Schedule a silent refresh at 90% of the token's lifetime.
+ * If the refresh fails (network down, etc.) we leave the existing token in
+ * place so the user stays logged in for as long as the token is valid; the
+ * next explicit request will then surface the 401 normally.
+ */
+function scheduleRefresh(expiresInSeconds: number): void {
+  cancelScheduledRefresh();
+  const delayMs = Math.max((expiresInSeconds * 0.9) * 1000, 0);
+  _refreshTimer = setTimeout(async () => {
+    const refreshToken = localStorage.getItem(REFRESH_KEY);
+    if (!refreshToken) return;
+    try {
+      const data = await apiPost<TokenResponse>('/auth/refresh', { refresh_token: refreshToken });
+      saveTokens(data.access_token, data.refresh_token);
+      scheduleRefresh(data.expires_in);
+    } catch {
+      // Refresh failed silently; the token will expire naturally and the next
+      // request will return 401, prompting the user to log in again.
+    }
+  }, delayMs);
 }
 
 // ── API base ─────────────────────────────────────────────────────────────────
@@ -67,7 +105,6 @@ async function apiPost<T>(path: string, body: unknown, token?: string): Promise<
   });
   const json = await res.json();
   if (!res.ok) {
-    // Backend returns { message } or { detail }
     throw new Error(json.message || json.detail || `Request failed (${res.status})`);
   }
   return json as T;
@@ -78,6 +115,7 @@ async function apiPost<T>(path: string, body: unknown, token?: string): Promise<
 interface TokenResponse {
   access_token: string;
   refresh_token: string;
+  expires_in: number;   // Fix #8: now typed (was ignored before)
   user: {
     id: string;
     email: string;
@@ -95,6 +133,7 @@ interface TokenResponse {
 export async function signIn(email: string, password: string): Promise<AuthUser> {
   const data = await apiPost<TokenResponse>('/auth/login', { email, password });
   saveTokens(data.access_token, data.refresh_token);
+  scheduleRefresh(data.expires_in);  // Fix #8
   const user: AuthUser = {
     id: data.user.id,
     name: data.user.full_name || data.user.username,
@@ -106,8 +145,6 @@ export async function signIn(email: string, password: string): Promise<AuthUser>
 }
 
 export async function signUp(name: string, email: string, password: string): Promise<AuthUser> {
-  // Backend expects: email, username, password, full_name
-  // Derive username from name (lowercase, no spaces)
   const username = name.toLowerCase().replace(/\s+/g, '_');
   const data = await apiPost<TokenResponse>('/auth/register', {
     email,
@@ -117,6 +154,7 @@ export async function signUp(name: string, email: string, password: string): Pro
     role: 'healthcare_professional',
   });
   saveTokens(data.access_token, data.refresh_token);
+  scheduleRefresh(data.expires_in);  // Fix #8
   const user: AuthUser = {
     id: data.user.id,
     name: data.user.full_name || data.user.username,
@@ -136,11 +174,29 @@ export async function signOut(): Promise<void> {
       // Logout best-effort — clear local state regardless
     }
   }
-  clearTokens();
+  clearTokens();  // also cancels the scheduled refresh timer
 }
 
 export function continueAsGuest(): AuthUser {
   const guest: AuthUser = { id: 'guest', name: 'Guest', email: '', isGuest: true };
   saveSession(guest);
   return guest;
+}
+
+/**
+ * Call once on app startup to re-arm the refresh timer if a token is already
+ * present in localStorage (e.g. after a page reload).  Reads the expiry from
+ * the JWT exp claim so no extra storage is needed.
+ */
+export function rehydrateRefreshSchedule(): void {
+  const token = getAccessToken();
+  if (!token) return;
+  try {
+    // JWT payload is the second base64-url segment
+    const payload = JSON.parse(atob(token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')));
+    const expiresIn = payload.exp - Math.floor(Date.now() / 1000);
+    if (expiresIn > 0) scheduleRefresh(expiresIn);
+  } catch {
+    // malformed token — leave it; the next API call will get a 401
+  }
 }
