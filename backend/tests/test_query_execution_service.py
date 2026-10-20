@@ -5,6 +5,7 @@ from uuid import uuid4
 
 from app.api.v1 import websockets as websocket_module
 from app.db.models import QueryExecutionRecord
+from app.schemas.document import DocumentStatus, DocumentStatusResponse
 from app.schemas.query import MedicalQueryRequest, QueryExecutionStatus
 from app.schemas.response import ErrorResponse
 from app.schemas.websocket import WebSocketEvent, WebSocketEventType
@@ -275,3 +276,162 @@ async def test_kb_query_fails_loudly_when_warm_retrieval_provider_is_missing(mon
     assert agent_service.calls == []
     assert execution.events[-1].event_type == WebSocketEventType.ERROR
     assert execution.events[-1].data["error_code"] == "RETRIEVAL_NOT_INITIALISED"
+
+
+# ---------------------------------------------------------------------------
+# Document-scope routing: a document_id must drive retrieval to the uploaded
+# document's isolated index; absent document_id must behave EXACTLY as before
+# (the warm shared-KB provider). These tests mock the agent and the scope
+# validation so no real models or database are touched.
+# ---------------------------------------------------------------------------
+
+
+def _indexed_status(document_id, user_id):
+    return DocumentStatusResponse(
+        document_id=document_id,
+        filename="report.pdf",
+        status=DocumentStatus.INDEXED,
+        uploaded_at=datetime.now(timezone.utc),
+        error_message=None,
+        chunk_count=3,
+    )
+
+
+class _FakeIndexService:
+    """Stand-in for UploadedDocumentIndexService used in _run.
+
+    ``evidence_provider`` returns a sentinel async callable so the test can
+    assert the scoped provider (not the shared KB provider) was threaded into
+    ``agent_service.execute_query``.
+    """
+
+    def __init__(self, *args, **kwargs):
+        pass
+
+    def evidence_provider(self, document_id):
+        async def _scoped(*_, **__):  # pragma: no cover - never invoked by fake
+            return [], []
+
+        _scoped.__scoped_document_id__ = document_id
+        return _scoped
+
+
+def _patch_scope_indexed(monkeypatch, user_id):
+    """Make DocumentService.get_status report an INDEXED doc for this user."""
+    from app.services import document_service as ds_module
+
+    def fake_init(self):
+        pass
+
+    monkeypatch.setattr(ds_module.DocumentService, "__init__", fake_init)
+    monkeypatch.setattr(
+        ds_module.DocumentService,
+        "get_status",
+        lambda self, document_id, uid: _indexed_status(document_id, uid),
+    )
+
+
+async def test_document_scoped_query_uses_isolated_index_provider(monkeypatch):
+    monkeypatch.setattr(QueryExecutionService, "_persist_status", _skip_persistence)
+    user_id = uuid4()
+    document_id = uuid4()
+    _patch_scope_indexed(monkeypatch, user_id)
+    from app.services import uploaded_document_index as udi_module
+
+    monkeypatch.setattr(udi_module, "UploadedDocumentIndexService", _FakeIndexService)
+
+    agent_service = FakeAgentService()
+    service = QueryExecutionService(agent_service=agent_service)
+
+    accepted = await service.start(
+        MedicalQueryRequest(question="What does my report say?", document_id=document_id),
+        user_id,
+        FakeSession(),
+    )
+    execution = service.get(accepted.query_id, user_id)
+    assert execution is not None
+    await execution.task
+
+    assert execution.status == QueryExecutionStatus.COMPLETED
+    assert len(agent_service.calls) == 1
+    scoped = agent_service.calls[0]["retrieval_provider"]
+    assert scoped is not None
+    # Proves the provider came from the uploaded-document index, not the KB.
+    assert getattr(scoped, "__scoped_document_id__", None) == document_id
+    assert scoped is not agent_service.retrieval_provider
+
+
+async def test_kb_query_without_document_id_uses_shared_provider(monkeypatch):
+    monkeypatch.setattr(QueryExecutionService, "_persist_status", _skip_persistence)
+    agent_service = FakeAgentService()
+    service = QueryExecutionService(agent_service=agent_service)
+    user_id = uuid4()
+
+    accepted = await service.start(
+        MedicalQueryRequest(question="What is the treatment for hypertension?"),
+        user_id,
+        FakeSession(),
+    )
+    execution = service.get(accepted.query_id, user_id)
+    assert execution is not None
+    await execution.task
+
+    assert execution.status == QueryExecutionStatus.COMPLETED
+    assert len(agent_service.calls) == 1
+    # Unchanged KB path: the warm shared provider is reused verbatim.
+    assert agent_service.calls[0]["retrieval_provider"] is agent_service.retrieval_provider
+
+
+async def test_document_scope_rejects_unindexed_document(monkeypatch):
+    user_id = uuid4()
+    from app.services import document_service as ds_module
+
+    monkeypatch.setattr(ds_module.DocumentService, "__init__", lambda self: None)
+
+    def pending_status(self, document_id, uid):
+        return DocumentStatusResponse(
+            document_id=document_id,
+            filename="report.pdf",
+            status=DocumentStatus.PROCESSING,
+            uploaded_at=datetime.now(timezone.utc),
+        )
+
+    monkeypatch.setattr(ds_module.DocumentService, "get_status", pending_status)
+
+    service = QueryExecutionService(agent_service=FakeAgentService())
+
+    try:
+        await service.start(
+            MedicalQueryRequest(question="What does my report say?", document_id=uuid4()),
+            user_id,
+            FakeSession(),
+        )
+    except ValueError as exc:
+        assert "not ready" in str(exc)
+    else:
+        raise AssertionError("Expected an unindexed document to be rejected")
+
+
+async def test_document_scope_rejects_unknown_document(monkeypatch):
+    user_id = uuid4()
+    from app.services import document_service as ds_module
+
+    monkeypatch.setattr(ds_module.DocumentService, "__init__", lambda self: None)
+    monkeypatch.setattr(
+        ds_module.DocumentService,
+        "get_status",
+        lambda self, document_id, uid: None,
+    )
+
+    service = QueryExecutionService(agent_service=FakeAgentService())
+
+    try:
+        await service.start(
+            MedicalQueryRequest(question="What does my report say?", document_id=uuid4()),
+            user_id,
+            FakeSession(),
+        )
+    except ValueError as exc:
+        assert str(exc) == "Document not found"
+    else:
+        raise AssertionError("Expected an unknown document to be rejected")
