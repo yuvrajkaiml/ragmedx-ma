@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What are the clinical features and associated conditions of catamenial pneumothorax?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "adca68de2ff0b92663d07c078a8ba0a7bfafef3f95bf41b0c9b627e129a89d13",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_60274aca1cb411341a0000e3_s23373_chunk_0",
+        "document_id": "bioasq_60274aca1cb411341a0000e3_s23373",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/19665681",
+        "title": "PubMed 19665681 [abstract]",
+        "cited_text": "While the pentad of thrombocytopenia, microangiopathic hemolytic anemia, fever, and renal and neurologic abnormalities characterize the clinical presentation of TTP, few patients present with all signs and symptoms.",
+        "cross_encoder_logit": 0.12031497061252594,
+        "relevance_score": 0.5300425108819734,
+        "cross_encoder_score": 0.5300425108819734,
+        "evidence_quality_score": 0.5300425108819734,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/19665681",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_60274aca1cb411341a0000e3_s23364_chunk_0",
+        "document_id": "bioasq_60274aca1cb411341a0000e3_s23364",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/12745043",
+        "title": "PubMed 12745043 [abstract]",
+        "cited_text": "It is a multi-systemic disorder characterized by a clinical pentad of thrombocytopenia, microangiopathic hemolytic anemia, diffuse and nonfocal neurologic symptoms, decreased renal function, and fever.",
+        "cross_encoder_logit": 0.03337597846984863,
+        "relevance_score": 0.5083432201335397,
+        "cross_encoder_score": 0.5083432201335397,
+        "evidence_quality_score": 0.5083432201335397,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/12745043",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_61f81912882a024a10000041_s52726_chunk_0",
+        "document_id": "bioasq_61f81912882a024a10000041_s52726",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/34145047",
+        "title": "PubMed 34145047 [title]",
+        "cited_text": "Combining clinical, radiological and genetic approaches to pneumothorax management.",
+        "cross_encoder_logit": 0.022794295102357864,
+        "relevance_score": 0.5056983270497146,
+        "cross_encoder_score": 0.5056983270497146,
+        "evidence_quality_score": 0.5056983270497146,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/34145047",
+        "index_id": null
+      }
+    ]
+  }
+}

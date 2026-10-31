@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Which histone modification is primarily linked to elongating transcription?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "51b81dd37d362ebef4bd0ab30b53e96ea00319b164ae7be55e4afe34a90cbced",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_56c3326750c68dd41600000b_s49789_chunk_0",
+        "document_id": "bioasq_56c3326750c68dd41600000b_s49789",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/24600005",
+        "title": "PubMed 24600005 [abstract]",
+        "cited_text": "This is accompanied by reductions in the level of H3K36 trimethylation, a posttranslational histone modification associated with efficient transcriptional elongation, and the number of full-length transcripts from these genes.",
+        "cross_encoder_logit": 0.954885721206665,
+        "relevance_score": 0.7220966737554109,
+        "cross_encoder_score": 0.7220966737554109,
+        "evidence_quality_score": 0.7220966737554109,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/24600005",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_56c3326750c68dd41600000b_s49795_chunk_0",
+        "document_id": "bioasq_56c3326750c68dd41600000b_s49795",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/20139424",
+        "title": "PubMed 20139424 [abstract]",
+        "cited_text": "Set2-mediated H3 Lys(36) methylation is a histone modification that has been demonstrated to function in transcriptional elongation by recruiting the Rpd3S histone deacetylase complex to repress intragenic cryptic transcription.",
+        "cross_encoder_logit": 0.9438506960868835,
+        "relevance_score": 0.7198768234376017,
+        "cross_encoder_score": 0.7198768234376017,
+        "evidence_quality_score": 0.7198768234376017,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/20139424",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_571f34ac0fd6f91b68000005_s6104_chunk_0",
+        "document_id": "bioasq_571f34ac0fd6f91b68000005_s6104",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/23592277",
+        "title": "PubMed 23592277 [abstract]",
+        "cited_text": "NSD1 and EZH2 are SET domain-containing histone methyltransferases that play key roles in the regulation of transcription through histone modification and chromatin modeling: NSD1 preferentially methylates lysine residue 36 of histone 3 (H3K36) and is primarily associated with active transcription, while EZH2 shows specificity for lysine residue 27 (H3K27) and is associated with transcriptional repression",
+        "cross_encoder_logit": 0.9006681442260742,
+        "relevance_score": 0.7110867871141839,
+        "cross_encoder_score": 0.7110867871141839,
+        "evidence_quality_score": 0.7110867871141839,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/23592277",
+        "index_id": null
+      }
+    ]
+  }
+}

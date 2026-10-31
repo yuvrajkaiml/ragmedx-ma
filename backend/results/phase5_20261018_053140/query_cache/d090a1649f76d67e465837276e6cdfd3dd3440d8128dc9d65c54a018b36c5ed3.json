@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Is perforation of the appendix a risk factor for tubal infertility and ectopic pregnancy?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "d090a1649f76d67e465837276e6cdfd3dd3440d8128dc9d65c54a018b36c5ed3",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_514a51c2d24251bc0500005c_s37715_chunk_0",
+        "document_id": "bioasq_514a51c2d24251bc0500005c_s37715",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/2738821",
+        "title": "PubMed 2738821 [sections.0]",
+        "cited_text": "Of the remaining six patients who had been investigated for infertility, no demonstrable cause of infertility was found in three. Of the other three patients, one showed evidence of bilateral tubal occlusion secondary to pelvic inflammatory disease, one has had a right ectopic pregnancy followed by two abortions, and the third patient was found to have a pituitary adenoma.",
+        "cross_encoder_logit": 0.1228402629494667,
+        "relevance_score": 0.5306715067036593,
+        "cross_encoder_score": 0.5306715067036593,
+        "evidence_quality_score": 0.5306715067036593,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/2738821",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5a6f941eb750ff445500005b_s9219_chunk_0",
+        "document_id": "bioasq_5a6f941eb750ff445500005b_s9219",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/8990390",
+        "title": "PubMed 8990390 [abstract]",
+        "cited_text": "Complications incurred during gestation included miscarriage (13.3%), preeclampsia (4.4%), gestational hypertension (4.4%), proteinuria (4.4%), and tubal pregnancy (2.2%).",
+        "cross_encoder_logit": 0.014022482559084892,
+        "relevance_score": 0.5035055631983802,
+        "cross_encoder_score": 0.5035055631983802,
+        "evidence_quality_score": 0.5035055631983802,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/8990390",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_622632483a8413c653000081_s12890_chunk_0",
+        "document_id": "bioasq_622632483a8413c653000081_s12890",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/32161574",
+        "title": "PubMed 32161574 [abstract]",
+        "cited_text": "Disruption of well-controlled immune functions leads to infertility, placental inflammation, and numerous pregnancy complications, including preeclampsia (PE).",
+        "cross_encoder_logit": 0.008975379168987274,
+        "relevance_score": 0.5022438297291705,
+        "cross_encoder_score": 0.5022438297291705,
+        "evidence_quality_score": 0.5022438297291705,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/32161574",
+        "index_id": null
+      }
+    ]
+  }
+}

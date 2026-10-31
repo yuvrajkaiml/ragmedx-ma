@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What clinical features are associated with PRDM12 gene mutations?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "e01a7784670569ab9c4d716dfa4032798f3cc2aa9c466742ac2154f9b5e89b1b",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_57090784cf1c325851000011_s50546_chunk_0",
+        "document_id": "bioasq_57090784cf1c325851000011_s50546",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/23099237",
+        "title": "PubMed 23099237 [abstract]",
+        "cited_text": "Somatic mutations of epigenetic gene regulators are common in patients with myelodysplastic syndromes (MDS) and correlate with some clinical and laboratory features.",
+        "cross_encoder_logit": 0.013811689801514149,
+        "relevance_score": 0.5034528675606699,
+        "cross_encoder_score": 0.5034528675606699,
+        "evidence_quality_score": 0.5034528675606699,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/23099237",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_531a34d5b166e2b806000036_s56144_chunk_0",
+        "document_id": "bioasq_531a34d5b166e2b806000036_s56144",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/15933261",
+        "title": "PubMed 15933261 [abstract]",
+        "cited_text": "We tested for an association of gene sequence variations in P2Y12 and occurrence of neurological adverse events in patients with symptomatic peripheral artery disease (PAD) during clopidogrel treatment",
+        "cross_encoder_logit": 0.010072031989693642,
+        "relevance_score": 0.5025179867108555,
+        "cross_encoder_score": 0.5025179867108555,
+        "evidence_quality_score": 0.5025179867108555,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/15933261",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_58d8e6818acda3452900000a_s24526_chunk_0",
+        "document_id": "bioasq_58d8e6818acda3452900000a_s24526",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/19159394",
+        "title": "PubMed 19159394 [abstract]",
+        "cited_text": "We here report 22 novel and 9 recurrent mutations in the FBN1 gene in 36 patients with clinical features of Marfan syndrome.",
+        "cross_encoder_logit": 0.0042808339931070805,
+        "relevance_score": 0.5010702068639341,
+        "cross_encoder_score": 0.5010702068639341,
+        "evidence_quality_score": 0.5010702068639341,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/19159394",
+        "index_id": null
+      }
+    ]
+  }
+}

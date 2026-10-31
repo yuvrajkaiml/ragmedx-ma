@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What proportion of risk is attributable to obesity in colorectal cancer women development?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "4592c9ed82f0ec3739aa5fde28460e26f4e9cfb47f430beb4625ea20001f2d14",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_5e3390fafbd6abf43b000060_s57404_chunk_0",
+        "document_id": "bioasq_5e3390fafbd6abf43b000060_s57404",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/24696219",
+        "title": "PubMed 24696219 [abstract]",
+        "cited_text": "After 8 years, the hazard ratio for developing colon cancer was 2.00 (95% CI 1.43-2.80) for women with radiation versus those without radiation treatment.",
+        "cross_encoder_logit": 0.3272540271282196,
+        "relevance_score": 0.5810910897257812,
+        "cross_encoder_score": 0.5810910897257812,
+        "evidence_quality_score": 0.5810910897257812,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/24696219",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_662fc122187cba990d000012_s52894_chunk_0",
+        "document_id": "bioasq_662fc122187cba990d000012_s52894",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/36672434",
+        "title": "PubMed 36672434 [abstract]",
+        "cited_text": "This review focuses on epidemiology, the relationship between obesity and the risk associated with the development and recurrence of cancer and the management of obesity.",
+        "cross_encoder_logit": 0.16890190541744232,
+        "relevance_score": 0.5421253783851961,
+        "cross_encoder_score": 0.5421253783851961,
+        "evidence_quality_score": 0.5421253783851961,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/36672434",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_66214c5db9f8b89d7e000002_s47938_chunk_0",
+        "document_id": "bioasq_66214c5db9f8b89d7e000002_s47938",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/16532978",
+        "title": "PubMed 16532978 [abstract]",
+        "cited_text": "BACKGROUND AND AIMS: Colorectal cancer screening beginning at age 50 is recommended for all Americans considered at average risk for the development of colorectal cancer regardless of gender or race/ethnicity. We determined the influence of gender and race/ethnicity on the cost-effectiveness of recommended colorectal cancer screening regimens.METHODS: We determined age-specific colorectal cancer incidence rates; the proportion of left-sided cancers; and the proportion of localized cancers in Asian, black, Latino and white men and women using the California Cancer Registry. We incorporated these data and available data for life expectancy and colorectal cancer survival to model the cost-effectiveness of two 35-year colorectal ca",
+        "cross_encoder_logit": 0.05135470628738403,
+        "relevance_score": 0.5128358556893858,
+        "cross_encoder_score": 0.5128358556893858,
+        "evidence_quality_score": 0.5128358556893858,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/16532978",
+        "index_id": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What is Pfh1's role in DNA replication? What is the replisome composition?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "82cde19ea65d7532db96af4ce7702b881e341734ba7d04c1c05e3f09d65a345e",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_553ca8d8f32186855800000d_s6081_chunk_0",
+        "document_id": "bioasq_553ca8d8f32186855800000d_s6081",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/18725402",
+        "title": "PubMed 18725402 [abstract]",
+        "cited_text": "However, the essential nuclear function of Pfh1p could be supplied by Rrm3p. Expression of Rrm3p suppressed the accumulation of DNA damage foci but not the hydroxyurea sensitivity of cells depleted of nuclear Pfh1p. Together, these data demonstrate that Pfh1p has essential roles in the replication of both nuclear and mitochondrial DNA",
+        "cross_encoder_logit": 0.6532976031303406,
+        "relevance_score": 0.6577531847791185,
+        "cross_encoder_score": 0.6577531847791185,
+        "evidence_quality_score": 0.6577531847791185,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/18725402",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5710ed19a5ed216440000003_s54686_chunk_0",
+        "document_id": "bioasq_5710ed19a5ed216440000003_s54686",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/24532715",
+        "title": "PubMed 24532715 [title]",
+        "cited_text": "Rif1 controls DNA replication by directing Protein Phosphatase 1 to reverse Cdc7-mediated phosphorylation of the MCM complex",
+        "cross_encoder_logit": 0.1599392294883728,
+        "relevance_score": 0.5398997887105045,
+        "cross_encoder_score": 0.5398997887105045,
+        "evidence_quality_score": 0.5398997887105045,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/24532715",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5710ed19a5ed216440000003_s54655_chunk_0",
+        "document_id": "bioasq_5710ed19a5ed216440000003_s54655",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/24656819",
+        "title": "PubMed 24656819 [title]",
+        "cited_text": "Protein phosphatase 1 recruitment by Rif1 regulates DNA replication origin firing by counteracting DDK activity",
+        "cross_encoder_logit": 0.15834328532218933,
+        "relevance_score": 0.5395033182388924,
+        "cross_encoder_score": 0.5395033182388924,
+        "evidence_quality_score": 0.5395033182388924,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/24656819",
+        "index_id": null
+      }
+    ]
+  }
+}

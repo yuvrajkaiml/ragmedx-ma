@@ -1,0 +1,35 @@
+# Owner: Pranav Sukale
+# Backend-only compose. Run from the backend/ directory:
+#   docker compose up --build
+#
+# The data/ directory is a bind mount so the SQLite database, FAISS index,
+# uploaded documents, and HuggingFace model cache persist across rebuilds.
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ragmedx-backend:latest
+    container_name: ragmedx-backend
+    ports:
+      - "8000:8000"
+    environment:
+      # Defaults suit CPU / mock-LLM development. Override in .env as needed.
+      RAGMEDX_LLM_MODE: ${RAGMEDX_LLM_MODE:-mock}
+      RAGMEDX_FAISS_INDEX_DIR: data/faiss_index
+      DATABASE_URL: ${DATABASE_URL:-sqlite+aiosqlite:///./data/ragmedx.db}
+    env_file:
+      # Optional: copy .env.example to .env to override. Missing file is fine.
+      - path: .env
+        required: false
+    volumes:
+      # Persist database, index, uploads, and model cache.
+      - ./data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 40s

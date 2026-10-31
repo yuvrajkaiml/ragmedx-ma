@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What conditions are associated with TRIM8 mutations?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "aa467a3f385d0b72476ce5ba3e58052d2032553abaea21552688c8be6dfe6d2c",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_56c095b7ef6e394741000025_s11264_chunk_0",
+        "document_id": "bioasq_56c095b7ef6e394741000025_s11264",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/24937153",
+        "title": "PubMed 24937153 [abstract]",
+        "cited_text": "TERT promoter mutations maintained its ability of inducing high transcriptional activity even under hypoxic and TMZ treatment conditions, and the presence of mutations was associated with poor prognosis in glioma patients.",
+        "cross_encoder_logit": 0.10823478549718857,
+        "relevance_score": 0.5270323117518556,
+        "cross_encoder_score": 0.5270323117518556,
+        "evidence_quality_score": 0.5270323117518556,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/24937153",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_530f900ee3eabad021000003_s43400_chunk_0",
+        "document_id": "bioasq_530f900ee3eabad021000003_s43400",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/22543196",
+        "title": "PubMed 22543196 [abstract]",
+        "cited_text": "Inactivating mutations in the gene encoding MCT8 are associated with a severe form of psychomotor retardation and abnormal serum TH levels (Allan-Herndon-Dudley syndrome).",
+        "cross_encoder_logit": 0.022655770182609558,
+        "relevance_score": 0.505663700290533,
+        "cross_encoder_score": 0.505663700290533,
+        "evidence_quality_score": 0.505663700290533,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/22543196",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_530f900ee3eabad021000003_s43408_chunk_0",
+        "document_id": "bioasq_530f900ee3eabad021000003_s43408",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/20083155",
+        "title": "PubMed 20083155 [abstract]",
+        "cited_text": "Therefore, the criterion for MCT8 mutation screening in these patients is the profile of increased T(3) and low-normal to low FT(4) serum levels.",
+        "cross_encoder_logit": 0.01769062504172325,
+        "relevance_score": 0.5044225409218233,
+        "cross_encoder_score": 0.5044225409218233,
+        "evidence_quality_score": 0.5044225409218233,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/20083155",
+        "index_id": null
+      }
+    ]
+  }
+}

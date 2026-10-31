@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What studies link open access endoscopy to patient informed consent?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "b7bc8dd03da03e6b14a75d255c4b8699ed61fcf952944678ee9e149ceea156cf",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_54fc99f36ad7dcbc12000004_s56806_chunk_0",
+        "document_id": "bioasq_54fc99f36ad7dcbc12000004_s56806",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/11254790",
+        "title": "PubMed 11254790 [abstract]",
+        "cited_text": "After informed consent, a bilateral stereotactic electrode placement targeting the ventral intermediate thalamic nucleus (VIM) and the globus pallidus internus (GPi) was performed.",
+        "cross_encoder_logit": 0.003779589431360364,
+        "relevance_score": 0.5009448962329968,
+        "cross_encoder_score": 0.5009448962329968,
+        "evidence_quality_score": 0.5009448962329968,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/11254790",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_54fc97b86ad7dcbc12000002_s34603_chunk_0",
+        "document_id": "bioasq_54fc97b86ad7dcbc12000002_s34603",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/8161465",
+        "title": "PubMed 8161465 [abstract]",
+        "cited_text": "We describe two patients with lateral amyotrophic sclerosis who, after informed consent, received empirical treatment with intravenous cephtriaxone at a dose of 2 g/24 hours for three weeks, with no positive results.",
+        "cross_encoder_logit": 0.0020450640004128218,
+        "relevance_score": 0.5005112658219149,
+        "cross_encoder_score": 0.5005112658219149,
+        "evidence_quality_score": 0.5005112658219149,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/8161465",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_56a3a386496b62f23f000007_s21496_chunk_0",
+        "document_id": "bioasq_56a3a386496b62f23f000007_s21496",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/19906716",
+        "title": "PubMed 19906716 [title]",
+        "cited_text": "JASPAR 2010: the greatly expanded open-access database of transcription factor binding profiles.",
+        "cross_encoder_logit": 0.0007363681797869503,
+        "relevance_score": 0.5001840920366283,
+        "cross_encoder_score": 0.5001840920366283,
+        "evidence_quality_score": 0.5001840920366283,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/19906716",
+        "index_id": null
+      }
+    ]
+  }
+}

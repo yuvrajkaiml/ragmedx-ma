@@ -1,0 +1,52 @@
+{
+  "workflow": "wf_f9d894c9ec5422e5",
+  "seed": 42,
+  "started_utc": "2026-10-18T12:29:11.798191+00:00",
+  "modes": {
+    "no_model": true,
+    "diagnostic_only": false,
+    "force_rebuild": false
+  },
+  "phases": {
+    "build_index": {
+      "ok": true,
+      "attempts": 1,
+      "skipped": true,
+      "error": null
+    },
+    "diagnose": {
+      "ok": true,
+      "n_queries": 250,
+      "n_gold_pmids_unique_normalized": 2394,
+      "gold_pmids_matched_in_eval_split": 0
+    },
+    "retrieval": {
+      "ok": true,
+      "n_queries": 250,
+      "views": {
+        "n_queries": 250,
+        "coverage_at_least_1": 1.0,
+        "coverage_all": 0.752,
+        "n_queries_with_at_least_one_available_gold": 250,
+        "n_queries_with_all_gold_available": 188,
+        "n_uncovered_gold_queries": 0,
+        "n_partially_covered_queries": 62,
+        "corpus_distinct_pmids": 2010
+      }
+    },
+    "calibration": {
+      "ok": true,
+      "data_regime": "DEGENERATE",
+      "N": 2,
+      "P": 0,
+      "source_consistency": "ok"
+    }
+  },
+  "rerun_command": "cd d:\\Ragmed_2\\backend && d:\\Ragmed_2\\.venv\\Scripts\\python.exe -m evaluation.bioasq_eval.run_all --no-model",
+  "integrity": {
+    "pre_run_ok": true,
+    "post_run_ok": true
+  },
+  "completed_utc": "2026-10-18T12:29:26.887260+00:00",
+  "status": "VALID"
+}

@@ -1,0 +1,27 @@
+{
+  "verdict": "APPROVED",
+  "findings": [
+    {
+      "severity": "LOW",
+      "blocking": false,
+      "confidence": "confirmed",
+      "title": "Snippet-only corpus inflates retrieval metrics",
+      "detail": "The retrieval-eval corpus is built entirely from the eval questions' own gold snippets with zero distractors (default-OFF), so coverage@>=1 = 1.0 and the 'retrieval effectiveness' view is numerically identical to the 'end-to-end' view. Ranking metrics (MRR 0.961, nDCG@5 0.833) are optimistic and the two-view distinction collapses. This is a disclosed design choice, not a hidden coverage gap; the report states the 83.96% distinct-PMID ceiling and the 62 partially-covered queries."
+    },
+    {
+      "severity": "LOW",
+      "blocking": false,
+      "confidence": "confirmed",
+      "title": "Advertised coverage flags are inert",
+      "detail": "--add-training-distractors only warns if the file is missing and --fetch-missing prints 'not auto-enabled'; neither actually ingests or fetches. The evaluation report describes them as flags that 'exist (default OFF) to raise coverage', which overstates them. Both are out of gated scope; report wording should match behavior."
+    },
+    {
+      "severity": "LOW",
+      "blocking": false,
+      "confidence": "confirmed",
+      "title": "Artifact filenames differ from the review brief",
+      "detail": "The gate prompt referenced diagnostics.json, retrieval_metrics.json, calibration_metrics.json at the top level; the real files live under diagnostics/, retrieval/, and calibration/. All content is present and consistent with the gate requirements; only the paths differ."
+    }
+  ],
+  "reviewDoc": "d:\\Ragmed_2\\backend\\results\\bioasq_eval_20261018\\code-review.md"
+}

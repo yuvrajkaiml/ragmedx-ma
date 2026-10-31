@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What are the clinical applications of BMV in brain metastasis?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "f4bd054ebb756f77533ac61540e3324e2d99f6709b90d2774f1247f22e5f8821",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_54d8d60d014675820d000007_s61358_chunk_0",
+        "document_id": "bioasq_54d8d60d014675820d000007_s61358",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/24295639",
+        "title": "PubMed 24295639 [abstract]",
+        "cited_text": "We investigated the BRAF kinase inhibitor vemurafenib in patients with advanced melanoma with symptomatic brain metastases.",
+        "cross_encoder_logit": 0.04747198522090912,
+        "relevance_score": 0.5118657680081888,
+        "cross_encoder_score": 0.5118657680081888,
+        "evidence_quality_score": 0.5118657680081888,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/24295639",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_515df5b2298dcd4e5100002c_s12138_chunk_0",
+        "document_id": "bioasq_515df5b2298dcd4e5100002c_s12138",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/21440544",
+        "title": "PubMed 21440544 [sections.0]",
+        "cited_text": "Autologous bone marrow stromal cells (BMSCs) offer significant practical advantages for potential clinical applications in multiple sclerosis (MS). Based on recent experimental data, a number of clinical trials have been designed for the intravenous (IV) and/or intrathecal (ITH) administration of BMSCs in MS patients.",
+        "cross_encoder_logit": 0.02981661632657051,
+        "relevance_score": 0.5074536018831394,
+        "cross_encoder_score": 0.5074536018831394,
+        "evidence_quality_score": 0.5074536018831394,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/21440544",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5890f4ab621ea6ff7e000008_s17456_chunk_0",
+        "document_id": "bioasq_5890f4ab621ea6ff7e000008_s17456",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/26113069",
+        "title": "PubMed 26113069 [title]",
+        "cited_text": "Current Applications of MRI-Guided Laser Interstitial Thermal Therapy in the Treatment of Brain Neoplasms and Epilepsy: A Radiologic and Neurosurgical Overview",
+        "cross_encoder_logit": 0.01030968688428402,
+        "relevance_score": 0.5025773988918772,
+        "cross_encoder_score": 0.5025773988918772,
+        "evidence_quality_score": 0.5025773988918772,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/26113069",
+        "index_id": null
+      }
+    ]
+  }
+}

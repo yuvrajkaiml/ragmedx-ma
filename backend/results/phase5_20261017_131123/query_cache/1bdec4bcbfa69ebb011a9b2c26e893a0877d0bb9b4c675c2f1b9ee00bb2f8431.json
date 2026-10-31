@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Does the severity of obstructive sleep apnea predict patients requiring high continuous positive airway pressure?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "1bdec4bcbfa69ebb011a9b2c26e893a0877d0bb9b4c675c2f1b9ee00bb2f8431",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_5a742d620384be9551000002_s2613_chunk_0",
+        "document_id": "bioasq_5a742d620384be9551000002_s2613",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/25081584",
+        "title": "PubMed 25081584 [abstract]",
+        "cited_text": "STUDY OBJECTIVE To determine if a high score (≥ 3) on the STOP-Bang screening questionnaire for obstructive sleep apnea (OSA) predicts whether obese patients are at high risk for OSA and increased risk of difficult airway.",
+        "cross_encoder_logit": 0.8283796310424805,
+        "relevance_score": 0.6960122023586927,
+        "cross_encoder_score": 0.6960122023586927,
+        "evidence_quality_score": 0.6960122023586927,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/25081584",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5a742d620384be9551000002_s2615_chunk_0",
+        "document_id": "bioasq_5a742d620384be9551000002_s2615",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/24917451",
+        "title": "PubMed 24917451 [abstract]",
+        "cited_text": "Subjects completed a questionnaire evaluating the presence and severity of AR and the STOP-BANG questionnaire (snoring, tiredness during daytime, observed apnea, high blood pressure, body mass index, age, neck circumference, gender), a validated screening method to identify obstructive sleep apnea syndrome risk.",
+        "cross_encoder_logit": 0.596670925617218,
+        "relevance_score": 0.6448942976770067,
+        "cross_encoder_score": 0.6448942976770067,
+        "evidence_quality_score": 0.6448942976770067,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/24917451",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5e48bb12d14c9f295d000016_s59723_chunk_0",
+        "document_id": "bioasq_5e48bb12d14c9f295d000016_s59723",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/31917607",
+        "title": "PubMed 31917607 [abstract]",
+        "cited_text": "Rationale: Excessive daytime sleepiness is a common disabling symptom in obstructive sleep apnea syndrome.Objectives: To evaluate the efficacy and safety of pitolisant, a selective histamine H3 receptor antagonist with wake-promoting effects, for the treatment of daytime sleepiness in patients with moderate to severe obstructive sleep apnea refusing continuous positive airw",
+        "cross_encoder_logit": 0.5678871870040894,
+        "relevance_score": 0.638275511784289,
+        "cross_encoder_score": 0.638275511784289,
+        "evidence_quality_score": 0.638275511784289,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/31917607",
+        "index_id": null
+      }
+    ]
+  }
+}

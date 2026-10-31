@@ -1,0 +1,188 @@
+{
+  "evidence_tier": "SOFTWARE TEST (wall-clock on this run)",
+  "prd_targets_ms": {
+    "single_pass": "< 5000",
+    "iterative_max_3_rounds": "< 15000",
+    "retrieval": "< 500",
+    "rerank": "< 2000",
+    "note": "cold vs warm reported separately below"
+  },
+  "configs": {
+    "phase5-basic-rag": {
+      "cold_latency_ms": {
+        "n": 16,
+        "mean": 63742.81,
+        "min": 48030,
+        "max": 87597
+      },
+      "warm_latency_ms": {
+        "n": 0,
+        "mean": "NOT MEASURED"
+      },
+      "per_stage_mean_ms": {
+        "query_understanding": "NOT MEASURED",
+        "retrieval": "NOT MEASURED",
+        "gap_analysis": "NOT MEASURED",
+        "evidence_reranking": "NOT MEASURED",
+        "generator": "NOT MEASURED",
+        "critic": "NOT MEASURED",
+        "confidence": "NOT MEASURED",
+        "abstention": "NOT MEASURED"
+      }
+    },
+    "phase5-full-pipeline": {
+      "cold_latency_ms": {
+        "n": 16,
+        "mean": 140713.12,
+        "min": 106374,
+        "max": 206959
+      },
+      "warm_latency_ms": {
+        "n": 0,
+        "mean": "NOT MEASURED"
+      },
+      "per_stage_mean_ms": {
+        "query_understanding": "NOT MEASURED",
+        "retrieval": "NOT MEASURED",
+        "gap_analysis": "NOT MEASURED",
+        "evidence_reranking": "NOT MEASURED",
+        "generator": "NOT MEASURED",
+        "critic": "NOT MEASURED",
+        "confidence": "NOT MEASURED",
+        "abstention": "NOT MEASURED"
+      }
+    },
+    "phase5-improved-no-verification": {
+      "cold_latency_ms": {
+        "n": 16,
+        "mean": 125241.81,
+        "min": 94032,
+        "max": 184050
+      },
+      "warm_latency_ms": {
+        "n": 16,
+        "mean": 0.12
+      },
+      "per_stage_mean_ms": {
+        "query_understanding": 18865.5,
+        "retrieval": 16.0,
+        "gap_analysis": 78971.06,
+        "evidence_reranking": 4480.75,
+        "generator": 7838.69,
+        "critic": 15036.25,
+        "confidence": 0.0,
+        "abstention": 0.0
+      }
+    },
+    "phase5-improved-v2": {
+      "cold_latency_ms": {
+        "n": 16,
+        "mean": 137773.44,
+        "min": 101448,
+        "max": 183745
+      },
+      "warm_latency_ms": {
+        "n": 16,
+        "mean": 19.62
+      },
+      "per_stage_mean_ms": {
+        "query_understanding": 18753.25,
+        "retrieval": 5112.19,
+        "gap_analysis": 81368.69,
+        "evidence_reranking": 4363.19,
+        "generator": 7908.62,
+        "critic": 15048.06,
+        "confidence": 0.62,
+        "abstention": 0.0
+      }
+    },
+    "phase5-no-calibration": {
+      "cold_latency_ms": {
+        "n": 16,
+        "mean": 140146.5,
+        "min": 99782,
+        "max": 185266
+      },
+      "warm_latency_ms": {
+        "n": 0,
+        "mean": "NOT MEASURED"
+      },
+      "per_stage_mean_ms": {
+        "query_understanding": "NOT MEASURED",
+        "retrieval": "NOT MEASURED",
+        "gap_analysis": "NOT MEASURED",
+        "evidence_reranking": "NOT MEASURED",
+        "generator": "NOT MEASURED",
+        "critic": "NOT MEASURED",
+        "confidence": "NOT MEASURED",
+        "abstention": "NOT MEASURED"
+      }
+    },
+    "phase5-no-critic": {
+      "cold_latency_ms": {
+        "n": 16,
+        "mean": 123891.25,
+        "min": 86617,
+        "max": 169312
+      },
+      "warm_latency_ms": {
+        "n": 0,
+        "mean": "NOT MEASURED"
+      },
+      "per_stage_mean_ms": {
+        "query_understanding": "NOT MEASURED",
+        "retrieval": "NOT MEASURED",
+        "gap_analysis": "NOT MEASURED",
+        "evidence_reranking": "NOT MEASURED",
+        "generator": "NOT MEASURED",
+        "critic": "NOT MEASURED",
+        "confidence": "NOT MEASURED",
+        "abstention": "NOT MEASURED"
+      }
+    },
+    "phase5-no-iterative-retrieval": {
+      "cold_latency_ms": {
+        "n": 16,
+        "mean": 89239.38,
+        "min": 48417,
+        "max": 210448
+      },
+      "warm_latency_ms": {
+        "n": 0,
+        "mean": "NOT MEASURED"
+      },
+      "per_stage_mean_ms": {
+        "query_understanding": "NOT MEASURED",
+        "retrieval": "NOT MEASURED",
+        "gap_analysis": "NOT MEASURED",
+        "evidence_reranking": "NOT MEASURED",
+        "generator": "NOT MEASURED",
+        "critic": "NOT MEASURED",
+        "confidence": "NOT MEASURED",
+        "abstention": "NOT MEASURED"
+      }
+    },
+    "phase5-plain-llm-no-rag": {
+      "cold_latency_ms": {
+        "n": 16,
+        "mean": 9624.5,
+        "min": 4784,
+        "max": 13765
+      },
+      "warm_latency_ms": {
+        "n": 0,
+        "mean": "NOT MEASURED"
+      },
+      "per_stage_mean_ms": {
+        "query_understanding": "NOT MEASURED",
+        "retrieval": "NOT MEASURED",
+        "gap_analysis": "NOT MEASURED",
+        "evidence_reranking": "NOT MEASURED",
+        "generator": "NOT MEASURED",
+        "critic": "NOT MEASURED",
+        "confidence": "NOT MEASURED",
+        "abstention": "NOT MEASURED"
+      }
+    }
+  }
+}

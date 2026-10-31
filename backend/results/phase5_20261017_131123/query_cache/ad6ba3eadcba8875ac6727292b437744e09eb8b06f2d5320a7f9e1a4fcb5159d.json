@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Which drugs are included in the MAID chemotherapy regimen for sarcoma?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "ad6ba3eadcba8875ac6727292b437744e09eb8b06f2d5320a7f9e1a4fcb5159d",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_60274ec61cb411341a0000e5_s8893_chunk_0",
+        "document_id": "bioasq_60274ec61cb411341a0000e5_s8893",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/31197128",
+        "title": "PubMed 31197128 [abstract]",
+        "cited_text": "The effective treatment for sarcoma botryoides is wide excision with safe margin of 1-2 cm, followed by 6-12 cycles of vincristine, actinomycin D, and cyclophosphamide (VAC) regiment as an adjuvant chemotherapy.",
+        "cross_encoder_logit": 0.6895136833190918,
+        "relevance_score": 0.6658587344543354,
+        "cross_encoder_score": 0.6658587344543354,
+        "evidence_quality_score": 0.6658587344543354,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/31197128",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_65cfe0381930410b13000029_s20533_chunk_0",
+        "document_id": "bioasq_65cfe0381930410b13000029_s20533",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/36329183",
+        "title": "PubMed 36329183 [abstract]",
+        "cited_text": "The main drug classes involved were antineoplastic and immunomodulating agents and the drugs with the greatest number of cases were tacrolimus, cyclosporin, bevacizumab, methotrexate, and vincristine.",
+        "cross_encoder_logit": 0.11449527740478516,
+        "relevance_score": 0.5285925907492945,
+        "cross_encoder_score": 0.5285925907492945,
+        "evidence_quality_score": 0.5285925907492945,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/36329183",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_602820fb1cb411341a0000f7_s20714_chunk_0",
+        "document_id": "bioasq_602820fb1cb411341a0000f7_s20714",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/32156916",
+        "title": "PubMed 32156916 [abstract]",
+        "cited_text": "Systemic chemotherapy was administered comprising a capecitabine/oxaliplatin(CAPOX)regimen.",
+        "cross_encoder_logit": 0.07973123341798782,
+        "relevance_score": 0.5199222555421357,
+        "cross_encoder_score": 0.5199222555421357,
+        "evidence_quality_score": 0.5199222555421357,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/32156916",
+        "index_id": null
+      }
+    ]
+  }
+}

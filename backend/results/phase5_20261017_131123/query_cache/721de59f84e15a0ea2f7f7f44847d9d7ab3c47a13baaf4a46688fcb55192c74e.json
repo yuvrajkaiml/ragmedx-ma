@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What severity metrics correlate with CPAP requirement in OSA?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "721de59f84e15a0ea2f7f7f44847d9d7ab3c47a13baaf4a46688fcb55192c74e",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_65f7080fc4010b4d78000019_s26226_chunk_0",
+        "document_id": "bioasq_65f7080fc4010b4d78000019_s26226",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/26731604",
+        "title": "PubMed 26731604 [abstract]",
+        "cited_text": "Based on a meta-analysis of the cohort studies, treatment with CPAP was associated with a lower incidence of stroke and cardiac events with relative risks of 0.27 [0.14-0.53], and 0.54 [0.38-0.75], respectively, although this could not be reproduced in the RCT and the studies using administrative data.CONCLUSIONS: Treating with CPAP in patients with OSA might decrease the risk of stroke, although there is some conflicting evidence.",
+        "cross_encoder_logit": 0.17075875401496887,
+        "relevance_score": 0.5425862592858001,
+        "cross_encoder_score": 0.5425862592858001,
+        "evidence_quality_score": 0.5425862592858001,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/26731604",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_65f7080fc4010b4d78000019_s26228_chunk_0",
+        "document_id": "bioasq_65f7080fc4010b4d78000019_s26228",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/31231783",
+        "title": "PubMed 31231783 [abstract]",
+        "cited_text": "CPAP) treatment in these patients. Observational studies have shown an increased risk of ischemic stroke in patients with untreated OSA when compared with patients treated with CPAP; however, results",
+        "cross_encoder_logit": 0.0784812867641449,
+        "relevance_score": 0.5196102572491501,
+        "cross_encoder_score": 0.5196102572491501,
+        "evidence_quality_score": 0.5196102572491501,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/31231783",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_65f7080fc4010b4d78000019_s26219_chunk_0",
+        "document_id": "bioasq_65f7080fc4010b4d78000019_s26219",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/19275628",
+        "title": "PubMed 19275628 [abstract]",
+        "cited_text": "Obstructive Sleep Apnea (OSA) is a prevalent disease that has emerged as a new cerebrovascular disease (CVD) risk factor, which is independent of its association to hypertension, age and other known conditions that increase CVD.",
+        "cross_encoder_logit": 0.05976708605885506,
+        "relevance_score": 0.514937325305406,
+        "cross_encoder_score": 0.514937325305406,
+        "evidence_quality_score": 0.514937325305406,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/19275628",
+        "index_id": null
+      }
+    ]
+  }
+}

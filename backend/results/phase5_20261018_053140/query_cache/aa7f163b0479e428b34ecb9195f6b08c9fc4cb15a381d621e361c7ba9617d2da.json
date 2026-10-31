@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What is the role of expert breast pathology assessment in DCIS management?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "aa7f163b0479e428b34ecb9195f6b08c9fc4cb15a381d621e361c7ba9617d2da",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_56ccae765795f9a73e000035_s34403_chunk_0",
+        "document_id": "bioasq_56ccae765795f9a73e000035_s34403",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/18922117",
+        "title": "PubMed 18922117 [abstract]",
+        "cited_text": "To evaluate the ability to guide treatment decisions in the group with a mid-range recurrence score, the North American Cooperative Groups developed the Trial Assessing IndiviuaLized Options for Treatment for breast cancer, a randomized trial of chemotherapy followed by hormonal therapy versus hormonal therapy alone on invasive disease-free survival-ductal carcinoma in situ (IDFS-DCIS) survival in women with node-negative, estrogen-receptor-positive breast cancer with a recurrence score of 11-25.",
+        "cross_encoder_logit": 0.02649184688925743,
+        "relevance_score": 0.5066225744067111,
+        "cross_encoder_score": 0.5066225744067111,
+        "evidence_quality_score": 0.5066225744067111,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/18922117",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_58a6bce660087bc10a000029_s8183_chunk_0",
+        "document_id": "bioasq_58a6bce660087bc10a000029_s8183",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/17109443",
+        "title": "PubMed 17109443 [abstract]",
+        "cited_text": "Women who were BRCA carriers, women who had a history of breast cancer, DCIS, or breast biopsy, or had a family history of ovarian cancer were more likely to have undergone surgery for cancer risk reduction.",
+        "cross_encoder_logit": 0.0052879564464092255,
+        "relevance_score": 0.5013219860311028,
+        "cross_encoder_score": 0.5013219860311028,
+        "evidence_quality_score": 0.5013219860311028,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/17109443",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5aa67b6ad6d6b54f79000010_s22294_chunk_0",
+        "document_id": "bioasq_5aa67b6ad6d6b54f79000010_s22294",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/15920545",
+        "title": "PubMed 15920545 [abstract]",
+        "cited_text": "Mammary Paget's disease is almost exclusively associated with underlying invasive breast carcinoma or high-grade ductal carcinoma in situ (DCIS G3).",
+        "cross_encoder_logit": 0.004698463715612888,
+        "relevance_score": 0.5011746137680492,
+        "cross_encoder_score": 0.5011746137680492,
+        "evidence_quality_score": 0.5011746137680492,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/15920545",
+        "index_id": null
+      }
+    ]
+  }
+}

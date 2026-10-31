@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What studies examine the predictive validity of selection processes for dental student performance?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "ccbe9088fa214f2ae6f51a110af688e0b9d193ed936786729674b3a99747778f",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_64136fbf201352f04a00003d_s39509_chunk_0",
+        "document_id": "bioasq_64136fbf201352f04a00003d_s39509",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/28323524",
+        "title": "PubMed 28323524 [abstract]",
+        "cited_text": "ance of prediction, accuracy of discrimination (area under the receiver operating characteristic curve [AUROC]), calibration, and validity of the two predictive models were investigated. The co",
+        "cross_encoder_logit": 0.0056550102308392525,
+        "relevance_score": 0.5014137487901725,
+        "cross_encoder_score": 0.5014137487901725,
+        "evidence_quality_score": 0.5014137487901725,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/28323524",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5e2b00bc76af173751000004_s18198_chunk_0",
+        "document_id": "bioasq_5e2b00bc76af173751000004_s18198",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/29253077",
+        "title": "PubMed 29253077 [abstract]",
+        "cited_text": "Applying DeepSynergy for classification of these novel drug combinations resulted in a high predictive performance of an AUC of 0.90.",
+        "cross_encoder_logit": 0.0009694775799289346,
+        "relevance_score": 0.5002423693759989,
+        "cross_encoder_score": 0.5002423693759989,
+        "evidence_quality_score": 0.5002423693759989,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/29253077",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5e323a37fbd6abf43b000057_s25935_chunk_0",
+        "document_id": "bioasq_5e323a37fbd6abf43b000057_s25935",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/30661338",
+        "title": "PubMed 30661338 [abstract]",
+        "cited_text": "In brain tumor studies, the association between dental X-ray exposure and meningioma was statistically significant in 5 of the 7 studies.",
+        "cross_encoder_logit": 0.0008044200949370861,
+        "relevance_score": 0.5002011050128898,
+        "cross_encoder_score": 0.5002011050128898,
+        "evidence_quality_score": 0.5002011050128898,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/30661338",
+        "index_id": null
+      }
+    ]
+  }
+}

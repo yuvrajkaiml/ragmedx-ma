@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What surgical technique is recommended for caesarean section according to guidelines?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "932d3f84c93729b5ea495784468df40a68f00fc669926902102f1c45e27a4bb4",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_660810a0fdcbea915f000005_s11105_chunk_0",
+        "document_id": "bioasq_660810a0fdcbea915f000005_s11105",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/26982189",
+        "title": "PubMed 26982189 [abstract]",
+        "cited_text": "und abscess (1) and seroma (3).CONCLUSION: Minimally invasive pectus excavatum repair is an effective surgical technique for the treat",
+        "cross_encoder_logit": 0.05455398187041283,
+        "relevance_score": 0.5136351139714677,
+        "cross_encoder_score": 0.5136351139714677,
+        "evidence_quality_score": 0.5136351139714677,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/26982189",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_660810a0fdcbea915f000005_s11127_chunk_0",
+        "document_id": "bioasq_660810a0fdcbea915f000005_s11127",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/35817669",
+        "title": "PubMed 35817669 [abstract]",
+        "cited_text": "OBJECTIVE(S): Compared to the open surgical technique, the minimally invasive repair of pectus excavatum (MIRPE; Nuss procedure) is a thoracoscopic technique designed to minimize intraoperative",
+        "cross_encoder_logit": 0.013594964519143105,
+        "relevance_score": 0.5033986887836085,
+        "cross_encoder_score": 0.5033986887836085,
+        "evidence_quality_score": 0.5033986887836085,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/35817669",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_54f088ee94afd61504000015_s17369_chunk_0",
+        "document_id": "bioasq_54f088ee94afd61504000015_s17369",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/18425908",
+        "title": "PubMed 18425908 [abstract]",
+        "cited_text": "here is insufficient evidence to favour excisional surgery over ablative surgery with respect to the chance of pregnancy after controlled ovarian stimulation and intra-uterine insemination (OR 1.40 CI 0.47-4.15) .",
+        "cross_encoder_logit": 0.009236227720975876,
+        "relevance_score": 0.5023090405153171,
+        "cross_encoder_score": 0.5023090405153171,
+        "evidence_quality_score": 0.5023090405153171,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/18425908",
+        "index_id": null
+      }
+    ]
+  }
+}

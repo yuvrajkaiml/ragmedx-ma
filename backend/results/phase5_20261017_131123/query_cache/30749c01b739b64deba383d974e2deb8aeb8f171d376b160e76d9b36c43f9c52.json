@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What is Mendelian randomization?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "30749c01b739b64deba383d974e2deb8aeb8f171d376b160e76d9b36c43f9c52",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_5c522b487e3cb0e231000008_s23755_chunk_0",
+        "document_id": "bioasq_5c522b487e3cb0e231000008_s23755",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/27569544",
+        "title": "PubMed 27569544 [abstract]",
+        "cited_text": "Here we present Genomiser, an analysis framework that is able not only to score the relevance of variation in the non-coding genome, but also to associate regulatory variants to specific Mendelian diseases.",
+        "cross_encoder_logit": 0.006146321538835764,
+        "relevance_score": 0.5015365755474097,
+        "cross_encoder_score": 0.5015365755474097,
+        "evidence_quality_score": 0.5015365755474097,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/27569544",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_55031181e9bde69634000014_s5082_chunk_0",
+        "document_id": "bioasq_55031181e9bde69634000014_s5082",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/15617541",
+        "title": "PubMed 15617541 [abstract]",
+        "cited_text": "In this study, we review the identification of genes and loci involved in the non-syndromic common form and syndromic Mendelian forms of Hirschsprung's disease. The majority of the identified genes are related to Mendelian syndromic forms of Hirschsprung's disease. The non-Mendelian inheritance of sporadic non-syndromic Hirschsprung's disease proved to be complex; involvement of multiple loci was demonstrated in a multiplicative model",
+        "cross_encoder_logit": 0.0060697211883962154,
+        "relevance_score": 0.5015174256384136,
+        "cross_encoder_score": 0.5015174256384136,
+        "evidence_quality_score": 0.5015174256384136,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/15617541",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_661d48a2eac11fad33000018_s11412_chunk_0",
+        "document_id": "bioasq_661d48a2eac11fad33000018_s11412",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/32668217",
+        "title": "PubMed 32668217 [abstract]",
+        "cited_text": "Phenylketonuria (PKU), caused by variants in the phenylalanine hydroxylase (PAH) gene, is the most common autosomal-recessive Mendelian phenotype of amino acid metabolism.",
+        "cross_encoder_logit": 0.00534418597817421,
+        "relevance_score": 0.5013360433147259,
+        "cross_encoder_score": 0.5013360433147259,
+        "evidence_quality_score": 0.5013360433147259,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/32668217",
+        "index_id": null
+      }
+    ]
+  }
+}

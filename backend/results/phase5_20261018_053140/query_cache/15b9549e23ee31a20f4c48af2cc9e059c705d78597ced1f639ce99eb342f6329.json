@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What is the mechanism of action of ibalizumab? What is its target?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "15b9549e23ee31a20f4c48af2cc9e059c705d78597ced1f639ce99eb342f6329",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_6414638c201352f04a000047_s37261_chunk_0",
+        "document_id": "bioasq_6414638c201352f04a000047_s37261",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/31187860",
+        "title": "PubMed 31187860 [abstract]",
+        "cited_text": "The molecular mechanism of action of IMiDs remained unclear for a long time until 2010 when the protein cereblon (CRBN) was identified as a primary direct target. IMiDs binds to CRBN and alters the substrate specificity of the CRBN E3 ubiquitin ligase complex,",
+        "cross_encoder_logit": 0.03176485002040863,
+        "relevance_score": 0.5079405448450812,
+        "cross_encoder_score": 0.5079405448450812,
+        "evidence_quality_score": 0.5079405448450812,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/31187860",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_65cfdd9c1930410b13000027_s11627_chunk_0",
+        "document_id": "bioasq_65cfdd9c1930410b13000027_s11627",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/37069321",
+        "title": "PubMed 37069321 [abstract]",
+        "cited_text": "An increased understanding of these biological effects, particularly the pro-inflammatory effects mediated by IL-12 and IL-23, has led to the development of monoclonal antibodies that target a subunit common to IL-12 and IL-23 (p40; targeted by ustekinumab and briakinumab), or the IL-23-specific subunit (p19; targeted by risankizumab, guselkumab, brazikumab and mirikizumab).",
+        "cross_encoder_logit": 0.0068487804383039474,
+        "relevance_score": 0.5017121884169515,
+        "cross_encoder_score": 0.5017121884169515,
+        "evidence_quality_score": 0.5017121884169515,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/37069321",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5a7237672dc08e987e000008_s58037_chunk_0",
+        "document_id": "bioasq_5a7237672dc08e987e000008_s58037",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/27568285",
+        "title": "PubMed 27568285 [abstract]",
+        "cited_text": "Idarucizumab is a monoclonal antibody fragment specifically targeted to dabigatran.",
+        "cross_encoder_logit": 0.005442748311907053,
+        "relevance_score": 0.5013606837189596,
+        "cross_encoder_score": 0.5013606837189596,
+        "evidence_quality_score": 0.5013606837189596,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/27568285",
+        "index_id": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "MiraLAX vs. Golytely: is there a significant difference in the adenoma detection rate?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "44c0679e3a2e7f33f939a0d5e02a1096461a963ffd5f19da1e1bb10d78cfe135",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_65f777d7c4010b4d78000032_s44544_chunk_0",
+        "document_id": "bioasq_65f777d7c4010b4d78000032_s44544",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/35279746",
+        "title": "PubMed 35279746 [abstract]",
+        "cited_text": "There was no significant difference in the R0 resection rate (P = 0.85), anal preservation rate (P = 0.89), morbidity rate (P = 0.60), anastomotic leakage rate (P = 0.06), operation time (P = 0.58), local recurrence rate (P = 0.56), distant metastasis rate (P = 0.32), or overall survival (OS) rate (P = 0.17) between the two groups.CONCLUSION: A longer interval between neoadjuvant chemoradiotherapy and surgery can improve the PCR rate; however, it has no significant impact on the clinical efficacy or long-term prognosis.",
+        "cross_encoder_logit": 0.34807831048965454,
+        "relevance_score": 0.5861514967801146,
+        "cross_encoder_score": 0.5861514967801146,
+        "evidence_quality_score": 0.5861514967801146,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/35279746",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_514a51c2d24251bc0500005c_s37718_chunk_0",
+        "document_id": "bioasq_514a51c2d24251bc0500005c_s37718",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/2803131",
+        "title": "PubMed 2803131 [sections.0]",
+        "cited_text": "There was no significant difference in the pregnancy rate between the patients with or without pituitary adenoma.",
+        "cross_encoder_logit": 0.1547209918498993,
+        "relevance_score": 0.5386032696976333,
+        "cross_encoder_score": 0.5386032696976333,
+        "evidence_quality_score": 0.5386032696976333,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/2803131",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_51490275d24251bc0500003d_s55089_chunk_0",
+        "document_id": "bioasq_51490275d24251bc0500003d_s55089",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/18847340",
+        "title": "PubMed 18847340 [sections.0]",
+        "cited_text": "There was no significant difference in the incidence of DINDs (28 vs 30% in the peroral and intravenous groups, respectively) or middle cerebral artery blood flow velocities (> 120 cm/second, 50 vs 45%, respectively).",
+        "cross_encoder_logit": 0.04323212057352066,
+        "relevance_score": 0.5108063470926143,
+        "cross_encoder_score": 0.5108063470926143,
+        "evidence_quality_score": 0.5108063470926143,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/18847340",
+        "index_id": null
+      }
+    ]
+  }
+}

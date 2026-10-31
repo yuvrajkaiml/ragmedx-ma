@@ -1,0 +1,82 @@
+{
+  "generated_at": "2026-10-17T07:44:38.626315+00:00",
+  "seed": 42,
+  "stratify_by": "source",
+  "evidence_tier": "SOFTWARE TEST",
+  "pool": {
+    "total": 750,
+    "bioasq": 250,
+    "pubmedqa": 500
+  },
+  "record_shape": [
+    "id",
+    "question",
+    "answer",
+    "type",
+    "source",
+    "pmid?"
+  ],
+  "splits": {
+    "dev": {
+      "n": 100,
+      "source_counts": {
+        "bioasq": 33,
+        "pubmedqa": 67
+      }
+    },
+    "calibration": {
+      "n": 150,
+      "source_counts": {
+        "bioasq": 50,
+        "pubmedqa": 100
+      }
+    },
+    "test": {
+      "n": 250,
+      "source_counts": {
+        "bioasq": 83,
+        "pubmedqa": 167
+      }
+    }
+  },
+  "manifest_hash": {
+    "pool": "06b4ac7ebb961f5a3eb27b22c7248731de3de0168ad82095e3d70c9248ac69ac",
+    "dev": "d18864c0c33a5a3c3250418d6591130ddb1b12654e63a5dfb242dee1d55dcc5c",
+    "calibration": "a3d1da9f7149770b1512d3afd5a18f290d3fbe3fa16bd24e902495112b23cf27",
+    "test": "8e2b2d925afd86b8d5f2567594bcf40f64ed3e0cab6c3e5b169b524569621eee"
+  },
+  "leakage_checks": {
+    "near_duplicates_threshold": 0.9,
+    "near_duplicate_counts": {
+      "dev_vs_cal": 0,
+      "dev_vs_test": 0,
+      "cal_vs_test": 0
+    },
+    "near_duplicate_pairs": {
+      "dev_vs_cal": [],
+      "dev_vs_test": [],
+      "cal_vs_test": []
+    },
+    "corpus_leakage_threshold": 0.95,
+    "corpus_leakage_method": "token_jaccard_prefused_threshold_0.95",
+    "corpus_meta": {
+      "num_chunks": 58173
+    },
+    "question_leakage_ids": [],
+    "answer_leakage_ids": [],
+    "index_leakage_guard": "PASS",
+    "resolved_eval_split_dir": "D:\\Ragmed_2\\backend\\data\\faiss_index\\eval_split"
+  },
+  "retrieval_quality_measurability": {
+    "bioasq": {
+      "retrieval_quality": "MEASURABLE (gold PMIDs; eval_split built from BioASQ corpus)",
+      "questions_with_gold_pmid": 250,
+      "note": "Recall@K/MRR/nDCG measurable only where the gold PMID is present in eval_split."
+    },
+    "pubmedqa": {
+      "retrieval_quality": "NOT MEASURED",
+      "reason": "PubMedQA abstracts are not in the BioASQ-built eval_split index; gold PMIDs are not retrievable from this index. Report answer-quality only.",
+      "questions_with_gold_pmid_in_dataset": 500
+    }
+  }
+}

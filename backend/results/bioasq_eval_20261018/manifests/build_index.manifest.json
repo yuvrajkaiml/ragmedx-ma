@@ -1,0 +1,54 @@
+{
+  "phase": "build_index",
+  "seed": 42,
+  "config": {
+    "corpus": "eval_questions.json snippets only",
+    "embedding_model": "BAAI/bge-m3",
+    "normalize": true,
+    "max_length": 512,
+    "batch_size": 16,
+    "dimension": 1024,
+    "section_prefix_rule": "[{beginSection}] prepended; endSection ignored",
+    "dense_only": true,
+    "dedup_key": "(pmid, normalized_text)",
+    "seed": 42
+  },
+  "config_hash": "e80684a3627d528d84c83c206d64db762b8b6540595d2eb770b48415c81ef8ea",
+  "inputs": {
+    "eval_questions": {
+      "path": "D:\\Ragmed_2\\backend\\data\\datasets\\bioasq_eval_split\\eval_questions.json",
+      "sha256": "ff138be55d5e3da2183462ee3df9821ddd9612f24ad026f6f99a7d8d0b294698"
+    }
+  },
+  "embedding_model": "BAAI/bge-m3",
+  "package_versions": {
+    "numpy": "2.5.2",
+    "faiss": "1.15.0",
+    "torch": "2.13.0+cpu",
+    "transformers": "5.15.0",
+    "sentence_transformers": "5.7.0",
+    "sklearn": "1.9.0"
+  },
+  "timestamp_utc": "2026-10-18T11:08:39.304966+00:00",
+  "index_dir": "D:\\Ragmed_2\\backend\\data\\indexes\\bioasq_retrieval_eval\\v1",
+  "build_report": {
+    "index_dir": "D:\\Ragmed_2\\backend\\data\\indexes\\bioasq_retrieval_eval\\v1",
+    "version": "v1",
+    "config_hash": "e80684a3627d528d84c83c206d64db762b8b6540595d2eb770b48415c81ef8ea",
+    "raw_snippets": 3077,
+    "n_chunks": 2947,
+    "n_distinct_pmids": 2010,
+    "skipped_no_pmid": 0,
+    "skipped_duplicate": 130,
+    "ntotal": 2947,
+    "len_chunks": 2947,
+    "ntotal_equals_len_chunks": true,
+    "d": 1024,
+    "d_equals_1024": true,
+    "metadata_source_pmid_match": "10/10",
+    "metadata_source_pmid_all_ok": true,
+    "gold_roundtrip": "10/10",
+    "gold_roundtrip_queries": 10,
+    "gold_roundtrip_hits": 10
+  }
+}

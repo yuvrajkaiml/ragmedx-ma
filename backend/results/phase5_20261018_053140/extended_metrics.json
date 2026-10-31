@@ -1,0 +1,526 @@
+{
+  "evidence_tier_legend": {
+    "BENCHMARK GROUND TRUTH": "computed vs gold answers / gold PMIDs / stored verdicts",
+    "SOFTWARE TEST": "operational measurement on this GPU run",
+    "NOT MEASURED": "evidence genuinely absent; reason given inline"
+  },
+  "run_dir": "D:\\Ragmed_2\\backend\\results\\phase5_20261018_053140",
+  "baseline_for_paired_tests": "phase5-full-pipeline",
+  "n_questions_pool": 250,
+  "n_questions_evaluated": 40,
+  "peak_vram_mb_run": 10161.24,
+  "configs": {
+    "phase5-basic-rag": {
+      "n_total": 40,
+      "n_answered": 5,
+      "n_abstained": 35,
+      "n_error": 0,
+      "abstention_rate": 0.875,
+      "failure_rate": 0.0,
+      "answerability_aware": {
+        "evidence_tier": "SOFTWARE TEST (no unanswerable gold labels in this split)",
+        "false_abstention_rate": 0.875,
+        "false_abstention_note": "Fraction of answerable questions the config abstained on. The split has no gold 'should-abstain' labels, so all questions are treated as answerable and false_abstention_rate == abstention_rate here.",
+        "false_acceptance_rate": "NOT MEASURED",
+        "false_acceptance_reason": "No unanswerable (should_abstain=True) gold cases in this split."
+      },
+      "rouge_l": {
+        "evidence_tier": "BENCHMARK GROUND TRUTH (ROUGE-L F1 vs gold answer) — PRIMARY answer quality",
+        "mean_rouge_l_f1": 0.0161,
+        "mean_rouge_l_precision": 0.015,
+        "mean_rouge_l_recall": 0.0188,
+        "note": "Abstentions score 0 ROUGE-L; read alongside abstention_rate."
+      },
+      "citation": {
+        "evidence_tier": "SOFTWARE TEST (citation presence from stored evidence)",
+        "citation_support_rate_all": 1.0,
+        "answer_with_citation_rate_non_abstained": 1.0,
+        "claim_level": {
+          "evidence_tier": "NOT MEASURED",
+          "reason": "No stored claim_verdicts with verified_claims for this config (claim verification / critic produced no verdicts, e.g. the config has critic/verification OFF, or every answered cell abstained before claim extraction). Raw claim_verdicts are preserved per cell."
+        }
+      },
+      "retrieval_quality": {
+        "n_bioasq_rows": 13,
+        "n_bioasq_with_gold_list": 13,
+        "n_bioasq_gold_pmids_in_index": 0,
+        "evidence_tier": "NOT MEASURED",
+        "reason": "0/789 BioASQ gold PMIDs are present in the eval_split index universe (verified against chunks.pkl). Gold PMIDs are not the indexed documents, so recall@K/MRR/nDCG@K vs gold PMIDs are not measurable on this index. PubMedQA retrieval is also NOT MEASURED (gold PMIDs not in the BioASQ-built index)."
+      },
+      "latency": {
+        "evidence_tier": "SOFTWARE TEST (wall-clock on this GPU run)",
+        "n_cold": 40,
+        "mean_cold_ms": 60592.3,
+        "min_cold_ms": 41908,
+        "max_cold_ms": 87597,
+        "n_warm": 0,
+        "mean_warm_ms": "NOT MEASURED",
+        "throughput_q_per_hour": 59.413
+      },
+      "peak_vram_mb": {
+        "evidence_tier": "SOFTWARE TEST (max over cells)",
+        "value": 10397.77
+      }
+    },
+    "phase5-full-pipeline": {
+      "n_total": 40,
+      "n_answered": 2,
+      "n_abstained": 38,
+      "n_error": 0,
+      "abstention_rate": 0.95,
+      "failure_rate": 0.0,
+      "answerability_aware": {
+        "evidence_tier": "SOFTWARE TEST (no unanswerable gold labels in this split)",
+        "false_abstention_rate": 0.95,
+        "false_abstention_note": "Fraction of answerable questions the config abstained on. The split has no gold 'should-abstain' labels, so all questions are treated as answerable and false_abstention_rate == abstention_rate here.",
+        "false_acceptance_rate": "NOT MEASURED",
+        "false_acceptance_reason": "No unanswerable (should_abstain=True) gold cases in this split."
+      },
+      "rouge_l": {
+        "evidence_tier": "BENCHMARK GROUND TRUTH (ROUGE-L F1 vs gold answer) — PRIMARY answer quality",
+        "mean_rouge_l_f1": 0.0098,
+        "mean_rouge_l_precision": 0.0088,
+        "mean_rouge_l_recall": 0.0165,
+        "note": "Abstentions score 0 ROUGE-L; read alongside abstention_rate."
+      },
+      "citation": {
+        "evidence_tier": "SOFTWARE TEST (citation presence from stored evidence)",
+        "citation_support_rate_all": 1.0,
+        "answer_with_citation_rate_non_abstained": 1.0,
+        "claim_level": {
+          "evidence_tier": "NOT MEASURED",
+          "reason": "No stored claim_verdicts with verified_claims for this config (claim verification / critic produced no verdicts, e.g. the config has critic/verification OFF, or every answered cell abstained before claim extraction). Raw claim_verdicts are preserved per cell."
+        }
+      },
+      "retrieval_quality": {
+        "n_bioasq_rows": 13,
+        "n_bioasq_with_gold_list": 13,
+        "n_bioasq_gold_pmids_in_index": 0,
+        "evidence_tier": "NOT MEASURED",
+        "reason": "0/789 BioASQ gold PMIDs are present in the eval_split index universe (verified against chunks.pkl). Gold PMIDs are not the indexed documents, so recall@K/MRR/nDCG@K vs gold PMIDs are not measurable on this index. PubMedQA retrieval is also NOT MEASURED (gold PMIDs not in the BioASQ-built index)."
+      },
+      "latency": {
+        "evidence_tier": "SOFTWARE TEST (wall-clock on this GPU run)",
+        "n_cold": 40,
+        "mean_cold_ms": 137212.9,
+        "min_cold_ms": 106374,
+        "max_cold_ms": 206959,
+        "n_warm": 0,
+        "mean_warm_ms": "NOT MEASURED",
+        "throughput_q_per_hour": 26.237
+      },
+      "peak_vram_mb": {
+        "evidence_tier": "SOFTWARE TEST (max over cells)",
+        "value": 10462.59
+      }
+    },
+    "phase5-improved-no-verification": {
+      "n_total": 40,
+      "n_answered": 2,
+      "n_abstained": 38,
+      "n_error": 0,
+      "abstention_rate": 0.95,
+      "failure_rate": 0.0,
+      "answerability_aware": {
+        "evidence_tier": "SOFTWARE TEST (no unanswerable gold labels in this split)",
+        "false_abstention_rate": 0.95,
+        "false_abstention_note": "Fraction of answerable questions the config abstained on. The split has no gold 'should-abstain' labels, so all questions are treated as answerable and false_abstention_rate == abstention_rate here.",
+        "false_acceptance_rate": "NOT MEASURED",
+        "false_acceptance_reason": "No unanswerable (should_abstain=True) gold cases in this split."
+      },
+      "rouge_l": {
+        "evidence_tier": "BENCHMARK GROUND TRUTH (ROUGE-L F1 vs gold answer) — PRIMARY answer quality",
+        "mean_rouge_l_f1": 0.0098,
+        "mean_rouge_l_precision": 0.0088,
+        "mean_rouge_l_recall": 0.0165,
+        "note": "Abstentions score 0 ROUGE-L; read alongside abstention_rate."
+      },
+      "citation": {
+        "evidence_tier": "SOFTWARE TEST (citation presence from stored evidence)",
+        "citation_support_rate_all": 1.0,
+        "answer_with_citation_rate_non_abstained": 1.0,
+        "claim_level": {
+          "evidence_tier": "NOT MEASURED",
+          "reason": "No stored claim_verdicts with verified_claims for this config (claim verification / critic produced no verdicts, e.g. the config has critic/verification OFF, or every answered cell abstained before claim extraction). Raw claim_verdicts are preserved per cell."
+        }
+      },
+      "retrieval_quality": {
+        "n_bioasq_rows": 13,
+        "n_bioasq_with_gold_list": 13,
+        "n_bioasq_gold_pmids_in_index": 0,
+        "evidence_tier": "NOT MEASURED",
+        "reason": "0/789 BioASQ gold PMIDs are present in the eval_split index universe (verified against chunks.pkl). Gold PMIDs are not the indexed documents, so recall@K/MRR/nDCG@K vs gold PMIDs are not measurable on this index. PubMedQA retrieval is also NOT MEASURED (gold PMIDs not in the BioASQ-built index)."
+      },
+      "latency": {
+        "evidence_tier": "SOFTWARE TEST (wall-clock on this GPU run)",
+        "n_cold": 40,
+        "mean_cold_ms": 121484.8,
+        "min_cold_ms": 94032,
+        "max_cold_ms": 184050,
+        "n_warm": 40,
+        "mean_warm_ms": 0.2,
+        "throughput_q_per_hour": 29.633
+      },
+      "peak_vram_mb": {
+        "evidence_tier": "SOFTWARE TEST (max over cells)",
+        "value": 10462.59
+      }
+    },
+    "phase5-improved-v2": {
+      "n_total": 40,
+      "n_answered": 2,
+      "n_abstained": 38,
+      "n_error": 0,
+      "abstention_rate": 0.95,
+      "failure_rate": 0.0,
+      "answerability_aware": {
+        "evidence_tier": "SOFTWARE TEST (no unanswerable gold labels in this split)",
+        "false_abstention_rate": 0.95,
+        "false_abstention_note": "Fraction of answerable questions the config abstained on. The split has no gold 'should-abstain' labels, so all questions are treated as answerable and false_abstention_rate == abstention_rate here.",
+        "false_acceptance_rate": "NOT MEASURED",
+        "false_acceptance_reason": "No unanswerable (should_abstain=True) gold cases in this split."
+      },
+      "rouge_l": {
+        "evidence_tier": "BENCHMARK GROUND TRUTH (ROUGE-L F1 vs gold answer) — PRIMARY answer quality",
+        "mean_rouge_l_f1": 0.0098,
+        "mean_rouge_l_precision": 0.0088,
+        "mean_rouge_l_recall": 0.0165,
+        "note": "Abstentions score 0 ROUGE-L; read alongside abstention_rate."
+      },
+      "citation": {
+        "evidence_tier": "SOFTWARE TEST (citation presence from stored evidence)",
+        "citation_support_rate_all": 1.0,
+        "answer_with_citation_rate_non_abstained": 1.0,
+        "claim_level": {
+          "evidence_tier": "BENCHMARK GROUND TRUTH (claim-level verdicts from stored claim_verdicts)",
+          "n_cells_with_verdicts": 5,
+          "n_claims_total": 10,
+          "unsupported_claim_rate": 1.0,
+          "unsupported_claims": 10,
+          "contradicted_claim_rate": 0.0,
+          "contradicted_claims": 0,
+          "n_cells_with_contradiction": 0,
+          "evidence_sufficiency_rate": 0.0,
+          "n_cells_sufficiency_judged": 5,
+          "note": "A claim is supported iff label=='verified'; 'unverifiable' and 'contradicted' are unsupported. Denominator = total extracted claims across cells that produced verdicts (not all 40 cells)."
+        }
+      },
+      "retrieval_quality": {
+        "n_bioasq_rows": 13,
+        "n_bioasq_with_gold_list": 13,
+        "n_bioasq_gold_pmids_in_index": 0,
+        "evidence_tier": "NOT MEASURED",
+        "reason": "0/789 BioASQ gold PMIDs are present in the eval_split index universe (verified against chunks.pkl). Gold PMIDs are not the indexed documents, so recall@K/MRR/nDCG@K vs gold PMIDs are not measurable on this index. PubMedQA retrieval is also NOT MEASURED (gold PMIDs not in the BioASQ-built index)."
+      },
+      "latency": {
+        "evidence_tier": "SOFTWARE TEST (wall-clock on this GPU run)",
+        "n_cold": 40,
+        "mean_cold_ms": 135499.8,
+        "min_cold_ms": 101448,
+        "max_cold_ms": 183745,
+        "n_warm": 40,
+        "mean_warm_ms": 18.2,
+        "throughput_q_per_hour": 26.568
+      },
+      "peak_vram_mb": {
+        "evidence_tier": "SOFTWARE TEST (max over cells)",
+        "value": 10462.59
+      }
+    },
+    "phase5-no-calibration": {
+      "n_total": 40,
+      "n_answered": 5,
+      "n_abstained": 35,
+      "n_error": 0,
+      "abstention_rate": 0.875,
+      "failure_rate": 0.0,
+      "answerability_aware": {
+        "evidence_tier": "SOFTWARE TEST (no unanswerable gold labels in this split)",
+        "false_abstention_rate": 0.875,
+        "false_abstention_note": "Fraction of answerable questions the config abstained on. The split has no gold 'should-abstain' labels, so all questions are treated as answerable and false_abstention_rate == abstention_rate here.",
+        "false_acceptance_rate": "NOT MEASURED",
+        "false_acceptance_reason": "No unanswerable (should_abstain=True) gold cases in this split."
+      },
+      "rouge_l": {
+        "evidence_tier": "BENCHMARK GROUND TRUTH (ROUGE-L F1 vs gold answer) — PRIMARY answer quality",
+        "mean_rouge_l_f1": 0.0098,
+        "mean_rouge_l_precision": 0.0088,
+        "mean_rouge_l_recall": 0.0165,
+        "note": "Abstentions score 0 ROUGE-L; read alongside abstention_rate."
+      },
+      "citation": {
+        "evidence_tier": "SOFTWARE TEST (citation presence from stored evidence)",
+        "citation_support_rate_all": 1.0,
+        "answer_with_citation_rate_non_abstained": 1.0,
+        "claim_level": {
+          "evidence_tier": "NOT MEASURED",
+          "reason": "No stored claim_verdicts with verified_claims for this config (claim verification / critic produced no verdicts, e.g. the config has critic/verification OFF, or every answered cell abstained before claim extraction). Raw claim_verdicts are preserved per cell."
+        }
+      },
+      "retrieval_quality": {
+        "n_bioasq_rows": 13,
+        "n_bioasq_with_gold_list": 13,
+        "n_bioasq_gold_pmids_in_index": 0,
+        "evidence_tier": "NOT MEASURED",
+        "reason": "0/789 BioASQ gold PMIDs are present in the eval_split index universe (verified against chunks.pkl). Gold PMIDs are not the indexed documents, so recall@K/MRR/nDCG@K vs gold PMIDs are not measurable on this index. PubMedQA retrieval is also NOT MEASURED (gold PMIDs not in the BioASQ-built index)."
+      },
+      "latency": {
+        "evidence_tier": "SOFTWARE TEST (wall-clock on this GPU run)",
+        "n_cold": 40,
+        "mean_cold_ms": 136585.0,
+        "min_cold_ms": 99782,
+        "max_cold_ms": 185266,
+        "n_warm": 0,
+        "mean_warm_ms": "NOT MEASURED",
+        "throughput_q_per_hour": 26.357
+      },
+      "peak_vram_mb": {
+        "evidence_tier": "SOFTWARE TEST (max over cells)",
+        "value": 10462.59
+      }
+    },
+    "phase5-no-critic": {
+      "n_total": 40,
+      "n_answered": 5,
+      "n_abstained": 35,
+      "n_error": 0,
+      "abstention_rate": 0.875,
+      "failure_rate": 0.0,
+      "answerability_aware": {
+        "evidence_tier": "SOFTWARE TEST (no unanswerable gold labels in this split)",
+        "false_abstention_rate": 0.875,
+        "false_abstention_note": "Fraction of answerable questions the config abstained on. The split has no gold 'should-abstain' labels, so all questions are treated as answerable and false_abstention_rate == abstention_rate here.",
+        "false_acceptance_rate": "NOT MEASURED",
+        "false_acceptance_reason": "No unanswerable (should_abstain=True) gold cases in this split."
+      },
+      "rouge_l": {
+        "evidence_tier": "BENCHMARK GROUND TRUTH (ROUGE-L F1 vs gold answer) — PRIMARY answer quality",
+        "mean_rouge_l_f1": 0.0161,
+        "mean_rouge_l_precision": 0.015,
+        "mean_rouge_l_recall": 0.0188,
+        "note": "Abstentions score 0 ROUGE-L; read alongside abstention_rate."
+      },
+      "citation": {
+        "evidence_tier": "SOFTWARE TEST (citation presence from stored evidence)",
+        "citation_support_rate_all": 1.0,
+        "answer_with_citation_rate_non_abstained": 1.0,
+        "claim_level": {
+          "evidence_tier": "NOT MEASURED",
+          "reason": "No stored claim_verdicts with verified_claims for this config (claim verification / critic produced no verdicts, e.g. the config has critic/verification OFF, or every answered cell abstained before claim extraction). Raw claim_verdicts are preserved per cell."
+        }
+      },
+      "retrieval_quality": {
+        "n_bioasq_rows": 13,
+        "n_bioasq_with_gold_list": 13,
+        "n_bioasq_gold_pmids_in_index": 0,
+        "evidence_tier": "NOT MEASURED",
+        "reason": "0/789 BioASQ gold PMIDs are present in the eval_split index universe (verified against chunks.pkl). Gold PMIDs are not the indexed documents, so recall@K/MRR/nDCG@K vs gold PMIDs are not measurable on this index. PubMedQA retrieval is also NOT MEASURED (gold PMIDs not in the BioASQ-built index)."
+      },
+      "latency": {
+        "evidence_tier": "SOFTWARE TEST (wall-clock on this GPU run)",
+        "n_cold": 40,
+        "mean_cold_ms": 130628.2,
+        "min_cold_ms": 85898,
+        "max_cold_ms": 169312,
+        "n_warm": 0,
+        "mean_warm_ms": "NOT MEASURED",
+        "throughput_q_per_hour": 27.559
+      },
+      "peak_vram_mb": {
+        "evidence_tier": "SOFTWARE TEST (max over cells)",
+        "value": 10462.59
+      }
+    },
+    "phase5-no-iterative-retrieval": {
+      "n_total": 40,
+      "n_answered": 2,
+      "n_abstained": 38,
+      "n_error": 0,
+      "abstention_rate": 0.95,
+      "failure_rate": 0.0,
+      "answerability_aware": {
+        "evidence_tier": "SOFTWARE TEST (no unanswerable gold labels in this split)",
+        "false_abstention_rate": 0.95,
+        "false_abstention_note": "Fraction of answerable questions the config abstained on. The split has no gold 'should-abstain' labels, so all questions are treated as answerable and false_abstention_rate == abstention_rate here.",
+        "false_acceptance_rate": "NOT MEASURED",
+        "false_acceptance_reason": "No unanswerable (should_abstain=True) gold cases in this split."
+      },
+      "rouge_l": {
+        "evidence_tier": "BENCHMARK GROUND TRUTH (ROUGE-L F1 vs gold answer) — PRIMARY answer quality",
+        "mean_rouge_l_f1": 0.0098,
+        "mean_rouge_l_precision": 0.0088,
+        "mean_rouge_l_recall": 0.0165,
+        "note": "Abstentions score 0 ROUGE-L; read alongside abstention_rate."
+      },
+      "citation": {
+        "evidence_tier": "SOFTWARE TEST (citation presence from stored evidence)",
+        "citation_support_rate_all": 1.0,
+        "answer_with_citation_rate_non_abstained": 1.0,
+        "claim_level": {
+          "evidence_tier": "NOT MEASURED",
+          "reason": "No stored claim_verdicts with verified_claims for this config (claim verification / critic produced no verdicts, e.g. the config has critic/verification OFF, or every answered cell abstained before claim extraction). Raw claim_verdicts are preserved per cell."
+        }
+      },
+      "retrieval_quality": {
+        "n_bioasq_rows": 13,
+        "n_bioasq_with_gold_list": 13,
+        "n_bioasq_gold_pmids_in_index": 0,
+        "evidence_tier": "NOT MEASURED",
+        "reason": "0/789 BioASQ gold PMIDs are present in the eval_split index universe (verified against chunks.pkl). Gold PMIDs are not the indexed documents, so recall@K/MRR/nDCG@K vs gold PMIDs are not measurable on this index. PubMedQA retrieval is also NOT MEASURED (gold PMIDs not in the BioASQ-built index)."
+      },
+      "latency": {
+        "evidence_tier": "SOFTWARE TEST (wall-clock on this GPU run)",
+        "n_cold": 40,
+        "mean_cold_ms": 71410.1,
+        "min_cold_ms": 43050,
+        "max_cold_ms": 210448,
+        "n_warm": 0,
+        "mean_warm_ms": "NOT MEASURED",
+        "throughput_q_per_hour": 50.413
+      },
+      "peak_vram_mb": {
+        "evidence_tier": "SOFTWARE TEST (max over cells)",
+        "value": 10397.77
+      }
+    },
+    "phase5-plain-llm-no-rag": {
+      "n_total": 40,
+      "n_answered": 40,
+      "n_abstained": 0,
+      "n_error": 0,
+      "abstention_rate": 0.0,
+      "failure_rate": 0.0,
+      "answerability_aware": {
+        "evidence_tier": "SOFTWARE TEST (no unanswerable gold labels in this split)",
+        "false_abstention_rate": 0.0,
+        "false_abstention_note": "Fraction of answerable questions the config abstained on. The split has no gold 'should-abstain' labels, so all questions are treated as answerable and false_abstention_rate == abstention_rate here.",
+        "false_acceptance_rate": "NOT MEASURED",
+        "false_acceptance_reason": "No unanswerable (should_abstain=True) gold cases in this split."
+      },
+      "rouge_l": {
+        "evidence_tier": "BENCHMARK GROUND TRUTH (ROUGE-L F1 vs gold answer) — PRIMARY answer quality",
+        "mean_rouge_l_f1": 0.0599,
+        "mean_rouge_l_precision": 0.0665,
+        "mean_rouge_l_recall": 0.0796,
+        "note": "Abstentions score 0 ROUGE-L; read alongside abstention_rate."
+      },
+      "citation": {
+        "evidence_tier": "SOFTWARE TEST (citation presence from stored evidence)",
+        "citation_support_rate_all": 0.0,
+        "answer_with_citation_rate_non_abstained": 0.0,
+        "claim_level": {
+          "evidence_tier": "NOT MEASURED",
+          "reason": "No stored claim_verdicts with verified_claims for this config (claim verification / critic produced no verdicts, e.g. the config has critic/verification OFF, or every answered cell abstained before claim extraction). Raw claim_verdicts are preserved per cell."
+        }
+      },
+      "retrieval_quality": {
+        "n_bioasq_rows": 13,
+        "n_bioasq_with_gold_list": 13,
+        "n_bioasq_gold_pmids_in_index": 0,
+        "evidence_tier": "NOT MEASURED",
+        "reason": "0/789 BioASQ gold PMIDs are present in the eval_split index universe (verified against chunks.pkl). Gold PMIDs are not the indexed documents, so recall@K/MRR/nDCG@K vs gold PMIDs are not measurable on this index. PubMedQA retrieval is also NOT MEASURED (gold PMIDs not in the BioASQ-built index)."
+      },
+      "latency": {
+        "evidence_tier": "SOFTWARE TEST (wall-clock on this GPU run)",
+        "n_cold": 40,
+        "mean_cold_ms": 11167.5,
+        "min_cold_ms": 4784,
+        "max_cold_ms": 20426,
+        "n_warm": 0,
+        "mean_warm_ms": "NOT MEASURED",
+        "throughput_q_per_hour": 322.363
+      },
+      "peak_vram_mb": {
+        "evidence_tier": "SOFTWARE TEST (max over cells)",
+        "value": 10172.5
+      }
+    }
+  },
+  "paired_rouge_l_bootstrap_vs_baseline": {
+    "phase5-basic-rag": {
+      "vs": "phase5-full-pipeline",
+      "n_paired": 40,
+      "mean_rouge_l_f1_delta": 0.006225,
+      "bootstrap_ci95": [
+        0.0,
+        0.018675
+      ],
+      "ci_excludes_zero": false
+    },
+    "phase5-improved-no-verification": {
+      "vs": "phase5-full-pipeline",
+      "n_paired": 40,
+      "mean_rouge_l_f1_delta": 0.0,
+      "bootstrap_ci95": [
+        0.0,
+        0.0
+      ],
+      "ci_excludes_zero": false
+    },
+    "phase5-improved-v2": {
+      "vs": "phase5-full-pipeline",
+      "n_paired": 40,
+      "mean_rouge_l_f1_delta": 0.0,
+      "bootstrap_ci95": [
+        0.0,
+        0.0
+      ],
+      "ci_excludes_zero": false
+    },
+    "phase5-no-calibration": {
+      "vs": "phase5-full-pipeline",
+      "n_paired": 40,
+      "mean_rouge_l_f1_delta": 0.0,
+      "bootstrap_ci95": [
+        0.0,
+        0.0
+      ],
+      "ci_excludes_zero": false
+    },
+    "phase5-no-critic": {
+      "vs": "phase5-full-pipeline",
+      "n_paired": 40,
+      "mean_rouge_l_f1_delta": 0.006225,
+      "bootstrap_ci95": [
+        0.0,
+        0.018675
+      ],
+      "ci_excludes_zero": false
+    },
+    "phase5-no-iterative-retrieval": {
+      "vs": "phase5-full-pipeline",
+      "n_paired": 40,
+      "mean_rouge_l_f1_delta": 0.0,
+      "bootstrap_ci95": [
+        0.0,
+        0.0
+      ],
+      "ci_excludes_zero": false
+    },
+    "phase5-plain-llm-no-rag": {
+      "vs": "phase5-full-pipeline",
+      "n_paired": 40,
+      "mean_rouge_l_f1_delta": 0.050042,
+      "bootstrap_ci95": [
+        0.02287,
+        0.08156
+      ],
+      "ci_excludes_zero": true
+    }
+  },
+  "retrieval_measurability": {
+    "bioasq": "NOT MEASURED (VERIFIED): 0/789 BioASQ gold PMIDs present in the eval_split index universe. Direct evidence corrects the manifest's earlier 'MEASURABLE' assumption.",
+    "pubmedqa": "NOT MEASURED (PubMedQA abstracts/gold PMIDs not in the BioASQ-built eval_split index)",
+    "diagnostic": {
+      "bioasq_gold_pmids_total": 789,
+      "bioasq_gold_pmids_in_index": 0,
+      "index_distinct_pmid_like_ids": 38934
+    }
+  },
+  "caveats": [
+    "Small n per config: proportion CIs are wide; treat deltas as directional.",
+    "ROUGE-L and token-containment accuracy score abstentions as 0/incorrect; high abstention configs are penalised on answer-quality but may be behaving safely. Always read answer quality alongside abstention_rate.",
+    "No superiority or clinical-safety claim is made without a Holm-adjusted significant paired test (see metric_summary.json) AND a bootstrap CI that excludes zero.",
+    "Claim-level unsupported/contradiction metrics are only MEASURED for configs that produced claim_verdicts; others are NOT MEASURED with reason."
+  ]
+}

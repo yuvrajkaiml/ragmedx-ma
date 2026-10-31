@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Is there a relationship between serum paraoxonase level and epicardial fat tissue thickness?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "95be0ad315f85d40e66a6ed6eb161172768d64234a9d8be04a0e1847f3d44f2a",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_661c03c848a2c27714000004_s21680_chunk_0",
+        "document_id": "bioasq_661c03c848a2c27714000004_s21680",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/11918623",
+        "title": "PubMed 11918623 [abstract]",
+        "cited_text": "Paraoxonase is a serum enzyme, which prevents oxidation of low-density lipoprotein (LDL) by hydrolyzing lipid peroxides.",
+        "cross_encoder_logit": 0.48668089509010315,
+        "relevance_score": 0.6193242249407056,
+        "cross_encoder_score": 0.6193242249407056,
+        "evidence_quality_score": 0.6193242249407056,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/11918623",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_662fc351187cba990d000014_s36433_chunk_0",
+        "document_id": "bioasq_662fc351187cba990d000014_s36433",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/20631481",
+        "title": "PubMed 20631481 [abstract]",
+        "cited_text": "BACKGROUND: Amphiregulin (AREG) and epiregulin (EREG) have been found to play pivotal roles in several malignancies. However, the correlation between their expression and clinicopathological factors in colorectal carcinoma (CRC) is yet to be further investigated. To clarify the clinical significance of AREG and EREG expression in CRC, we detected serum and tissue levels of AREG and EREG.PATIENTS AND METHODS: We detected serum AREG and EREG levels by ELISA, and tissue levels by immunohistochemical test in 73 patients with CRC. The correlation between each independent clinicopathological characteristic and AREG and EREG levels was examined.RESULTS: There was significant correlation between serum AREG level and vascular invasion. There was no correlation between EREG serum level and any clinicopathological characteristics. Among the 73 primary lesions, 51 were AREG-positive, and 48 were EREG-positive. AREG-positive status was significantly correlated with depth of tumor invasion",
+        "cross_encoder_logit": 0.015207625925540924,
+        "relevance_score": 0.5038018332102395,
+        "cross_encoder_score": 0.5038018332102395,
+        "evidence_quality_score": 0.5038018332102395,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/20631481",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_53265dd4d6d3ac6a34000007_s44751_chunk_0",
+        "document_id": "bioasq_53265dd4d6d3ac6a34000007_s44751",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/19303793",
+        "title": "PubMed 19303793 [abstract]",
+        "cited_text": "There was a significant inverse relationship between fT3 levels and global oxygen consumption.",
+        "cross_encoder_logit": 0.009202150627970695,
+        "relevance_score": 0.502300521423084,
+        "cross_encoder_score": 0.502300521423084,
+        "evidence_quality_score": 0.502300521423084,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/19303793",
+        "index_id": null
+      }
+    ]
+  }
+}

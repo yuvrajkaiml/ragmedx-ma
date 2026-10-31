@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Describe manifestations of KIF1A-related disorders in children",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "9dec1ab3c7793bddffe66ffcd71e3dcffb40285ce2ea9514231dbdc2da4e7beb",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_5148f6f0d24251bc0500003c_s58215_chunk_0",
+        "document_id": "bioasq_5148f6f0d24251bc0500003c_s58215",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/22258533",
+        "title": "PubMed 22258533 [sections.0]",
+        "cited_text": "We have shown that mutations in the KIF1A gene are responsible for SPG30 in two autosomal recessive HSP families. In published families, the nature of the KIF1A mutations seems to be of good predictor of the underlying phenotype and vice versa.",
+        "cross_encoder_logit": 0.059317655861377716,
+        "relevance_score": 0.5148250672828291,
+        "cross_encoder_score": 0.5148250672828291,
+        "evidence_quality_score": 0.5148250672828291,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/22258533",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_58dd0dde8acda34529000027_s59174_chunk_0",
+        "document_id": "bioasq_58dd0dde8acda34529000027_s59174",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/9401003",
+        "title": "PubMed 9401003 [abstract]",
+        "cited_text": "Fibrillin-1 mutations have also been found in several other related connective tissue disorders, such as severe neonatal Marfan syndrome, dominant ectopia lentis, familial ascending aortic aneurysm, isolated skeletal features of Marfan syndrome, and Shprintzen-Goldberg syndrome.",
+        "cross_encoder_logit": 0.02735714614391327,
+        "relevance_score": 0.506838860016733,
+        "cross_encoder_score": 0.506838860016733,
+        "evidence_quality_score": 0.506838860016733,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/9401003",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_530cf4e0c8a0b4a00c000005_s60036_chunk_0",
+        "document_id": "bioasq_530cf4e0c8a0b4a00c000005_s60036",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/16358146",
+        "title": "PubMed 16358146 [abstract]",
+        "cited_text": "To describe the clinical cardiac manifestations and temporal evolution of Marfan syndrome in children; to estimate the incidence of annuloaortic ectasia and mitral valve prolapse",
+        "cross_encoder_logit": 0.01980781927704811,
+        "relevance_score": 0.5049517929174467,
+        "cross_encoder_score": 0.5049517929174467,
+        "evidence_quality_score": 0.5049517929174467,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/16358146",
+        "index_id": null
+      }
+    ]
+  }
+}

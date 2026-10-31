@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What conditions are associated with TRIM8 gene mutations?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "9712ddcb5ff7387239307865d8147571556251b78c8bf5252b1acc09664bb32b",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_530f900ee3eabad021000003_s43400_chunk_0",
+        "document_id": "bioasq_530f900ee3eabad021000003_s43400",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/22543196",
+        "title": "PubMed 22543196 [abstract]",
+        "cited_text": "Inactivating mutations in the gene encoding MCT8 are associated with a severe form of psychomotor retardation and abnormal serum TH levels (Allan-Herndon-Dudley syndrome).",
+        "cross_encoder_logit": 0.043120067566633224,
+        "relevance_score": 0.5107783468922462,
+        "cross_encoder_score": 0.5107783468922462,
+        "evidence_quality_score": 0.5107783468922462,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/22543196",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_530f900ee3eabad021000003_s43408_chunk_0",
+        "document_id": "bioasq_530f900ee3eabad021000003_s43408",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/20083155",
+        "title": "PubMed 20083155 [abstract]",
+        "cited_text": "Therefore, the criterion for MCT8 mutation screening in these patients is the profile of increased T(3) and low-normal to low FT(4) serum levels.",
+        "cross_encoder_logit": 0.010925582610070705,
+        "relevance_score": 0.5027313684826581,
+        "cross_encoder_score": 0.5027313684826581,
+        "evidence_quality_score": 0.5027313684826581,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/20083155",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_530f900ee3eabad021000003_s43425_chunk_0",
+        "document_id": "bioasq_530f900ee3eabad021000003_s43425",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/15980113",
+        "title": "PubMed 15980113 [abstract]",
+        "cited_text": "Pathogenic mutations in the MCT8 gene, which encodes a thyroid hormone transporter, results in elevated serum triiodothyronine (T3) levels, which were confirmed in four affected males of this family, while normal levels were found among obligate carriers.",
+        "cross_encoder_logit": 0.01065172627568245,
+        "relevance_score": 0.5026629063913497,
+        "cross_encoder_score": 0.5026629063913497,
+        "evidence_quality_score": 0.5026629063913497,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/15980113",
+        "index_id": null
+      }
+    ]
+  }
+}

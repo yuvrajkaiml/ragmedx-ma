@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What studies compare early vs delayed surfactant treatment in preterm infants?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "abfaa0e2b91ba0019ab3d20e5ee8a4ad27b301a140e961448808d394af36c4d2",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_515db54c298dcd4e51000016_s42042_chunk_0",
+        "document_id": "bioasq_515db54c298dcd4e51000016_s42042",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/22266202",
+        "title": "PubMed 22266202 [sections.0]",
+        "cited_text": "The INSURE method, which consists of an intubation-surfactant-extubation sequence, is effective in reducing the need for mechanical ventilation (MV), the duration of respiratory support, and the need for surfactant replacement in preterm infants with respiratory distress syndrome",
+        "cross_encoder_logit": 0.13456019759178162,
+        "relevance_score": 0.5335893826551062,
+        "cross_encoder_score": 0.5335893826551062,
+        "evidence_quality_score": 0.5335893826551062,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/22266202",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_515db54c298dcd4e51000016_s42048_chunk_0",
+        "document_id": "bioasq_515db54c298dcd4e51000016_s42048",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/19679893",
+        "title": "PubMed 19679893 [sections.0]",
+        "cited_text": "In preterm infants with respiratory distress syndrome (RDS) nasal continuous positive airway pressure (nCPAP) with the \"InSurE\" procedure (intubation, surfactant, extubation) is increasingly used.",
+        "cross_encoder_logit": 0.06404916942119598,
+        "relevance_score": 0.5160068206695574,
+        "cross_encoder_score": 0.5160068206695574,
+        "evidence_quality_score": 0.5160068206695574,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/19679893",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_515db54c298dcd4e51000016_s42050_chunk_0",
+        "document_id": "bioasq_515db54c298dcd4e51000016_s42050",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/17476269",
+        "title": "PubMed 17476269 [sections.0]",
+        "cited_text": "a method for surfactant administration by transient intubation, INSURE (i.e. INtubation SURfactant Extubation) during nasal continuous positive airway pressure (nCPAP) for moderately preterm infants with respiratory distress syndrome (RDS)",
+        "cross_encoder_logit": 0.05401211604475975,
+        "relevance_score": 0.5134997472599302,
+        "cross_encoder_score": 0.5134997472599302,
+        "evidence_quality_score": 0.5134997472599302,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/17476269",
+        "index_id": null
+      }
+    ]
+  }
+}

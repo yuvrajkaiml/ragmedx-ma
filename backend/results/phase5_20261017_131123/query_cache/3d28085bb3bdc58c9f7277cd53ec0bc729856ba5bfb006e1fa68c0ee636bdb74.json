@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What clinical presentations of prior preterm birth predict subsequent pregnancy risk?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "3d28085bb3bdc58c9f7277cd53ec0bc729856ba5bfb006e1fa68c0ee636bdb74",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_622a5a483a8413c65300008f_s28941_chunk_0",
+        "document_id": "bioasq_622a5a483a8413c65300008f_s28941",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/11293640",
+        "title": "PubMed 11293640 [abstract]",
+        "cited_text": "BACKGROUND: Preterm, prelabour rupture of the fetal membranes (pPROM) is the commonest antecedent of preterm birth, and can lead to death, neonatal disease, and long-term",
+        "cross_encoder_logit": 0.09170177578926086,
+        "relevance_score": 0.5229093920286865,
+        "cross_encoder_score": 0.5229093920286865,
+        "evidence_quality_score": 0.5229093920286865,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/11293640",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_622632483a8413c653000081_s12907_chunk_0",
+        "document_id": "bioasq_622632483a8413c653000081_s12907",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/30058156",
+        "title": "PubMed 30058156 [abstract]",
+        "cited_text": "Therefore, a delicate immune balance is critical for the maintenance of a successful pregnancy, while disruption of this balance can induce complications such as implantation failure, miscarriage, preterm birth/labor, preeclampsia and fetal growth restriction.",
+        "cross_encoder_logit": 0.030385605990886688,
+        "relevance_score": 0.5075958170813509,
+        "cross_encoder_score": 0.5075958170813509,
+        "evidence_quality_score": 0.5075958170813509,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/30058156",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_622a5a483a8413c65300008f_s28946_chunk_0",
+        "document_id": "bioasq_622a5a483a8413c65300008f_s28946",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/23536574",
+        "title": "PubMed 23536574 [abstract]",
+        "cited_text": "Preterm premature rupture of the membranes (PPROM) is an important etiology of preterm birth and source of significant neonatal morbidity.",
+        "cross_encoder_logit": 0.028371624648571014,
+        "relevance_score": 0.507092430414744,
+        "cross_encoder_score": 0.507092430414744,
+        "evidence_quality_score": 0.507092430414744,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/23536574",
+        "index_id": null
+      }
+    ]
+  }
+}

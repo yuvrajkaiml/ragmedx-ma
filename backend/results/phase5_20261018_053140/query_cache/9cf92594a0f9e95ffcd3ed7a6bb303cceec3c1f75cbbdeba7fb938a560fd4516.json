@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What studies link self-reported health-related quality of life to survival in non-small-cell lung cancer?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "9cf92594a0f9e95ffcd3ed7a6bb303cceec3c1f75cbbdeba7fb938a560fd4516",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_5e476da1d14c9f295d000002_s51100_chunk_0",
+        "document_id": "bioasq_5e476da1d14c9f295d000002_s51100",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/11894017",
+        "title": "PubMed 11894017 [abstract]",
+        "cited_text": "There were no significant differences in survival in a non-small cell lung cancer prinomastat study, and in a small cell lung cancer marimastat trial.",
+        "cross_encoder_logit": 0.5670040845870972,
+        "relevance_score": 0.6380715963145582,
+        "cross_encoder_score": 0.6380715963145582,
+        "evidence_quality_score": 0.6380715963145582,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/11894017",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5e476da1d14c9f295d000002_s51101_chunk_0",
+        "document_id": "bioasq_5e476da1d14c9f295d000002_s51101",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/11894017",
+        "title": "PubMed 11894017 [abstract]",
+        "cited_text": "There were no significant differences in survival in a non-small cell lung cancer prinomastat study , and in a small cell lung cancer marimastat trial.",
+        "cross_encoder_logit": 0.5445685982704163,
+        "relevance_score": 0.6328745486710053,
+        "cross_encoder_score": 0.6328745486710053,
+        "evidence_quality_score": 0.6328745486710053,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/11894017",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_621e9e7b3a8413c653000054_s35282_chunk_0",
+        "document_id": "bioasq_621e9e7b3a8413c653000054_s35282",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/32156276",
+        "title": "PubMed 32156276 [abstract]",
+        "cited_text": "BACKGROUND: There is a lack of cohort studies on the influence factors of oral health-related quality of life (OHRQoL).",
+        "cross_encoder_logit": 0.036168988794088364,
+        "relevance_score": 0.5090412615750142,
+        "cross_encoder_score": 0.5090412615750142,
+        "evidence_quality_score": 0.5090412615750142,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/32156276",
+        "index_id": null
+      }
+    ]
+  }
+}

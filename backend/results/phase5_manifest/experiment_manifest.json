@@ -1,0 +1,264 @@
+{
+  "manifest_version": 1,
+  "feature": "FEAT-001",
+  "generated_at": "2026-10-17T22:53:35.290793+00:00",
+  "evidence_tier": "SOFTWARE TEST (frozen experiment manifest)",
+  "dataset_split": {
+    "source_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261017_131123\\splits\\test.json",
+    "n_pool": 250,
+    "seed": 42,
+    "stratify_by": "source",
+    "manifest_hash": {
+      "pool": "06b4ac7ebb961f5a3eb27b22c7248731de3de0168ad82095e3d70c9248ac69ac",
+      "dev": "d18864c0c33a5a3c3250418d6591130ddb1b12654e63a5dfb242dee1d55dcc5c",
+      "calibration": "a3d1da9f7149770b1512d3afd5a18f290d3fbe3fa16bd24e902495112b23cf27",
+      "test": "8e2b2d925afd86b8d5f2567594bcf40f64ed3e0cab6c3e5b169b524569621eee"
+    },
+    "note": "Leakage-checked eval split reused verbatim; NOT rebuilt."
+  },
+  "selection": {
+    "function": "_stratified_sample",
+    "source_module": "backend/scripts/run_phase5_experiment.py",
+    "source_file": "D:\\Ragmed_2\\backend\\results\\phase5_20261017_131123\\splits\\test.json",
+    "seed": 42,
+    "stratify_by": "source",
+    "n_preferred": 50,
+    "n_fallback": 40,
+    "subset_assertion": "set(pilot_reused_ids_16) ⊂ set(question_ids_40) ⊂ set(question_ids_50)",
+    "subset_assertion_passed": true
+  },
+  "question_ids_50": [
+    "pubmedqa::12040336",
+    "pubmedqa::23621776",
+    "bioasq::53372ba3d6d3ac6a34000058",
+    "pubmedqa::26548832",
+    "pubmedqa::18019905",
+    "bioasq::5e766256835f4e4777000003",
+    "bioasq::63f57f7f33942b094c000006",
+    "bioasq::5139ec51bee46bd34c000006",
+    "pubmedqa::25394614",
+    "pubmedqa::23412195",
+    "pubmedqa::16735905",
+    "pubmedqa::12098035",
+    "pubmedqa::23375036",
+    "pubmedqa::15943725",
+    "pubmedqa::23321509",
+    "pubmedqa::12377809",
+    "bioasq::601ffa7a1cb411341a000078",
+    "bioasq::6060996394d57fd879000045",
+    "bioasq::5881e8e8713cbdfd3d000003",
+    "pubmedqa::21848798",
+    "bioasq::602825a61cb411341a0000fa",
+    "pubmedqa::20605051",
+    "pubmedqa::24449622",
+    "bioasq::601d35111cb411341a00002f",
+    "pubmedqa::22266735",
+    "pubmedqa::16968876",
+    "pubmedqa::18158048",
+    "bioasq::643de76757b1c7a315000039",
+    "bioasq::54d7a1047035c08008000002",
+    "pubmedqa::21645374",
+    "pubmedqa::20549895",
+    "pubmedqa::22365295",
+    "pubmedqa::15528969",
+    "pubmedqa::21394762",
+    "bioasq::620086aac9dfcb9c09000020",
+    "pubmedqa::10548670",
+    "bioasq::65f7728fc4010b4d78000021",
+    "pubmedqa::18719011",
+    "pubmedqa::10223070",
+    "pubmedqa::24481006",
+    "bioasq::601d6ec61cb411341a000032",
+    "bioasq::61f9c990c9dfcb9c09000001",
+    "pubmedqa::23422012",
+    "pubmedqa::22251324",
+    "pubmedqa::26215326",
+    "bioasq::58ea7248eda5a57672000002",
+    "bioasq::5c58b26386df2b9174000011",
+    "pubmedqa::22012962",
+    "pubmedqa::10922093",
+    "pubmedqa::20602784"
+  ],
+  "question_ids_40": [
+    "pubmedqa::12040336",
+    "pubmedqa::10223070",
+    "pubmedqa::15943725",
+    "pubmedqa::25394614",
+    "pubmedqa::12377809",
+    "bioasq::620086aac9dfcb9c09000020",
+    "bioasq::5139ec51bee46bd34c000006",
+    "bioasq::63f57f7f33942b094c000006",
+    "pubmedqa::23621776",
+    "pubmedqa::12098035",
+    "pubmedqa::10548670",
+    "pubmedqa::24481006",
+    "pubmedqa::16968876",
+    "pubmedqa::24449622",
+    "pubmedqa::23412195",
+    "pubmedqa::20549895",
+    "pubmedqa::10922093",
+    "pubmedqa::18719011",
+    "bioasq::602825a61cb411341a0000fa",
+    "pubmedqa::20605051",
+    "bioasq::601d35111cb411341a00002f",
+    "pubmedqa::23375036",
+    "pubmedqa::22251324",
+    "pubmedqa::18019905",
+    "bioasq::54d7a1047035c08008000002",
+    "bioasq::5881e8e8713cbdfd3d000003",
+    "pubmedqa::23321509",
+    "bioasq::65f7728fc4010b4d78000021",
+    "bioasq::6060996394d57fd879000045",
+    "pubmedqa::21394762",
+    "bioasq::53372ba3d6d3ac6a34000058",
+    "pubmedqa::21645374",
+    "pubmedqa::21848798",
+    "bioasq::601d6ec61cb411341a000032",
+    "pubmedqa::16735905",
+    "pubmedqa::20602784",
+    "pubmedqa::26215326",
+    "pubmedqa::15528969",
+    "bioasq::58ea7248eda5a57672000002",
+    "bioasq::5c58b26386df2b9174000011"
+  ],
+  "pilot_reused_ids_16": [
+    "pubmedqa::15943725",
+    "bioasq::602825a61cb411341a0000fa",
+    "bioasq::53372ba3d6d3ac6a34000058",
+    "bioasq::54d7a1047035c08008000002",
+    "pubmedqa::21394762",
+    "pubmedqa::16735905",
+    "pubmedqa::26215326",
+    "pubmedqa::23321509",
+    "pubmedqa::24449622",
+    "pubmedqa::22251324",
+    "pubmedqa::18719011",
+    "pubmedqa::10548670",
+    "pubmedqa::20605051",
+    "bioasq::6060996394d57fd879000045",
+    "pubmedqa::12098035",
+    "pubmedqa::23621776"
+  ],
+  "source_counts": {
+    "question_ids_50": {
+      "bioasq": 17,
+      "pubmedqa": 33
+    },
+    "question_ids_40": {
+      "bioasq": 13,
+      "pubmedqa": 27
+    },
+    "pilot_reused_ids_16": {
+      "bioasq": 4,
+      "pubmedqa": 12
+    }
+  },
+  "configs": [
+    "phase5-improved-v2",
+    "phase5-improved-no-verification",
+    "phase5-full-pipeline",
+    "phase5-no-critic",
+    "phase5-no-iterative-retrieval",
+    "phase5-no-calibration",
+    "phase5-basic-rag",
+    "phase5-plain-llm-no-rag"
+  ],
+  "config_parameter_hashes": {
+    "phase5-improved-v2": "98d99cf74db6194e14a179b9a5e1cea4d5fecd823c9f0438d8a63038ff4e4791",
+    "phase5-improved-no-verification": "6d73f45c4aacf8800ac45579173a73e68649cdccd3ee004e2e76dbd5a854152d",
+    "phase5-full-pipeline": "27121f7d821798771d0c5e627ae9a4669edc509a8f99b5b4c53f39977c8f95f3",
+    "phase5-no-critic": "58355b17c3c44aff66dde9de7e6a06b89b370c78a0319934c0511fc886c12c68",
+    "phase5-no-iterative-retrieval": "2e4f9183fa781e5dbe9163e1341f21c8d04c469a986a4569d5078e155d04f617",
+    "phase5-no-calibration": "c07be665f61cee06047baf5f89a5774ca8ce40610ffcc5e064e043fabe8237c9",
+    "phase5-basic-rag": "5e76c9a41a5e9740f8ec4733dff64fc2ab6f8bc4b8b82980b638a10f8b404a99",
+    "phase5-plain-llm-no-rag": "a24d5af963a8dd4d1d2f78e35ea6185ba21727f84e6bf36dd65f4b3b4e9055e9"
+  },
+  "generation": {
+    "generator_temperature": 0.0,
+    "prompts_dir": "D:\\Ragmed_2\\backend\\prompts\\v1",
+    "prompt_sha256": {
+      "abstention.txt": "a6c7d85d5d07a3462d3f9b3408a957d598853326226b32a178028a2b963f6bd5",
+      "confidence.txt": "2a9f43bb15998c4d605c017e0ecce6653a409f4ad65f4a18f9a8f4cb31c2cad8",
+      "critic.txt": "548c2049321e6a4ae216c0b559e3ed2c0333a25b71c4f5216c06e19bdb19975d",
+      "evidence_reranking.txt": "be136c707831bfe13181f342ab6f6fcccf34b3f5401ca8d8a121c9eb2aa0c938",
+      "generator.txt": "d39dbff1502f822306f1b58735a1e8e881a6c259804dc6029a92cd8b364d0613",
+      "iterative_retrieval.txt": "8375178a521f35410039419134848b537d5fbd1929384c4097160b35f7170406",
+      "query_understanding.txt": "1e7b9430f288f1ae6ef9d3c404025627ff1d06e3c07919600bb7ce49b0a5868b"
+    },
+    "top_k_retrieval": 10,
+    "top_k_final": 3,
+    "note": "Prompts, retrieval params, and generation settings unchanged."
+  },
+  "model": {
+    "model_name": "Qwen/Qwen3-8B",
+    "quantization": "4-bit NF4",
+    "llm_mode": "local",
+    "mock_fallback_allowed": false,
+    "hard_assert_llm_mode_local": true
+  },
+  "index": {
+    "resolved_eval_split_path": "D:\\Ragmed_2\\backend\\data\\faiss_index\\eval_split",
+    "index_faiss_sha256": "fc18d20d30ea92e6d4b7581786bd1ba640e18e658d994466d47d924c847fc258",
+    "chunks_pkl_sha256": "6370a1b47b2d0e799788f3406f320dc29057c008db4f4d8ce19f761456a5f5d1",
+    "num_chunks": 58173,
+    "index_leakage_guard": "PASS",
+    "production_index_protected": true
+  },
+  "code_revision": {
+    "git_head": "bee531992aee3bb5e79417fc93d046fd9c1ad86a",
+    "branch": "yuvraj/llm"
+  },
+  "metric_definitions": {
+    "metrics_module": {
+      "file": "D:\\Ragmed_2\\backend\\evaluation\\metrics.py",
+      "sha256": "5f27cf15b2d559da1b03779e99293672d6ecd20d69b883353e8c2922aff925f4",
+      "functions": [
+        "compute_rouge_l",
+        "compute_batch_rouge_l",
+        "compute_exact_containment_rate",
+        "compute_abstention_rate",
+        "compute_citation_support_rate",
+        "compute_answer_with_citation_rate",
+        "recall_at_k",
+        "precision_at_k",
+        "mrr",
+        "ndcg_at_k",
+        "ece",
+        "brier_score",
+        "risk_coverage_curve",
+        "abstention_precision",
+        "abstention_recall",
+        "false_abstention_rate",
+        "false_acceptance_rate"
+      ]
+    },
+    "statistics_module": {
+      "file": "D:\\Ragmed_2\\backend\\evaluation\\statistics.py",
+      "sha256": "95475108e92b88f874a17c9b2db0b1fd3dd3b1dc0156cbe78d34d9ecec92326c",
+      "functions": [
+        "wilson_ci",
+        "mcnemar_test",
+        "paired_bootstrap",
+        "holm_correction"
+      ]
+    },
+    "library_versions": {
+      "scipy": "1.18.0",
+      "torch": "2.13.0",
+      "transformers": "5.15.0"
+    },
+    "note": "Metrics reused as-defined; no metric redefinition."
+  },
+  "retrieval_quality_measurability": {
+    "bioasq": {
+      "retrieval_quality": "MEASURABLE (gold PMIDs; eval_split built from BioASQ corpus)",
+      "questions_with_gold_pmid": 250,
+      "note": "Recall@K/MRR/nDCG measurable only where the gold PMID is present in eval_split."
+    },
+    "pubmedqa": {
+      "retrieval_quality": "NOT MEASURED",
+      "reason": "PubMedQA abstracts are not in the BioASQ-built eval_split index; gold PMIDs are not retrievable from this index. Report answer-quality only.",
+      "questions_with_gold_pmid_in_dataset": 500
+    }
+  }
+}

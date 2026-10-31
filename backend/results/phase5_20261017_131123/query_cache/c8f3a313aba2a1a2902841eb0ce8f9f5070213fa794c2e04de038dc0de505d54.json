@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What studies show the predictive value of prior preterm birth for subsequent pregnancies?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "c8f3a313aba2a1a2902841eb0ce8f9f5070213fa794c2e04de038dc0de505d54",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_531375a6e3eabad021000011_s17113_chunk_0",
+        "document_id": "bioasq_531375a6e3eabad021000011_s17113",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/20132378",
+        "title": "PubMed 20132378 [abstract]",
+        "cited_text": "Nonsustained VT was the only predictive risk factor (RF) for an appropriate ICD intervention in the PP (positive predictive value 22%, negative predictive value 96%).",
+        "cross_encoder_logit": 0.29643067717552185,
+        "relevance_score": 0.5735697352004596,
+        "cross_encoder_score": 0.5735697352004596,
+        "evidence_quality_score": 0.5735697352004596,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/20132378",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_622a5a483a8413c65300008f_s28941_chunk_0",
+        "document_id": "bioasq_622a5a483a8413c65300008f_s28941",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/11293640",
+        "title": "PubMed 11293640 [abstract]",
+        "cited_text": "BACKGROUND: Preterm, prelabour rupture of the fetal membranes (pPROM) is the commonest antecedent of preterm birth, and can lead to death, neonatal disease, and long-term",
+        "cross_encoder_logit": 0.029045255854725838,
+        "relevance_score": 0.5072608035201022,
+        "cross_encoder_score": 0.5072608035201022,
+        "evidence_quality_score": 0.5072608035201022,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/11293640",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_622a5a483a8413c65300008f_s28948_chunk_0",
+        "document_id": "bioasq_622a5a483a8413c65300008f_s28948",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/15715592",
+        "title": "PubMed 15715592 [abstract]",
+        "cited_text": "Preterm premature rupture of the membranes (PPROM) is responsible for one-third of all preterm births and affects 120,000 pregnancies in the United States each year.",
+        "cross_encoder_logit": 0.022487884387373924,
+        "relevance_score": 0.5056217341872757,
+        "cross_encoder_score": 0.5056217341872757,
+        "evidence_quality_score": 0.5056217341872757,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/15715592",
+        "index_id": null
+      }
+    ]
+  }
+}

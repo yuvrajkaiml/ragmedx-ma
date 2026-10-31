@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What is the phenotype of people carrying mutations in the gene PRDM12?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "d2d1bed457d2ae137fc475f1b3eb8d0c714dd0b9a6d286d5adf168fdb8903067",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_5c630666e842deac6700000c_s35851_chunk_0",
+        "document_id": "bioasq_5c630666e842deac6700000c_s35851",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/27822311",
+        "title": "PubMed 27822311 [abstract]",
+        "cited_text": "CONCLUSIONS This study suggests that MIR137 is the mediator of the obesity phenotype of patients carrying 1p21.3 microdeletions.",
+        "cross_encoder_logit": 0.006991138216108084,
+        "relevance_score": 0.5017477774353334,
+        "cross_encoder_score": 0.5017477774353334,
+        "evidence_quality_score": 0.5017477774353334,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/27822311",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5c630666e842deac6700000c_s35854_chunk_0",
+        "document_id": "bioasq_5c630666e842deac6700000c_s35854",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/27822311",
+        "title": "PubMed 27822311 [abstract]",
+        "cited_text": "CONCLUSIONS This study suggests that MIR137 is the mediator of the obesity phenotype of patients carrying 1p21.3 microdeletions.",
+        "cross_encoder_logit": 0.006991138216108084,
+        "relevance_score": 0.5017477774353334,
+        "cross_encoder_score": 0.5017477774353334,
+        "evidence_quality_score": 0.5017477774353334,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/27822311",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_58f89eb270f9fc6f0f00001a_s29240_chunk_0",
+        "document_id": "bioasq_58f89eb270f9fc6f0f00001a_s29240",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/24039113",
+        "title": "PubMed 24039113 [abstract]",
+        "cited_text": "FG syndrome, Lujan syndrome, and Ohdo syndrome, the Maat-Kievit-Brunner type, have been described as distinct syndromes with overlapping non-specific features and different missense mutations of the MED12 gene have been reported in all of them.",
+        "cross_encoder_logit": 0.006832427345216274,
+        "relevance_score": 0.5017081001915058,
+        "cross_encoder_score": 0.5017081001915058,
+        "evidence_quality_score": 0.5017081001915058,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/24039113",
+        "index_id": null
+      }
+    ]
+  }
+}

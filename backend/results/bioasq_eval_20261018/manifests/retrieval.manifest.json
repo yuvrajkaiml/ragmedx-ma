@@ -1,0 +1,59 @@
+{
+  "phase": "retrieval",
+  "seed": 42,
+  "config": {
+    "top_k": 5,
+    "index_dir": "D:\\Ragmed_2\\backend\\data\\indexes\\bioasq_retrieval_eval\\v1",
+    "seed": 42
+  },
+  "config_hash": "85ab82cf5ce5a78ac92c1bab2df68444ecd1739f9cfacf0e62ba57f54516b0f2",
+  "inputs": {
+    "eval_questions": {
+      "path": "D:\\Ragmed_2\\backend\\data\\datasets\\bioasq_eval_split\\eval_questions.json",
+      "sha256": "ff138be55d5e3da2183462ee3df9821ddd9612f24ad026f6f99a7d8d0b294698"
+    },
+    "index": {
+      "path": "D:\\Ragmed_2\\backend\\data\\indexes\\bioasq_retrieval_eval\\v1\\index.faiss",
+      "sha256": "1d90087ae146c35bfd21d3b967ab158261ed5fe7572ac0ea6ffc1983825c8506"
+    }
+  },
+  "embedding_model": "BAAI/bge-m3",
+  "package_versions": {
+    "numpy": "2.5.2",
+    "faiss": "1.15.0",
+    "torch": "2.13.0+cpu",
+    "transformers": "5.15.0",
+    "sentence_transformers": "5.7.0",
+    "sklearn": "1.9.0"
+  },
+  "timestamp_utc": "2026-10-18T12:29:23.813614+00:00",
+  "n_queries": 250,
+  "views": {
+    "corpus_coverage": {
+      "n_queries": 250,
+      "coverage_at_least_1": 1.0,
+      "coverage_all": 0.752,
+      "n_queries_with_at_least_one_available_gold": 250,
+      "n_queries_with_all_gold_available": 188,
+      "n_uncovered_gold_queries": 0,
+      "n_partially_covered_queries": 62,
+      "corpus_distinct_pmids": 2010
+    },
+    "end_to_end": {
+      "denominator": 250,
+      "note": "All 250 queries; uncovered-gold queries contribute 0.",
+      "precision_at_5": 0.564,
+      "recall_at_5": 0.561097,
+      "ndcg_at_5": 0.832771,
+      "mrr": 0.961
+    },
+    "retrieval_effectiveness": {
+      "denominator": 250,
+      "note": "Only covered queries (available gold non-empty); metric vs FULL gold.",
+      "precision_at_5": 0.564,
+      "recall_at_5": 0.561097,
+      "ndcg_at_5": 0.832771,
+      "mrr": 0.961
+    }
+  }
+}

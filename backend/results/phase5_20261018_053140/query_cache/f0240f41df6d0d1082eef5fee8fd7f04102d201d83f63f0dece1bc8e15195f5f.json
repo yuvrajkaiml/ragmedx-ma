@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What are the surgical indications for displaced midshaft clavicular fractures?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "f0240f41df6d0d1082eef5fee8fd7f04102d201d83f63f0dece1bc8e15195f5f",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_56bce63cd36b5da37800000b_s35116_chunk_0",
+        "document_id": "bioasq_56bce63cd36b5da37800000b_s35116",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/9269112",
+        "title": "PubMed 9269112 [abstract]",
+        "cited_text": "The authors report 7 cases involving the surgical treatment of unstable pelvic ring fractures (Malgaigne type) using two compression bars, as described by Tile.",
+        "cross_encoder_logit": 0.002764199860394001,
+        "relevance_score": 0.5006910495250843,
+        "cross_encoder_score": 0.5006910495250843,
+        "evidence_quality_score": 0.5006910495250843,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/9269112",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_59bf823b542ba3824b000001_s59583_chunk_0",
+        "document_id": "bioasq_59bf823b542ba3824b000001_s59583",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/9181534",
+        "title": "PubMed 9181534 [abstract]",
+        "cited_text": "Surgical indications for tonsillectomy in the young voice patient are discussed.",
+        "cross_encoder_logit": 0.002710792701691389,
+        "relevance_score": 0.5006776977604235,
+        "cross_encoder_score": 0.5006776977604235,
+        "evidence_quality_score": 0.5006776977604235,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/9181534",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_56bce63cd36b5da37800000b_s35121_chunk_0",
+        "document_id": "bioasq_56bce63cd36b5da37800000b_s35121",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/9269112",
+        "title": "PubMed 9269112 [abstract]",
+        "cited_text": "The authors report 7 cases involving the surgical treatment of unstable pelvic ring fractures (Malgaigne type) using two compression bars, as described by Tile",
+        "cross_encoder_logit": 0.002126207109540701,
+        "relevance_score": 0.5005315515771339,
+        "cross_encoder_score": 0.5005315515771339,
+        "evidence_quality_score": 0.5005315515771339,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/9269112",
+        "index_id": null
+      }
+    ]
+  }
+}

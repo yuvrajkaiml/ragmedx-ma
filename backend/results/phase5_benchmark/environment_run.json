@@ -1,0 +1,53 @@
+{
+  "generated_at": "2026-10-17T23:55:51.308766+00:00",
+  "resolved_eval_split_path": "D:\\Ragmed_2\\backend\\data\\faiss_index\\eval_split",
+  "canonical_eval_split": "D:\\Ragmed_2\\backend\\data\\faiss_index\\eval_split",
+  "llm_model": "Qwen/Qwen3-8B",
+  "llm_mode": "local",
+  "generator_temperature": 0.0,
+  "model_load_ms": 36861,
+  "configs": [
+    "phase5-improved-v2",
+    "phase5-improved-no-verification",
+    "phase5-full-pipeline",
+    "phase5-no-critic",
+    "phase5-no-iterative-retrieval",
+    "phase5-no-calibration",
+    "phase5-basic-rag",
+    "phase5-plain-llm-no-rag"
+  ],
+  "subset": {
+    "dev": 0,
+    "test": 3,
+    "full": false
+  },
+  "records_per_config": {
+    "phase5-improved-v2": 3,
+    "phase5-improved-no-verification": 3,
+    "phase5-full-pipeline": 3,
+    "phase5-no-critic": 3,
+    "phase5-no-iterative-retrieval": 3,
+    "phase5-no-calibration": 3,
+    "phase5-basic-rag": 3,
+    "phase5-plain-llm-no-rag": 3
+  },
+  "mode": "pilot",
+  "pilot": {
+    "requested_n": 3,
+    "seed": 42,
+    "stratify_by": "source",
+    "questions_completed": 3,
+    "budget_hours": null,
+    "budget_stopped_early": false
+  },
+  "wall_clock": {
+    "run_seconds": 2446.6,
+    "run_hours": 0.68,
+    "questions_completed": 3,
+    "mean_seconds_per_question_all_configs": 815.5
+  },
+  "torch_version": "2.11.0+cu128",
+  "cuda_version": "12.8",
+  "cuda_available": true,
+  "peak_vram_mb_run": 10163.91
+}

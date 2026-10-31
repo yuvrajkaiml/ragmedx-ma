@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Quaternary cytoreductive surgery in ovarian cancer: does surgical effort still matter?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "5e9f966701946af36e46f44c8505286b9c58eb05ec74d8ef705bd76d1840d034",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_553fb11fc6a5098552000003_s30934_chunk_0",
+        "document_id": "bioasq_553fb11fc6a5098552000003_s30934",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/21842290",
+        "title": "PubMed 21842290 [abstract]",
+        "cited_text": "Patients suffering from peritoneal recurrence of ovarian cancer should be considered for radical reoperation with HIPEC in a center with expertise in multimodal therapeutic options. Organ-preserving cytoreductive surgery allows complete cytoreduction with the goal of decreasing morbidity",
+        "cross_encoder_logit": 0.13979598879814148,
+        "relevance_score": 0.5348921910957113,
+        "cross_encoder_score": 0.5348921910957113,
+        "evidence_quality_score": 0.5348921910957113,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/21842290",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_553fb11fc6a5098552000003_s30940_chunk_0",
+        "document_id": "bioasq_553fb11fc6a5098552000003_s30940",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/19356887",
+        "title": "PubMed 19356887 [abstract]",
+        "cited_text": "in the majority of patients with primary and recurrent advanced ovarian cancer, cytoreductive surgery combined with HIPEC can lead to a substantial increase in subsequent rates of disease-free and overall survival",
+        "cross_encoder_logit": 0.12215961515903473,
+        "relevance_score": 0.5305019815370083,
+        "cross_encoder_score": 0.5305019815370083,
+        "evidence_quality_score": 0.5305019815370083,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/19356887",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_553fb11fc6a5098552000003_s30945_chunk_0",
+        "document_id": "bioasq_553fb11fc6a5098552000003_s30945",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/22572845",
+        "title": "PubMed 22572845 [abstract]",
+        "cited_text": "Although standard treatment for advanced epithelial ovarian cancer (EOC) consists of surgical debulking and intravenous platinum- and taxane-based chemotherapy, favorable oncological outcomes have been recently reported with the use of cytoreductive surgery (CRS) and hyperthermic intraperitoneal chemotherapy (HIPEC).",
+        "cross_encoder_logit": 0.10601899772882462,
+        "relevance_score": 0.5264799511283164,
+        "cross_encoder_score": 0.5264799511283164,
+        "evidence_quality_score": 0.5264799511283164,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/22572845",
+        "index_id": null
+      }
+    ]
+  }
+}

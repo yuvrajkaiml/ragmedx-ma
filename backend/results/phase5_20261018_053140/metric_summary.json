@@ -1,0 +1,207 @@
+{
+  "evidence_tier": {
+    "answer_correctness": "BENCHMARK GROUND TRUTH (token-containment vs gold, threshold 0.6)",
+    "latency": "SOFTWARE TEST (wall-clock on this GPU run)",
+    "abstention_rate": "SOFTWARE TEST"
+  },
+  "baseline_for_paired_tests": "phase5-full-pipeline",
+  "configs": {
+    "phase5-basic-rag": {
+      "n_measured": 40,
+      "n_total": 40,
+      "accuracy_correct": 1,
+      "accuracy": 0.025,
+      "accuracy_wilson_ci_95": [
+        0.004427,
+        0.128814
+      ],
+      "abstention_rate": 0.875
+    },
+    "phase5-full-pipeline": {
+      "n_measured": 40,
+      "n_total": 40,
+      "accuracy_correct": 0,
+      "accuracy": 0.0,
+      "accuracy_wilson_ci_95": [
+        0.0,
+        0.087622
+      ],
+      "abstention_rate": 0.95
+    },
+    "phase5-improved-no-verification": {
+      "n_measured": 40,
+      "n_total": 40,
+      "accuracy_correct": 0,
+      "accuracy": 0.0,
+      "accuracy_wilson_ci_95": [
+        0.0,
+        0.087622
+      ],
+      "abstention_rate": 0.95
+    },
+    "phase5-improved-v2": {
+      "n_measured": 40,
+      "n_total": 40,
+      "accuracy_correct": 0,
+      "accuracy": 0.0,
+      "accuracy_wilson_ci_95": [
+        0.0,
+        0.087622
+      ],
+      "abstention_rate": 0.95
+    },
+    "phase5-no-calibration": {
+      "n_measured": 40,
+      "n_total": 40,
+      "accuracy_correct": 0,
+      "accuracy": 0.0,
+      "accuracy_wilson_ci_95": [
+        0.0,
+        0.087622
+      ],
+      "abstention_rate": 0.875
+    },
+    "phase5-no-critic": {
+      "n_measured": 40,
+      "n_total": 40,
+      "accuracy_correct": 1,
+      "accuracy": 0.025,
+      "accuracy_wilson_ci_95": [
+        0.004427,
+        0.128814
+      ],
+      "abstention_rate": 0.875
+    },
+    "phase5-no-iterative-retrieval": {
+      "n_measured": 40,
+      "n_total": 40,
+      "accuracy_correct": 0,
+      "accuracy": 0.0,
+      "accuracy_wilson_ci_95": [
+        0.0,
+        0.087622
+      ],
+      "abstention_rate": 0.95
+    },
+    "phase5-plain-llm-no-rag": {
+      "n_measured": 40,
+      "n_total": 40,
+      "accuracy_correct": 15,
+      "accuracy": 0.375,
+      "accuracy_wilson_ci_95": [
+        0.24223,
+        0.529676
+      ],
+      "abstention_rate": 0.0
+    }
+  },
+  "paired_vs_baseline_mcnemar_holm": {
+    "phase5-basic-rag": {
+      "vs": "phase5-full-pipeline",
+      "table": {
+        "n00": 39,
+        "n01": 1,
+        "n10": 0,
+        "n11": 0
+      },
+      "shared_measured": 40,
+      "mcnemar_statistic": 0.0,
+      "p_value_raw": 1.0,
+      "method": "exact_binomial",
+      "p_value_holm_adjusted": 1.0,
+      "significant_holm_0.05": false
+    },
+    "phase5-improved-no-verification": {
+      "vs": "phase5-full-pipeline",
+      "table": {
+        "n00": 40,
+        "n01": 0,
+        "n10": 0,
+        "n11": 0
+      },
+      "shared_measured": 40,
+      "mcnemar_statistic": 0.0,
+      "p_value_raw": 1.0,
+      "method": "exact_binomial",
+      "p_value_holm_adjusted": 1.0,
+      "significant_holm_0.05": false
+    },
+    "phase5-improved-v2": {
+      "vs": "phase5-full-pipeline",
+      "table": {
+        "n00": 40,
+        "n01": 0,
+        "n10": 0,
+        "n11": 0
+      },
+      "shared_measured": 40,
+      "mcnemar_statistic": 0.0,
+      "p_value_raw": 1.0,
+      "method": "exact_binomial",
+      "p_value_holm_adjusted": 1.0,
+      "significant_holm_0.05": false
+    },
+    "phase5-no-calibration": {
+      "vs": "phase5-full-pipeline",
+      "table": {
+        "n00": 40,
+        "n01": 0,
+        "n10": 0,
+        "n11": 0
+      },
+      "shared_measured": 40,
+      "mcnemar_statistic": 0.0,
+      "p_value_raw": 1.0,
+      "method": "exact_binomial",
+      "p_value_holm_adjusted": 1.0,
+      "significant_holm_0.05": false
+    },
+    "phase5-no-critic": {
+      "vs": "phase5-full-pipeline",
+      "table": {
+        "n00": 39,
+        "n01": 1,
+        "n10": 0,
+        "n11": 0
+      },
+      "shared_measured": 40,
+      "mcnemar_statistic": 0.0,
+      "p_value_raw": 1.0,
+      "method": "exact_binomial",
+      "p_value_holm_adjusted": 1.0,
+      "significant_holm_0.05": false
+    },
+    "phase5-no-iterative-retrieval": {
+      "vs": "phase5-full-pipeline",
+      "table": {
+        "n00": 40,
+        "n01": 0,
+        "n10": 0,
+        "n11": 0
+      },
+      "shared_measured": 40,
+      "mcnemar_statistic": 0.0,
+      "p_value_raw": 1.0,
+      "method": "exact_binomial",
+      "p_value_holm_adjusted": 1.0,
+      "significant_holm_0.05": false
+    },
+    "phase5-plain-llm-no-rag": {
+      "vs": "phase5-full-pipeline",
+      "table": {
+        "n00": 25,
+        "n01": 15,
+        "n10": 0,
+        "n11": 0
+      },
+      "shared_measured": 40,
+      "mcnemar_statistic": 0.0,
+      "p_value_raw": 6.1e-05,
+      "method": "exact_binomial",
+      "p_value_holm_adjusted": 0.000427,
+      "significant_holm_0.05": true
+    }
+  },
+  "significance_caveat": "No superiority claim is made without a Holm-adjusted significant paired test. Small pilot n yields wide CIs; treat deltas as directional only.",
+  "metric_caveat": "Answer-correctness here is token-containment vs gold (threshold 0.6). It scores an abstention as incorrect, so configs with high abstention rates (the RAG baselines on this BioASQ/PubMedQA mix) are penalised relative to always-answering plain-LLM. This is a measurement property, NOT evidence that abstention is wrong — abstention can be the safe behaviour. Report abstention_rate alongside accuracy; do not read accuracy alone."
+}

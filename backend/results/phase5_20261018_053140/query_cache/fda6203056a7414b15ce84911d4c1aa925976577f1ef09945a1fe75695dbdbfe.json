@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Is Pfh1 a component of the replisome?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "fda6203056a7414b15ce84911d4c1aa925976577f1ef09945a1fe75695dbdbfe",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_530cf22aa177c6630c000005_s48467_chunk_0",
+        "document_id": "bioasq_530cf22aa177c6630c000005_s48467",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/19496828",
+        "title": "PubMed 19496828 [abstract]",
+        "cited_text": "Ctf4 is a protein conserved in eukaryotes and a constituent of the replisome progression complex.",
+        "cross_encoder_logit": 0.031553853303194046,
+        "relevance_score": 0.5078878088814361,
+        "cross_encoder_score": 0.5078878088814361,
+        "evidence_quality_score": 0.5078878088814361,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/19496828",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_553ca8d8f32186855800000d_s6081_chunk_0",
+        "document_id": "bioasq_553ca8d8f32186855800000d_s6081",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/18725402",
+        "title": "PubMed 18725402 [abstract]",
+        "cited_text": "However, the essential nuclear function of Pfh1p could be supplied by Rrm3p. Expression of Rrm3p suppressed the accumulation of DNA damage foci but not the hydroxyurea sensitivity of cells depleted of nuclear Pfh1p. Together, these data demonstrate that Pfh1p has essential roles in the replication of both nuclear and mitochondrial DNA",
+        "cross_encoder_logit": 0.02633197419345379,
+        "relevance_score": 0.5065826132023109,
+        "cross_encoder_score": 0.5065826132023109,
+        "evidence_quality_score": 0.5065826132023109,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/18725402",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5710ed19a5ed216440000003_s54655_chunk_0",
+        "document_id": "bioasq_5710ed19a5ed216440000003_s54655",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/24656819",
+        "title": "PubMed 24656819 [title]",
+        "cited_text": "Protein phosphatase 1 recruitment by Rif1 regulates DNA replication origin firing by counteracting DDK activity",
+        "cross_encoder_logit": 0.021144121885299683,
+        "relevance_score": 0.5052858335429452,
+        "cross_encoder_score": 0.5052858335429452,
+        "evidence_quality_score": 0.5052858335429452,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/24656819",
+        "index_id": null
+      }
+    ]
+  }
+}

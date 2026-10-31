@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Do Conserved noncoding elements act as enhancers?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "154645da863e5a7bdd4ada7e0ee28e6d2ae3b5ecadd15a2de9dba82b5f73d930",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_553a8d78f321868558000003_s8082_chunk_0",
+        "document_id": "bioasq_553a8d78f321868558000003_s8082",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/23393190",
+        "title": "PubMed 23393190 [abstract]",
+        "cited_text": "The majority of these regions map onto ultraconserved elements and we demonstrate that they can act as functional enhancers within the organism of origin, as well as in cross-transgenesis experiments, and that they are transcribed in extant species of Olfactores. We refer to the elements as 'Olfactores conserved non-coding elements'",
+        "cross_encoder_logit": 0.9940465688705444,
+        "relevance_score": 0.7298864541239075,
+        "cross_encoder_score": 0.7298864541239075,
+        "evidence_quality_score": 0.7298864541239075,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/23393190",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_553a8d78f321868558000003_s8090_chunk_0",
+        "document_id": "bioasq_553a8d78f321868558000003_s8090",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/23393190",
+        "title": "PubMed 23393190 [title]",
+        "cited_text": "Highly conserved elements discovered in vertebrates are present in non-syntenic loci of tunicates, act as enhancers and can be transcribed during development.",
+        "cross_encoder_logit": 0.954755425453186,
+        "relevance_score": 0.722070526150248,
+        "cross_encoder_score": 0.722070526150248,
+        "evidence_quality_score": 0.722070526150248,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/23393190",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_553a8d78f321868558000003_s8081_chunk_0",
+        "document_id": "bioasq_553a8d78f321868558000003_s8081",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/23393190",
+        "title": "PubMed 23393190 [title]",
+        "cited_text": "Highly conserved elements discovered in vertebrates are present in non-syntenic loci of tunicates, act as enhancers and can be transcribed during development",
+        "cross_encoder_logit": 0.9155629277229309,
+        "relevance_score": 0.7141371596645518,
+        "cross_encoder_score": 0.7141371596645518,
+        "evidence_quality_score": 0.7141371596645518,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/23393190",
+        "index_id": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Is anorectal endosonography valuable in dyschesia?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "1601e527daa17c20441ece3d6428ada7c4438d79c0e9fdfac256373b7083fc18",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_621eb1d83a8413c653000059_s48490_chunk_0",
+        "document_id": "bioasq_621eb1d83a8413c653000059_s48490",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/21493029",
+        "title": "PubMed 21493029 [abstract]",
+        "cited_text": "features. The aim of this study is to assess the value of MR diffusion-weighted imaging (DWI) in differentiating endometriosis infiltrating the bowel from colorectal c",
+        "cross_encoder_logit": 0.005053791683167219,
+        "relevance_score": 0.5012634452316751,
+        "cross_encoder_score": 0.5012634452316751,
+        "evidence_quality_score": 0.5012634452316751,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/21493029",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_621eb1d83a8413c653000059_s48496_chunk_0",
+        "document_id": "bioasq_621eb1d83a8413c653000059_s48496",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/21822742",
+        "title": "PubMed 21822742 [abstract]",
+        "cited_text": "PURPOSE: To evaluate magnetic resonance (MR) imaging morphologic- and signal intensity abnormalities of deep infiltrating endometriosis (DIE) of the bowel wall and to assess its value in predicting depth and extent of bowel wall infiltra",
+        "cross_encoder_logit": 0.003823437262326479,
+        "relevance_score": 0.5009558581511339,
+        "cross_encoder_score": 0.5009558581511339,
+        "evidence_quality_score": 0.5009558581511339,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/21822742",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_621eb1d83a8413c653000059_s48518_chunk_0",
+        "document_id": "bioasq_621eb1d83a8413c653000059_s48518",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/25782295",
+        "title": "PubMed 25782295 [abstract]",
+        "cited_text": "Hence, when diagnosing deep infiltrating endometriosis, MRI should be complemented with transvaginal ultrasonography to detect endometrioid implants on the bowel walls as the informative value in this aspect is above.",
+        "cross_encoder_logit": 0.001972781727090478,
+        "relevance_score": 0.5004931952718183,
+        "cross_encoder_score": 0.5004931952718183,
+        "evidence_quality_score": 0.5004931952718183,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/25782295",
+        "index_id": null
+      }
+    ]
+  }
+}

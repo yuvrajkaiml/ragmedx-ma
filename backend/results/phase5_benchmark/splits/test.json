@@ -1,0 +1,44 @@
+[
+  {
+    "id": "pubmedqa::12040336",
+    "question": "Cardiogenic shock complicating acute myocardial infarction in elderly patients: does admission to a tertiary center improve survival?",
+    "answer": "no",
+    "answer_letter": "B",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "12040336"
+    ]
+  },
+  {
+    "id": "pubmedqa::25394614",
+    "question": "Does timing of initial surfactant treatment make a difference in rates of chronic lung disease or mortality in premature infants?",
+    "answer": "maybe",
+    "answer_letter": "C",
+    "options": {
+      "A": "yes",
+      "B": "no",
+      "C": "maybe"
+    },
+    "type": "yesno",
+    "source": "pubmedqa",
+    "pmid": [
+      "25394614"
+    ]
+  },
+  {
+    "id": "bioasq::5e766256835f4e4777000003",
+    "question": "Have the rotavirus vaccines changed the predominant rotavirus genotypes?",
+    "answer": "The increased diversity and differences in genotype dominance observed in states using RotaTeq (G12P[8]), and in states and territories using Rotarix (equine-like G3P[8] and G2P[4]), suggest that these vaccines exert different immunological pressures that influence the diversity of rotavirus strains.",
+    "type": "yesno",
+    "source": "bioasq",
+    "pmid": [
+      "29790933"
+    ]
+  }
+]

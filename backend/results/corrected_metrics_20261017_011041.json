@@ -1,0 +1,51 @@
+{
+  "correction_date": "2026-10-17T01:10:41",
+  "evidence_tier": "SOFTWARE INSPECTION of source code + result JSON files (no model re-run)",
+  "corrections": [
+    {
+      "config": "full-pipeline_pilot25_20261007_021046",
+      "metric": "accuracy",
+      "original_value": 0.52,
+      "corrected_value": 0.0,
+      "reason": "The original accuracy=0.52 was computed by the old buggy compute_accuracy() function. That function used the Python expression '\"\" in truth_string' which evaluates to True for every empty string (abstention), counting all 13 abstentions out of 25 as 'correct'. Corrected exact-containment accuracy (fixed function: requires non-empty prediction, bidirectional substring) = 0/25 = 0.0. None of the 12 non-abstained answers are contained in or contain the reference answer after strip+lower normalisation.",
+      "evidence": "static code inspection of backend/evaluation/metrics.py (old compute_accuracy); per_sample_results in step4_full-pipeline_pilot25_20261007_021046.json; manual re-computation: abstained_count=13, total=25, abstention_rate=0.52 = accuracy_original → confirms the bug; corrected_correct=0, corrected_accuracy=0.0",
+      "files_affected": [
+        "backend/data/results/step4_full-pipeline_pilot25_20261007_021046.json"
+      ],
+      "original_file_untouched": true
+    },
+    {
+      "config": "full-pipeline_pilot25_20261003_234006",
+      "metric": "accuracy",
+      "original_value": 0.0,
+      "corrected_value": 0.0,
+      "reason": "The first pilot file (20261003_234006) has accuracy=0.0 and abstention_rate=0.0 (0 abstentions). All 25 answers are mock outputs ('[MOCK_GENERATED_ANSWER for: ...]'). The value 0.0 is coincidentally correct under the fixed metric — no mock answer is contained in or contains the reference answer. However, this run has llm_mode=None (not 'local') and all answers are mock scaffold outputs. This result is NOT a valid real-LLM benchmark result.",
+      "evidence": "per_sample_results in step4_full-pipeline_pilot25_20261003_234006.json: all predicted_answer values start with '[MOCK_GENERATED_ANSWER for:...'; llm_mode: null; abstention_rate: 0.0",
+      "files_affected": [
+        "backend/data/results/step4_full-pipeline_pilot25_20261003_234006.json"
+      ],
+      "original_file_untouched": true
+    },
+    {
+      "config": "ALL_n30_configs",
+      "metric": "accuracy (aliased to rouge_l_f1)",
+      "original_value": "varies (0.0888 to 0.1575)",
+      "corrected_value": "NO CORRECTION NEEDED",
+      "reason": "The 6 canonical n30 result files (step4_*_n30_20261008_*.json) use the current code where 'accuracy' is aliased to rouge_l_f1. These files do NOT use the old buggy compute_accuracy. No correction is needed for these files. The accuracy/rouge_l_f1 alias is a labelling issue (not a computation bug) and is documented in the audit but does not change the numeric values.",
+      "evidence": "Software inspection of mirage_runner.py and run_step4_matrix.py: evaluate_batch() stores rouge['mean_rouge_l_f1'] in both 'accuracy' and 'rouge_l_f1' fields. All 6 n30 files have consistent accuracy == rouge_l_f1.",
+      "files_affected": [],
+      "original_file_untouched": true
+    },
+    {
+      "config": "citation_support_rate_labelling",
+      "metric": "citation_support_rate (denominator inconsistency between JSON and ablation summary)",
+      "original_value": "JSON: all 30 responses denominator; summary: non-abstained denominator",
+      "corrected_value": "NO NUMERIC CORRECTION — labelling clarification only",
+      "reason": "compute_citation_support_rate() uses all responses as denominator (including abstentions). compute_answer_with_citation_rate() uses only non-abstained responses. The ablation summary table labelled the latter as 'Citation Support Rate' while the JSON result uses the former. Both functions are correctly implemented. The discrepancy is a labelling inconsistency in the ablation summary narrative, not a computation error. No numeric value is wrong; the functions are properly documented.",
+      "evidence": "Software inspection of backend/evaluation/metrics.py: compute_citation_support_rate (all responses denominator) vs compute_answer_with_citation_rate (non-abstained denominator). step4_ablation_summary_20261008_102054.md column 'Cit Support Rate'.",
+      "files_affected": [],
+      "original_file_untouched": true
+    }
+  ],
+  "notes": "Only step4_full-pipeline_pilot25_20261007_021046.json contains a provably wrong numeric metric (accuracy computed with the buggy empty-string bug). The first pilot25 file is a mock-mode run and should not be used for any evaluation. The 6 canonical n30 results are not affected by the accuracy bug. Original result files are untouched."
+}

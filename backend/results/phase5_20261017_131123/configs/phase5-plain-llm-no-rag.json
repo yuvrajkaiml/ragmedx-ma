@@ -1,0 +1,8 @@
+{
+  "config_name": "phase5-plain-llm-no-rag",
+  "kind": "plain",
+  "orchestrator": {},
+  "max_retrieval_iterations": 1,
+  "cache_enabled": false,
+  "experiment_id": "phase5-plain-llm-no-rag"
+}

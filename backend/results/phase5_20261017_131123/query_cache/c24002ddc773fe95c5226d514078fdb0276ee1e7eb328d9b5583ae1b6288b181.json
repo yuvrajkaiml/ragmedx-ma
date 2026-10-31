@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What studies compare pancreatic lipase and amylase in acute pancreatitis?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "c24002ddc773fe95c5226d514078fdb0276ee1e7eb328d9b5583ae1b6288b181",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_51753a948ed59a060a000029_s16907_chunk_0",
+        "document_id": "bioasq_51753a948ed59a060a000029_s16907",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/22146585",
+        "title": "PubMed 22146585 [sections.0]",
+        "cited_text": "studies were shown that p38 MAPK stimulates glucose uptake through the AMPK activation.",
+        "cross_encoder_logit": 0.14126576483249664,
+        "relevance_score": 0.5352578268864409,
+        "cross_encoder_score": 0.5352578268864409,
+        "evidence_quality_score": 0.5352578268864409,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/22146585",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_66088cccfdcbea915f00000b_s12459_chunk_0",
+        "document_id": "bioasq_66088cccfdcbea915f00000b_s12459",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/37933195",
+        "title": "PubMed 37933195 [abstract]",
+        "cited_text": "Acute pancreatitis-induced splanchnic vein thrombosis (APISVT) is an important sequela complication of acute pancreatitis, which may cause poor prognosis, such as severe gastrointestinal hemorrhage, bowel ischemic necrosis and liver failure.",
+        "cross_encoder_logit": 0.009947636164724827,
+        "relevance_score": 0.502486888533614,
+        "cross_encoder_score": 0.502486888533614,
+        "evidence_quality_score": 0.502486888533614,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/37933195",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_66088cccfdcbea915f00000b_s12470_chunk_0",
+        "document_id": "bioasq_66088cccfdcbea915f00000b_s12470",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/37933195",
+        "title": "PubMed 37933195 [abstract]",
+        "cited_text": "Acute pancreatitis-induced splanchnic vein thrombosis (APISVT) is an important sequela complication of acute pancreatitis, which may cause poor prognosis, such as severe gastrointestinal hemorrhage, bowel ischemic necrosis and liver failure. However, its mechanism remains uncertain, and there is not a general consensus on the management.",
+        "cross_encoder_logit": 0.009577049873769283,
+        "relevance_score": 0.5023942441684871,
+        "cross_encoder_score": 0.5023942441684871,
+        "evidence_quality_score": 0.5023942441684871,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/37933195",
+        "index_id": null
+      }
+    ]
+  }
+}

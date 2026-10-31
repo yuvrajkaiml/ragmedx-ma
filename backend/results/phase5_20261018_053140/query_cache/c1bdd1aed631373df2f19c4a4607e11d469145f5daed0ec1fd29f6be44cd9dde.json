@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Health habits and vaccination status of Lebanese residents: are future doctors applying the rules of prevention?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "c1bdd1aed631373df2f19c4a4607e11d469145f5daed0ec1fd29f6be44cd9dde",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_66214b9cb9f8b89d7e000001_s56112_chunk_0",
+        "document_id": "bioasq_66214b9cb9f8b89d7e000001_s56112",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/33618551",
+        "title": "PubMed 33618551 [abstract]",
+        "cited_text": "This study aims to investigate the incidence and trends of colorectal cancer in Lebanon, a country in the Middle East and North Africa region, and to compare these rates to those in regional and western countries.",
+        "cross_encoder_logit": 0.0008209241786971688,
+        "relevance_score": 0.5002052310331485,
+        "cross_encoder_score": 0.5002052310331485,
+        "evidence_quality_score": 0.5002052310331485,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/33618551",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_65cfdc561930410b13000026_s42823_chunk_0",
+        "document_id": "bioasq_65cfdc561930410b13000026_s42823",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/37590262",
+        "title": "PubMed 37590262 [abstract]",
+        "cited_text": "JYNNEOS vaccination among all adults at risk for mpox should be encouraged, irrespective of childhood smallpox vaccination status",
+        "cross_encoder_logit": 0.0005941381095908582,
+        "relevance_score": 0.5001485345230283,
+        "cross_encoder_score": 0.5001485345230283,
+        "evidence_quality_score": 0.5001485345230283,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/37590262",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_65cfdc561930410b13000026_s42802_chunk_0",
+        "document_id": "bioasq_65cfdc561930410b13000026_s42802",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/37590262",
+        "title": "PubMed 37590262 [abstract]",
+        "cited_text": "Currently recommended JYNNEOS vaccination among all adults at risk for mpox should be encouraged, irrespective of childhood smallpox vaccination status",
+        "cross_encoder_logit": 0.00048577127745375037,
+        "relevance_score": 0.5001214428169753,
+        "cross_encoder_score": 0.5001214428169753,
+        "evidence_quality_score": 0.5001214428169753,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/37590262",
+        "index_id": null
+      }
+    ]
+  }
+}

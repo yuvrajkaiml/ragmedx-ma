@@ -1,0 +1,54 @@
+# ==========================================
+# Docker (CPU) dependency set for RAGMedX-MA backend
+# ==========================================
+# The default requirements.txt pins CUDA torch wheels via an --extra-index-url,
+# which cannot be installed in a generic CPU container. This file mirrors those
+# dependencies but uses CPU torch so the image builds on any host. It matches
+# the project default RAGMEDX_LLM_MODE=mock (no GPU required). For GPU serving,
+# build from requirements.txt on a CUDA base image instead.
+
+# FastAPI & DB
+fastapi
+uvicorn[standard]
+pydantic
+pydantic-settings
+email-validator
+python-multipart
+python-dotenv
+httpx
+orjson
+sqlalchemy
+aiosqlite
+python-jose[cryptography]
+passlib[bcrypt]
+bcrypt<4.0
+
+# AI / LLM (CPU torch — no CUDA wheels in the container)
+torch
+transformers==4.51.3
+accelerate==1.6.0
+sentence-transformers
+huggingface_hub
+datasets
+
+# RAG
+langchain
+langgraph
+faiss-cpu
+rank-bm25
+
+# Document Processing
+pymupdf
+pypdf
+reportlab
+jinja2
+
+# Data
+numpy
+pandas
+scikit-learn
+
+# Utilities
+rich
+tqdm
+loguru

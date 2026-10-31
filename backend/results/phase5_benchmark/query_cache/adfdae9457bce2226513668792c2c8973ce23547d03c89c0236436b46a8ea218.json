@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Have the rotavirus vaccines changed the predominant rotavirus genotypes?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "adfdae9457bce2226513668792c2c8973ce23547d03c89c0236436b46a8ea218",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_5e76611b835f4e4777000002_s29558_chunk_0",
+        "document_id": "bioasq_5e76611b835f4e4777000002_s29558",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/25224179",
+        "title": "PubMed 25224179 [abstract]",
+        "cited_text": "Comprehensive reviews of pre licensure rotavirus strain prevalence data indicated the global importance of six rotavirus genotypes, G1P[8], G2P[4], G3P[8], G4P[8], G9P[8] and G12P[8].",
+        "cross_encoder_logit": 0.541915237903595,
+        "relevance_score": 0.6322578383017176,
+        "cross_encoder_score": 0.6322578383017176,
+        "evidence_quality_score": 0.6322578383017176,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/25224179",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5e64f1921af46fc130000018_s45750_chunk_0",
+        "document_id": "bioasq_5e64f1921af46fc130000018_s45750",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/29102168",
+        "title": "PubMed 29102168 [abstract]",
+        "cited_text": "The decrease in rotavirus positivity was inversely related to increase in rotavirus vaccine coverage showing impact of rotavirus vaccines.",
+        "cross_encoder_logit": 0.2341068834066391,
+        "relevance_score": 0.5582608762963586,
+        "cross_encoder_score": 0.5582608762963586,
+        "evidence_quality_score": 0.5582608762963586,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/29102168",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5e64f1921af46fc130000018_s45785_chunk_0",
+        "document_id": "bioasq_5e64f1921af46fc130000018_s45785",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/27443593",
+        "title": "PubMed 27443593 [abstract]",
+        "cited_text": "Widespread introduction of rotavirus vaccines has led to major reductions in the burden of rotavirus gastroenteritis worldwide.",
+        "cross_encoder_logit": 0.20399914681911469,
+        "relevance_score": 0.5508236538758453,
+        "cross_encoder_score": 0.5508236538758453,
+        "evidence_quality_score": 0.5508236538758453,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/27443593",
+        "index_id": null
+      }
+    ]
+  }
+}

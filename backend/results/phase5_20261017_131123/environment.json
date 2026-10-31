@@ -1,0 +1,50 @@
+{
+  "phase": "Phase 5 — 500-question 8-config GPU experiment",
+  "evidence_tier": "SOFTWARE TEST (environment capture)",
+  "pre_check": {
+    "phase4_gate": "IMPLEMENTED AND TESTED (confirmed from docs/progress/PROGRESS.md: critic analysis written, 42 cache tests pass, profile written)",
+    "cuda_available": true,
+    "torch_version": "2.11.0+cu128",
+    "cuda_version": "12.8",
+    "gpu_interpreter": "d:\\Ragmed_2\\.venv-cu128-pilot\\Scripts\\python.exe",
+    "cpu_interpreter": "d:\\Ragmed_2\\.venv\\Scripts\\python.exe",
+    "question_pool": "BioASQ-eval 250 + MIRAGE PubMedQA 500 = 750 (>= 500)"
+  },
+  "eval_split_index": {
+    "resolved_path": "D:\\Ragmed_2\\backend\\data\\faiss_index\\eval_split",
+    "index_faiss_sha256": "FC18D20D30EA92E6D4B7581786BD1BA640E18E658D994466D47D924C847FC258",
+    "chunks_pkl_sha256": "6370A1B47B2D0E799788F3406F320DC29057C008DB4F4D8CE19F761456A5F5D1",
+    "index_faiss_mtime": "2026-09-29T20:26:17.3770510+05:30",
+    "num_chunks": 58173,
+    "index_leakage_guard": "PASS"
+  },
+  "leakage_canary": {
+    "command": ".venv-cu128-pilot\\Scripts\\python.exe -m scripts.run_step4_benchmark --smoke-test",
+    "result": "PASS",
+    "question": "List mediators that are released from mast cells?",
+    "first_retrieved_pmid": "17128671",
+    "in_eval_question_pmid_set": false,
+    "detail": "First retrieved PMID 17128671 is NOT in the 3-PMID eval-question set for this question."
+  },
+  "llm": {
+    "llm_model": "Qwen/Qwen3-8B",
+    "llm_mode": "local",
+    "quantization": "4-bit NF4 (unchanged from historical runs)",
+    "generator_temperature": 0.0,
+    "mock_fallback_allowed": false,
+    "hard_assert_llm_mode_local": true
+  },
+  "run_tier": {
+    "tier": "BUDGET_BOUNDED_PILOT",
+    "executed": "16 test questions x 8 configs = 128 runs (requested 18; wall-clock budget guard stopped before Q17)",
+    "sample": "stratified by source, seed 42, from the test split (12 PubMedQA + 4 BioASQ)",
+    "wall_clock_hours": 3.691,
+    "mean_seconds_per_question_all_configs": 830.4,
+    "peak_vram_mb_run": 10157.1,
+    "budget_hours": 3.8,
+    "budget_stopped_early": true,
+    "failures": 0,
+    "full_run_estimate": "~40+ hours (500 x 8); NOT RUN — exceeds the 4 h GPU budget.",
+    "full_run_command": "d:\\Ragmed_2\\.venv-cu128-pilot\\Scripts\\python.exe backend\\scripts\\run_phase5_experiment.py --full --output-root D:\\Ragmed_2\\backend\\results\\phase5_20261017_131123"
+  }
+}

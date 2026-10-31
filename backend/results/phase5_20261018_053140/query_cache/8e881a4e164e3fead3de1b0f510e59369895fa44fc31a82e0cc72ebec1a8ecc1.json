@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What are health habits and vaccination rates among Lebanese residents and future doctors?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "8e881a4e164e3fead3de1b0f510e59369895fa44fc31a82e0cc72ebec1a8ecc1",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_66214b9cb9f8b89d7e000001_s56123_chunk_0",
+        "document_id": "bioasq_66214b9cb9f8b89d7e000001_s56123",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/33618551",
+        "title": "PubMed 33618551 [abstract]",
+        "cited_text": "Global trends in the incidence and mortality rates of colorectal cancer show a steady increase with significant predilection to western developed countries, possibly linking it to westernized lifestyles among other risk factors. This study aims to investigate the incidence and trends of colorectal cancer in Lebanon, a country in the Middle East and North Africa region, and to compare these rates to those in regional and western countries.",
+        "cross_encoder_logit": 0.0019646782893687487,
+        "relevance_score": 0.500491169414351,
+        "cross_encoder_score": 0.500491169414351,
+        "evidence_quality_score": 0.500491169414351,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/33618551",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_66214b9cb9f8b89d7e000001_s56112_chunk_0",
+        "document_id": "bioasq_66214b9cb9f8b89d7e000001_s56112",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/33618551",
+        "title": "PubMed 33618551 [abstract]",
+        "cited_text": "This study aims to investigate the incidence and trends of colorectal cancer in Lebanon, a country in the Middle East and North Africa region, and to compare these rates to those in regional and western countries.",
+        "cross_encoder_logit": 0.0011198673164471984,
+        "relevance_score": 0.5002799667998529,
+        "cross_encoder_score": 0.5002799667998529,
+        "evidence_quality_score": 0.5002799667998529,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/33618551",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_65f84d20c4010b4d7800004a_s40217_chunk_0",
+        "document_id": "bioasq_65f84d20c4010b4d7800004a_s40217",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/31622151",
+        "title": "PubMed 31622151 [abstract]",
+        "cited_text": "Health care and community collaboration led to coverage rates of measles vaccination increasing from 80% to 95% within three months and a significant decline in incidence.",
+        "cross_encoder_logit": 0.0007703027222305536,
+        "relevance_score": 0.5001925756710353,
+        "cross_encoder_score": 0.5001925756710353,
+        "evidence_quality_score": 0.5001925756710353,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/31622151",
+        "index_id": null
+      }
+    ]
+  }
+}

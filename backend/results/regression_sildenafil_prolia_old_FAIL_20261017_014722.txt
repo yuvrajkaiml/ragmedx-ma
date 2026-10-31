@@ -1,0 +1,34 @@
+﻿Phase 3b Sildenafil/Prolia Regression Test — RUN AGAINST OLD CODE
+Date: 2026-10-17 01:47:22
+Code version: git stash (HEAD before Phase 3 changes) — backend/app/agents/evidence_reranking.py (original)
+Command: d:\Ragmed_2\.venv\Scripts\python.exe -m pytest backend\tests\test_workstream_a_verification.py::test_sildenafil_prolia_regression backend\tests\test_workstream_a_verification.py::test_reranker_reasoning_tagged_non_source backend\tests\test_workstream_a_verification.py::test_reranker_rejects_unknown_ids -v
+
+RESULT: 2 FAILED, 1 PASSED
+
+FAILING TESTS:
+1. test_sildenafil_prolia_regression
+   AssertionError: LLM reasoning must be tagged as non_source_text=True to prevent downstream
+   agents from treating it as retrieved evidence.
+   assert None is True
+   (evidence_reranking dict did not contain 'non_source_text' key — old code does not tag reasoning)
+
+2. test_reranker_reasoning_tagged_non_source
+   AssertionError: Reasoning must be tagged as non_source_text=True
+   assert None is True
+   (same root cause: old reranker returns reasoning in evidence_reranking without non_source_text flag)
+
+PASSING TESTS:
+1. test_reranker_rejects_unknown_ids — PASSED (old code also rejects unknown markers, but
+   returns all original evidence as fallback after empty selected set triggers ValueError)
+
+ROOT CAUSE (old code):
+  The old evidence_reranking.py _parse_assessment() accepts the fabricated marker
+  "[Doc 1 states trade name of sildenafil as Prolia]" in selected_markers without rejection.
+  _resolve_selected_markers() returns an empty set (no match found).
+  The run() method then raises ValueError("selected no usable evidence") — but the evidence_reranking
+  dict returned does NOT contain non_source_text=True, so the reasoning text
+  "Doc 1 states trade name of sildenafil as Prolia" is never tagged as non-source text.
+  In practice, when the LLM returns valid markers alongside fabricated reasoning, the reasoning
+  propagates into the evidence_reranking output and can be consumed as if it were a retrieved passage.
+
+Evidence tier: SOFTWARE TEST

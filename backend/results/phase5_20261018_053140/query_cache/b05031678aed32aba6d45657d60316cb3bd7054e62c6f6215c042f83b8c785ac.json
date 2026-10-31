@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What are the clinical features of PRDM12 gene mutations?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "b05031678aed32aba6d45657d60316cb3bd7054e62c6f6215c042f83b8c785ac",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_54ecb640445c3b5a5f000001_s7416_chunk_0",
+        "document_id": "bioasq_54ecb640445c3b5a5f000001_s7416",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/24773018",
+        "title": "PubMed 24773018 [abstract]",
+        "cited_text": "The clinical features of cytopenia, developmental defects, and tumor predisposition are similar in each group, suggesting that the gene products participate in a common pathway.",
+        "cross_encoder_logit": 0.015161042101681232,
+        "relevance_score": 0.5037901879255339,
+        "cross_encoder_score": 0.5037901879255339,
+        "evidence_quality_score": 0.5037901879255339,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/24773018",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_57090784cf1c325851000011_s50546_chunk_0",
+        "document_id": "bioasq_57090784cf1c325851000011_s50546",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/23099237",
+        "title": "PubMed 23099237 [abstract]",
+        "cited_text": "Somatic mutations of epigenetic gene regulators are common in patients with myelodysplastic syndromes (MDS) and correlate with some clinical and laboratory features.",
+        "cross_encoder_logit": 0.005682864226400852,
+        "relevance_score": 0.5014207122331169,
+        "cross_encoder_score": 0.5014207122331169,
+        "evidence_quality_score": 0.5014207122331169,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/23099237",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_572096c90fd6f91b6800000e_s28576_chunk_0",
+        "document_id": "bioasq_572096c90fd6f91b6800000e_s28576",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/24211141",
+        "title": "PubMed 24211141 [abstract]",
+        "cited_text": "We describe a toddler with clinical features suggesting giant axonal neuropathy (GAN), whose diagnosis was confirmed by minimally invasive skin biopsy and corroborated by the finding of compound heterozygous mutations involving the GAN gene",
+        "cross_encoder_logit": 0.00439806655049324,
+        "relevance_score": 0.5010995148652985,
+        "cross_encoder_score": 0.5010995148652985,
+        "evidence_quality_score": 0.5010995148652985,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/24211141",
+        "index_id": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "config_name": "phase5-basic-rag",
+  "kind": "rag",
+  "orchestrator": {
+    "disable_critic": true,
+    "disable_calibration": true
+  },
+  "max_retrieval_iterations": 1,
+  "cache_enabled": false,
+  "experiment_id": "phase5-basic-rag"
+}

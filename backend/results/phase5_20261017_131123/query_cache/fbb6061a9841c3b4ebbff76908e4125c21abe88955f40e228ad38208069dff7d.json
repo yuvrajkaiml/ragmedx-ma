@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Does the National Institutes of Health Stroke Scale favor left hemisphere strokes?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "fbb6061a9841c3b4ebbff76908e4125c21abe88955f40e228ad38208069dff7d",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_58861f8b3b87a8a738000003_s29228_chunk_0",
+        "document_id": "bioasq_58861f8b3b87a8a738000003_s29228",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/9731605",
+        "title": "PubMed 9731605 [abstract]",
+        "cited_text": "BACKGROUND AND PURPOSE: This study compared the ability of 2 stroke impairment scales, Orpington Prognostic Scale and National Institutes of Health (NIH) Stroke Scale, to predict disability as measured by the Barthel activities of daily living (ADL) Index and higher level of self-reported physical functioning as measured by the SF-36 physical functioning index (PFI) at 1, 3, and 6 months after stroke.",
+        "cross_encoder_logit": 0.2737347185611725,
+        "relevance_score": 0.5680095421772974,
+        "cross_encoder_score": 0.5680095421772974,
+        "evidence_quality_score": 0.5680095421772974,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/9731605",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_58861f8b3b87a8a738000003_s29219_chunk_0",
+        "document_id": "bioasq_58861f8b3b87a8a738000003_s29219",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/9731605",
+        "title": "PubMed 9731605 [abstract]",
+        "cited_text": "This study compared the ability of 2 stroke impairment scales, Orpington Prognostic Scale and National Institutes of Health (NIH) Stroke Scale, to predict disability as measured by the Barthel activities of daily living (ADL) Index and higher level of self-reported physical functioning as measured by the SF-36 physical functioning index (PFI) at 1, 3, and 6 months after stroke.",
+        "cross_encoder_logit": 0.2268924117088318,
+        "relevance_score": 0.5564810062699438,
+        "cross_encoder_score": 0.5564810062699438,
+        "evidence_quality_score": 0.5564810062699438,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/9731605",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_550e9d2cb305b40c5c000001_s63772_chunk_0",
+        "document_id": "bioasq_550e9d2cb305b40c5c000001_s63772",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/24798141",
+        "title": "PubMed 24798141 [abstract]",
+        "cited_text": "The Stroke Prognostication using Age and the NIH Stroke Scale index, created by combining age in years plus a National Institutes of Health (NIH) Stroke Scale score of 100 or higher (and hereafter referred to as the SPAN-100 index), is a simple risk score for estimating clinical outcomes for patients with acute ischemic stroke (AIS)",
+        "cross_encoder_logit": 0.11429189145565033,
+        "relevance_score": 0.5285419102428469,
+        "cross_encoder_score": 0.5285419102428469,
+        "evidence_quality_score": 0.5285419102428469,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/24798141",
+        "index_id": null
+      }
+    ]
+  }
+}

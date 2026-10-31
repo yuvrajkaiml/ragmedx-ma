@@ -1,1 +1,213 @@
-# Owner: Yuvraj K — agent / evaluation module placeholder
+from datetime import datetime, timezone
+from typing import Any, Dict, List, Set
+
+from app.llm.parser import extract_raw_text
+from app.llm.prompt_templates import render_prompt
+from app.rag.citations.markers import (
+    CITATION_MARKER_PATTERN,
+    extract_markers,
+    normalize_marker,
+)
+from .base import BaseAgent
+
+
+class GeneratorAgent(BaseAgent):
+    """
+    Agent 5: Medical Answer Generator.
+
+    Generates an evidence-grounded medical answer
+    using only the evidence supplied in pipeline state.
+
+    Responsibilities:
+    - Generate a concise answer.
+    - Ground factual claims in supplied evidence.
+    - Preserve citation markers.
+    - Avoid unsupported medical claims.
+    - Refuse to invent citations.
+    """
+
+    # Shared canonical pattern (single source of truth with the critic). Matches
+    # both the production `[Doc N]` form and the legacy `[E1]` form.
+    CITATION_PATTERN = CITATION_MARKER_PATTERN
+
+    #: Default generation temperature — small amount of sampling for natural-sounding
+    #: answers in the live API.  Benchmark callers should pass temperature=0.0 for
+    #: deterministic, reproducible outputs.  This is an instance attribute so it
+    #: can be overridden per-instance without touching the class default.
+    DEFAULT_TEMPERATURE: float = 0.1
+
+    def __init__(self, llm_wrapper=None, temperature: float | None = None):
+        super().__init__(
+            agent_name="Medical Answer Generator",
+            agent_type="generator",
+            llm_wrapper=llm_wrapper,
+        )
+        # Use caller-supplied temperature if given; fall back to class default.
+        self.temperature: float = temperature if temperature is not None else self.DEFAULT_TEMPERATURE
+
+    async def run(
+        self,
+        state: Dict[str, Any],
+    ) -> Dict[str, Any]:
+        started_at = datetime.now(timezone.utc)
+
+        try:
+            question = state.get("original_question") or state.get("question")
+
+            if not question or not str(question).strip():
+                raise ValueError("State must contain 'original_question' or 'question'.")
+
+            evidence = state.get("evidence", [])
+
+            if not evidence:
+                raise ValueError("Generator requires evidence.")
+
+            evidence_text = self._format_evidence(evidence)
+            valid_citations = self._extract_valid_citations(evidence)
+
+            prompt = self._build_prompt(
+                question=str(question).strip(),
+                evidence_text=evidence_text,
+                revision_instructions=state.get("revision_instructions"),
+            )
+
+            if self.llm_wrapper is None:
+                raise RuntimeError("GeneratorAgent requires an LLM wrapper.")
+
+            raw_response = self.llm_wrapper.generate(
+                prompt,
+                temperature=self.temperature,
+            )
+
+            raw_text = extract_raw_text(raw_response)
+            answer = raw_text.strip()
+
+            if not answer:
+                raise ValueError("Generator returned an empty answer.")
+
+            used_citations = self._extract_citations(answer)
+            unsupported_citations = used_citations - valid_citations
+
+            if unsupported_citations:
+                raise ValueError(
+                    f"Generator produced unsupported citation markers: {sorted(unsupported_citations)}"
+                )
+
+            completed_at = datetime.now(timezone.utc)
+
+            trace_step = self.create_trace_step(
+                status="completed",
+                started_at=started_at,
+                completed_at=completed_at,
+                details={
+                    "evidence_count": len(evidence),
+                    "citation_count": len(used_citations),
+                    "answer_length": len(answer),
+                },
+            )
+
+            return {
+                "answer": answer,
+                "answer_citations": sorted(used_citations),
+                "agent_trace": [trace_step],
+            }
+
+        except Exception as exc:
+            completed_at = datetime.now(timezone.utc)
+
+            trace_step = self.create_trace_step(
+                status="failed",
+                started_at=started_at,
+                completed_at=completed_at,
+                details={
+                    "error": str(exc),
+                },
+            )
+
+            raise RuntimeError(f"Generator Agent failed: {exc}") from exc
+
+    @staticmethod
+    def _build_prompt(
+        question: str,
+        evidence_text: str,
+        revision_instructions: str | None = None,
+    ) -> str:
+        return render_prompt(
+            "generator",
+            {
+                "question": question,
+                "evidence_text": evidence_text,
+                "revision_instructions": revision_instructions,
+            },
+        )
+
+    @classmethod
+    def _format_evidence(
+        cls,
+        evidence: List[Any],
+    ) -> str:
+        formatted = []
+        for index, item in enumerate(evidence, start=1):
+            if isinstance(item, dict):
+                citation = item.get("citation_marker", f"[E{index}]")
+                text = item.get("cited_text", "")
+                title = item.get("title", "")
+                journal = item.get("journal", "")
+                year = item.get("publication_year", "")
+            else:
+                citation = getattr(item, "citation_marker", f"[E{index}]")
+                text = getattr(item, "cited_text", "")
+                title = getattr(item, "title", "")
+                journal = getattr(item, "journal", "")
+                year = getattr(item, "publication_year", "")
+
+            # Ensure brackets around citation
+            marker_str = str(citation)
+            if not marker_str.startswith("["):
+                marker_str = f"[{marker_str}]"
+
+            metadata = " ".join(str(v) for v in [title, journal, year] if v)
+            if metadata:
+                formatted.append(f"{marker_str} ({metadata}): {text}")
+            else:
+                formatted.append(f"{marker_str}: {text}")
+
+        return "\n\n".join(formatted)
+
+    @classmethod
+    def _extract_valid_citations(
+        cls,
+        evidence: List[Any],
+    ) -> Set[str]:
+        """Canonical set of markers the answer is allowed to cite.
+
+        Every evidence item contributes its ``citation_marker`` normalized to
+        bracketed form (e.g. ``[Doc 1]``, ``[E1]``). Extracted answer markers are
+        normalized the same way, so the comparison in ``run`` is apples-to-apples
+        regardless of marker style.
+        """
+        citations: Set[str] = set()
+        for item in evidence:
+            if isinstance(item, dict):
+                marker = item.get("citation_marker")
+            else:
+                marker = getattr(item, "citation_marker", None)
+
+            normalized = normalize_marker(marker)
+            if normalized:
+                citations.add(normalized)
+
+        return citations
+
+    @classmethod
+    def _extract_citations(
+        cls,
+        answer: str,
+    ) -> Set[str]:
+        """Extract in-text citation markers using the shared canonical pattern.
+
+        Handles both the production ``[Doc N]`` form (which contains a space and
+        was previously dropped) and the legacy ``[E1]`` form. Returns normalized
+        bracketed markers.
+        """
+        return extract_markers(answer)

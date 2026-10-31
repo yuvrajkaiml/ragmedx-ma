@@ -1,0 +1,33 @@
+{
+  "dataset": "BioASQ 13b (gold-snippet retrieval)",
+  "num_questions": 5,
+  "corpus_size": 56,
+  "retriever": "Hybrid (BGE-M3 dense + BM25 sparse + RRF) \u2192 cross-encoder rerank",
+  "metrics": {
+    "precision_at_k": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0,
+      "10": 0.88
+    },
+    "recall_at_k": {
+      "1": 0.1024,
+      "3": 0.307,
+      "5": 0.5117,
+      "10": 0.8402
+    },
+    "ndcg_at_k": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0,
+      "10": 1.0
+    },
+    "mrr": 1.0,
+    "retrieval_latency_ms": {
+      "avg_ms": 20275.47,
+      "median_ms": 18204.44,
+      "min_ms": 14198.61,
+      "max_ms": 27163.52
+    }
+  }
+}

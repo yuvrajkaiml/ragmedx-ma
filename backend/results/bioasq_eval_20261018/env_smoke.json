@@ -1,0 +1,38 @@
+{
+  "python_version": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "python_executable": "D:\\Ragmed_2\\.venv\\Scripts\\python.exe",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "cwd": "D:\\Ragmed_2\\backend",
+  "import_strategies": {
+    "default_syspath": {
+      "app": "ModuleNotFoundError: No module named 'app'",
+      "evaluation.metrics": "ModuleNotFoundError: No module named 'evaluation'"
+    },
+    "syspath_insert_backend": {
+      "app": "ok",
+      "evaluation.metrics": "ok"
+    }
+  },
+  "packages": {
+    "faiss": {
+      "status": "ok",
+      "version": "1.15.0"
+    },
+    "numpy": {
+      "status": "ok",
+      "version": "2.5.2"
+    },
+    "sentence_transformers": {
+      "status": "ok",
+      "version": "5.7.0"
+    },
+    "torch": {
+      "status": "ok",
+      "version": "2.13.0+cpu"
+    },
+    "transformers": {
+      "status": "ok",
+      "version": "5.15.0"
+    }
+  }
+}

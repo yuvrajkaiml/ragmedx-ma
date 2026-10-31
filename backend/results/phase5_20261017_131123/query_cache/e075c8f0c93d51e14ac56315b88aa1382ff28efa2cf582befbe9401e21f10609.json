@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Does performance in selection processes predict performance as a dental student?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "e075c8f0c93d51e14ac56315b88aa1382ff28efa2cf582befbe9401e21f10609",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_621e9e7b3a8413c653000054_s35274_chunk_0",
+        "document_id": "bioasq_621e9e7b3a8413c653000054_s35274",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/33625386",
+        "title": "PubMed 33625386 [abstract]",
+        "cited_text": "To compare oral health-related quality of life (OHRQoL) and masticatory performance (MP) in patients treated with a mandibular complete denture (CD) and immediately loaded implant-supported prostheses",
+        "cross_encoder_logit": 0.000503863615449518,
+        "relevance_score": 0.5001259659011974,
+        "cross_encoder_score": 0.5001259659011974,
+        "evidence_quality_score": 0.5001259659011974,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/33625386",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_553ba7b7f321868558000006_s45122_chunk_0",
+        "document_id": "bioasq_553ba7b7f321868558000006_s45122",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/21512722",
+        "title": "PubMed 21512722 [abstract]",
+        "cited_text": "It is known that the dental follicle (DF) consists of progenitor cells that give rise to the cementum, periodontal ligament, and alveolar bone",
+        "cross_encoder_logit": 0.00012365830480121076,
+        "relevance_score": 0.5000309145761609,
+        "cross_encoder_score": 0.5000309145761609,
+        "evidence_quality_score": 0.5000309145761609,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/21512722",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_5c6e12247c78d6947100004b_s64502_chunk_0",
+        "document_id": "bioasq_5c6e12247c78d6947100004b_s64502",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/8362051",
+        "title": "PubMed 8362051 [abstract]",
+        "cited_text": "This paper describes a case of transmission of herpetic whitlow to the index finger of a dental student from a patient with herpes simplex virus.",
+        "cross_encoder_logit": 0.00010140892118215561,
+        "relevance_score": 0.5000253522302738,
+        "cross_encoder_score": 0.5000253522302738,
+        "evidence_quality_score": 0.5000253522302738,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/8362051",
+        "index_id": null
+      }
+    ]
+  }
+}

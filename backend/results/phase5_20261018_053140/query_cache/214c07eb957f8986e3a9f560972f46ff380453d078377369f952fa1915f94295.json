@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "What studies compare adenoma detection rates between MiraLAX and Golytely?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "214c07eb957f8986e3a9f560972f46ff380453d078377369f952fa1915f94295",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_660999bffdcbea915f00001b_s54266_chunk_0",
+        "document_id": "bioasq_660999bffdcbea915f00001b_s54266",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/22084361",
+        "title": "PubMed 22084361 [abstract]",
+        "cited_text": "A separate metaanalysis of nearly 3,000 patients with a history of colorectal adenoma or cancer in four randomized adenoma prevention trials showed that aspirin reduced the occurrence of advanced adenomas by 28% and any adenoma by 17%.",
+        "cross_encoder_logit": 0.00976443663239479,
+        "relevance_score": 0.5024410897628123,
+        "cross_encoder_score": 0.5024410897628123,
+        "evidence_quality_score": 0.5024410897628123,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/22084361",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_514a51c2d24251bc0500005c_s37717_chunk_0",
+        "document_id": "bioasq_514a51c2d24251bc0500005c_s37717",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/2803131",
+        "title": "PubMed 2803131 [sections.0]",
+        "cited_text": "Patients with pituitary adenoma had a significantly higher (p less than 0.001) baseline serum prolactin level (182 +/- 4.6 ng/ml) than those with no adenoma (59.2 +/- 4.2 ng/ml). All patients in the study were treated with bromocriptine (2.5-10 mg) to normalize serum prolactin or to achieve a pregnancy.",
+        "cross_encoder_logit": 0.004800984635949135,
+        "relevance_score": 0.5012002438535744,
+        "cross_encoder_score": 0.5012002438535744,
+        "evidence_quality_score": 0.5012002438535744,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/2803131",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_58da2a348acda34529000014_s53282_chunk_0",
+        "document_id": "bioasq_58da2a348acda34529000014_s53282",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/9166168",
+        "title": "PubMed 9166168 [abstract]",
+        "cited_text": "Initial and revised screen-positive rates and detection rates were reviewed for women undergoing triple-marker testing (maternal serum alpha-fetoprotein, human chorionic gonadotropin, and unconjugated estriol).",
+        "cross_encoder_logit": 0.003443631809204817,
+        "relevance_score": 0.5008609071015386,
+        "cross_encoder_score": 0.5008609071015386,
+        "evidence_quality_score": 0.5008609071015386,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/9166168",
+        "index_id": null
+      }
+    ]
+  }
+}

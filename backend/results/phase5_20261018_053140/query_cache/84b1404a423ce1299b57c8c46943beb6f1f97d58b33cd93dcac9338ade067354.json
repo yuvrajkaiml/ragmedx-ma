@@ -1,0 +1,70 @@
+{
+  "key": {
+    "query": "Should cavitation in proximal surfaces be reported in cone beam computed tomography examination?",
+    "index_identity": "unknown_index",
+    "retrieval_config": {
+      "top_k_final": 3,
+      "component": "RAGPipeline.retrieve_evidence"
+    },
+    "model_version": "qwen3-8b-4bit",
+    "embedder_version": "bge-m3",
+    "prompt_version": "v1",
+    "preprocessing_config": "default"
+  },
+  "key_hash": "84b1404a423ce1299b57c8c46943beb6f1f97d58b33cd93dcac9338ade067354",
+  "value": {
+    "evidence": [
+      {
+        "chunk_id": "bioasq_5e339202fbd6abf43b000062_s16683_chunk_0",
+        "document_id": "bioasq_5e339202fbd6abf43b000062_s16683",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/22149823",
+        "title": "PubMed 22149823 [abstract]",
+        "cited_text": "However, activation, neutron production, and the associated secondary cancer risk in proton beam should be an important consideration which is evaluated.",
+        "cross_encoder_logit": 0.0017256522551178932,
+        "relevance_score": 0.5004314129567217,
+        "cross_encoder_score": 0.5004314129567217,
+        "evidence_quality_score": 0.5004314129567217,
+        "citation_marker": "[Doc 1]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/22149823",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_627a6ef856bf9aee6f000020_s40779_chunk_0",
+        "document_id": "bioasq_627a6ef856bf9aee6f000020_s40779",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/11985377",
+        "title": "PubMed 11985377 [abstract]",
+        "cited_text": "Death following lumbar puncture (LP) is feared by physicians. Many opinions are found in literature on the question whether computed cranial tomography (CT) should be performed before LP, to prevent herniation.",
+        "cross_encoder_logit": 0.0013396554859355092,
+        "relevance_score": 0.5003349138213954,
+        "cross_encoder_score": 0.5003349138213954,
+        "evidence_quality_score": 0.5003349138213954,
+        "citation_marker": "[Doc 2]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/11985377",
+        "index_id": null
+      },
+      {
+        "chunk_id": "bioasq_623648513a8413c6530000ae_s36930_chunk_0",
+        "document_id": "bioasq_623648513a8413c6530000ae_s36930",
+        "source_type": "http://www.ncbi.nlm.nih.gov/pubmed/20691038",
+        "title": "PubMed 20691038 [title]",
+        "cited_text": "Using Abbreviated Injury Scale (AIS) codes to classify Computed Tomography (CT) features in the Marshall System.",
+        "cross_encoder_logit": 0.0003928378864657134,
+        "relevance_score": 0.5000982094703534,
+        "cross_encoder_score": 0.5000982094703534,
+        "evidence_quality_score": 0.5000982094703534,
+        "citation_marker": "[Doc 3]",
+        "journal": null,
+        "publication_year": null,
+        "doi": null,
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/20691038",
+        "index_id": null
+      }
+    ]
+  }
+}
